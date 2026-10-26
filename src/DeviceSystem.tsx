@@ -287,7 +287,7 @@ export function ControlCenter({
         {[Heart, Music2, House, Radio].map((Icon, i) => (
           <button
             key={i}
-            aria-label={["常用控製項", "媒體控製項", "家庭控製項", "連線控製項"][i]}
+            aria-label={["常用控制項", "媒體控制項", "家庭控制項", "連線控制項"][i]}
             onClick={() =>
               document
                 .querySelector(
@@ -363,7 +363,7 @@ export function ControlCenter({
         </button>
         <button className="cc-home" onClick={() => setTool("家庭")}>
           <House size={38} />
-          <span>未設置家庭</span>
+          <span>尚未設定家庭</span>
         </button>
         {[Flashlight, Timer, Calculator, Camera].map((Icon, i) => (
           <button
@@ -392,7 +392,7 @@ export function ControlCenter({
         <div className="cc-tool">
           <strong>{tool}</strong>
           <p>
-            {tool === "螢幕鏡像輸出" ? "正在搜尋作品中的裝置…" : "作品內快速控製項"}
+            {tool === "螢幕鏡像輸出" ? "正在搜尋作品中的裝置…" : "作品內快速控制項"}
           </p>
           <button onClick={() => setTool("")}>完成</button>
         </div>
