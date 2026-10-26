@@ -363,7 +363,7 @@ export function MymyInstagram(p: SkinProps) {
           </button>
           <small>{i.meta.location || i.time}</small>
         </div>
-        <button aria-label="貼文详情" onClick={() => openPost(i)}>
+        <button aria-label="貼文詳細資料" onClick={() => openPost(i)}>
           <MoreHorizontal />
         </button>
       </header>
