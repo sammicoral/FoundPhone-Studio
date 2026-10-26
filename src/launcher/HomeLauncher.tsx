@@ -548,7 +548,7 @@ export function HomeLauncher(p: Props) {
               <Plus size={18} />
               小工具
             </button>
-            <button onClick={() => setSheet("layout")}>布局</button>
+            <button onClick={() => setSheet("layout")}>版面配置</button>
             <button onClick={() => setEditing(false)}>完成</button>
           </>
         ) : null}
@@ -569,7 +569,7 @@ export function HomeLauncher(p: Props) {
             className="home-app-grid"
             data-drop-zone={"page:" + n}
             role="group"
-            aria-label={"桌面第" + (n + 1) + "頁"}
+            aria-label={"主畫面第" + (n + 1) + "頁"}
             key={n}
           >
             {cells.map(({ entry, x, y, w, h }) => (
@@ -593,7 +593,7 @@ export function HomeLauncher(p: Props) {
             {pages.map((_, i) => (
               <button
                 key={i}
-                aria-label={"前往桌面第" + (i + 1) + "頁"}
+                aria-label={"前往主畫面第" + (i + 1) + "頁"}
                 aria-current={page === i ? "page" : undefined}
                 onClick={() =>
                   pager.current?.scrollTo({
@@ -644,7 +644,7 @@ export function HomeLauncher(p: Props) {
               aria-label="關閉 App 管理"
             >
               <ChevronLeft />
-              桌面
+              主畫面
             </button>
             <strong>
               {sheet === "library"
@@ -720,7 +720,7 @@ export function HomeLauncher(p: Props) {
                           {category(a.id)} ·{" "}
                           {a.installed
                             ? a.visible
-                              ? "已在桌面"
+                              ? "已在主畫面"
                               : "僅 App 資料庫"
                             : "尚未安裝"}
                         </small>
@@ -790,14 +790,14 @@ export function HomeLauncher(p: Props) {
               </>
             ) : sheet === "layout" ? (
               <>
-                <p>布局、安装狀態和小工具自動儲存在本浏览器。</p>
+                <p>版面配置、安装狀態和小工具自動儲存在本Safari。</p>
                 <button className="launcher-action" onClick={download}>
                   <Download />
-                  匯出布局JSON
+                  匯出版面配置JSON
                 </button>
                 <label className="launcher-action">
                   <Upload />
-                  匯入布局JSON
+                  匯入版面配置JSON
                   <input
                     aria-label="匯入主畫面版面配置"
                     type="file"
@@ -985,7 +985,7 @@ export function HomeLauncher(p: Props) {
                         setSheet("");
                       }}
                     >
-                      从桌面移除
+                      从主畫面移除
                     </button>
                     <button
                       className="launcher-action danger"
