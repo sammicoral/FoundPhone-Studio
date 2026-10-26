@@ -95,14 +95,14 @@ export function DeviceLock({
     const value = key === "⌫" ? code.slice(0, -1) : (code + key).slice(0, 12);
     setCode(value);
     if (
-      /^\d+$/.test(work.phone.passcode) &&
-      value.length === work.phone.passcode.length
+      /^\d+$/.test(activePasscode) &&
+      value.length === activePasscode.length
     ) {
       onUnlock(value);
       setCode("");
     }
   };
-  const open = () => (work.phone.passcode ? setPinOpen(true) : onUnlock(""));
+  const open = () => (activePasscode ? setPinOpen(true) : onUnlock(""));
   return (
     <motion.div
       className={"lock-screen device-lock " + (pinOpen ? "pin-open" : "")}
@@ -163,13 +163,13 @@ export function DeviceLock({
             className={"passcode-dots " + (error ? "pin-shake" : "")}
             aria-label={"已輸入" + code.length + "位密碼"}
           >
-            {Array.from({ length: work.phone.passcode.length }, (_, i) => (
+            {Array.from({ length: activePasscode.length }, (_, i) => (
               <i key={i} className={i < code.length ? "filled" : ""} />
             ))}
           </div>
           <input
             className={
-              /^\d+$/.test(work.phone.passcode)
+              /^\d+$/.test(activePasscode)
                 ? "accessible-pin"
                 : "legacy-passcode"
             }
@@ -216,7 +216,7 @@ export function DeviceLock({
           <span role="status" className="pin-error">
             {error}
           </span>
-          {!/^[0-9]+$/.test(work.phone.passcode) && (
+          {!/^[0-9]+$/.test(activePasscode) && (
             <button onClick={() => onUnlock(code)}>解鎖</button>
           )}
           <div className="pin-footer">
