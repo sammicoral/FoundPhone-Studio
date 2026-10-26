@@ -116,7 +116,7 @@ function MessageList({
             ) : i.kind === "transfer" ? (
               <div className="skin-transfer">
                 ¥ {i.body}
-                <small>转账记录 · 虚构</small>
+                <small>轉帳記錄 · 虚构</small>
               </div>
             ) : (
               i.body
@@ -273,7 +273,7 @@ export function WeChatSkin(p: SkinProps) {
               </button>
             ))}
           {!p.items.some((i) => i.folder === utility) &&
-            utility !== "聊天資訊" && <p className="skin-empty">暂无内容</p>}
+            utility !== "聊天資訊" && <p className="skin-empty">暫無內容</p>}
         </div>
       ) : p.thread ? (
         <>
@@ -306,7 +306,7 @@ export function WeChatSkin(p: SkinProps) {
               </div>
             </button>
           ))}
-          {!posts.length && <p className="skin-empty">暂无朋友圈動態</p>}
+          {!posts.length && <p className="skin-empty">暫無朋友圈動態</p>}
           {p.creator && (
             <button className="phone-add" onClick={p.onAdd}>
               新增朋友圈動態
@@ -366,11 +366,11 @@ export function WeChatSkin(p: SkinProps) {
                     </button>
                   );
                 })}
-              {!conversations.length && <p className="skin-empty">暂无聊天</p>}
+              {!conversations.length && <p className="skin-empty">暫無聊天</p>}
             </>
           ) : tab === "通訊錄" ? (
             <>
-              <div className="wx-section-label">联系人</div>
+              <div className="wx-section-label">聯係人</div>
               {contacts.map((c) => (
                 <button
                   key={c}
@@ -422,12 +422,12 @@ export function WeChatSkin(p: SkinProps) {
                 <Avatar name={p.owner || "手機持有人"} />
                 <div>
                   <h2>{p.owner || "手機持有人"}</h2>
-                  <small>微信号：未設定</small>
+                  <small>微信號：未設定</small>
                   <button
                     className="wx-profile-status"
-                    onClick={() => setUtility("状态")}
+                    onClick={() => setUtility("狀態")}
                   >
-                    ＋ 状态
+                    ＋ 狀態
                   </button>
                 </div>
               </div>
@@ -474,7 +474,7 @@ export function WeChatSkin(p: SkinProps) {
                 ))}
               {p.creator && (
                 <button className="phone-add" onClick={p.onAdd}>
-                  编辑个人個人資料內容
+                  編輯個人個人資料內容
                 </button>
               )}
             </>
@@ -560,7 +560,7 @@ export function WhatsAppSkin(p: SkinProps) {
             />
             <div>
               <strong>{p.thread}</strong>
-              <small>联系人</small>
+              <small>聯係人</small>
             </div>
             <Video size={18} />
             <Phone size={17} />
@@ -634,7 +634,7 @@ export function WhatsAppSkin(p: SkinProps) {
             <>
               <div className="wa-settings-profile">
                 <Avatar name="我" round />
-                <h2>个人资料</h2>
+                <h2>個人资料</h2>
               </div>
               {p.items
                 .filter((i) => i.folder === "設定")
@@ -654,7 +654,7 @@ export function WhatsAppSkin(p: SkinProps) {
               {tab === "動態" && (
                 <div className="wa-status">
                   <Avatar name="我" round />
-                  <span>我的状态</span>
+                  <span>我的狀態</span>
                   {p.creator && (
                     <button aria-label="新增動態" onClick={p.onAdd}>
                       <Plus size={17} />
@@ -688,13 +688,13 @@ export function WhatsAppSkin(p: SkinProps) {
                   </button>
                 ))}
               {!p.items.some((i) => i.folder === tab) && (
-                <p className="skin-empty">暂无{tab}内容</p>
+                <p className="skin-empty">暫無{tab}內容</p>
               )}
             </>
           )}
           {p.creator && (
             <button className="phone-add" onClick={p.onAdd}>
-              新增{tab === "聊天" ? "聊天" : tab}内容
+              新增{tab === "聊天" ? "聊天" : tab}內容
             </button>
           )}
         </div>
@@ -777,7 +777,7 @@ export function InstagramSkin(p: SkinProps) {
                 </div>
               </button>
             ))}
-            {!messages.length && <p className="skin-empty">暂无私訊</p>}
+            {!messages.length && <p className="skin-empty">暫無私訊</p>}
             {p.creator && (
               <button className="phone-add" onClick={p.onAdd}>
                 新增私訊
@@ -833,7 +833,7 @@ export function InstagramSkin(p: SkinProps) {
                 </button>
                 <div className="ig-post-controls">
                   <button
-                    aria-label={`喜欢${i.title}`}
+                    aria-label={`喜歡${i.title}`}
                     onClick={() =>
                       setLikes(
                         likes.includes(i.id)
@@ -849,7 +849,7 @@ export function InstagramSkin(p: SkinProps) {
                     />
                   </button>
                   <button
-                    aria-label={`评论${i.title}`}
+                    aria-label={`評論${i.title}`}
                     onClick={() => p.onItem(i)}
                   >
                     <MessageCircle size={22} />
@@ -878,13 +878,13 @@ export function InstagramSkin(p: SkinProps) {
                 </div>
                 <div className="ig-post-caption">
                   <strong>
-                    {i.likes + (likes.includes(i.id) ? 1 : 0)} 次赞
+                    {i.likes + (likes.includes(i.id) ? 1 : 0)} 次讚
                   </strong>
                   <p>
                     <b>{i.sender}</b> {i.body}
                   </p>
                   <button onClick={() => p.onItem(i)}>
-                    查看全部 {i.comments.length} 条评论
+                    查看全部 {i.comments.length} 條評論
                   </button>
                   <time>{i.time}</time>
                 </div>
@@ -920,7 +920,7 @@ export function InstagramSkin(p: SkinProps) {
                 </button>
               </div>
             ))}
-            {!reels.length && <p className="skin-empty">暂无 Reels</p>}
+            {!reels.length && <p className="skin-empty">暫無 Reels</p>}
           </>
         ) : (
           <>
@@ -932,11 +932,11 @@ export function InstagramSkin(p: SkinProps) {
               </div>
               <div>
                 <strong>0</strong>
-                <small>关注者</small>
+                <small>關註者</small>
               </div>
               <div>
                 <strong>0</strong>
-                <small>正在关注</small>
+                <small>正在關註</small>
               </div>
             </div>
             <h3 className="ig-profile-name">{posts[0]?.sender ?? "我"}</h3>
