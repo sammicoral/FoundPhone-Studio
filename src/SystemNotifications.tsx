@@ -61,7 +61,7 @@ export function SystemNotifications({
                   <strong>{n.title}</strong>
                   <span>{n.body}</span>
                 </span>
-                <time>现在</time>
+                <time>現在</time>
               </button>
               {!compact && (
                 <button
@@ -81,7 +81,7 @@ export function SystemNotifications({
           className="notice-expand"
           onClick={() => setExpanded(!expanded)}
         >
-          {expanded ? "收起" : notices.length + " 条通知"}
+          {expanded ? "收起" : notices.length + " 條通知"}
         </button>
       )}
     </div>
