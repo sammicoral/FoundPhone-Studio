@@ -26,7 +26,7 @@ import type { Item } from "../schema";
 import { meta, type Props } from "./shared";
 import "../ios/native-apps.css";
 const healthTypes = [
-  { id: "cycle", title: "经期追踪", icon: Activity, color: "#7361ff" },
+  { id: "cycle", title: "經期追蹤", icon: Activity, color: "#7361ff" },
   { id: "activity", title: "健身記錄", icon: Flame, color: "#ff5900" },
   { id: "sleep", title: "睡眠評分", icon: Bed, color: "#7361ff" },
   { id: "steps", title: "步數", icon: Footprints, color: "#ff5900" },
@@ -45,7 +45,7 @@ function seriesFor(item: Item | undefined) {
 }
 function recordFor(items: Item[], key: string) {
   const map: Record<string, string[]> = {
-    cycle: ["经期", "月经"],
+    cycle: ["经期", "月經"],
     activity: ["活動", "健身"],
     sleep: ["睡眠"],
     steps: ["步數"],
