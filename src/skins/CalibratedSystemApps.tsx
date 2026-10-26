@@ -169,7 +169,7 @@ export function HealthSkin(p: Props) {
         ) : tab === "摘要" ? (
           <>
             <div className="health-section-title">
-              <h2>置顶</h2>
+              <h2>置頂</h2>
               <button onClick={() => setEditing(!editing)}>
                 {editing ? "完成" : "編輯"}
               </button>
