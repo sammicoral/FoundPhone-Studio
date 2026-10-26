@@ -441,7 +441,7 @@ export function WeatherSkin(p: Props) {
                 {mode === "temperature"
                   ? "氣溫 (°C)"
                   : mode === "rain"
-                    ? "降水概率"
+                    ? "降雨機率"
                     : "風速"}
               </small>
             </div>
