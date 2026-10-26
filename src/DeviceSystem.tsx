@@ -113,7 +113,7 @@ export function DeviceLock({
           <div className="lock-clock-block">
             <LockKeyhole size={18} />
             <p>
-              {new Intl.DateTimeFormat("zh-CN", {
+              {new Intl.DateTimeFormat("zh-TW", {
                 month: "long",
                 day: "numeric",
                 weekday: "long",
