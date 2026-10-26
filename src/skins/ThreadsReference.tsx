@@ -522,7 +522,7 @@ export function ThreadsReference(p: SkinProps) {
                   ))}
                   {n === 2 && (
                     <button
-                      aria-label="删除串文字符"
+                      aria-label="刪除串文字符"
                       onClick={() => setDraft(draft.slice(0, -1))}
                     >
                       <Delete />
