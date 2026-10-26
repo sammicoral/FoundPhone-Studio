@@ -164,7 +164,7 @@ export function HealthSkin(p: Props) {
                   <small>{current.time}</small>
                 </>
               ) : (
-                <p>暫無數據</p>
+                <p>暫無資料</p>
               )}
             </section>
           </>
@@ -285,7 +285,7 @@ export function HealthSkin(p: Props) {
           <section className="health-sharing">
             <Users size={54} />
             <h2>共享健康資料</h2>
-            <p>尚未共享數據</p>
+            <p>尚未共享資料</p>
             {p.items
               .filter((i) => i.folder === "共享")
               .map((i) => (
