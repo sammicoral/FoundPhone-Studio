@@ -44,7 +44,7 @@ function Actions({ p, item }: { p: Props; item: Item }) {
         <MessageCircle size={17} />
         {item.comments.length || ""}
       </button>
-      <button aria-label={`详情${item.title}`} onClick={() => p.onItem(item)}>
+      <button aria-label={`詳細資料${item.title}`} onClick={() => p.onItem(item)}>
         <Repeat2 size={17} />
         {meta(item, "reposts")}
       </button>
@@ -117,7 +117,7 @@ export function WeiboSkin(p: Props) {
           <>
             <SearchBox value={q} set={setQ} />
             <div className="weibo-feed-filter">
-              {["全部", ...groupItems(items).filter((g) => g !== "未分类")].map(
+              {["全部", ...groupItems(items).filter((g) => g !== "未分類")].map(
                 (g) => (
                   <button key={g} onClick={() => setFeed(g)}>
                     {g}
@@ -378,7 +378,7 @@ export function PinterestSkin(p: Props) {
   const { tab, setTab, q, setQ, items } = useContent(p, "發現");
   const [board, setBoard] = useState("");
   const list = board
-    ? items.filter((i) => (i.folder || "未分类") === board)
+    ? items.filter((i) => (i.folder || "未分類") === board)
     : items;
   return (
     <div className="catalog-skin pinterest-ui">
@@ -391,7 +391,7 @@ export function PinterestSkin(p: Props) {
               {groupItems(items).map((g) => (
                 <button key={g} onClick={() => setBoard(g)}>
                   <Media
-                    item={items.find((i) => (i.folder || "未分类") === g)!}
+                    item={items.find((i) => (i.folder || "未分類") === g)!}
                   />
                   <strong>{g}</strong>
                 </button>
@@ -464,14 +464,14 @@ export function RedditSkin(p: Props) {
                 className="reddit-sub"
                 key={g}
                 onClick={() => {
-                  setQ(g === "未分类" ? "" : g);
+                  setQ(g === "未分類" ? "" : g);
                   setTab("首頁");
                 }}
               >
                 <Hash size={22} />
                 {g}
                 <small>
-                  {items.filter((i) => (i.folder || "未分类") === g).length} 帖
+                  {items.filter((i) => (i.folder || "未分類") === g).length} 帖
                 </small>
               </button>
             ))
@@ -525,7 +525,7 @@ export function ForumSkin(p: Props) {
   const { tab, setTab, q, setQ, items } = useContent(p, "貼文");
   const [board, setBoard] = useState("");
   const list = board
-    ? items.filter((i) => (i.folder || "未分类") === board)
+    ? items.filter((i) => (i.folder || "未分類") === board)
     : items;
   return (
     <div className="catalog-skin forum-ui">
@@ -537,7 +537,7 @@ export function ForumSkin(p: Props) {
       </div>
       <div className="catalog-scroll">
         <SearchBox value={q} set={setQ} />
-        {tab === "版块"
+        {tab === "版塊"
           ? groupItems(items).map((g) => (
               <button
                 className="forum-board"
@@ -551,7 +551,7 @@ export function ForumSkin(p: Props) {
                 <div>
                   <strong>{g}</strong>
                   <small>
-                    {items.filter((i) => (i.folder || "未分类") === g).length}{" "}
+                    {items.filter((i) => (i.folder || "未分類") === g).length}{" "}
                     個主題
                   </small>
                 </div>
@@ -581,7 +581,7 @@ export function ForumSkin(p: Props) {
             ))}
       </div>
       <Tabs
-        tabs={["貼文", "版块"]}
+        tabs={["貼文", "版塊"]}
         value={tab}
         set={(t) => {
           setTab(t);
