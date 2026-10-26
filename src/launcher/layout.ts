@@ -78,13 +78,7 @@ export function validateLayout(raw: unknown, input: Work) {
   // Keep built-in app names in sync with the canonical Traditional Chinese registry.
   for (const app of layout.apps) {
     const canonical = w.apps.find((item) => item.id === app.id);
-    if (canonical && app.name !== canonical.name && app.id !== "custom") {
-      const legacyNames: Record<string, string[]> = {
-        wechat: ["微信"], weibo: ["微博"], douyin: ["抖音"], netease: ["网易云音乐", "网易云音樂"],
-        contacts: ["通訊錄"], safari: ["Safari"], redbook: ["小紅書"],
-      };
-      if ((legacyNames[app.id] ?? []).includes(app.name)) app.name = canonical.name;
-    }
+    if (canonical && app.id !== "custom") app.name = canonical.name;
   }
   const known = new Set(w.apps.map((a) => a.id));
   if (layout.apps.some((a) => !known.has(a.id))) throw Error("布局含未注册App");
@@ -129,22 +123,19 @@ export function validateLayout(raw: unknown, input: Work) {
     ];
     layout.previewLayoutRevision = 1;
   }
-  if (w.id === "ui-test-phone-v2") {
-    // Always enforce the requested removals. Saved layouts can outlive a previous
-    // migration revision, so this must not depend on a one-time version check.
-    const removedApps = ["qq", "weibo", "bilibili", "alipay", "taobao", "netease"];
-    for (const app of layout.apps) {
-      if (removedApps.includes(app.id)) {
-        app.installed = false;
-        app.visible = false;
-        app.dock = false;
-        app.folder = "";
-        delete layout.positions[app.id];
-      }
+  // Always enforce the requested removals for saved and newly created phone layouts.
+  const removedApps = ["qq", "weibo", "bilibili", "alipay", "taobao", "netease"];
+  for (const app of layout.apps) {
+    if (removedApps.includes(app.id)) {
+      app.installed = false;
+      app.visible = false;
+      app.dock = false;
+      app.folder = "";
+      delete layout.positions[app.id];
     }
-    layout.order = layout.order.filter((id) => !removedApps.includes(id));
-    layout.previewLayoutRevision = 4;
   }
+  layout.order = layout.order.filter((id) => !removedApps.includes(id));
+  if (w.id === "ui-test-phone-v2") layout.previewLayoutRevision = 4;
   const entries = homeEntries(layout),
     packed = packHome(entries, layout.positions);
   for (const entry of entries) {
