@@ -88,8 +88,8 @@ export function AppManager({
             <label className="library-search">
               <Search size={16} />
               <input
-                aria-label="搜索 App"
-                placeholder="搜索 App"
+                aria-label="搜尋 App"
+                placeholder="搜尋 App"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
@@ -126,17 +126,17 @@ export function AppManager({
               onClick={() => setShowFolder(!showFolder)}
             >
               <FolderPlus size={15} />
-              创建文件夹
+              创建檔案夹
             </button>
           </div>
           {showFolder && (
             <section className="folder-builder">
               <label>
-                文件夹名称
+                檔案夹名称
                 <input
                   value={folder}
                   onChange={(e) => setFolder(e.target.value)}
-                  placeholder="文件夹名称"
+                  placeholder="檔案夹名称"
                 />
               </label>
               <div className="folder-app-picks">
@@ -175,7 +175,7 @@ export function AppManager({
                   setFolderApps([]);
                 }}
               >
-                保存文件夹
+                儲存檔案夹
               </button>
             </section>
           )}
@@ -288,7 +288,7 @@ export function AppManager({
                         <ArrowDown size={12} />
                       </button>
                       <button
-                        aria-label={`${a.visible ? "从桌面移除" : "添加到桌面"}${a.name}`}
+                        aria-label={`${a.visible ? "从主畫面移除" : "新增到主畫面"}${a.name}`}
                         onClick={() =>
                           onChange((w) => {
                             if (a.visible) removeFromHome(w, a.id);
@@ -300,7 +300,7 @@ export function AppManager({
                         }
                       >
                         <Smartphone size={12} />
-                        {a.visible ? "从桌面移除" : "添加到桌面"}
+                        {a.visible ? "从主畫面移除" : "新增到主畫面"}
                       </button>
                       <button
                         className="danger"
@@ -318,7 +318,7 @@ export function AppManager({
                 </article>
               ))}
               {!filtered.length && (
-                <p className="library-empty">没有匹配的 App</p>
+                <p className="library-empty">沒有匹配的 App</p>
               )}
             </div>
             <aside className="app-properties">
@@ -371,11 +371,11 @@ export function AppManager({
                     </button>
                   )}
                   <label>
-                    文件夹
+                    檔案夹
                     <input
-                      aria-label="App 文件夹"
+                      aria-label="App 檔案夹"
                       value={current.folder}
-                      placeholder="留空放在桌面"
+                      placeholder="留空放在主畫面"
                       onChange={(e) =>
                         update({
                           folder: e.target.value,
@@ -409,11 +409,11 @@ export function AppManager({
                     放入 Dock
                   </label>
                   <small>
-                    {(work.data[current.id] ?? []).length} 条创作内容
+                    {(work.data[current.id] ?? []).length} 則创作內容
                   </small>
                 </>
               ) : (
-                <p>选择已安装的 App，编辑名称、图标与文件夹。</p>
+                <p>选择已安装的 App，編輯名称、图标与檔案夹。</p>
               )}
               <div className="custom-app-form">
                 <label>
@@ -435,7 +435,7 @@ export function AppManager({
                   }}
                 >
                   <Plus size={14} />
-                  添加 App
+                  新增 App
                 </button>
               </div>
             </aside>
@@ -463,18 +463,18 @@ export function AppManager({
           onClose={() => setUninstall("")}
         >
           <div className="editor-fields">
-            <p>卸载后将从手机和 App 资源库移除。</p>
+            <p>卸载后将从手機和 App 资源库移除。</p>
             <label className="inline-check">
               <input
                 type="checkbox"
                 checked={keep}
                 onChange={(e) => setKeep(e.target.checked)}
               />
-              保留创作数据，重新安装后恢复
+              保留创作資料，重新安装后恢复
             </label>
             {!keep && (
               <p className="error">
-                将删除此 App 的全部创作内容。引用这些内容的剧情可能失效。
+                将刪除此 App 的全部创作內容。引用這些內容的剧情可能失效。
               </p>
             )}
           </div>
@@ -489,7 +489,7 @@ export function AppManager({
                 setUninstall("");
               }}
             >
-              确认卸载{keep ? "并保留数据" : "并删除数据"}
+              確認卸载{keep ? "并保留資料" : "并刪除資料"}
             </button>
           </footer>
         </Modal>
