@@ -76,7 +76,7 @@ export function SpotifySkin(p: Props) {
             className={tab === "首頁" ? "selected" : ""}
             onClick={() => setTab("首頁")}
           >
-            音乐
+            音樂
           </button>
           <button
             className={tab === "音樂庫" ? "selected" : ""}
@@ -164,7 +164,7 @@ export function NeteaseSkin(p: Props) {
           <>
             <div className="netease-feature">
               <Music size={44} />
-              <h2>推荐歌单</h2>
+              <h2>推薦歌单</h2>
             </div>
             <div className="netease-shelves">
               {groupItems(items, "我的歌单").map((g) => (
@@ -302,13 +302,13 @@ export function YouTubeSkin(p: Props) {
 }
 export function BilibiliSkin(p: Props) {
   const { tab, setTab, q, setQ, items } = useContent(p, "首頁");
-  const [category, setCategory] = useState("推荐");
+  const [category, setCategory] = useState("推薦");
   const list =
     tab === "歷史"
       ? items.filter((i) => i.folder === "歷史")
       : tab === "動態"
         ? items.filter((i) => i.folder === "動態")
-        : category === "推荐"
+        : category === "推薦"
           ? items
           : items.filter((i) => i.folder === category);
   return (
@@ -319,7 +319,7 @@ export function BilibiliSkin(p: Props) {
         <SearchBox value={q} set={setQ} />
       </div>
       <div className="bili-categories">
-        {["推荐", "动画", "音乐", "生活"].map((c) => (
+        {["推薦", "動畫", "音樂", "生活"].map((c) => (
           <button
             key={c}
             className={category === c ? "selected" : ""}
@@ -400,13 +400,13 @@ function VerticalVideo({ p, item }: { p: Props; item: Item }) {
   );
 }
 export function DouyinSkin(p: Props) {
-  const { tab, setTab, items } = useContent(p, "推荐");
-  const list = tab === "推荐" ? items : items.filter((i) => i.folder === tab);
+  const { tab, setTab, items } = useContent(p, "推薦");
+  const list = tab === "推薦" ? items : items.filter((i) => i.folder === tab);
   return (
     <div className="catalog-skin douyin-ui">
       <Header p={p} />
       <div className="douyin-top">
-        {["同城", "关注", "推荐"].map((t) => (
+        {["同城", "關注", "推薦"].map((t) => (
           <button
             className={tab === t ? "selected" : ""}
             key={t}
@@ -423,7 +423,7 @@ export function DouyinSkin(p: Props) {
         <Empty items={list} />
       </div>
       <Tabs
-        tabs={["推荐", "关注", "我"]}
+        tabs={["推薦", "關注", "我"]}
         value={tab}
         set={setTab}
         icons={[<Home />, <Users />, <User />]}
@@ -437,7 +437,7 @@ export function TikTokSkin(p: Props) {
     tab === "For You"
       ? items
       : tab === "Following"
-        ? items.filter((i) => i.folder === "关注" || i.folder === "Following")
+        ? items.filter((i) => i.folder === "關注" || i.folder === "Following")
         : items.filter((i) => i.folder === "個人檔案");
   return (
     <div className="catalog-skin tiktok-ui">
