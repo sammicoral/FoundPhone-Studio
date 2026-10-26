@@ -25,7 +25,7 @@ import { NavigationPage, useNavigation } from "./Navigation";
 type Row = [ComponentType<{ size?: number }>, string, string];
 const groups: Row[][] = [
   [
-    [Plane, "飞行模式", "#ff9500"],
+    [Plane, "飛航模式", "#ff9500"],
     [Wifi, "無線局域網", "#007aff"],
     [Bluetooth, "藍牙", "#007aff"],
     [Signal, "蜂窝網絡", "#34c759"],
@@ -34,7 +34,7 @@ const groups: Row[][] = [
     [Globe, "VPN", "#007aff"],
   ],
   [
-    [Settings, "通用", "#8e8e93"],
+    [Settings, "一般", "#8e8e93"],
     [Accessibility, "辅助功能", "#007aff"],
     [Image, "墙纸", "#32ade6"],
   ],
@@ -42,7 +42,7 @@ const groups: Row[][] = [
     [Bell, "通知", "#ff3b30"],
     [Volume2, "聲音与触感", "#ff2d55"],
     [Moon, "專註模式", "#5856d6"],
-    [Shield, "面容 ID 与密碼", "#34c759"],
+    [Shield, "Face ID ID 与密碼", "#34c759"],
   ],
 ];
 export function NativeSettings({
@@ -79,7 +79,7 @@ export function NativeSettings({
   );
   const sub = () => {
     switch (nav.page) {
-      case "通用":
+      case "一般":
         return (
           <div className="settings-group">
             {row("關於本机", "", () => nav.push("關於本机"))}
@@ -177,7 +177,7 @@ export function NativeSettings({
             <div className="settings-group">
               {row(
                 nav.page,
-                nav.page === "面容 ID 与密碼"
+                nav.page === "Face ID ID 与密碼"
                   ? work.phone.passcode
                     ? "已設置密碼"
                     : "未設置密碼"
@@ -196,7 +196,7 @@ export function NativeSettings({
       <NavigationPage
         page={nav.page}
         back={nav.pop}
-        title={nav.depth > 1 ? "通用" : "設置"}
+        title={nav.depth > 1 ? "一般" : "設置"}
       >
         {nav.page ? (
           sub()
@@ -224,13 +224,13 @@ export function NativeSettings({
                     <div
                       key={name}
                       className="settings-native-row"
-                      role={name === "飞行模式" ? undefined : "button"}
-                      tabIndex={name === "飞行模式" ? undefined : 0}
+                      role={name === "飛航模式" ? undefined : "button"}
+                      tabIndex={name === "飛航模式" ? undefined : 0}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") nav.push(name);
                       }}
                       onClick={() => {
-                        if (name !== "飞行模式") nav.push(name);
+                        if (name !== "飛航模式") nav.push(name);
                       }}
                     >
                       <span
@@ -240,9 +240,9 @@ export function NativeSettings({
                         <Icon size={21} />
                       </span>
                       <span>{name}</span>
-                      {name === "飞行模式" ? (
+                      {name === "飛航模式" ? (
                         <IOSToggle
-                          label="飞行模式"
+                          label="飛航模式"
                           checked={airplane}
                           onChange={setAirplane}
                         />
@@ -293,8 +293,8 @@ export function NativeSettings({
         <label className="settings-search">
           <Search size={23} />
           <input
-            aria-label="搜索設置"
-            placeholder="搜索"
+            aria-label="搜尋設置"
+            placeholder="搜尋"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
