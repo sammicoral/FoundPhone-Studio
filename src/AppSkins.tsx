@@ -116,7 +116,7 @@ function MessageList({
             ) : i.kind === "transfer" ? (
               <div className="skin-transfer">
                 ¥ {i.body}
-                <small>轉帳記錄 · 虚构</small>
+                <small>轉帳記錄 · 虛構</small>
               </div>
             ) : (
               i.body
