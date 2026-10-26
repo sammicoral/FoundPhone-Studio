@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { useState, useEffect, useMemo } from "react";
 import { workSchema, type Work } from "../schema";
+import { getApp } from "../registry";
 export const widgetSchema = z.object({
   id: z
     .string()
