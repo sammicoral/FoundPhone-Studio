@@ -474,7 +474,7 @@ export function WeChatSkin(p: SkinProps) {
                 ))}
               {p.creator && (
                 <button className="phone-add" onClick={p.onAdd}>
-                  編輯個人個人資料內容
+                  編輯個人資料
                 </button>
               )}
             </>
@@ -634,7 +634,7 @@ export function WhatsAppSkin(p: SkinProps) {
             <>
               <div className="wa-settings-profile">
                 <Avatar name="我" round />
-                <h2>個人资料</h2>
+                <h2>個人資料</h2>
               </div>
               {p.items
                 .filter((i) => i.folder === "設定")
