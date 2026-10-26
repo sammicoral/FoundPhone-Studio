@@ -92,7 +92,7 @@ export function NativeDetail({
             )}
           </div>
           <footer className="native-detail-toolbar">
-            <button aria-label="分享照片说明" onClick={copy}>
+            <button aria-label="分享照片說明" onClick={copy}>
               <Share />
             </button>
             <button
