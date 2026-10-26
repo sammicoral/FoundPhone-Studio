@@ -430,7 +430,7 @@ export function WeatherSkin(p: Props) {
           <p>
             {item?.meta.aqi
               ? `當前 AQI (CN) 為 ${item.meta.aqi}。`
-              : "暫無空氣品質數據"}
+              : "暫無空氣品質資料"}
           </p>
         </button>
         <section className="weather-native-card weather-hourly">
@@ -601,7 +601,7 @@ export function WeatherSkin(p: Props) {
               <h2>{item?.title || "暫無城市"}</h2>
               <p>
                 {sheet === "空氣品質"
-                  ? meta(item, "aqi", "暫無空氣品質數據")
+                  ? meta(item, "aqi", "暫無空氣品質資料")
                   : item?.body || "暫無天氣紀錄"}
               </p>
               {item && <small>{item.time}</small>}
