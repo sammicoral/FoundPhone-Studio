@@ -66,7 +66,7 @@ export function AppManager({
         .toLowerCase()
         .includes(query.toLowerCase()) &&
       (group === "全部" || category(a.id) === group) &&
-      (status === "全部" || (status === "已安装" ? a.installed : !a.installed)),
+      (status === "全部" || (status === "已安裝" ? a.installed : !a.installed)),
   );
   const current = work.apps.find((a) => a.id === selected);
   const update = (patch: Partial<Work["apps"][number]>) =>
@@ -95,19 +95,19 @@ export function AppManager({
               />
             </label>
             <select
-              aria-label="App 分类"
+              aria-label="App 分類"
               value={group}
               onChange={(e) => setGroup(e.target.value)}
             >
               {[
                 "全部",
-                "系统",
-                "通讯",
+                "系統",
+                "通訊",
                 "社交",
                 "影音",
                 "生活",
                 "工具",
-                "自定义",
+                "自訂",
               ].map((c) => (
                 <option key={c}>{c}</option>
               ))}
@@ -117,7 +117,7 @@ export function AppManager({
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             >
-              {["全部", "已安装", "未安装"].map((c) => (
+              {["全部", "已安裝", "未安裝"].map((c) => (
                 <option key={c}>{c}</option>
               ))}
             </select>
@@ -126,17 +126,17 @@ export function AppManager({
               onClick={() => setShowFolder(!showFolder)}
             >
               <FolderPlus size={15} />
-              创建檔案夹
+              建立資料夾
             </button>
           </div>
           {showFolder && (
             <section className="folder-builder">
               <label>
-                檔案夹名称
+                資料夾名稱
                 <input
                   value={folder}
                   onChange={(e) => setFolder(e.target.value)}
-                  placeholder="檔案夹名称"
+                  placeholder="資料夾名稱"
                 />
               </label>
               <div className="folder-app-picks">
@@ -175,12 +175,12 @@ export function AppManager({
                   setFolderApps([]);
                 }}
               >
-                儲存檔案夹
+                儲存資料夾
               </button>
             </section>
           )}
           <div className="library-layout">
-            <div className="library-catalog" aria-label="App 目录">
+            <div className="library-catalog" aria-label="App 目錄">
               {filtered.map((a) => (
                 <article
                   key={a.id}
@@ -195,7 +195,7 @@ export function AppManager({
                   <div className="library-app-main">
                     <button
                       className="drag-grip"
-                      aria-label={`拖动${a.name}排序`}
+                      aria-label={`拖曳${a.name}排序`}
                       disabled={!a.installed}
                       draggable={false}
                       onDragStart={(e) => {
@@ -238,9 +238,9 @@ export function AppManager({
                           {category(a.id)} ·{" "}
                           {a.installed
                             ? a.visible
-                              ? "已安装"
-                              : "仅 App 资源库"
-                            : "未安装"}
+                              ? "已安裝"
+                              : "僅限 App 資料庫"
+                            : "未安裝"}
                         </small>
                       </span>
                     </button>
@@ -288,7 +288,7 @@ export function AppManager({
                         <ArrowDown size={12} />
                       </button>
                       <button
-                        aria-label={`${a.visible ? "从主畫面移除" : "新增到主畫面"}${a.name}`}
+                        aria-label={`${a.visible ? "從主畫面移除" : "加入主畫面"}${a.name}`}
                         onClick={() =>
                           onChange((w) => {
                             if (a.visible) removeFromHome(w, a.id);
@@ -300,25 +300,25 @@ export function AppManager({
                         }
                       >
                         <Smartphone size={12} />
-                        {a.visible ? "从主畫面移除" : "新增到主畫面"}
+                        {a.visible ? "從主畫面移除" : "加入主畫面"}
                       </button>
                       <button
                         className="danger"
-                        aria-label={`卸载${a.name}`}
+                        aria-label={`解除安裝${a.name}`}
                         onClick={() => {
                           setUninstall(a.id);
                           setKeep(true);
                         }}
                       >
                         <Trash2 size={12} />
-                        卸载
+                        解除安裝
                       </button>
                     </div>
                   )}
                 </article>
               ))}
               {!filtered.length && (
-                <p className="library-empty">沒有匹配的 App</p>
+                <p className="library-empty">沒有符合的 App</p>
               )}
             </div>
             <aside className="app-properties">
@@ -328,15 +328,15 @@ export function AppManager({
                   <label>
                     App 名称
                     <input
-                      aria-label="自定义 App 名称"
+                      aria-label="自訂 App 名称"
                       value={current.name}
                       onChange={(e) => update({ name: e.target.value })}
                     />
                   </label>
                   <label>
-                    图标文字
+                    圖示文字
                     <input
-                      aria-label="自定义图标文字"
+                      aria-label="自訂圖示文字"
                       maxLength={4}
                       value={
                         current.icon.startsWith("data:") ? "" : current.icon
@@ -371,9 +371,9 @@ export function AppManager({
                     </button>
                   )}
                   <label>
-                    檔案夹
+                    資料夾
                     <input
-                      aria-label="App 檔案夹"
+                      aria-label="App 資料夾"
                       value={current.folder}
                       placeholder="留空放在主畫面"
                       onChange={(e) =>
@@ -413,11 +413,11 @@ export function AppManager({
                   </small>
                 </>
               ) : (
-                <p>选择已安装的 App，編輯名称、图标与檔案夹。</p>
+                <p>选择已安裝的 App，編輯名称、图标与資料夾。</p>
               )}
               <div className="custom-app-form">
                 <label>
-                  自定义 App
+                  自訂 App
                   <input
                     value={customName}
                     onChange={(e) => setCustomName(e.target.value)}
@@ -448,8 +448,8 @@ export function AppManager({
         </div>
         <footer>
           <span>
-            {work.apps.filter((a) => a.installed).length} 个已安装 ·
-            拖动手柄排序
+            {work.apps.filter((a) => a.installed).length} 个已安裝 ·
+            拖曳手柄排序
           </span>
           <button className="primary" onClick={onClose}>
             <Check size={14} />
@@ -459,11 +459,11 @@ export function AppManager({
       </Modal>
       {uninstall && (
         <Modal
-          title={`卸载${catalog.find((a) => a.id === uninstall)?.name}？`}
+          title={`解除安裝${catalog.find((a) => a.id === uninstall)?.name}？`}
           onClose={() => setUninstall("")}
         >
           <div className="editor-fields">
-            <p>卸载后将从手機和 App 资源库移除。</p>
+            <p>解除安裝后将从手機和 App 资源库移除。</p>
             <label className="inline-check">
               <input
                 type="checkbox"
@@ -489,7 +489,7 @@ export function AppManager({
                 setUninstall("");
               }}
             >
-              確認卸载{keep ? "并保留資料" : "并刪除資料"}
+              確認解除安裝{keep ? "并保留資料" : "并刪除資料"}
             </button>
           </footer>
         </Modal>
