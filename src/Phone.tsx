@@ -430,6 +430,7 @@ function PhoneRuntime({
                 setPinOpen={setPinOpen}
                 error={pinError}
                 onUnlock={unlock}
+                passcode={String(s.ui?.settings?.passcode ?? work.phone.passcode ?? "")}
                 onLight={() => setPanel("light")}
                 onCamera={() => {
                   setQuickCamera(true);
