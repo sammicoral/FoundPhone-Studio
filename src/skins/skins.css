@@ -4130,3 +4130,60 @@
 .catalog-slot[hidden] {
   display: none;
 }
+
+/* Uber Eats-inspired delivery app */
+.uber-eats-ui {
+  --app-accent: #06c167;
+  background: #fff;
+  color: #171717;
+}
+.uber-eats-ui .uber-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 15px 8px; background:#fff;
+}
+.uber-eats-ui .uber-address { min-width:0; }
+.uber-eats-ui .uber-address > span { display:block; color:#666; font-size:9px; margin-bottom:4px; }
+.uber-eats-ui .uber-address strong { display:flex; align-items:center; gap:5px; font-size:12px; font-weight:700; }
+.uber-eats-ui .uber-address svg { color:#06a957; flex-shrink:0; }
+.uber-eats-ui .uber-profile { width:30px; height:30px; border-radius:50%; background:#eee; color:#171717; font-weight:700; flex-shrink:0; }
+.uber-eats-ui .uber-search-wrap { padding:7px 14px 12px; background:#fff; }
+.uber-eats-ui .catalog-search { margin:0; border-radius:9px; padding:10px; background:#f3f3f3; color:#333; }
+.uber-eats-ui .catalog-search input { background:transparent; color:#171717; font-size:11px; }
+.uber-eats-ui .uber-scroll { background:#fff; }
+.uber-eats-ui .uber-welcome { padding:10px 15px 15px; }
+.uber-eats-ui .uber-welcome h1 { font-size:22px; line-height:1.2; font-weight:800; letter-spacing:-.6px; }
+.uber-eats-ui .uber-welcome p { font-size:10px; color:#666; margin-top:6px; }
+.uber-eats-ui .uber-categories { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:5px; padding:0 10px 16px; }
+.uber-eats-ui .uber-categories button { display:flex; flex-direction:column; align-items:center; gap:5px; min-width:0; }
+.uber-eats-ui .uber-categories button > span { display:grid; place-items:center; width:38px; height:38px; border-radius:50%; background:#f4f4f4; font-size:21px; }
+.uber-eats-ui .uber-categories small { font-size:8px; white-space:nowrap; }
+.uber-eats-ui .uber-promo { margin:0 13px 17px; padding:16px 14px; min-height:90px; border-radius:9px; background:#d9f4e4; display:flex; align-items:center; justify-content:space-between; overflow:hidden; }
+.uber-eats-ui .uber-promo small { font-size:9px; color:#17653e; font-weight:700; }
+.uber-eats-ui .uber-promo h2 { font-size:15px; font-weight:800; margin-top:4px; }
+.uber-eats-ui .uber-promo p { font-size:8px; margin-top:4px; color:#315b43; }
+.uber-eats-ui .uber-promo > span { font-size:22px; font-weight:900; letter-spacing:-1.5px; color:#06a957; transform:rotate(-8deg); }
+.uber-eats-ui .uber-list-heading { display:flex; align-items:center; justify-content:space-between; padding:0 14px 9px; }
+.uber-eats-ui .uber-list-heading h2, .uber-eats-ui .uber-section-title { font-size:17px; font-weight:800; }
+.uber-eats-ui .uber-list-heading button { font-size:9px; text-decoration:underline; }
+.uber-eats-ui .uber-merchant { display:flex; flex-direction:column; width:100%; padding:0 13px 16px; margin-bottom:12px; text-align:left; background:#fff; border-bottom:1px solid #eee; }
+.uber-eats-ui .uber-merchant > img, .uber-eats-ui .uber-merchant > .catalog-art { width:100%; height:126px; border-radius:8px; object-fit:cover; flex-shrink:0; }
+.uber-eats-ui .uber-merchant-info { width:100%; padding-top:8px; }
+.uber-eats-ui .uber-merchant h3 { font-size:13px; font-weight:750; }
+.uber-eats-ui .uber-merchant p { display:flex; align-items:center; gap:4px; font-size:9px; margin-top:5px; color:#333; }
+.uber-eats-ui .uber-merchant p svg { color:#14834a; }
+.uber-eats-ui .uber-merchant small { display:block; color:#777; font-size:9px; margin-top:5px; }
+.uber-eats-ui .uber-merchant footer { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:7px; font-size:8px; color:#666; }
+.uber-eats-ui .uber-merchant footer b { font-size:9px; color:#171717; }
+.uber-eats-ui .uber-order { display:flex; align-items:center; gap:10px; width:calc(100% - 26px); margin:10px 13px; text-align:left; padding:10px; border-radius:8px; background:#f6f6f6; }
+.uber-eats-ui .uber-order > img, .uber-eats-ui .uber-order > .catalog-art { width:50px; height:50px; object-fit:cover; border-radius:6px; flex-shrink:0; }
+.uber-eats-ui .uber-order > div { flex:1; min-width:0; }
+.uber-eats-ui .uber-order strong { font-size:11px; }
+.uber-eats-ui .uber-order p, .uber-eats-ui .uber-order small { display:block; color:#666; font-size:8px; margin-top:4px; }
+.uber-eats-ui .uber-account { padding:15px; }
+.uber-eats-ui .uber-account h1 { font-size:24px; font-weight:800; margin-bottom:16px; }
+.uber-eats-ui .uber-account button { display:flex; justify-content:space-between; width:100%; padding:14px 0; border-bottom:1px solid #eee; font-size:12px; }
+.uber-eats-ui .uber-account p { color:#777; font-size:9px; margin-top:20px; }
+.uber-eats-ui .catalog-tabs { background:#fff; border-top:1px solid #eee; }
+.uber-eats-ui .catalog-tabs button { color:#666; }
+.uber-eats-ui .catalog-tabs button[aria-selected="true"], .uber-eats-ui .catalog-tabs button.active { color:#06a957; }
+.uber-eats-ui .catalog-tabs svg { width:19px; height:19px; }
