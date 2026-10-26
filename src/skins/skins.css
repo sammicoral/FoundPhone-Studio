@@ -4187,3 +4187,8 @@
 .uber-eats-ui .catalog-tabs button { color:#666; }
 .uber-eats-ui .catalog-tabs button[aria-selected="true"], .uber-eats-ui .catalog-tabs button.active { color:#06a957; }
 .uber-eats-ui .catalog-tabs svg { width:19px; height:19px; }
+
+.phone-shell .phone-screen:has(.uber-eats-ui) .status-bar {
+  background: #06c167;
+  color: #fff;
+}
