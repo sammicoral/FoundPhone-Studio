@@ -850,6 +850,8 @@ export function AppArtwork({
   time?: string;
 }) {
   const [failed, setFailed] = useState(false);
+  // Always use the custom Uber Eats artwork instead of the legacy delivery.jpg asset.
+  if (id === "delivery") return <DrawnArtwork id={id} date={date} />;
   const file = originalIconFiles[id];
   if (!originalsEnabled || !file || failed)
     return <DrawnArtwork id={id} date={date} />;
