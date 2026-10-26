@@ -69,7 +69,7 @@ function WidgetFace({
       {widget.type === "calendar" ? (
         <>
           <span className="widget-red">
-            {new Intl.DateTimeFormat("zh-CN", {
+            {new Intl.DateTimeFormat("zh-TW", {
               weekday: "long",
               timeZone: "UTC",
             }).format(date)}
