@@ -62,7 +62,7 @@ export function SocialDetail(p: {
   };
   const submit = () => {
     if (!draft.trim()) return;
-    setExtra([...extra, (p.owner || "机主") + "：" + draft.trim()]);
+    setExtra([...extra, (p.owner || "手機持有人") + "：" + draft.trim()]);
     setDraft("");
     setTarget("");
     setTab("留言");
@@ -78,7 +78,7 @@ export function SocialDetail(p: {
         {meta(item, "reposts", "0")}
       </button>
       <button
-        aria-label="喜欢帖子"
+        aria-label="喜歡貼文"
         aria-pressed={liked}
         onClick={() => setLiked(!liked)}
       >
@@ -89,14 +89,14 @@ export function SocialDetail(p: {
         {count(item.likes + (liked ? 1 : 0))}
       </button>
       <button
-        aria-label="收藏帖子"
+        aria-label="收藏貼文"
         aria-pressed={saved}
         onClick={() => setSaved(!saved)}
       >
         <Bookmark fill={saved ? "currentColor" : "none"} />
         {saved ? "1" : "0"}
       </button>
-      <button aria-label="分享帖子" onClick={() => setMenu(!menu)}>
+      <button aria-label="分享貼文" onClick={() => setMenu(!menu)}>
         <Share />
       </button>
     </div>
@@ -112,13 +112,13 @@ export function SocialDetail(p: {
       }
     >
       <header className="post-detail-nav">
-        <button aria-label="返回帖子列表" onClick={p.back}>
+        <button aria-label="返回貼文列表" onClick={p.back}>
           <ChevronLeft size={27} />
         </button>
-        <strong>{weibo ? "微博正文" : "帖子"}</strong>
+        <strong>{weibo ? "微博正文" : "貼文"}</strong>
         <div>
           {weibo && <Headphones size={23} />}
-          <button aria-label="帖子更多选项" onClick={() => setMenu(!menu)}>
+          <button aria-label="貼文更多選項" onClick={() => setMenu(!menu)}>
             <MoreHorizontal size={26} />
           </button>
         </div>
@@ -136,7 +136,7 @@ export function SocialDetail(p: {
           </div>
           {weibo ? (
             <button
-              aria-label="关注作者"
+              aria-label="關注作者"
               onClick={() => setFollowed(!followed)}
             >
               <Star fill={followed ? "#ff9500" : "none"} />
@@ -146,7 +146,7 @@ export function SocialDetail(p: {
               className="post-follow"
               onClick={() => setFollowed(!followed)}
             >
-              {followed ? "已关注" : "关注"}
+              {followed ? "已關注" : "關注"}
             </button>
           )}
         </div>
@@ -159,7 +159,7 @@ export function SocialDetail(p: {
             {[Crown, MessageCircle, Camera, Share, Copy].map((Icon, n) => (
               <button
                 key={n}
-                aria-label={["会员", "微信分享", "相机", "分享", "複製"][n]}
+                aria-label={["會員", "微信分享", "相机", "分享", "複製"][n]}
                 onClick={() => (n === 4 ? void copy() : setMenu(true))}
               >
                 <Icon size={25} />
@@ -227,7 +227,7 @@ export function SocialDetail(p: {
                         <MessageCircle size={16} />
                       </button>
                       <button
-                        aria-label={"喜欢回覆" + index}
+                        aria-label={"喜歡回覆" + index}
                         onClick={(e) => {
                           e.currentTarget.classList.toggle("liked");
                         }}
@@ -255,9 +255,9 @@ export function SocialDetail(p: {
           submit();
         }}
       >
-        <Avatar name={p.owner || "机主"} />
+        <Avatar name={p.owner || "手機持有人"} />
         <input
-          aria-label="回覆帖子"
+          aria-label="回覆貼文"
           placeholder={
             target ? "回覆 @" + target : weibo ? "發表留言" : "發布回覆"
           }
@@ -274,7 +274,7 @@ export function SocialDetail(p: {
             <button
               key={n}
               aria-label={
-                ["返回X 時間軸", "X 搜尋", "X助手", "X 通知", "X 私訊"][n]
+                ["返回X 時間軸", "X 搜尋", "X 助理", "X 通知", "X 私訊"][n]
               }
               onClick={p.back}
             >
