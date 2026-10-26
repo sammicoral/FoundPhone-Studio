@@ -526,7 +526,7 @@ export function MymyInstagram(p: SkinProps) {
               <input
                 className="mymy-search"
                 aria-label="搜尋Instagram"
-                placeholder="搜尋"
+                placeholder="搜尋 X"
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
               />
@@ -639,7 +639,7 @@ export function MymyInstagram(p: SkinProps) {
 }
 export function MymyX(p: SkinProps) {
   const [dark, setDark] = useSkinState<boolean>(p, "x-dark", true);
-  const [tab, setTab] = useSkinState<string>(p, "mymyTab", "推薦"),
+  const [tab, setTab] = useSkinState<string>(p, "mymyTab", "為你推薦"),
     [likes, setLikes] = useSkinState<string[]>(p, "mymyXLikes", []),
     [reposts, setReposts] = useSkinState<string[]>(p, "mymyXReposts", []),
     [marks, setMarks] = useSkinState<string[]>(p, "mymyXMarks", []),
@@ -665,12 +665,12 @@ export function MymyX(p: SkinProps) {
             <ArrowLeft />
           </button>
           <div className="kzxlg">𝕏</div>
-          <button aria-label="切换X外观" onClick={() => setDark(!dark)}>
+          <button aria-label="切換 X 外觀" onClick={() => setDark(!dark)}>
             <User />
           </button>
         </header>
         <div className="kzxtb">
-          {["为你推薦", "正在追蹤", "添加 +", "时间"].map((t) => (
+          {["為你推薦", "正在追蹤", "搜尋", "通知"].map((t) => (
             <button
               className={t === tab ? "on" : ""}
               key={t}
@@ -691,6 +691,7 @@ export function MymyX(p: SkinProps) {
         )}
         <div className="kzxfd">
           {p.items
+            .filter((i) => (tab === "正在追蹤" ? i.meta.following !== "false" : true))
             .filter((i) => (i.title + i.body).includes(query))
             .map((i) => (
               <article className="kzxt" key={i.id}>
@@ -778,8 +779,8 @@ export function MymyX(p: SkinProps) {
             <button
               key={n}
               aria-label={["時間軸", "搜尋", "通知", "私訊"][n]}
-              onClick={() => n < 2 && setTab(n ? "搜尋" : "推薦")}
-              disabled={n > 1}
+              onClick={() => setTab(["為你推薦", "搜尋", "通知", "私訊"][n])}
+              
             >
               <Icon />
             </button>
