@@ -81,7 +81,7 @@ export function QQThread(p: Props) {
                           </div>
                         </div>
                         <footer>
-                          {meta(i, "transferStatus", "转账记录")}
+                          {meta(i, "transferStatus", "轉帳紀錄")}
                           <small>QQ支付</small>
                         </footer>
                       </>
@@ -108,7 +108,7 @@ export function QQThread(p: Props) {
             </div>
           );
         })}
-        {!messages.length && <p className="qq-thread-empty">暂无消息</p>}
+        {!messages.length && <p className="qq-thread-empty">目前沒有訊息</p>}
       </div>
       <div className="qq-native-composer">
         <NativeComposer creator={p.creator} onAdd={p.onAdd} />
@@ -170,7 +170,7 @@ export function QQThread(p: Props) {
                 ))}
               {!messages.some((i) =>
                 ["image", "audio", "video"].includes(i.kind),
-              ) && <p>暂无内容</p>}
+              ) && <p>目前沒有內容</p>}
             </div>
           )}
         </div>
