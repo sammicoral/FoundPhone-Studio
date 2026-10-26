@@ -482,7 +482,7 @@ export function HomeLauncher(p: Props) {
   );
   const addWidget = () => {
     if (p.layout.widgets.length >= 24) {
-      setError("最多新增24個小工具");
+      setError("最多可新增 24 個小工具");
       return;
     }
     p.change((l) => {
@@ -548,7 +548,7 @@ export function HomeLauncher(p: Props) {
               <Plus size={18} />
               小工具
             </button>
-            <button onClick={() => setSheet("layout")}>版面配置</button>
+            <button onClick={() => setSheet("layout")}>主畫面配置</button>
             <button onClick={() => setEditing(false)}>完成</button>
           </>
         ) : null}
@@ -652,7 +652,7 @@ export function HomeLauncher(p: Props) {
                 : sheet === "widgets"
                   ? "小工具"
                   : sheet === "layout"
-                    ? "儲存版面配置"
+                    ? "儲存主畫面配置"
                     : active?.name || "小工具"}
             </strong>
           </header>
@@ -790,16 +790,16 @@ export function HomeLauncher(p: Props) {
               </>
             ) : sheet === "layout" ? (
               <>
-                <p>版面配置、安装狀態和小工具自動儲存在本Safari。</p>
+                <p>主畫面配置、安裝狀態和小工具自動儲存在這個 Safari 瀏覽器。</p>
                 <button className="launcher-action" onClick={download}>
                   <Download />
-                  匯出版面配置JSON
+                  匯出主畫面配置JSON
                 </button>
                 <label className="launcher-action">
                   <Upload />
-                  匯入版面配置JSON
+                  匯入主畫面配置JSON
                   <input
-                    aria-label="匯入主畫面版面配置"
+                    aria-label="匯入主畫面主畫面配置"
                     type="file"
                     accept=".json"
                     onChange={async (e) => {
@@ -807,7 +807,7 @@ export function HomeLauncher(p: Props) {
                       if (!f) return;
                       try {
                         if (f.size > 4 * 1024 * 1024)
-                          throw Error("版面配置檔案過大");
+                          throw Error("主畫面配置檔案過大");
                         p.importLayout(JSON.parse(await f.text()));
                         setSheet("");
                       } catch (err) {
@@ -1007,9 +1007,9 @@ export function HomeLauncher(p: Props) {
                         checked={keep}
                         onChange={(e) => setKeep(e.target.checked)}
                       />
-                      保留此App的本机內容
+                      保留此App的本機內容
                     </label>
-                    <p>取消勾選會移除本机內容，原始故事脚本不受影响。</p>
+                    <p>取消勾選會移除本機內容，原始故事腳本不受影響。</p>
                     <button
                       className="launcher-primary danger"
                       onClick={() => {
