@@ -314,7 +314,7 @@ export function MymyKakao(p: SkinProps) {
   );
 }
 export function MymyInstagram(p: SkinProps) {
-  const [tab, setTab] = useSkinState<string>(p, "mymyTab", "主页"),
+  const [tab, setTab] = useSkinState<string>(p, "mymyTab", "首頁"),
     [liked, setLiked] = useSkinState<string[]>(p, "mymyLiked", []),
     [saved, setSaved] = useSkinState<string[]>(p, "mymySaved", []),
     [replies, setReplies] = useSkinState<string[]>(p, "mymyReplies", []),
@@ -325,10 +325,10 @@ export function MymyInstagram(p: SkinProps) {
     [draft, setDraft] = useState(""),
     [pop, setPop] = useState("");
   const posts = p.items.filter(
-      (i) => i.folder !== "私信" && i.meta.story !== "true",
+      (i) => i.folder !== "私訊" && i.meta.story !== "true",
     ),
     stories = p.items.filter((i) => i.meta.story === "true"),
-    dms = p.items.filter((i) => i.folder === "私信"),
+    dms = p.items.filter((i) => i.folder === "私訊"),
     active = stories[story - 1];
   const toggle = (id: string, values: string[], set: (v: string[]) => void) =>
     set(values.includes(id) ? values.filter((v) => v !== id) : [...values, id]);
@@ -358,12 +358,12 @@ export function MymyInstagram(p: SkinProps) {
       <header className="igph">
         <Avatar name={i.sender} src={i.avatar} />
         <div className="igpn">
-          <button onClick={() => setTab("个人主页")}>
+          <button onClick={() => setTab("个人首頁")}>
             <b>{i.sender}</b>
           </button>
           <small>{i.meta.location || i.time}</small>
         </div>
-        <button aria-label="帖子详情" onClick={() => openPost(i)}>
+        <button aria-label="貼文详情" onClick={() => openPost(i)}>
           <MoreHorizontal />
         </button>
       </header>
@@ -385,7 +385,7 @@ export function MymyInstagram(p: SkinProps) {
       </div>
       <div className="iga">
         <button
-          aria-label={"点赞" + i.title}
+          aria-label={"按讚" + i.title}
           aria-pressed={liked.includes(i.id)}
           onClick={() => toggle(i.id, liked, setLiked)}
         >
@@ -395,7 +395,7 @@ export function MymyInstagram(p: SkinProps) {
           />
         </button>
         <button
-          aria-label={"评论" + i.title}
+          aria-label={"留言" + i.title}
           onClick={() => {
             read(p, i);
             setSheet(i);
@@ -403,7 +403,7 @@ export function MymyInstagram(p: SkinProps) {
         >
           <MessageCircle />
         </button>
-        <button aria-label="分享帖子" onClick={() => setTab("私信")}>
+        <button aria-label="分享貼文" onClick={() => setTab("私訊")}>
           <Send />
         </button>
         <button
@@ -415,7 +415,7 @@ export function MymyInstagram(p: SkinProps) {
           <Bookmark fill={saved.includes(i.id) ? "currentColor" : "none"} />
         </button>
       </div>
-      <p className="lk2">{i.likes + (liked.includes(i.id) ? 1 : 0)} 次赞</p>
+      <p className="lk2">{i.likes + (liked.includes(i.id) ? 1 : 0)} 次讚</p>
       <button
         className="igc"
         onClick={() => {
@@ -425,7 +425,7 @@ export function MymyInstagram(p: SkinProps) {
         <b>{i.sender}</b> {i.body}
       </button>
       <button className="cmall" onClick={() => setSheet(i)}>
-        查看评论{" "}
+        查看留言{" "}
         {i.comments.length +
           replies.filter((r) => r.startsWith(i.id + "\t")).length}
       </button>
@@ -437,21 +437,21 @@ export function MymyInstagram(p: SkinProps) {
       <div className="ig">
         <header className="igh">
           <button
-            aria-label={selected ? "返回Instagram动态" : "关闭当前App"}
+            aria-label={selected ? "返回 Instagram 動態" : "關閉目前 App"}
             onClick={() => (selected ? setSelected(null) : p.onBack())}
           >
             <ArrowLeft />
           </button>
           <span className="igl2">
-            {selected ? "帖子" : tab === "主页" ? "Instagram" : tab}
+            {selected ? "貼文" : tab === "首頁" ? "Instagram" : tab}
           </span>
-          <button aria-label="打开私信" onClick={() => setTab("私信")}>
+          <button aria-label="打开私訊" onClick={() => setTab("私訊")}>
             <Send />
           </button>
         </header>
         <div className="igb">
           {selected && post(selected)}
-          {!selected && tab === "主页" && (
+          {!selected && tab === "首頁" && (
             <>
               <div className="sts">
                 {stories.map((s, n) => (
@@ -473,22 +473,22 @@ export function MymyInstagram(p: SkinProps) {
               {!posts.length && <Blank />}
             </>
           )}
-          {!selected && tab === "个人主页" && (
+          {!selected && tab === "个人首頁" && (
             <>
               <div className="pf">
                 <Avatar name={p.owner || "机主"} />
                 <div className="ps">
                   <div>
                     <b>{posts.length}</b>
-                    <small>帖子</small>
+                    <small>貼文</small>
                   </div>
                   <div>
                     <b>—</b>
-                    <small>粉丝</small>
+                    <small>粉絲</small>
                   </div>
                   <div>
                     <b>—</b>
-                    <small>关注</small>
+                    <small>追蹤</small>
                   </div>
                 </div>
               </div>
@@ -507,7 +507,7 @@ export function MymyInstagram(p: SkinProps) {
               </div>
             </>
           )}
-          {!selected && tab === "私信" && (
+          {!selected && tab === "私訊" && (
             <>
               {dms.map((i) => (
                 <button className="kzkr" key={i.id} onClick={() => openPost(i)}>
@@ -521,12 +521,12 @@ export function MymyInstagram(p: SkinProps) {
               {!dms.length && <Blank />}
             </>
           )}
-          {!selected && tab === "搜索" && (
+          {!selected && tab === "搜尋" && (
             <>
               <input
                 className="mymy-search"
-                aria-label="搜索Instagram"
-                placeholder="搜索"
+                aria-label="搜尋Instagram"
+                placeholder="搜尋"
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
               />
@@ -540,13 +540,13 @@ export function MymyInstagram(p: SkinProps) {
           {[Home, Search, Send, User].map((Icon, n) => (
             <button
               key={n}
-              aria-label={["主页", "搜索", "私信", "个人主页"][n]}
+              aria-label={["首頁", "搜尋", "私訊", "个人首頁"][n]}
               aria-pressed={
-                !selected && tab === ["主页", "搜索", "私信", "个人主页"][n]
+                !selected && tab === ["首頁", "搜尋", "私訊", "个人首頁"][n]
               }
               onClick={() => {
                 setSelected(null);
-                setTab(["主页", "搜索", "私信", "个人主页"][n]);
+                setTab(["首頁", "搜尋", "私訊", "个人首頁"][n]);
               }}
             >
               <Icon />
@@ -558,14 +558,14 @@ export function MymyInstagram(p: SkinProps) {
         <div className="kzcs">
           <button
             className="kzbk"
-            aria-label="关闭评论"
+            aria-label="关闭留言"
             onClick={() => setSheet(null)}
           />
-          <section className="kzsh" role="dialog" aria-label="Instagram评论">
+          <section className="kzsh" role="dialog" aria-label="Instagram留言">
             <div className="mymy-sheet-handle" />
             <header>
-              <b>评论</b>
-              <button aria-label="关闭评论面板" onClick={() => setSheet(null)}>
+              <b>留言</b>
+              <button aria-label="关闭留言面板" onClick={() => setSheet(null)}>
                 <X />
               </button>
             </header>
@@ -593,13 +593,13 @@ export function MymyInstagram(p: SkinProps) {
               }}
             >
               <input
-                aria-label="添加评论"
+                aria-label="添加留言"
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
-                placeholder="添加评论"
+                placeholder="添加留言"
                 maxLength={500}
               />
-              <button>发布</button>
+              <button>發布</button>
             </form>
           </section>
         </div>
@@ -639,7 +639,7 @@ export function MymyInstagram(p: SkinProps) {
 }
 export function MymyX(p: SkinProps) {
   const [dark, setDark] = useSkinState<boolean>(p, "x-dark", true);
-  const [tab, setTab] = useSkinState<string>(p, "mymyTab", "推荐"),
+  const [tab, setTab] = useSkinState<string>(p, "mymyTab", "推薦"),
     [likes, setLikes] = useSkinState<string[]>(p, "mymyXLikes", []),
     [reposts, setReposts] = useSkinState<string[]>(p, "mymyXReposts", []),
     [marks, setMarks] = useSkinState<string[]>(p, "mymyXMarks", []),
@@ -661,7 +661,7 @@ export function MymyX(p: SkinProps) {
     >
       <div className="kzxw">
         <header className="kzxh">
-          <button aria-label="关闭当前App" onClick={p.onBack}>
+          <button aria-label="關閉目前 App" onClick={p.onBack}>
             <ArrowLeft />
           </button>
           <div className="kzxlg">𝕏</div>
@@ -670,7 +670,7 @@ export function MymyX(p: SkinProps) {
           </button>
         </header>
         <div className="kzxtb">
-          {["为你推荐", "正在关注", "添加 +", "时间"].map((t) => (
+          {["为你推薦", "正在追蹤", "添加 +", "时间"].map((t) => (
             <button
               className={t === tab ? "on" : ""}
               key={t}
@@ -680,13 +680,13 @@ export function MymyX(p: SkinProps) {
             </button>
           ))}
         </div>
-        {tab === "搜索" && (
+        {tab === "搜尋" && (
           <input
             className="mymy-search"
-            aria-label="搜索X"
+            aria-label="搜尋X"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="搜索"
+            placeholder="搜尋"
           />
         )}
         <div className="kzxfd">
@@ -725,14 +725,14 @@ export function MymyX(p: SkinProps) {
                   )}
                   <div className="kzxac">
                     <button
-                      aria-label={"评论" + i.title}
+                      aria-label={"留言" + i.title}
                       onClick={() => p.onItem(i)}
                     >
                       <MessageCircle />
                       {i.comments.length}
                     </button>
                     <button
-                      aria-label={"转发" + i.title}
+                      aria-label={"轉發" + i.title}
                       aria-pressed={reposts.includes(i.id)}
                       onClick={() => toggle(i.id, reposts, setReposts)}
                     >
@@ -740,7 +740,7 @@ export function MymyX(p: SkinProps) {
                       {reposts.includes(i.id) ? 1 : 0}
                     </button>
                     <button
-                      aria-label={"点赞" + i.title}
+                      aria-label={"按讚" + i.title}
                       aria-pressed={isLiked(i.id)}
                       onClick={() => {
                         toggle(i.id, likes, setLikes);
@@ -777,8 +777,8 @@ export function MymyX(p: SkinProps) {
           {[Home, Search, Bell, MessageCircle].map((Icon, n) => (
             <button
               key={n}
-              aria-label={["时间线", "搜索", "通知", "私信"][n]}
-              onClick={() => n < 2 && setTab(n ? "搜索" : "推荐")}
+              aria-label={["時間軸", "搜尋", "通知", "私訊"][n]}
+              onClick={() => n < 2 && setTab(n ? "搜尋" : "推薦")}
               disabled={n > 1}
             >
               <Icon />
