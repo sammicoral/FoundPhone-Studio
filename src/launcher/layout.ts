@@ -75,6 +75,17 @@ export function validateLayout(raw: unknown, input: Work) {
   const w = ensureAppStore(input);
   const layout = layoutSchema.parse(raw);
   if (layout.workId !== w.id) throw Error("布局属于其他作品");
+  // Keep built-in app names in sync with the canonical Traditional Chinese registry.
+  for (const app of layout.apps) {
+    const canonical = w.apps.find((item) => item.id === app.id);
+    if (canonical && app.name !== canonical.name && app.id !== "custom") {
+      const legacyNames: Record<string, string[]> = {
+        wechat: ["微信"], weibo: ["微博"], douyin: ["抖音"], netease: ["网易云音乐", "网易云音樂"],
+        contacts: ["通訊錄"], safari: ["Safari"], redbook: ["小紅書"],
+      };
+      if ((legacyNames[app.id] ?? []).includes(app.name)) app.name = canonical.name;
+    }
+  }
   const known = new Set(w.apps.map((a) => a.id));
   if (layout.apps.some((a) => !known.has(a.id))) throw Error("布局含未注册App");
   if (new Set(layout.apps.map((a) => a.id)).size !== layout.apps.length)
