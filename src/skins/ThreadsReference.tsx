@@ -73,7 +73,7 @@ export function ThreadsReference(p: SkinProps) {
   };
   const card = (i: Item) => (
     <article className="tr-post" key={i.id}>
-      <button className="tr-avatar" onClick={() => setTab("个人主页")}>
+      <button className="tr-avatar" onClick={() => setTab("個人檔案")}>
         <Avatar name={i.sender} src={i.avatar} />
         <span>+</span>
       </button>
@@ -112,7 +112,7 @@ export function ThreadsReference(p: SkinProps) {
             {i.comments.length || ""}
           </button>
           <button
-            aria-label={"转发" + i.title}
+            aria-label={"轉發" + i.title}
             onClick={() => toggle(i.id, saved, setSaved)}
           >
             <Repeat2 />
@@ -172,7 +172,7 @@ export function ThreadsReference(p: SkinProps) {
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
               />
-              <button>发送</button>
+              <button>傳送</button>
             </form>
           </>
         ) : (
@@ -185,7 +185,7 @@ export function ThreadsReference(p: SkinProps) {
               {tab === "首页" ? (
                 <>
                   <button
-                    aria-label="打开Threads菜单"
+                    aria-label="開啟 Threads 選單"
                     onClick={() => setSide(true)}
                   >
                     <Menu />
@@ -219,7 +219,7 @@ export function ThreadsReference(p: SkinProps) {
                       ? "消息"
                       : tab === "动态"
                         ? "动态"
-                        : tab === "个人主页"
+                        : tab === "個人檔案"
                           ? p.owner || "机主"
                           : tab}
                   </h1>
@@ -265,9 +265,9 @@ export function ThreadsReference(p: SkinProps) {
                 .filter((i) =>
                   filter === "收藏"
                     ? saved.includes(i.id)
-                    : filter === "已关注"
+                    : filter === "已追蹤"
                       ? i.meta.following === "true"
-                      : filter === "限时帖"
+                      : filter === "限時貼文"
                         ? i.meta.story === "true"
                         : true,
                 )
@@ -324,10 +324,10 @@ export function ThreadsReference(p: SkinProps) {
                       </div>
                     </div>
                   ))}
-                {!activities.length && <p className="tr-empty">暂无动态</p>}
+                {!activities.length && <p className="tr-empty">目前沒有動態</p>}
               </>
             )}
-            {tab === "个人主页" && (
+            {tab === "個人檔案" && (
               <>
                 <div className="tr-profile">
                   <Avatar name={p.owner || "机主"} />
@@ -357,11 +357,11 @@ export function ThreadsReference(p: SkinProps) {
                 "Threads消息",
                 "新建串文",
                 "Threads动态",
-                "Threads个人主页",
+                "Threads個人檔案",
               ][n]
             }
             className={
-              tab === ["首页", "消息", "", "动态", "个人主页"][n]
+              tab === ["首页", "消息", "", "动态", "個人檔案"][n]
                 ? "selected"
                 : ""
             }
@@ -370,7 +370,7 @@ export function ThreadsReference(p: SkinProps) {
               if (n === 2) {
                 setCompose(true);
                 setKeyboard(true);
-              } else setTab(["首页", "消息", "", "动态", "个人主页"][n]);
+              } else setTab(["首页", "消息", "", "动态", "個人檔案"][n]);
             }}
           >
             <Icon
@@ -414,7 +414,7 @@ export function ThreadsReference(p: SkinProps) {
               </button>
             </div>
             <div className="tr-side-list">
-              {["为你推荐", "已关注", "限时帖"].map((t) => (
+              {["為您推薦", "已追蹤", "限時貼文"].map((t) => (
                 <button
                   key={t}
                   onClick={() => {
@@ -450,10 +450,10 @@ export function ThreadsReference(p: SkinProps) {
             <Avatar name={p.owner || "机主"} />
             <div>
               <b>{p.owner}</b>
-              <span className="tr-muted"> › 社群或话题</span>
+              <span className="tr-muted"> › 社群或話題</span>
               <textarea
                 aria-label="串文内容"
-                placeholder="有什么新鲜事吗？"
+                placeholder="有什麼新鮮事？"
                 value={draft}
                 inputMode="none"
                 onFocus={() => setKeyboard(true)}
@@ -478,7 +478,7 @@ export function ThreadsReference(p: SkinProps) {
                 setTab("首页");
               }}
             >
-              发布
+              發布
             </button>
           </div>
           {keyboard && (
@@ -545,7 +545,7 @@ export function ThreadsReference(p: SkinProps) {
                   {" "}
                 </button>
                 <button
-                  aria-label="换行"
+                  aria-label="換行"
                   onClick={() => setDraft(draft + "\n")}
                 >
                   <CornerDownLeft />
