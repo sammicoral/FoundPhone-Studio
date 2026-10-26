@@ -511,7 +511,7 @@ export function NetflixSkin(p: Props) {
                 ) : (
                   <Plus size={16} />
                 )}
-                我的片单
+                我的片單
               </button>
             </div>
           </div>
