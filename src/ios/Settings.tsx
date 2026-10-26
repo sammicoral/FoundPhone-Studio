@@ -26,7 +26,7 @@ type Row = [ComponentType<{ size?: number }>, string, string];
 const groups: Row[][] = [
   [
     [Plane, "飛航模式", "#ff9500"],
-    [Wifi, "無線局域網", "#007aff"],
+    [Wifi, "Wi-Fi", "#007aff"],
     [Bluetooth, "藍牙", "#007aff"],
     [Signal, "行動網路", "#34c759"],
     [Link, "個人熱點", "#65ce88"],
@@ -36,12 +36,12 @@ const groups: Row[][] = [
   [
     [Settings, "一般", "#8e8e93"],
     [Accessibility, "輔助使用", "#007aff"],
-    [Image, "墙纸", "#32ade6"],
+    [Image, "壁紙", "#32ade6"],
   ],
   [
     [Bell, "通知", "#ff3b30"],
     [Volume2, "聲音與觸覺回饋", "#ff2d55"],
-    [Moon, "專註模式", "#5856d6"],
+    [Moon, "專注模式", "#5856d6"],
     [Shield, "Face ID 與密碼", "#34c759"],
   ],
 ];
@@ -92,7 +92,7 @@ export function NativeSettings({
       case "關於本機":
         return (
           <div className="settings-group">
-            {row("名称", work.phone.owner + "的 iPhone")}
+            {row("名稱", work.phone.owner + "的 iPhone")}
             {row("iOS 版本", "18.0")}
             {row("機型名稱", "iPhone 15 Pro")}
             {row("照片", String(work.data.photos?.length || 0))}
@@ -103,7 +103,7 @@ export function NativeSettings({
           </div>
         );
       case "Wi-Fi":
-      case "無線局域網":
+      case "Wi-Fi":
         return (
           <>
             <div className="settings-group">
@@ -154,7 +154,7 @@ export function NativeSettings({
           <div className="settings-group">
             {row("日期", work.phone.date || "2026-09-01")}
             {row("時間", work.phone.time)}
-            {row("時区", "中國標准時間")}
+            {row("時區", "中國標準時間")}
           </div>
         );
       case "iPhone 儲存空間":
@@ -249,16 +249,16 @@ export function NativeSettings({
                       ) : (
                         <>
                           <small>
-                            {name === "無線局域網"
+                            {name === "Wi-Fi"
                               ? wifi
-                                ? "未連接"
+                                ? "未連線"
                                 : "關閉"
                               : name === "藍牙"
                                 ? bluetooth
                                   ? "打開"
                                   : "關閉"
                                 : name === "VPN"
-                                  ? "未連接"
+                                  ? "未連線"
                                   : name === "行動網路" || name === "個人熱點"
                                     ? "關閉"
                                     : ""}
