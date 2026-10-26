@@ -100,11 +100,11 @@ export function HealthSkin(p: Props) {
           {detail
             ? healthTypes.find((x) => x.id === detail)?.title
             : profile
-              ? "健康详细资料"
+              ? "健康詳細資料"
               : tab}
         </strong>
         <button
-          aria-label="健康资料"
+          aria-label="健康資料"
           onClick={() => (p.creator ? p.onAdd() : setProfile(true))}
         >
           <User size={23} />
@@ -113,11 +113,11 @@ export function HealthSkin(p: Props) {
       <div className="health-native-scroll">
         {profile ? (
           <>
-            <h1>健康详细资料</h1>
+            <h1>健康詳細資料</h1>
             <section className="health-profile-empty">
               <User size={45} />
-              <h2>{p.owner || "机主"}</h2>
-              <p>尚未設置更多资料</p>
+              <h2>{p.owner || "手機持有人"}</h2>
+              <p>尚未設定更多資料</p>
             </section>
           </>
         ) : detail ? (
@@ -269,7 +269,7 @@ export function HealthSkin(p: Props) {
                 );
               })}
             </div>
-            <button className="health-all-row" onClick={() => setTab("浏览")}>
+            <button className="health-all-row" onClick={() => setTab("瀏覽")}>
               <Heart color="#ff2d55" />
               顯示所有健康數據
               <ChevronRight />
@@ -294,7 +294,7 @@ export function HealthSkin(p: Props) {
           </section>
         ) : (
           <>
-            <h1>浏览</h1>
+            <h1>瀏覽</h1>
             {healthTypes.map((t) => (
               <button
                 key={t.id}
@@ -326,7 +326,7 @@ export function HealthSkin(p: Props) {
           {[
             [Heart, "摘要"],
             [Users, "共享"],
-            [Grid2X2, "浏览"],
+            [Grid2X2, "瀏覽"],
           ].map(([Icon, label]) => {
             const Glyph = Icon as typeof Heart;
             return (
@@ -560,7 +560,7 @@ export function WeatherSkin(p: Props) {
               <label className="weather-city-search">
                 <Search size={18} />
                 <input
-                  placeholder="搜索城市"
+                  placeholder="搜尋城市"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                 />
