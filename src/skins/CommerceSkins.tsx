@@ -41,7 +41,7 @@ export function AlipaySkin(p: Props) {
             卡包
           </button>
         </div>
-        <small>作品内的虛構付款记录</small>
+        <small>作品內的虛構付款紀錄</small>
       </div>
       <div className="catalog-scroll">
         <SearchBox value={q} set={setQ} />
@@ -74,7 +74,7 @@ export function AlipaySkin(p: Props) {
               </div>
               <span>
                 <strong>{meta(i, "amount", "—")}</strong>
-                <small>{meta(i, "status", "账单记录")}</small>
+                <small>{meta(i, "status", "帳單紀錄")}</small>
               </span>
             </button>
           ),
@@ -123,7 +123,7 @@ export function TaobaoSkin(p: Props) {
         ) : (
           <>
             <div className="taobao-status">
-              {["全部", "待付款", "待发货", "待收貨", "已完成"].map((s) => (
+              {["全部", "待付款", "待出貨", "待收貨", "已完成"].map((s) => (
                 <button
                   className={s === status ? "selected" : ""}
                   key={s}
@@ -142,7 +142,7 @@ export function TaobaoSkin(p: Props) {
                 <div>
                   <ShoppingBag size={16} />
                   <strong>{i.sender}</strong>
-                  <small>{meta(i, "status", "訂單记录")}</small>
+                  <small>{meta(i, "status", "訂單紀錄")}</small>
                 </div>
                 <section>
                   <Media item={i} />
@@ -216,7 +216,7 @@ export function DeliverySkin(p: Props) {
                 <header>
                   <Utensils size={18} />
                   <strong>{i.sender}</strong>
-                  <span>{meta(i, "status", "配送记录")}</span>
+                  <span>{meta(i, "status", "配送紀錄")}</span>
                 </header>
                 <section>
                   <Media item={i} />
