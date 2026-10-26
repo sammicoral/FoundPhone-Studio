@@ -129,7 +129,9 @@ export function validateLayout(raw: unknown, input: Work) {
     ];
     layout.previewLayoutRevision = 1;
   }
-  if (w.id === "ui-test-phone-v2" && layout.previewLayoutRevision < 3) {
+  if (w.id === "ui-test-phone-v2") {
+    // Always enforce the requested removals. Saved layouts can outlive a previous
+    // migration revision, so this must not depend on a one-time version check.
     const removedApps = ["qq", "weibo", "bilibili", "alipay", "taobao", "netease"];
     for (const app of layout.apps) {
       if (removedApps.includes(app.id)) {
@@ -141,7 +143,7 @@ export function validateLayout(raw: unknown, input: Work) {
       }
     }
     layout.order = layout.order.filter((id) => !removedApps.includes(id));
-    layout.previewLayoutRevision = 3;
+    layout.previewLayoutRevision = 4;
   }
   const entries = homeEntries(layout),
     packed = packHome(entries, layout.positions);
