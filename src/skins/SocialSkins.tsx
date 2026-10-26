@@ -227,7 +227,7 @@ export function ThreadsSkin(p: Props) {
               </button>
               <Actions p={p} item={i} />
               <button className="thread-replies" onClick={() => p.onItem(i)}>
-                {i.comments.length} 条回复
+                {i.comments.length} 則回覆
               </button>
             </div>
           </article>
@@ -384,9 +384,9 @@ export function PinterestSkin(p: Props) {
     <div className="catalog-skin pinterest-ui">
       <Header p={p} />
       <div className="catalog-scroll">
-        {tab === "收藏板" && !board ? (
+        {tab === "收藏看板" && !board ? (
           <>
-            <h1>收藏板</h1>
+            <h1>收藏看板</h1>
             <div className="pinterest-boards">
               {groupItems(items).map((g) => (
                 <button key={g} onClick={() => setBoard(g)}>
@@ -406,7 +406,7 @@ export function PinterestSkin(p: Props) {
                 className="pinterest-board-title"
                 onClick={() => setBoard("")}
               >
-                {board} · 返回收藏板
+                {board} · 返回收藏看板
               </button>
             )}
             <div className="pinterest-pins">
@@ -422,7 +422,7 @@ export function PinterestSkin(p: Props) {
         )}
       </div>
       <Tabs
-        tabs={["發現", "收藏板"]}
+        tabs={["發現", "收藏看板"]}
         value={tab}
         set={(t) => {
           setTab(t);
@@ -434,7 +434,7 @@ export function PinterestSkin(p: Props) {
   );
 }
 export function RedditSkin(p: Props) {
-  const { tab, setTab, q, setQ, items } = useContent(p, "首页");
+  const { tab, setTab, q, setQ, items } = useContent(p, "首頁");
   const [sort, setSort] = useState("最新");
   const list = [...items].sort((a, b) =>
     sort === "熱門" ? b.likes - a.likes : b.time.localeCompare(a.time),
@@ -444,7 +444,7 @@ export function RedditSkin(p: Props) {
       <Header p={p} />
       <div className="reddit-community">
         <Hash size={21} />
-        <button onClick={() => setTab(tab === "首页" ? "社群" : "首页")}>
+        <button onClick={() => setTab(tab === "首頁" ? "社群" : "首頁")}>
           {tab} ⌄
         </button>
         <select
@@ -465,7 +465,7 @@ export function RedditSkin(p: Props) {
                 key={g}
                 onClick={() => {
                   setQ(g === "未分类" ? "" : g);
-                  setTab("首页");
+                  setTab("首頁");
                 }}
               >
                 <Hash size={22} />
@@ -479,7 +479,7 @@ export function RedditSkin(p: Props) {
         <Empty items={items} />
       </div>
       <Tabs
-        tabs={["首页", "社群"]}
+        tabs={["首頁", "社群"]}
         value={tab}
         set={setTab}
         icons={[<Home />, <Users />]}
@@ -532,7 +532,7 @@ export function ForumSkin(p: Props) {
       <Header p={p} />
       <div className="forum-banner">
         <Hash size={27} />
-        <strong>{board || "论坛"}</strong>
+        <strong>{board || "論壇"}</strong>
         <span>{items.length} 個主題</span>
       </div>
       <div className="catalog-scroll">
@@ -574,7 +574,7 @@ export function ForumSkin(p: Props) {
                     {i.sender} · {i.time.slice(5, 16)}
                   </span>
                   <span>
-                    {meta(i, "views", "—")} 浏览 · {i.comments.length} 回复
+                    {meta(i, "views", "—")} 瀏覽 · {i.comments.length} 回复
                   </span>
                 </div>
               </button>
@@ -599,8 +599,8 @@ export function SnapchatSkin(p: Props) {
   const { tab, setTab, items } = useContent(p, "快拍");
   const [index, setIndex] = useState(0);
   const list = items.filter((i) =>
-    tab === "回忆"
-      ? i.favorite || i.folder === "回忆"
+    tab === "回憶"
+      ? i.favorite || i.folder === "回憶"
       : tab === "聊天"
         ? i.folder === "聊天"
         : i.folder !== "聊天",
@@ -632,7 +632,7 @@ export function SnapchatSkin(p: Props) {
             </button>
             <button
               className="snap-next"
-              aria-label="下一条快拍"
+              aria-label="下一則限時動態"
               onClick={() => {
                 setIndex((n) => n + 1);
                 p.onRead(i.id);
@@ -649,7 +649,7 @@ export function SnapchatSkin(p: Props) {
         )}
       </div>
       <Tabs
-        tabs={["聊天", "快拍", "回忆"]}
+        tabs={["聊天", "快拍", "回憶"]}
         value={tab}
         set={(t) => {
           setTab(t);
