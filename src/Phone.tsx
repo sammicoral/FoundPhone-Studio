@@ -134,6 +134,7 @@ function PhoneRuntime({
 }) {
   const [app, setApp] = useState("");
   const [homeRequest, setHomeRequest] = useState(0);
+  const [homePage, setHomePage] = useState(0);
   const [locked, setLocked] = useState(!creator);
   const [pinOpen, setPinOpen] = useState(false);
   const [quickCamera, setQuickCamera] = useState(false);
@@ -480,6 +481,8 @@ function PhoneRuntime({
               </AppWindow>
             ) : (
               <HomeLauncher
+                initialPage={homePage}
+                onPageChange={setHomePage}
                 key={
                   "home-" + homeRequest + (app === "appstore" ? "store" : "")
                 }
