@@ -16,7 +16,7 @@ import "./qq-detail.css";
 export function QQThread(p: Props) {
   const [panel, setPanel] = useState("");
   const messages = p.items.filter(
-    (i) => i.title === p.thread && i.folder !== "空间" && i.kind !== "post",
+    (i) => i.title === p.thread && i.folder !== "空間" && i.kind !== "post",
   );
   const read = (i: (typeof messages)[number]) =>
     p.creator || i.password ? p.onItem(i) : p.onRead(i.id);
@@ -77,7 +77,7 @@ export function QQThread(p: Props) {
                                 /^\d+(\.\d+)?$/.test(i.body) ? i.body : "—",
                               )}
                             </strong>
-                            <p>转账</p>
+                            <p>轉帳</p>
                           </div>
                         </div>
                         <footer>
@@ -115,8 +115,8 @@ export function QQThread(p: Props) {
         <div>
           {[
             [Mic, "语音"],
-            [Image, "图片"],
-            [Camera, "相机"],
+            [Image, "圖片"],
+            [Camera, "相機"],
             [Video, "视频"],
             [Smile, "表情"],
             [Plus, "更多"],
@@ -163,7 +163,7 @@ export function QQThread(p: Props) {
                       {i.kind === "audio"
                         ? "语音"
                         : i.kind === "image"
-                          ? "图片"
+                          ? "圖片"
                           : "视频"}
                     </span>
                   </button>
