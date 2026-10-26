@@ -69,6 +69,7 @@ export function DeviceLock({
   onUnlock,
   onCamera,
   onLight,
+  passcode,
 }: {
   work: Work;
   time: string;
@@ -80,8 +81,10 @@ export function DeviceLock({
   onUnlock: (v: string) => void;
   onCamera: () => void;
   onLight: () => void;
+  passcode?: string;
 }) {
   const [code, setCode] = useState("");
+  const activePasscode = passcode ?? work.phone.passcode;
   useEffect(() => {
     if (error) setCode("");
   }, [error]);
