@@ -207,7 +207,7 @@ export function ThreadsSkin(p: Props) {
         </button>
       </div>
       <div className="catalog-scroll">
-        {(tab === "个人主页"
+        {(tab === "個人檔案"
           ? items
           : items.filter((i) => tab !== "正在關注" || i.folder === "正在關注")
         ).map((i) => (
@@ -235,7 +235,7 @@ export function ThreadsSkin(p: Props) {
         <Empty items={items} />
       </div>
       <Tabs
-        tabs={["為你推薦", "正在關注", "个人主页"]}
+        tabs={["為你推薦", "正在關注", "個人檔案"]}
         value={tab}
         set={setTab}
         icons={[<Home />, <Users />, <User />]}
@@ -244,20 +244,20 @@ export function ThreadsSkin(p: Props) {
   );
 }
 export function FacebookSkin(p: Props) {
-  const { tab, setTab, q, setQ, items } = useContent(p, "动态");
+  const { tab, setTab, q, setQ, items } = useContent(p, "動態");
   const stories = items.filter((i) => i.folder === "Story");
   return (
     <div className="catalog-skin facebook-ui">
       <Header p={p} />
       <Tabs
-        tabs={["动态", "好友", "个人主页"]}
+        tabs={["動態", "好友", "個人檔案"]}
         value={tab}
         set={setTab}
         icons={[<Home />, <Users />, <User />]}
       />
       <div className="catalog-scroll">
         <SearchBox value={q} set={setQ} />
-        {tab === "动态" ? (
+        {tab === "動態" ? (
           <>
             <button
               className="fb-compose"
@@ -265,7 +265,7 @@ export function FacebookSkin(p: Props) {
               onClick={p.onAdd}
             >
               <Avatar name={p.owner ?? "我"} />
-              分享新动态
+              分享新動態
             </button>
             <div className="fb-stories">
               {stories.map((i) => (
@@ -308,7 +308,7 @@ export function FacebookSkin(p: Props) {
               <h1>{p.owner ?? "我"}</h1>
             </div>
             {items
-              .filter((i) => i.folder === "个人主页")
+              .filter((i) => i.folder === "個人檔案")
               .map((i) => (
                 <button
                   key={i.id}
@@ -444,7 +444,7 @@ export function RedditSkin(p: Props) {
       <Header p={p} />
       <div className="reddit-community">
         <Hash size={21} />
-        <button onClick={() => setTab(tab === "首页" ? "社区" : "首页")}>
+        <button onClick={() => setTab(tab === "首页" ? "社群" : "首页")}>
           {tab} ⌄
         </button>
         <select
@@ -458,7 +458,7 @@ export function RedditSkin(p: Props) {
       </div>
       <div className="catalog-scroll">
         <SearchBox value={q} set={setQ} />
-        {tab === "社区"
+        {tab === "社群"
           ? groupItems(items).map((g) => (
               <button
                 className="reddit-sub"
@@ -479,7 +479,7 @@ export function RedditSkin(p: Props) {
         <Empty items={items} />
       </div>
       <Tabs
-        tabs={["首页", "社区"]}
+        tabs={["首页", "社群"]}
         value={tab}
         set={setTab}
         icons={[<Home />, <Users />]}
@@ -533,7 +533,7 @@ export function ForumSkin(p: Props) {
       <div className="forum-banner">
         <Hash size={27} />
         <strong>{board || "论坛"}</strong>
-        <span>{items.length} 个主题</span>
+        <span>{items.length} 個主題</span>
       </div>
       <div className="catalog-scroll">
         <SearchBox value={q} set={setQ} />
@@ -552,7 +552,7 @@ export function ForumSkin(p: Props) {
                   <strong>{g}</strong>
                   <small>
                     {items.filter((i) => (i.folder || "未分类") === g).length}{" "}
-                    个主题
+                    個主題
                   </small>
                 </div>
                 <ChevronRight size={16} />
@@ -645,7 +645,7 @@ export function SnapchatSkin(p: Props) {
             </button>
           </>
         ) : (
-          <p className="catalog-empty">暂无{tab}</p>
+          <p className="catalog-empty">目前沒有{tab}</p>
         )}
       </div>
       <Tabs
