@@ -7,7 +7,6 @@ import {
   Ticket,
   Truck,
   Users,
-  Utensils,
   Wallet,
 } from "lucide-react";
 import { useState } from "react";
