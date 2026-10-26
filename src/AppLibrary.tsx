@@ -46,10 +46,11 @@ export function AppManager({
     [error, setError] = useState(""),
     [dragging, setDragging] = useState("");
   const drag = useRef("");
+  const removedApps = new Set(["qq", "weibo", "bilibili", "alipay", "taobao", "netease", "douyin", "wechat"]);
   const catalog = [
-    ...work.apps,
+    ...work.apps.filter((a) => !removedApps.has(a.id)),
     ...registry
-      .filter((r) => !work.apps.some((a) => a.id === r.id))
+      .filter((r) => !removedApps.has(r.id) && !work.apps.some((a) => a.id === r.id))
       .map((a) => ({
         id: a.id,
         name: a.name,
