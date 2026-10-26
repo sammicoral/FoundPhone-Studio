@@ -398,7 +398,7 @@ export function ControlCenter({
         </div>
       )}
       <button className="cc-dismiss" onClick={close}>
-        輕掃以關闭
+        輕掃以關閉
         <ChevronUp size={16} />
       </button>
     </motion.div>
