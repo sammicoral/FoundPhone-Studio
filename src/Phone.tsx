@@ -530,7 +530,7 @@ function PhoneRuntime({
                   ))}
               </div>
               <button className="glass-btn" onClick={() => setFolder("")}>
-                关闭文件夹
+                關閉檔案夹
               </button>
             </div>
           )}
@@ -546,7 +546,7 @@ function PhoneRuntime({
               className={`system-panel ${panel === "light" ? "flash-on" : ""}`}
             >
               <button className="panel-close" onClick={() => setPanel("")}>
-                关闭 <ChevronLeft size={14} />
+                關閉 <ChevronLeft size={14} />
               </button>
               {panel === "notification" ? (
                 <>
@@ -564,16 +564,16 @@ function PhoneRuntime({
                       onDismiss={dismissNotice}
                     />
                   ) : (
-                    <p>没有新通知</p>
+                    <p>沒有新通知</p>
                   )}
                 </>
               ) : panel === "search" ? (
                 <>
-                  <h2>搜索 App</h2>
+                  <h2>搜尋 App</h2>
                   <AppSearch apps={installedApps} open={open} />
                 </>
               ) : (
-                <h2>手电筒已打开</h2>
+                <h2>手电筒已開啟</h2>
               )}
             </div>
           )}
@@ -595,7 +595,7 @@ function PhoneRuntime({
           {!creator && s.endings.length > 0 && !locked && (
             <div className="story-overlay ending">
               <span className="eyebrow">ENDING · {s.endings.length}</span>
-              <h2>故事在这里停泊。</h2>
+              <h2>故事在這里停泊。</h2>
               <p>{s.endings[s.endings.length - 1]}</p>
               <button
                 onClick={() => {
@@ -604,7 +604,7 @@ function PhoneRuntime({
                   setLocked(true);
                 }}
               >
-                重新开始
+                重新開始
               </button>
             </div>
           )}
@@ -626,7 +626,7 @@ function PhoneRuntime({
                   return record?.kind === "audio" && safeMedia(record.media) ? (
                     <audio controls src={safeMedia(record.media)} />
                   ) : (
-                    <p>这是一通虚构來電。</p>
+                    <p>這是一通虛構來電。</p>
                   );
                 })()}
               <div className="incoming-actions">
@@ -848,7 +848,7 @@ function Media({ item }: { item: Item }) {
       <strong>{item.id.includes("ticket") ? "09 · 01" : "雨 后"}</strong>
       <small>
         {item.id.includes("ticket")
-          ? "16:30 · 一张未完成的约定"
+          ? "16:30 · 一張未完成的約定"
           : "a little moment of quiet"}
       </small>
     </div>
@@ -925,7 +925,7 @@ function AppContent({
       {detail.password && !creator && !unlocks.includes(detail.id) ? (
         <div className="locked-note">
           <LockKeyhole size={36} />
-          <h3>这条內容已锁定</h3>
+          <h3>這則內容已锁定</h3>
           <input
             type="password"
             placeholder="內容密碼"
@@ -1092,7 +1092,7 @@ function AppContent({
                   ) : i.kind === "transfer" ? (
                     <span className="transfer">
                       ¥ {i.body}
-                      <small>虚构转账记录</small>
+                      <small>虛構轉帳紀錄</small>
                     </span>
                   ) : (
                     i.body
@@ -1108,11 +1108,11 @@ function AppContent({
             ))}
           {creator ? (
             <button className="chat-compose" onClick={onAdd}>
-              ＋ 添加一条消息
+              ＋ 新增一則訊息
             </button>
           ) : (
             <div className="chat-compose muted">
-              根据剧情推进，互动回复将在这里出现。
+              根據劇情推進，互动回复将在這里出现。
             </div>
           )}
         </div>
@@ -1124,7 +1124,7 @@ function AppContent({
             <div className="phone-search">
               <Search size={15} />
               <input
-                placeholder={`搜索${name}`}
+                placeholder={`搜尋${name}`}
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
               />
@@ -1209,7 +1209,7 @@ function AppContent({
                     <MessageCircle size={22} />
                   </button>
                   <small>
-                    {i.likes + (likes.includes(i.id) ? 1 : 0)} 次虚构喜欢
+                    {i.likes + (likes.includes(i.id) ? 1 : 0)} 次虛構喜欢
                   </small>
                 </div>
                 <button className="post-text" onClick={() => read(i)}>
@@ -1250,7 +1250,7 @@ function AppContent({
           {!filtered.length && app.engine !== "messaging" && (
             <div className="empty-app">
               <app.icon size={36} />
-              <h3>这一页还很安静</h3>
+              <h3>這一页还很安静</h3>
               <p>
                 {creator
                   ? "新增這個 App 的故事內容。"
@@ -1261,7 +1261,7 @@ function AppContent({
           {creator && (
             <button className="phone-add" onClick={onAdd}>
               <Plus size={15} />
-              添加
+              新增
               {app.engine === "messaging"
                 ? "聊天"
                 : app.engine === "social"
