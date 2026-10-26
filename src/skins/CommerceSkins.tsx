@@ -6,6 +6,7 @@ import {
   Star,
   Ticket,
   Truck,
+  Users,
   Utensils,
   Wallet,
 } from "lucide-react";
