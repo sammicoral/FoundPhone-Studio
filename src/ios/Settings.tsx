@@ -28,21 +28,21 @@ const groups: Row[][] = [
     [Plane, "飛航模式", "#ff9500"],
     [Wifi, "無線局域網", "#007aff"],
     [Bluetooth, "藍牙", "#007aff"],
-    [Signal, "蜂窝網絡", "#34c759"],
+    [Signal, "行動網路", "#34c759"],
     [Link, "個人热點", "#65ce88"],
     [Battery, "電池", "#34c759"],
     [Globe, "VPN", "#007aff"],
   ],
   [
     [Settings, "一般", "#8e8e93"],
-    [Accessibility, "辅助功能", "#007aff"],
+    [Accessibility, "輔助使用", "#007aff"],
     [Image, "墙纸", "#32ade6"],
   ],
   [
     [Bell, "通知", "#ff3b30"],
-    [Volume2, "聲音与触感", "#ff2d55"],
+    [Volume2, "聲音與觸覺回饋", "#ff2d55"],
     [Moon, "專註模式", "#5856d6"],
-    [Shield, "Face ID ID 与密碼", "#34c759"],
+    [Shield, "Face ID 與密碼", "#34c759"],
   ],
 ];
 export function NativeSettings({
@@ -82,22 +82,22 @@ export function NativeSettings({
       case "一般":
         return (
           <div className="settings-group">
-            {row("關於本机", "", () => nav.push("關於本机"))}
-            {row("軟件更新", "iOS 18.0", () => nav.push("軟件更新"))}
+            {row("關於本機", "", () => nav.push("關於本機"))}
+            {row("軟體更新", "iOS 18.0", () => nav.push("軟體更新"))}
             {row("iPhone 儲存空間", "", () => nav.push("iPhone 儲存空間"))}
-            {row("日期与時間", "", () => nav.push("日期与時間"))}
-            {row("語言与地区", "簡體中文", () => nav.push("語言与地区"))}
+            {row("日期與時間", "", () => nav.push("日期與時間"))}
+            {row("語言與地區", "繁體中文", () => nav.push("語言與地區"))}
           </div>
         );
-      case "關於本机":
+      case "關於本機":
         return (
           <div className="settings-group">
             {row("名称", work.phone.owner + "的 iPhone")}
             {row("iOS 版本", "18.0")}
-            {row("机型名称", "iPhone 15 Pro")}
+            {row("機型名稱", "iPhone 15 Pro")}
             {row("照片", String(work.data.photos?.length || 0))}
             {row(
-              "應用程序",
+              "App",
               String(work.apps.filter((a) => a.installed).length),
             )}
           </div>
@@ -120,7 +120,7 @@ export function NativeSettings({
                   </div>
                 </div>
                 <p className="settings-page-caption">
-                  連接狀態仅用於作品中的虚拟手機。
+                  連接狀態僅用於作品中的虛擬手機。
                 </p>
               </>
             )}
@@ -133,7 +133,7 @@ export function NativeSettings({
               {toggle("藍牙", bluetooth, setBluetooth)}
             </div>
             <p className="settings-page-caption">
-              {bluetooth ? "我的設備" : "藍牙已關闭"}
+              {bluetooth ? "我的裝置" : "藍牙已關閉"}
             </p>
           </>
         );
@@ -145,11 +145,11 @@ export function NativeSettings({
               {toggle("低電量模式", lowPower, setLowPower)}
             </div>
             <p className="settings-page-caption">
-              低電量模式仅改變虚拟設備狀態。
+              低電量模式仅改變虚拟裝置狀態。
             </p>
           </>
         );
-      case "日期与時間":
+      case "日期與時間":
         return (
           <div className="settings-group">
             {row("日期", work.phone.date || "2026-09-01")}
@@ -165,7 +165,7 @@ export function NativeSettings({
               .map((a) => row(a.name, `${work.data[a.id]?.length || 0} 項`))}
           </div>
         );
-      case "軟件更新":
+      case "軟體更新":
         return (
           <p className="settings-page-caption">
             iOS 18.0 · 此為作品中的虚拟係統，不下載係統更新。
@@ -177,10 +177,10 @@ export function NativeSettings({
             <div className="settings-group">
               {row(
                 nav.page,
-                nav.page === "Face ID ID 与密碼"
+                nav.page === "Face ID 與密碼"
                   ? work.phone.passcode
-                    ? "已設置密碼"
-                    : "未設置密碼"
+                    ? "已設定密碼"
+                    : "未設定密碼"
                   : "",
               )}
             </div>
@@ -196,13 +196,13 @@ export function NativeSettings({
       <NavigationPage
         page={nav.page}
         back={nav.pop}
-        title={nav.depth > 1 ? "一般" : "設置"}
+        title={nav.depth > 1 ? "一般" : "設定"}
       >
         {nav.page ? (
           sub()
         ) : (
           <>
-            <h1>設置</h1>
+            <h1>設定</h1>
             {!query && (
               <button
                 className="settings-account"
@@ -211,7 +211,7 @@ export function NativeSettings({
                 <span>{work.phone.owner.slice(0, 1)}</span>
                 <div>
                   <strong>{work.phone.owner}</strong>
-                  <small>Apple 帳户、iCloud 与更多</small>
+                  <small>Apple 帳號、iCloud 與更多</small>
                 </div>
                 <ChevronRight size={17} />
               </button>
@@ -252,15 +252,15 @@ export function NativeSettings({
                             {name === "無線局域網"
                               ? wifi
                                 ? "未連接"
-                                : "關闭"
+                                : "關閉"
                               : name === "藍牙"
                                 ? bluetooth
                                   ? "打開"
-                                  : "關闭"
+                                  : "關閉"
                                 : name === "VPN"
                                   ? "未連接"
-                                  : name === "蜂窝網絡" || name === "個人热點"
-                                    ? "關闭"
+                                  : name === "行動網路" || name === "個人热點"
+                                    ? "關閉"
                                     : ""}
                           </small>
                           <ChevronRight size={16} />
@@ -293,7 +293,7 @@ export function NativeSettings({
         <label className="settings-search">
           <Search size={23} />
           <input
-            aria-label="搜尋設置"
+            aria-label="搜尋設定"
             placeholder="搜尋"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
