@@ -112,8 +112,12 @@ it("migrates preview folders once while preserving custom folders and widgets", 
   expect(migrated.apps.find((a) => a.id === "clock")!.folder).toBe("我的工具");
   expect(migrated.widgets).toEqual(old.widgets);
   expect(JSON.stringify(w)).toBe(before);
-  migrated.apps.find((a) => a.id === "wechat")!.folder = "作者新建文件夹";
-  expect(
-    validateLayout(migrated, w).apps.find((a) => a.id === "wechat")!.folder,
-  ).toBe("作者新建文件夹");
+  const revalidated = validateLayout(migrated, w);
+  for (const id of ["wechat", "douyin"]) {
+    const app = revalidated.apps.find((a) => a.id === id)!;
+    expect(app.installed).toBe(false);
+    expect(app.visible).toBe(false);
+    expect(app.dock).toBe(false);
+    expect(app.folder).toBe("");
+  }
 });
