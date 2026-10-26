@@ -675,7 +675,7 @@ export function HomeLauncher(p: Props) {
                 <nav className="library-filters">
                   {[
                     "全部",
-                    "係統",
+                    "系統",
                     "通訊",
                     "社群",
                     "影音",
