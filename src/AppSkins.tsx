@@ -166,7 +166,7 @@ export function WeChatSkin(p: SkinProps) {
   const conversations = [
     ...new Set(
       p.items
-        .filter((i) => !["朋友圈", "我"].includes(i.folder))
+        .filter((i) => !["動態", "我"].includes(i.folder))
         .map((i) => i.title),
     ),
   ];
@@ -174,7 +174,7 @@ export function WeChatSkin(p: SkinProps) {
     ...new Set(p.items.map((i) => i.sender).filter((s) => s !== "我")),
   ];
   const posts = p.items.filter(
-    (i) => i.folder === "朋友圈" || i.kind === "post",
+    (i) => i.folder === "動態" || i.kind === "post",
   );
   return (
     <div
@@ -206,7 +206,7 @@ export function WeChatSkin(p: SkinProps) {
         <strong>
           {utility ||
             p.thread ||
-            (moments ? "朋友圈" : tab === "微信" ? p.name : tab)}
+            (moments ? "動態" : tab === "微信" ? p.name : tab)}
         </strong>
         <button
           aria-label={
@@ -289,7 +289,7 @@ export function WeChatSkin(p: SkinProps) {
         <div className="wx-moments">
           <div className="wx-moment-cover">
             <Camera size={32} />
-            <span>朋友圈</span>
+            <span>動態</span>
           </div>
           {posts.map((i) => (
             <button
@@ -306,10 +306,10 @@ export function WeChatSkin(p: SkinProps) {
               </div>
             </button>
           ))}
-          {!posts.length && <p className="skin-empty">暫無朋友圈動態</p>}
+          {!posts.length && <p className="skin-empty">暫無動態動態</p>}
           {p.creator && (
             <button className="phone-add" onClick={p.onAdd}>
-              新增朋友圈動態
+              新增動態動態
             </button>
           )}
         </div>
@@ -370,7 +370,7 @@ export function WeChatSkin(p: SkinProps) {
             </>
           ) : tab === "通訊錄" ? (
             <>
-              <div className="wx-section-label">聯係人</div>
+              <div className="wx-section-label">聯絡人</div>
               {contacts.map((c) => (
                 <button
                   key={c}
@@ -394,7 +394,7 @@ export function WeChatSkin(p: SkinProps) {
           ) : tab === "探索" ? (
             <div className="wx-discover-groups">
               {[
-                [Camera, "朋友圈", "#26a958"],
+                [Camera, "動態", "#26a958"],
                 [Play, "影音頻道", "#fa9d3b"],
                 [Music, "聽一聽", "#fa5151"],
               ].map(([Icon, label, color]) => {
@@ -404,7 +404,7 @@ export function WeChatSkin(p: SkinProps) {
                     key={String(label)}
                     className="wx-discovery"
                     onClick={() =>
-                      label === "朋友圈"
+                      label === "動態"
                         ? setMoments(true)
                         : setUtility(String(label))
                     }
@@ -435,7 +435,7 @@ export function WeChatSkin(p: SkinProps) {
                 {[
                   [MessageCircle, "服务", "#07c160"],
                   [Layers, "收藏", "#e8a828"],
-                  [ImageIcon, "朋友圈", "#3a9bd9"],
+                  [ImageIcon, "動態", "#3a9bd9"],
                   [Layers, "作品", "#329dd8"],
                   [ShoppingBag, "小店與卡包", "#ed7c59"],
                   [Smile, "表情符號", "#f7b900"],
@@ -447,7 +447,7 @@ export function WeChatSkin(p: SkinProps) {
                       key={String(label)}
                       className="wx-discovery"
                       onClick={() =>
-                        label === "朋友圈"
+                        label === "動態"
                           ? setMoments(true)
                           : setUtility(String(label))
                       }
@@ -560,7 +560,7 @@ export function WhatsAppSkin(p: SkinProps) {
             />
             <div>
               <strong>{p.thread}</strong>
-              <small>聯係人</small>
+              <small>聯絡人</small>
             </div>
             <Video size={18} />
             <Phone size={17} />
