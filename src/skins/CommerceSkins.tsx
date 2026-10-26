@@ -21,7 +21,7 @@ import {
   type Props,
 } from "./shared";
 export function AlipaySkin(p: Props) {
-  const { tab, setTab, q, setQ, items } = useContent(p, "账单");
+  const { tab, setTab, q, setQ, items } = useContent(p, "帳單");
   const list =
     tab === "卡包"
       ? items.filter((i) => i.folder === "卡包" || i.folder === "票券")
@@ -32,9 +32,9 @@ export function AlipaySkin(p: Props) {
       <div className="alipay-blue">
         <h2>{tab}</h2>
         <div>
-          <button onClick={() => setTab("账单")}>
+          <button onClick={() => setTab("帳單")}>
             <Receipt size={28} />
-            账单
+            帳單
           </button>
           <button onClick={() => setTab("卡包")}>
             <Ticket size={28} />
@@ -82,7 +82,7 @@ export function AlipaySkin(p: Props) {
         <Empty items={list} />
       </div>
       <Tabs
-        tabs={["账单", "卡包"]}
+        tabs={["帳單", "卡包"]}
         value={tab}
         set={setTab}
         icons={[<Receipt />, <Ticket />]}
