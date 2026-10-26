@@ -1,6 +1,7 @@
 import { useId, type ReactNode } from "react";
 export const detailedIcons = new Set([
   "appstore",
+  "delivery",
   "photos",
   "camera",
   "calculator",
@@ -19,7 +20,15 @@ export function DetailedArtwork({ id }: { id: string }) {
     g = (n: string) => `url(#${key + n})`;
   let bg = g("paper"),
     art: ReactNode;
-  if (id === "appstore") {
+  if (id === "delivery") {
+    bg = "#06C167";
+    art = (
+      <g fill="#fff" fontFamily="Arial, Helvetica, sans-serif" fontWeight="700">
+        <text x="7" y="28" fontSize="14" letterSpacing="-.7">UBER</text>
+        <text x="7" y="43" fontSize="14" letterSpacing="-.7">EATS</text>
+      </g>
+    );
+  } else if (id === "appstore") {
     bg = g("blue");
     art = (
       <g fill="none" stroke="#ebfaff" strokeWidth="4.6" strokeLinecap="round">
