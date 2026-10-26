@@ -116,7 +116,7 @@ const definitions: [
     ["商品", "訂單", "物流"],
   ],
   ["netease", "網易雲音樂", "media", "#cd5659", Headphones, ["探索", "播放清單"]],
-  ["delivery", "外送", "records", "#d4a83f", Utensils, ["商家", "訂單"]],
+  ["delivery", "Uber Eats", "records", "#06C167", Utensils, ["為你推薦", "搜尋", "訂單", "帳戶"]],
   ["forum", "論壇", "social", "#8b9776", Hash, ["貼文", "版塊"]],
   [
     "whatsapp",
