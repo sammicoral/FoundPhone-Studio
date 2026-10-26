@@ -197,7 +197,7 @@ export function QQSkin(p: Props) {
                       <small>{i.time}</small>
                     </button>
                   ))}
-                <Add p={p} label="新增動態动态" />
+                <Add p={p} label="新增動態" />
               </div>
             )}
           </div>
