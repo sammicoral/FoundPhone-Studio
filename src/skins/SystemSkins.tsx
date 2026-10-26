@@ -52,7 +52,7 @@ export function PhoneSkin(p: Props) {
       <Header p={p} />
       <div className="catalog-scroll">
         <h1>{tab}</h1>
-        {tab === "撥號键盤" ? (
+        {tab === "撥號鍵盤" ? (
           <div className="dialer">
             <output>{digits || "輸入號碼"}</output>
             <div>
@@ -121,7 +121,7 @@ export function PhoneSkin(p: Props) {
         )}
       </div>
       <Tabs
-        tabs={["收藏", "最近通話", "通訊錄", "撥號键盤"]}
+        tabs={["收藏", "最近通話", "通訊錄", "撥號鍵盤"]}
         value={tab}
         set={setTab}
         icons={[<Star />, <Clock />, <Users />, <Grid />]}
@@ -257,7 +257,7 @@ export function CameraSkin(p: Props) {
         <span>{mode === "影片" ? "HD · 30" : "4:3"}</span>
       </div>
       <div className="camera-view">
-        {frame ? <Media item={frame} /> : <p>未設置取景畫面</p>}
+        {frame ? <Media item={frame} /> : <p>未設定取景畫面</p>}
         <div className="camera-grid" />
       </div>
       <div className="camera-mode">
@@ -298,7 +298,7 @@ export function CameraSkin(p: Props) {
           <Camera size={24} />
         </button>
       </div>
-      <small className="camera-caption">作者設置的虛構取景內容</small>
+      <small className="camera-caption">作者設定的虛構取景內容</small>
     </div>
   );
 }
@@ -778,7 +778,7 @@ export function MusicSkin(p: Props) {
           {song.kind === "audio" && safeMedia(song.media) ? (
             <AudioPlayer p={p} item={song} />
           ) : (
-            <button onClick={() => p.onItem(song)}>查看歌曲內容</button>
+            <button onClick={() => p.onItem(song)}>查看歌曲資訊</button>
           )}
           <button
             aria-label="下一首"
