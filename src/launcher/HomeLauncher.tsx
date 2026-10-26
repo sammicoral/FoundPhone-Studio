@@ -159,10 +159,11 @@ export function HomeLauncher(p: Props) {
   useEffect(() => {
     const el = pager.current;
     if (!el) return;
-    const targetPage = Math.max(0, Math.min(p.initialPage ?? 0, pages.length - 1));
+    const pageCount = packHome(homeEntries(p.layout), p.layout.positions).length;
+    const targetPage = Math.max(0, Math.min(p.initialPage ?? 0, pageCount - 1));
     el.scrollLeft = targetPage * el.clientWidth;
     setPageState(targetPage);
-  }, [p.initialPage, pages.length]);
+  }, [p.initialPage]);
   const removedApps = new Set(["qq", "weibo", "bilibili", "alipay", "taobao", "netease", "douyin", "wechat"]);
   const pages = packHome(homeEntries(p.layout), p.layout.positions),
     apps = p.layout.apps.filter((a) => !removedApps.has(a.id)),
