@@ -482,7 +482,7 @@ export function HomeLauncher(p: Props) {
   );
   const addWidget = () => {
     if (p.layout.widgets.length >= 24) {
-      setError("最多添加24個小工具");
+      setError("最多新增24個小工具");
       return;
     }
     p.change((l) => {
@@ -544,7 +544,7 @@ export function HomeLauncher(p: Props) {
       <div className="launcher-toolbar">
         {editing ? (
           <>
-            <button aria-label="添加小工具" onClick={() => setSheet("widgets")}>
+            <button aria-label="新增小工具" onClick={() => setSheet("widgets")}>
               <Plus size={18} />
               小工具
             </button>
@@ -785,12 +785,12 @@ export function HomeLauncher(p: Props) {
                   ))}
                 </div>
                 <button className="launcher-primary" onClick={addWidget}>
-                  添加{widgetLabels[widgetType]}小工具
+                  新增{widgetLabels[widgetType]}小工具
                 </button>
               </>
             ) : sheet === "layout" ? (
               <>
-                <p>布局、安装狀態和小工具自動保存在本浏览器。</p>
+                <p>布局、安装狀態和小工具自動儲存在本浏览器。</p>
                 <button className="launcher-action" onClick={download}>
                   <Download />
                   匯出布局JSON
