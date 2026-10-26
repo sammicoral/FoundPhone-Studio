@@ -34,7 +34,7 @@ const systemApps = new Set([
   "settings",
 ]);
 export function category(id: string) {
-  if (systemApps.has(id)) return "係統";
+  if (systemApps.has(id)) return "系統";
   const app = registry.find((a) => a.id === id);
   if (!app) return "自訂";
   return (
