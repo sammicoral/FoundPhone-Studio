@@ -215,7 +215,7 @@ export function QQSkin(p: Props) {
 export function TelegramSkin(p: Props) {
   const { q, setQ, items } = useContent(p, "全部");
   const [folder, setFolder] = useState("全部");
-  const folders = ["全部", ...groupItems(items).filter((f) => f !== "未分类")];
+  const folders = ["全部", ...groupItems(items).filter((f) => f !== "未分類")];
   const list =
     folder === "全部" ? items : items.filter((i) => i.folder === folder);
   return (
