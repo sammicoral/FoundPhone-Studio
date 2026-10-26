@@ -126,7 +126,7 @@ export function NativeDetail({
             })}
           </div>
           <div className="native-detail-group">
-            <small>手机</small>
+            <small>手機</small>
             <p className="native-blue">{item.meta.phone || "尚未設定電話號碼"}</p>
           </div>
           <div className="native-detail-group">
