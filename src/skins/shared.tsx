@@ -66,7 +66,7 @@ export function Tabs({
 export function SearchBox({
   value,
   set,
-  placeholder = "搜索",
+  placeholder = "搜尋",
 }: {
   value: string;
   set: (s: string) => void;
@@ -161,7 +161,7 @@ export function Row({
 }
 export function Empty({
   items,
-  label = "暂无内容",
+  label = "暫無內容",
 }: {
   items: Item[];
   label?: string;
@@ -192,6 +192,6 @@ export function useContent(p: Props, first: string) {
   );
   return { tab, setTab, q, setQ, items };
 }
-export function groupItems(items: Item[], fallback = "未分类") {
+export function groupItems(items: Item[], fallback = "未分類") {
   return [...new Set(items.map((i) => i.folder || fallback))];
 }
