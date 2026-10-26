@@ -4192,3 +4192,16 @@
   background: #06c167;
   color: #fff;
 }
+
+
+/* X uses a dark bottom navigation bar for clear icon contrast. */
+.mymy-x .kzxnav {
+  background: #000;
+  border-top: 1px solid #262626;
+}
+.mymy-x .kzxnav button {
+  color: #fff;
+}
+.mymy-x .kzxnav button:disabled {
+  color: #777;
+}
