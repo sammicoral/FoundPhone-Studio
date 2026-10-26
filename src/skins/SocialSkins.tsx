@@ -448,7 +448,7 @@ export function RedditSkin(p: Props) {
           {tab} ⌄
         </button>
         <select
-          aria-label="帖子排序"
+          aria-label="貼文排序"
           value={sort}
           onChange={(e) => setSort(e.target.value)}
         >
@@ -522,7 +522,7 @@ function RedditPost({ p, item: i }: { p: Props; item: Item }) {
   );
 }
 export function ForumSkin(p: Props) {
-  const { tab, setTab, q, setQ, items } = useContent(p, "帖子");
+  const { tab, setTab, q, setQ, items } = useContent(p, "貼文");
   const [board, setBoard] = useState("");
   const list = board
     ? items.filter((i) => (i.folder || "未分类") === board)
@@ -544,7 +544,7 @@ export function ForumSkin(p: Props) {
                 key={g}
                 onClick={() => {
                   setBoard(g);
-                  setTab("帖子");
+                  setTab("貼文");
                 }}
               >
                 <FolderIcon />
@@ -574,14 +574,14 @@ export function ForumSkin(p: Props) {
                     {i.sender} · {i.time.slice(5, 16)}
                   </span>
                   <span>
-                    {meta(i, "views", "—")} 瀏覽 · {i.comments.length} 回复
+                    {meta(i, "views", "—")} 瀏覽 · {i.comments.length} 回覆
                   </span>
                 </div>
               </button>
             ))}
       </div>
       <Tabs
-        tabs={["帖子", "版块"]}
+        tabs={["貼文", "版块"]}
         value={tab}
         set={(t) => {
           setTab(t);
