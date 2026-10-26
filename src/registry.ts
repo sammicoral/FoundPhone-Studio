@@ -115,7 +115,7 @@ const definitions: [
     ShoppingBag,
     ["商品", "訂單", "物流"],
   ],
-  ["netease", "网易云音樂", "media", "#cd5659", Headphones, ["探索", "播放清單"]],
+  ["netease", "網易雲音樂", "media", "#cd5659", Headphones, ["探索", "播放清單"]],
   ["delivery", "外送", "records", "#d4a83f", Utensils, ["商家", "訂單"]],
   ["forum", "論壇", "social", "#8b9776", Hash, ["貼文", "版塊"]],
   [
@@ -154,7 +154,7 @@ const definitions: [
     ["首頁", "訂閱", "播放清單"],
   ],
   ["line", "LINE", "messaging", "#5db873", MessageCircle, ["聊天", "好友"]],
-  ["snapchat", "Snapchat", "social", "#ccbb49", Camera, ["動態", "回忆"]],
+  ["snapchat", "Snapchat", "social", "#ccbb49", Camera, ["動態", "回憶"]],
   ["facebook", "Facebook", "social", "#587bb5", Users, ["動態", "個人檔案"]],
   [
     "messenger",
