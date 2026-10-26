@@ -124,7 +124,7 @@ export function validateLayout(raw: unknown, input: Work) {
     layout.previewLayoutRevision = 1;
   }
   // Always enforce the requested removals for saved and newly created phone layouts.
-  const removedApps = ["qq", "weibo", "bilibili", "alipay", "taobao", "netease"];
+  const removedApps = ["qq", "weibo", "bilibili", "alipay", "taobao", "netease", "douyin", "wechat"];
   for (const app of layout.apps) {
     if (removedApps.includes(app.id)) {
       app.installed = false;
