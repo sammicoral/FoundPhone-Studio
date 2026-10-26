@@ -309,7 +309,7 @@ function PhoneRuntime({
         (_, i) => i !== index,
       ),
     });
-  if (!ready) return <div className="phone-loading">正在恢复进度…</div>;
+  if (!ready) return <div className="phone-loading">正在恢復进度…</div>;
   return (
     <div
       ref={shell}
@@ -530,7 +530,7 @@ function PhoneRuntime({
                   ))}
               </div>
               <button className="glass-btn" onClick={() => setFolder("")}>
-                關閉檔案夹
+                關閉資料夾
               </button>
             </div>
           )}
@@ -845,7 +845,7 @@ function Media({ item }: { item: Item }) {
       <span>
         {item.id.includes("ticket") ? "城南 / SOUTHBOUND" : "after the rain"}
       </span>
-      <strong>{item.id.includes("ticket") ? "09 · 01" : "雨 后"}</strong>
+      <strong>{item.id.includes("ticket") ? "09 · 01" : "雨後"}</strong>
       <small>
         {item.id.includes("ticket")
           ? "16:30 · 一張未完成的約定"
@@ -1250,7 +1250,7 @@ function AppContent({
           {!filtered.length && app.engine !== "messaging" && (
             <div className="empty-app">
               <app.icon size={36} />
-              <h3>這一页还很安静</h3>
+              <h3>這一頁還很安靜</h3>
               <p>
                 {creator
                   ? "新增這個 App 的故事內容。"
