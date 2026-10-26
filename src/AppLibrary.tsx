@@ -113,7 +113,7 @@ export function AppManager({
               ))}
             </select>
             <select
-              aria-label="安装筛选"
+              aria-label="安裝篩選"
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             >
@@ -341,14 +341,14 @@ export function AppManager({
                       value={
                         current.icon.startsWith("data:") ? "" : current.icon
                       }
-                      placeholder="使用默认图标"
+                      placeholder="使用預設圖示"
                       onChange={(e) => update({ icon: e.target.value })}
                     />
                   </label>
                   <label className="icon-upload">
-                    上传图标
+                    上傳圖示
                     <input
-                      aria-label="上传 App 图标"
+                      aria-label="上传 App 圖示"
                       type="file"
                       accept="image/png,image/jpeg,image/webp"
                       onChange={async (e) => {
@@ -367,7 +367,7 @@ export function AppManager({
                       className="text-button"
                       onClick={() => update({ icon: "" })}
                     >
-                      恢复默认图标
+                      恢复默认圖示
                     </button>
                   )}
                   <label>
@@ -396,7 +396,7 @@ export function AppManager({
                             (a) => a.installed && a.visible && a.dock,
                           ).length >= 4
                         ) {
-                          setError("Dock 最多放置 4 个 App");
+                          setError("Dock 最多放置 4 個 App");
                           return;
                         }
                         update({
@@ -409,11 +409,11 @@ export function AppManager({
                     放入 Dock
                   </label>
                   <small>
-                    {(work.data[current.id] ?? []).length} 則创作內容
+                    {(work.data[current.id] ?? []).length} 則創作內容
                   </small>
                 </>
               ) : (
-                <p>选择已安裝的 App，編輯名称、图标与資料夾。</p>
+                <p>選擇已安裝的 App，編輯名稱、圖示与資料夾。</p>
               )}
               <div className="custom-app-form">
                 <label>
@@ -463,18 +463,18 @@ export function AppManager({
           onClose={() => setUninstall("")}
         >
           <div className="editor-fields">
-            <p>解除安裝后将从手機和 App 资源库移除。</p>
+            <p>解除安裝後會從手機和 App 資料庫移除。</p>
             <label className="inline-check">
               <input
                 type="checkbox"
                 checked={keep}
                 onChange={(e) => setKeep(e.target.checked)}
               />
-              保留创作資料，重新安装后恢复
+              保留創作資料，重新安裝後還原
             </label>
             {!keep && (
               <p className="error">
-                将刪除此 App 的全部创作內容。引用這些內容的剧情可能失效。
+                将刪除此 App 的全部創作內容。引用這些內容的劇情可能失效。
               </p>
             )}
           </div>
