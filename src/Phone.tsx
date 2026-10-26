@@ -309,7 +309,7 @@ function PhoneRuntime({
         (_, i) => i !== index,
       ),
     });
-  if (!ready) return <div className="phone-loading">正在恢復进度…</div>;
+  if (!ready) return <div className="phone-loading">正在恢復進度…</div>;
   return (
     <div
       ref={shell}
@@ -595,7 +595,7 @@ function PhoneRuntime({
           {!creator && s.endings.length > 0 && !locked && (
             <div className="story-overlay ending">
               <span className="eyebrow">ENDING · {s.endings.length}</span>
-              <h2>故事在這里停泊。</h2>
+              <h2>故事在這裡停泊。</h2>
               <p>{s.endings[s.endings.length - 1]}</p>
               <button
                 onClick={() => {
@@ -612,7 +612,7 @@ function PhoneRuntime({
             <div className="incoming-call-screen">
               <small>
                 {s.incomingCall.status === "ringing" ? "來電" : "通話中"} ·
-                作品内模拟
+                作品內模拟
               </small>
               <div className="incoming-avatar">
                 {s.incomingCall.caller.slice(0, 1)}
@@ -1112,7 +1112,7 @@ function AppContent({
             </button>
           ) : (
             <div className="chat-compose muted">
-              根據劇情推進，互动回复将在這里出现。
+              根據劇情推進，互动回复将在這裡出现。
             </div>
           )}
         </div>
