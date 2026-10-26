@@ -6,7 +6,7 @@ export function createWork(title = "雨停之前"): Work {
     id: uid(),
     title,
     description:
-      "一部遺落在末班地铁上的手機，一條未送達的消息。\n在雨停之前，找到那個沒有赴約的人。",
+      "一部遺落在末班捷運上的手機，一條未送達的訊息。\n在雨停之前，找到那個沒有赴約的人。",
     category: "懸疑 · 療癒",
     cover: "",
     updatedAt: Date.now(),
@@ -73,7 +73,7 @@ export function createWork(title = "雨停之前"): Work {
                 : "九月的某一天",
         body:
           a.engine === "messaging"
-            ? "你捡到這部手機了吗？\n別著急，線索就在備忘錄裡。"
+            ? "你撿到這部手機了嗎？\n別著急，線索就在備忘錄裡。"
             : a.engine === "records"
               ? "2026 年 9 月 1 日 · 城南舊書店\n這是故事裡的一條虛構記錄。"
               : "那天的雨下得很大，我們約好在舊書店見面。\n可是，有人一直沒有出現。",
@@ -91,14 +91,14 @@ export function createWork(title = "雨停之前"): Work {
       id: "wx1",
       title: "小林",
       sender: "小林",
-      body: "知夏，你的手機是不是落在地铁上了？",
+      body: "知夏，你的手機是不是落在捷運上了？",
       time: "2026-09-01 08:30",
     }),
     makeItem({
       id: "wx2",
       title: "小林",
       sender: "我",
-      body: "如果有人捡到，請幫我看看備忘錄。",
+      body: "如果有人撿到，請幫我看看備忘錄。",
       outgoing: true,
       time: "2026-09-01 08:32",
     }),
@@ -106,7 +106,7 @@ export function createWork(title = "雨停之前"): Work {
       id: "wx3",
       title: "小林",
       sender: "小林",
-      body: "還有一張照片。它比你想象的更重要。",
+      body: "還有一張照片。它比你想像的更重要。",
       time: "2026-09-01 08:34",
     }),
   ];
@@ -120,7 +120,7 @@ export function createWork(title = "雨停之前"): Work {
     }),
     makeItem({
       id: "note-locked",
-      title: "给未來的自己",
+      title: "給未來的自己",
       body: "請記住，無論多晚，總有人在等你。",
       password: "0901",
       kind: "note",
@@ -165,7 +165,7 @@ export function createWork(title = "雨停之前"): Work {
         {
           type: "notification",
           key: "",
-          value: "小林：如果你捡到手機，請查看備忘錄。",
+          value: "小林：如果你撿到手機，請查看備忘錄。",
         },
       ],
       next: [],
@@ -222,7 +222,7 @@ export function createWork(title = "雨停之前"): Work {
           type: "ending",
           key: "",
           value:
-            "雨停了。你把手機交给舊書店門口等待的人，也替一個陌生人守住了約定。",
+            "雨停了。你把手機交給舊書店門口等待的人，也替一個陌生人守住了約定。",
         },
       ],
       next: [],
