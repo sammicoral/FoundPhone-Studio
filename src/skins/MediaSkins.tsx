@@ -60,11 +60,11 @@ function TrackPlayer({
   );
 }
 export function SpotifySkin(p: Props) {
-  const { tab, setTab, q, setQ, items } = useContent(p, "首页");
+  const { tab, setTab, q, setQ, items } = useContent(p, "首頁");
   const [playlist, setPlaylist] = useState(""),
     [track, setTrack] = useTrack(p, items);
   const list = playlist
-    ? items.filter((i) => (i.folder || "我的音乐") === playlist)
+    ? items.filter((i) => (i.folder || "我的音樂") === playlist)
     : items;
   return (
     <div className="catalog-skin spotify-ui">
@@ -73,23 +73,23 @@ export function SpotifySkin(p: Props) {
         <div className="spotify-heading">
           <Avatar name={p.owner ?? "我"} />
           <button
-            className={tab === "首页" ? "selected" : ""}
-            onClick={() => setTab("首页")}
+            className={tab === "首頁" ? "selected" : ""}
+            onClick={() => setTab("首頁")}
           >
             音乐
           </button>
           <button
-            className={tab === "音乐库" ? "selected" : ""}
-            onClick={() => setTab("音乐库")}
+            className={tab === "音樂庫" ? "selected" : ""}
+            onClick={() => setTab("音樂庫")}
           >
-            音乐库
+            音樂庫
           </button>
         </div>
-        {tab === "搜索" && <SearchBox value={q} set={setQ} />}
-        <h1>{playlist || (tab === "音乐库" ? "音乐库" : "为你收藏")}</h1>
+        {tab === "搜尋" && <SearchBox value={q} set={setQ} />}
+        <h1>{playlist || (tab === "音樂庫" ? "音樂庫" : "為您收藏")}</h1>
         {!playlist && (
           <div className="spotify-playlists">
-            {groupItems(items, "我的音乐").map((g) => (
+            {groupItems(items, "我的音樂").map((g) => (
               <button key={g} onClick={() => setPlaylist(g)}>
                 <Music size={29} />
                 <strong>{g}</strong>
@@ -99,7 +99,7 @@ export function SpotifySkin(p: Props) {
         )}
         {playlist && (
           <button className="playlist-back" onClick={() => setPlaylist("")}>
-            返回全部音乐
+            返回所有音樂
           </button>
         )}
         <div className="spotify-tracks">
@@ -137,7 +137,7 @@ export function SpotifySkin(p: Props) {
         />
       )}
       <Tabs
-        tabs={["首页", "搜索", "音乐库"]}
+        tabs={["首頁", "搜尋", "音樂庫"]}
         value={tab}
         set={(t) => {
           setTab(t);
@@ -149,7 +149,7 @@ export function SpotifySkin(p: Props) {
   );
 }
 export function NeteaseSkin(p: Props) {
-  const { tab, setTab, q, setQ, items } = useContent(p, "发现");
+  const { tab, setTab, q, setQ, items } = useContent(p, "探索");
   const [folder, setFolder] = useState(""),
     [track, setTrack] = useTrack(p, items);
   const list = folder
@@ -160,7 +160,7 @@ export function NeteaseSkin(p: Props) {
       <Header p={p} />
       <div className="catalog-scroll">
         <SearchBox value={q} set={setQ} />
-        {tab === "发现" ? (
+        {tab === "探索" ? (
           <>
             <div className="netease-feature">
               <Music size={44} />
@@ -185,7 +185,7 @@ export function NeteaseSkin(p: Props) {
           <>
             <div className="netease-profile">
               <Avatar name={p.owner ?? "我"} />
-              <h2>{p.owner ?? "我的音乐"}</h2>
+              <h2>{p.owner ?? "我的音樂"}</h2>
             </div>
             <h3>{folder || "我的歌单"}</h3>
           </>
@@ -229,7 +229,7 @@ export function NeteaseSkin(p: Props) {
         />
       )}
       <Tabs
-        tabs={["发现", "我的"]}
+        tabs={["探索", "我的"]}
         value={tab}
         set={(t) => {
           setTab(t);
@@ -241,7 +241,7 @@ export function NeteaseSkin(p: Props) {
   );
 }
 export function YouTubeSkin(p: Props) {
-  const { tab, setTab, q, setQ, items } = useContent(p, "首页");
+  const { tab, setTab, q, setQ, items } = useContent(p, "首頁");
   const [category, setCategory] = useState("全部");
   const list = items.filter((i) =>
     tab === "Shorts"
@@ -292,7 +292,7 @@ export function YouTubeSkin(p: Props) {
         <Empty items={list} />
       </div>
       <Tabs
-        tabs={["首页", "Shorts", "订阅", "播放列表"]}
+        tabs={["首頁", "Shorts", "订阅", "播放列表"]}
         value={tab}
         set={setTab}
         icons={[<Home />, <Video />, <Users />, <User />]}
@@ -301,13 +301,13 @@ export function YouTubeSkin(p: Props) {
   );
 }
 export function BilibiliSkin(p: Props) {
-  const { tab, setTab, q, setQ, items } = useContent(p, "首页");
+  const { tab, setTab, q, setQ, items } = useContent(p, "首頁");
   const [category, setCategory] = useState("推荐");
   const list =
-    tab === "历史"
-      ? items.filter((i) => i.folder === "历史")
-      : tab === "动态"
-        ? items.filter((i) => i.folder === "动态")
+    tab === "歷史"
+      ? items.filter((i) => i.folder === "歷史")
+      : tab === "動態"
+        ? items.filter((i) => i.folder === "動態")
         : category === "推荐"
           ? items
           : items.filter((i) => i.folder === category);
@@ -349,7 +349,7 @@ export function BilibiliSkin(p: Props) {
         <Empty items={list} />
       </div>
       <Tabs
-        tabs={["首页", "动态", "历史"]}
+        tabs={["首頁", "動態", "歷史"]}
         value={tab}
         set={setTab}
         icons={[<Home />, <MessageCircle />, <User />]}
@@ -438,7 +438,7 @@ export function TikTokSkin(p: Props) {
       ? items
       : tab === "Following"
         ? items.filter((i) => i.folder === "关注" || i.folder === "Following")
-        : items.filter((i) => i.folder === "个人主页");
+        : items.filter((i) => i.folder === "個人檔案");
   return (
     <div className="catalog-skin tiktok-ui">
       <Header p={p} />
@@ -472,7 +472,7 @@ export function TikTokSkin(p: Props) {
   );
 }
 export function NetflixSkin(p: Props) {
-  const { tab, setTab, q, setQ, items } = useContent(p, "首页");
+  const { tab, setTab, q, setQ, items } = useContent(p, "首頁");
   const [saved, setSaved] = useSkinState<string[]>(p, "saved", []);
   const list =
     tab === "我的片单"
@@ -484,7 +484,7 @@ export function NetflixSkin(p: Props) {
       <Header p={p} />
       <div className="catalog-scroll">
         <SearchBox value={q} set={setQ} />
-        {featured && tab === "首页" && (
+        {featured && tab === "首頁" && (
           <div className="netflix-feature">
             <Media item={featured} />
             <div>
@@ -534,7 +534,7 @@ export function NetflixSkin(p: Props) {
         <Empty items={list} />
       </div>
       <Tabs
-        tabs={["首页", "我的片单"]}
+        tabs={["首頁", "我的片单"]}
         value={tab}
         set={setTab}
         icons={[<Home />, <Bookmark />]}
