@@ -83,7 +83,7 @@ export function PhoneSkin(p: Props) {
             <button
               className="dial-call"
               disabled={!digits}
-              aria-label="模拟撥號"
+              aria-label="模擬撥號"
               onClick={() => {
                 setCall(digits);
                 const i = items.find((i) => meta(i, "number") === digits);
@@ -121,7 +121,7 @@ export function PhoneSkin(p: Props) {
         )}
       </div>
       <Tabs
-        tabs={["收藏", "最近通話", "通讯錄", "撥號键盤"]}
+        tabs={["收藏", "最近通話", "通訊錄", "撥號键盤"]}
         value={tab}
         set={setTab}
         icons={[<Star />, <Clock />, <Users />, <Grid />]}
@@ -131,8 +131,8 @@ export function PhoneSkin(p: Props) {
           <small>虚拟通話</small>
           <Avatar name={call} />
           <h2>{call}</h2>
-          <p>這是作品內的通話模拟</p>
-          <button aria-label="挂断" onClick={() => setCall("")}>
+          <p>這是作品內的通話模擬</p>
+          <button aria-label="掛斷" onClick={() => setCall("")}>
             <Phone />
           </button>
         </div>
@@ -141,12 +141,12 @@ export function PhoneSkin(p: Props) {
   );
 }
 export function ContactsSkin(p: Props) {
-  const { q, setQ, items } = useContent(p, "所有聯係人");
+  const { q, setQ, items } = useContent(p, "所有聯絡人");
   return (
     <div className="catalog-skin native-contacts">
       <Header p={p} />
       <div className="catalog-scroll">
-        <h1>通讯錄</h1>
+        <h1>通訊錄</h1>
         <SearchBox value={q} set={setQ} />
         <button
           className="contact-self"
@@ -161,12 +161,12 @@ export function ContactsSkin(p: Props) {
             <small>我的名片</small>
           </span>
         </button>
-        {groupItems(items, "所有聯係人").map((g) => (
+        {groupItems(items, "所有聯絡人").map((g) => (
           <section key={g}>
             <h4 className="native-section">{g}</h4>
             {items
-              .filter((i) => (i.folder || "所有聯係人") === g)
-              .sort((a, b) => a.title.localeCompare(b.title, "zh-CN"))
+              .filter((i) => (i.folder || "所有聯絡人") === g)
+              .sort((a, b) => a.title.localeCompare(b.title, "zh-TW"))
               .map((i) => (
                 <Row
                   key={i.id}
@@ -246,22 +246,22 @@ export function CameraSkin(p: Props) {
   const [mode, setMode] = useState("照片"),
     [index, setIndex] = useState(0);
   const frames = p.items.filter((i) =>
-    mode === "視頻" ? i.kind === "video" : i.kind !== "video",
+    mode === "影片" ? i.kind === "video" : i.kind !== "video",
   );
   const frame = frames[index % Math.max(frames.length, 1)];
   return (
     <div className="catalog-skin native-camera">
       <Header p={p} />
       <div className="camera-top">
-        <span>闪光灯關闭</span>
-        <span>{mode === "視頻" ? "HD · 30" : "4:3"}</span>
+        <span>閃光燈關闭</span>
+        <span>{mode === "影片" ? "HD · 30" : "4:3"}</span>
       </div>
       <div className="camera-view">
         {frame ? <Media item={frame} /> : <p>未設置取景畫面</p>}
         <div className="camera-grid" />
       </div>
       <div className="camera-mode">
-        {["視頻", "照片"].map((m) => (
+        {["影片", "照片"].map((m) => (
           <button
             className={mode === m ? "selected" : ""}
             key={m}
@@ -284,7 +284,7 @@ export function CameraSkin(p: Props) {
         </button>
         <button
           className="camera-shutter"
-          aria-label={p.creator ? "編輯拍摄畫面" : "查看拍摄內容"}
+          aria-label={p.creator ? "編輯拍攝畫面" : "查看拍攝內容"}
           disabled={!p.creator && !frame}
           onClick={() => (p.creator ? p.onAdd() : frame && p.onItem(frame))}
         >
@@ -298,7 +298,7 @@ export function CameraSkin(p: Props) {
           <Camera size={24} />
         </button>
       </div>
-      <small className="camera-caption">作者設置的虚构取景內容</small>
+      <small className="camera-caption">作者設置的虛構取景內容</small>
     </div>
   );
 }
@@ -313,8 +313,8 @@ export function SafariSkin(p: Props) {
     )
     .filter((i) =>
       tab === "書籤"
-        ? i.favorite || i.folder !== "歷史記錄"
-        : i.folder === "歷史記錄",
+        ? i.favorite || i.folder !== "歷史紀錄"
+        : i.folder === "歷史紀錄",
     );
   return (
     <div className="catalog-skin native-safari">
@@ -332,14 +332,14 @@ export function SafariSkin(p: Props) {
             </button>
           ))}
         </div>
-        <Empty items={items} label="沒有匹配的虚构網頁" />
+        <Empty items={items} label="沒有匹配的虛構網頁" />
       </div>
       <label className="safari-address">
         <LockKeyhole size={13} />
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="搜索或輸入虚构網址"
+          placeholder="搜尋或輸入虛構網址"
           aria-label="地址欄"
           onKeyDown={(e) => {
             if (e.key === "Enter" && items[0]) p.onItem(items[0]);
@@ -348,7 +348,7 @@ export function SafariSkin(p: Props) {
         <Search size={16} />
       </label>
       <Tabs
-        tabs={["書籤", "歷史記錄"]}
+        tabs={["書籤", "歷史紀錄"]}
         value={tab}
         set={setTab}
         icons={[<Globe />, <Clock />]}
@@ -368,7 +368,7 @@ export function NotesSkin(p: Props) {
       <div className="catalog-scroll">
         <button className="notes-back" onClick={() => setFolder(null)}>
           <Folder size={17} />
-          文件夹
+          資料夾
         </button>
         <h1>{folder || "所有備忘錄"}</h1>
         <SearchBox value={q} set={setQ} />
@@ -402,8 +402,8 @@ export function NotesSkin(p: Props) {
         <Empty items={list} />
       </div>
       <div className="notes-footer">
-        <span>{list.length} 则備忘錄</span>
-        <Add p={p} label="新建備忘錄" />
+        <span>{list.length} 則備忘錄</span>
+        <Add p={p} label="新增備忘錄" />
       </div>
     </div>
   );
@@ -478,7 +478,7 @@ export function CalendarSkin(p: Props) {
           </button>
         ))}
         <Empty items={list} label="當天沒有日程" />
-        <Add p={p} label="添加日程" />
+        <Add p={p} label="新增行程" />
       </div>
     </div>
   );
@@ -490,13 +490,13 @@ export function MailSkin(p: Props) {
       tab === "全部郵件" ||
       i.folder === tab ||
       (tab === "收件箱" &&
-        (!i.folder || !["草稿", "已發送"].includes(i.folder))),
+        (!i.folder || !["草稿", "已傳送"].includes(i.folder))),
   );
   return (
     <div className="catalog-skin native-mail">
       <Header p={p} />
       <div className="mail-folders">
-        {["收件箱", "草稿", "已發送", "全部郵件"].map((t) => (
+        {["收件箱", "草稿", "已傳送", "全部郵件"].map((t) => (
           <button
             key={t}
             className={tab === t ? "selected" : ""}
@@ -534,7 +534,7 @@ export function MailSkin(p: Props) {
   );
 }
 export function ClockSkin(p: Props) {
-  const { tab, setTab, items } = useContent(p, "闹鐘");
+  const { tab, setTab, items } = useContent(p, "鬧鐘");
   const [enabled, setEnabled] = useSkinState<string[]>(p, "alarms", []),
     [seconds, setSeconds] = useState(0),
     [running, setRunning] = useState(false);
@@ -577,10 +577,10 @@ export function ClockSkin(p: Props) {
                   {tab === "世界時鐘" ? meta(i, "city", i.title) : i.title}
                 </small>
               </button>
-              {tab === "闹鐘" ? (
+              {tab === "鬧鐘" ? (
                 <button
                   role="switch"
-                  aria-label={`闹鐘${i.title}`}
+                  aria-label={`鬧鐘${i.title}`}
                   aria-checked={enabled.includes(i.id)}
                   className={`native-switch ${enabled.includes(i.id) ? "on" : ""}`}
                   onClick={() =>
@@ -601,7 +601,7 @@ export function ClockSkin(p: Props) {
         )}
       </div>
       <Tabs
-        tabs={["世界時鐘", "闹鐘", "秒表"]}
+        tabs={["世界時鐘", "鬧鐘", "秒表"]}
         value={tab}
         set={setTab}
         icons={[<Globe />, <Clock />, <Clock />]}
@@ -674,7 +674,7 @@ export function FilesSkin(p: Props) {
       <div className="catalog-scroll">
         <h1>{folder || tab}</h1>
         <SearchBox value={q} set={setQ} />
-        {tab === "浏览" && !folder ? (
+        {tab === "瀏覽" && !folder ? (
           <div className="file-folders">
             {groupItems(items, "我的iPhone").map((g) => (
               <button key={g} onClick={() => setFolder(g)}>
@@ -713,7 +713,7 @@ export function FilesSkin(p: Props) {
         <Empty items={list} />
       </div>
       <Tabs
-        tabs={["最近項目", "浏览"]}
+        tabs={["最近項目", "瀏覽"]}
         value={tab}
         set={(t) => {
           setTab(t);
@@ -725,14 +725,14 @@ export function FilesSkin(p: Props) {
   );
 }
 export function MusicSkin(p: Props) {
-  const { tab, setTab, items } = useContent(p, "资料庫");
+  const { tab, setTab, items } = useContent(p, "資料庫");
   const [song, setSong] = useTrack(p, items);
   return (
     <div className="catalog-skin native-music">
       <Header p={p} />
       <div className="catalog-scroll">
         <h1>{tab}</h1>
-        {tab === "歌单" ? (
+        {tab === "播放清單" ? (
           <div className="music-albums">
             {groupItems(items, "我的音樂").map((g) => (
               <button
@@ -795,7 +795,7 @@ export function MusicSkin(p: Props) {
         </div>
       )}
       <Tabs
-        tabs={["资料庫", "歌单"]}
+        tabs={["資料庫", "播放清單"]}
         value={tab}
         set={setTab}
         icons={[<Music />, <Folder />]}
@@ -814,7 +814,7 @@ function LocationMap({
 }) {
   return (
     <div className={`fiction-map ${find ? "find-map" : ""}`}>
-      <svg viewBox="0 0 300 300" aria-label="原創虚构地圖">
+      <svg viewBox="0 0 300 300" aria-label="原創虛構地圖">
         <rect width="300" height="300" fill="#e4e5d8" />
         {[35, 100, 190, 260].map((n) => (
           <path
@@ -856,7 +856,7 @@ export function MapsSkin(p: Props) {
       <Header p={p} />
       <LocationMap items={items} onItem={p.onItem} />
       <div className="map-sheet">
-        <SearchBox value={q} set={setQ} placeholder="搜索虚构地點" />
+        <SearchBox value={q} set={setQ} placeholder="搜尋虛構地點" />
         <div className="map-places">
           {items.map((i) => (
             <Row key={i.id} item={i} onItem={p.onItem} leading={<MapPin />} />
