@@ -127,7 +127,7 @@ export function SocialDetail(p: {
         <div className="post-detail-author">
           <Avatar name={item.sender} src={item.avatar} />
           <div>
-            <strong>{item.sender || "用户"}</strong>
+            <strong>{item.sender || "使用者"}</strong>
             <small>
               {weibo
                 ? item.time + " " + meta(item, "location")
@@ -159,7 +159,7 @@ export function SocialDetail(p: {
             {[Crown, MessageCircle, Camera, Share, Copy].map((Icon, n) => (
               <button
                 key={n}
-                aria-label={["会员", "微信分享", "相机", "分享", "复制"][n]}
+                aria-label={["会员", "微信分享", "相机", "分享", "複製"][n]}
                 onClick={() => (n === 4 ? void copy() : setMenu(true))}
               >
                 <Icon size={25} />
@@ -176,7 +176,7 @@ export function SocialDetail(p: {
         )}
         {weibo ? (
           <div className="weibo-detail-tabs">
-            {["轉發", "留言", "赞"].map((name) => (
+            {["轉發", "留言", "讚"].map((name) => (
               <button
                 key={name}
                 aria-pressed={tab === name}
@@ -185,7 +185,7 @@ export function SocialDetail(p: {
                 {name}{" "}
                 {name === "留言"
                   ? count(comments.length)
-                  : name === "赞"
+                  : name === "讚"
                     ? count(item.likes + (liked ? 1 : 0))
                     : meta(item, "reposts", "0")}
               </button>
@@ -194,7 +194,7 @@ export function SocialDetail(p: {
         ) : (
           <div className="x-related-row">
             <button onClick={() => setSort(!sort)}>
-              {sort ? "最新" : "相关"}⌄
+              {sort ? "最新" : "相關"}⌄
             </button>
             <button onClick={() => setTab(tab === "轉發" ? "留言" : "轉發")}>
               查看引用 ›
@@ -211,7 +211,7 @@ export function SocialDetail(p: {
             {replies.map((c, index) => {
               const split = c.search(/[：:]/),
                 hasName = split > 0 && split < 24,
-                name = hasName ? c.slice(0, split) : "用户",
+                name = hasName ? c.slice(0, split) : "使用者",
                 body = hasName ? c.slice(split + 1) : c;
               return (
                 <article key={index} className="post-detail-comment">
@@ -221,13 +221,13 @@ export function SocialDetail(p: {
                     <p>{body}</p>
                     <div className="post-comment-actions">
                       <button
-                        aria-label={"回复" + name}
+                        aria-label={"回覆" + name}
                         onClick={() => setTarget(name)}
                       >
                         <MessageCircle size={16} />
                       </button>
                       <button
-                        aria-label={"喜欢回复" + index}
+                        aria-label={"喜欢回覆" + index}
                         onClick={(e) => {
                           e.currentTarget.classList.toggle("liked");
                         }}
@@ -240,11 +240,11 @@ export function SocialDetail(p: {
                 </article>
               );
             })}
-            {!replies.length && <p className="post-comments-empty">暂无留言</p>}
+            {!replies.length && <p className="post-comments-empty">尚無留言</p>}
           </div>
         ) : (
           <p className="post-comments-empty">
-            {tab === "轉發" ? "暂无可展开的轉發记录" : "目前沒有更多紀錄"}
+            {tab === "轉發" ? "目前沒有可展開的轉發紀錄" : "目前沒有更多紀錄"}
           </p>
         )}
       </div>
@@ -257,9 +257,9 @@ export function SocialDetail(p: {
       >
         <Avatar name={p.owner || "机主"} />
         <input
-          aria-label="回复帖子"
+          aria-label="回覆帖子"
           placeholder={
-            target ? "回复 @" + target : weibo ? "发表你的留言" : "發布回覆"
+            target ? "回覆 @" + target : weibo ? "發表留言" : "發布回覆"
           }
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
@@ -274,7 +274,7 @@ export function SocialDetail(p: {
             <button
               key={n}
               aria-label={
-                ["返回X时间线", "X 搜尋", "X助手", "X 通知", "X 私訊"][n]
+                ["返回X 時間軸", "X 搜尋", "X助手", "X 通知", "X 私訊"][n]
               }
               onClick={p.back}
             >
@@ -287,7 +287,7 @@ export function SocialDetail(p: {
         <div className="post-options-menu">
           <button onClick={copy}>
             <Copy size={18} />
-            {copied ? "已复制" : "复制文字"}
+            {copied ? "已複製" : "複製文字"}
           </button>
           <button
             onClick={() => {
