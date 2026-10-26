@@ -4205,3 +4205,21 @@
 .mymy-x .kzxnav button:disabled {
   color: #777;
 }
+
+
+/* Keep X's navigation bar in its native dark appearance even when other
+   shared Mymy navigation styles are loaded later. */
+.phone-shell.ios18 .mymy-ui.mymy-x .kzxw .kzxnav,
+.phone-shell.ios18 .mymy-ui.mymy-x.x-reference-dark .kzxw .kzxnav {
+  background: #000 !important;
+  border-top: 1px solid #2f3336 !important;
+}
+.phone-shell.ios18 .mymy-ui.mymy-x .kzxw .kzxnav button,
+.phone-shell.ios18 .mymy-ui.mymy-x.x-reference-dark .kzxw .kzxnav button {
+  color: #e7e9ea !important;
+  background: transparent !important;
+}
+.phone-shell.ios18 .mymy-ui.mymy-x .kzxw {
+  background: #000;
+  color: #e7e9ea;
+}
