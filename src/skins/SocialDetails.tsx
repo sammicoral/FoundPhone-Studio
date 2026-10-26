@@ -44,7 +44,7 @@ export function SocialDetail(p: {
       false,
     ),
     [extra, setExtra] = useSkinState<string[]>(p, "replies-" + item.id, []);
-  const [tab, setTab] = useState("评论"),
+  const [tab, setTab] = useState("留言"),
     [draft, setDraft] = useState(""),
     [target, setTarget] = useState(""),
     [menu, setMenu] = useState(false),
@@ -65,15 +65,15 @@ export function SocialDetail(p: {
     setExtra([...extra, (p.owner || "机主") + "：" + draft.trim()]);
     setDraft("");
     setTarget("");
-    setTab("评论");
+    setTab("留言");
   };
   const actions = (
     <div className="post-detail-actions">
-      <button aria-label="查看评论" onClick={() => setTab("评论")}>
+      <button aria-label="查看留言" onClick={() => setTab("留言")}>
         <MessageCircle />
         {count(comments.length)}
       </button>
-      <button aria-label="查看转发" onClick={() => setTab("转发")}>
+      <button aria-label="查看轉發" onClick={() => setTab("轉發")}>
         <Repeat2 />
         {meta(item, "reposts", "0")}
       </button>
@@ -176,14 +176,14 @@ export function SocialDetail(p: {
         )}
         {weibo ? (
           <div className="weibo-detail-tabs">
-            {["转发", "评论", "赞"].map((name) => (
+            {["轉發", "留言", "赞"].map((name) => (
               <button
                 key={name}
                 aria-pressed={tab === name}
                 onClick={() => setTab(name)}
               >
                 {name}{" "}
-                {name === "评论"
+                {name === "留言"
                   ? count(comments.length)
                   : name === "赞"
                     ? count(item.likes + (liked ? 1 : 0))
@@ -196,17 +196,17 @@ export function SocialDetail(p: {
             <button onClick={() => setSort(!sort)}>
               {sort ? "最新" : "相关"}⌄
             </button>
-            <button onClick={() => setTab(tab === "转发" ? "评论" : "转发")}>
+            <button onClick={() => setTab(tab === "轉發" ? "留言" : "轉發")}>
               查看引用 ›
             </button>
           </div>
         )}
         {weibo && (
           <button className="weibo-sort" onClick={() => setSort(!sort)}>
-            {sort ? "按时间" : "按热度"}⌄
+            {sort ? "依時間" : "依熱門程度"}⌄
           </button>
         )}
-        {tab === "评论" ? (
+        {tab === "留言" ? (
           <div className="post-detail-comments">
             {replies.map((c, index) => {
               const split = c.search(/[：:]/),
@@ -240,11 +240,11 @@ export function SocialDetail(p: {
                 </article>
               );
             })}
-            {!replies.length && <p className="post-comments-empty">暂无评论</p>}
+            {!replies.length && <p className="post-comments-empty">暂无留言</p>}
           </div>
         ) : (
           <p className="post-comments-empty">
-            {tab === "转发" ? "暂无可展开的转发记录" : "暂无更多记录"}
+            {tab === "轉發" ? "暂无可展开的轉發记录" : "目前沒有更多紀錄"}
           </p>
         )}
       </div>
@@ -259,12 +259,12 @@ export function SocialDetail(p: {
         <input
           aria-label="回复帖子"
           placeholder={
-            target ? "回复 @" + target : weibo ? "发表你的评论" : "发布你的回复"
+            target ? "回复 @" + target : weibo ? "发表你的留言" : "發布回覆"
           }
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
         />
-        <button aria-label="发送回复" disabled={!draft.trim()}>
+        <button aria-label="傳送回覆" disabled={!draft.trim()}>
           <Send size={20} />
         </button>
       </form>
@@ -274,7 +274,7 @@ export function SocialDetail(p: {
             <button
               key={n}
               aria-label={
-                ["返回X时间线", "X搜索", "X助手", "X通知", "X私信"][n]
+                ["返回X时间线", "X 搜尋", "X助手", "X 通知", "X 私訊"][n]
               }
               onClick={p.back}
             >
