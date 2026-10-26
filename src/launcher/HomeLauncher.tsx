@@ -26,6 +26,8 @@ import {
 } from "./layout";
 type Props = {
   work: Work;
+  initialPage?: number;
+  onPageChange?: (page: number) => void;
   storeOpen?: boolean;
   closeStore?: () => void;
   layout: DeviceLayout;
@@ -121,7 +123,7 @@ export function HomeLauncher(p: Props) {
     [selected, setSelected] = useState(""),
     [uninstall, setUninstall] = useState(false),
     [keep, setKeep] = useState(true),
-    [page, setPage] = useState(0),
+    [page, setPageState] = useState(p.initialPage ?? 0),
     [error, setError] = useState(""),
     [ghost, setGhost] = useState<{
       entry: HomeEntry;
@@ -130,6 +132,7 @@ export function HomeLauncher(p: Props) {
     } | null>(null),
     [widgetType, setWidgetType] = useState<Widget["type"]>("calendar"),
     [size, setSize] = useState<Widget["size"]>("small");
+  const setPage = (next: number) => { setPageState(next); p.onPageChange?.(next); };
   const root = useRef<HTMLDivElement>(null),
     pager = useRef<HTMLDivElement>(null),
     timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined),
