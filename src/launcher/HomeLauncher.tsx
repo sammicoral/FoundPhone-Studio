@@ -153,8 +153,9 @@ export function HomeLauncher(p: Props) {
       started: number;
       active: boolean;
     } | null>(null);
+  const removedApps = new Set(["qq", "weibo", "bilibili", "alipay", "taobao", "netease", "douyin", "wechat"]);
   const pages = packHome(homeEntries(p.layout), p.layout.positions),
-    apps = p.layout.apps,
+    apps = p.layout.apps.filter((a) => !removedApps.has(a.id)),
     active = apps.find((a) => a.id === selected);
   if (editing && pages.length < 20) pages.push([]);
   const beginSwipe = (e: PointerEvent<HTMLDivElement>) => {
