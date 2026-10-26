@@ -214,7 +214,7 @@ export function DeviceLock({
             {error}
           </span>
           {!/^[0-9]+$/.test(work.phone.passcode) && (
-            <button onClick={() => onUnlock(code)}>解锁</button>
+            <button onClick={() => onUnlock(code)}>解鎖</button>
           )}
           <div className="pin-footer">
             <button onClick={() => setPinOpen(false)}>取消</button>
@@ -252,13 +252,13 @@ export function ControlCenter({
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: -100, opacity: 0 }}
     >
-      <button className="cc-close" aria-label="關閉控制中心" onClick={close}>
+      <button className="cc-close" aria-label="關閉控製中心" onClick={close}>
         <Power />
       </button>
       <button
         className="cc-edit"
-        aria-label="控制中心編輯"
-        onClick={() => setTool("編輯控制項")}
+        aria-label="控製中心編輯"
+        onClick={() => setTool("編輯控製項")}
       >
         <Plus />
       </button>
@@ -266,28 +266,28 @@ export function ControlCenter({
         <span>
           <Airplay size={13} />
         </span>
-        控制中心 <ChevronRight size={16} />
+        控製中心 <ChevronRight size={16} />
       </div>
       <div className="cc-status" aria-label={"行動網路 " + network}>
         <div>
           <span>
             <Signal size={18} />
-            <small>主号</small> 中国移动 <Wifi size={17} />
+            <small>主號</small> 中國移動 <Wifi size={17} />
           </span>
           <span>
             <Signal size={18} />
-            <small>副号</small> 中国电信
+            <small>副號</small> 中國電信
           </span>
         </div>
         <span>
           <Lock size={13} /> {battery}% <Battery size={27} />
         </span>
       </div>
-      <nav className="cc-page-rail" aria-label="控制中心分類">
+      <nav className="cc-page-rail" aria-label="控製中心分類">
         {[Heart, Music2, House, Radio].map((Icon, i) => (
           <button
             key={i}
-            aria-label={["常用控制項", "媒體控制項", "家庭控制項", "連線控制項"][i]}
+            aria-label={["常用控製項", "媒體控製項", "家庭控製項", "連線控製項"][i]}
             onClick={() =>
               document
                 .querySelector(
@@ -311,7 +311,7 @@ export function ControlCenter({
           </div>
           <div className="cc-media-title">
             <strong>{playing ? "測試播放" : "目前沒有播放內容"}</strong>
-            <small>音乐</small>
+            <small>音樂</small>
           </div>
           <div>
             <button aria-label="上一首">
@@ -358,12 +358,12 @@ export function ControlCenter({
           onClick={() => setFocus(!focus)}
         >
           <Moon />
-          <span>专注模式</span>
+          <span>專註模式</span>
           <ChevronDown size={14} />
         </button>
         <button className="cc-home" onClick={() => setTool("家庭")}>
           <House size={38} />
-          <span>未设置家庭</span>
+          <span>未設置家庭</span>
         </button>
         {[Flashlight, Timer, Calculator, Camera].map((Icon, i) => (
           <button
@@ -392,13 +392,13 @@ export function ControlCenter({
         <div className="cc-tool">
           <strong>{tool}</strong>
           <p>
-            {tool === "螢幕鏡像輸出" ? "正在搜尋作品中的裝置…" : "作品內快速控制項"}
+            {tool === "螢幕鏡像輸出" ? "正在搜尋作品中的裝置…" : "作品內快速控製項"}
           </p>
           <button onClick={() => setTool("")}>完成</button>
         </div>
       )}
       <button className="cc-dismiss" onClick={close}>
-        轻扫以关闭
+        輕掃以關闭
         <ChevronUp size={16} />
       </button>
     </motion.div>
