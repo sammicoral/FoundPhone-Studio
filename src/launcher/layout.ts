@@ -78,7 +78,7 @@ export function validateLayout(raw: unknown, input: Work) {
   // Keep built-in app names in sync with the canonical Traditional Chinese registry.
   for (const app of layout.apps) {
     const canonical = w.apps.find((item) => item.id === app.id);
-    if (canonical && app.id !== "custom") app.name = canonical.name;
+    if (canonical && app.id !== "custom") app.name = getApp(app.id).name;
   }
   const known = new Set(w.apps.map((a) => a.id));
   if (layout.apps.some((a) => !known.has(a.id))) throw Error("布局含未注册App");
