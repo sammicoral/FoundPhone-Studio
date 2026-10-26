@@ -132,7 +132,7 @@ export function NativeCalculator(p: {
               <ChevronLeft />
               返回
             </button>
-            <strong>{panel === "history" ? "历史记录" : "计算器"}</strong>
+            <strong>{panel === "history" ? "歷史紀錄" : "计算器"}</strong>
             {panel === "history" && (
               <button onClick={() => setHistory([])}>清除</button>
             )}
@@ -159,7 +159,7 @@ export function NativeCalculator(p: {
                     {i.title}
                   </button>
                 ))}
-                {!history.length && !p.items.length && <p>暂无计算记录</p>}
+                {!history.length && !p.items.length && <p>目前沒有計算紀錄</p>}
               </div>
             </>
           ) : (
