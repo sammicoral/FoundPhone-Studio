@@ -27,9 +27,9 @@ import { meta, type Props } from "./shared";
 import "../ios/native-apps.css";
 const healthTypes = [
   { id: "cycle", title: "经期追踪", icon: Activity, color: "#7361ff" },
-  { id: "activity", title: "健身记录", icon: Flame, color: "#ff5900" },
-  { id: "sleep", title: "睡眠评分", icon: Bed, color: "#7361ff" },
-  { id: "steps", title: "步数", icon: Footprints, color: "#ff5900" },
+  { id: "activity", title: "健身記錄", icon: Flame, color: "#ff5900" },
+  { id: "sleep", title: "睡眠評分", icon: Bed, color: "#7361ff" },
+  { id: "steps", title: "步數", icon: Footprints, color: "#ff5900" },
 ];
 function seriesFor(item: Item | undefined) {
   try {
@@ -46,9 +46,9 @@ function seriesFor(item: Item | undefined) {
 function recordFor(items: Item[], key: string) {
   const map: Record<string, string[]> = {
     cycle: ["经期", "月经"],
-    activity: ["活动", "健身"],
+    activity: ["活動", "健身"],
     sleep: ["睡眠"],
-    steps: ["步数"],
+    steps: ["步數"],
   };
   return items.find((i) =>
     map[key].some((s) => meta(i, "metric", i.title).includes(s)),
@@ -117,13 +117,13 @@ export function HealthSkin(p: Props) {
             <section className="health-profile-empty">
               <User size={45} />
               <h2>{p.owner || "机主"}</h2>
-              <p>尚未设置更多资料</p>
+              <p>尚未設置更多资料</p>
             </section>
           </>
         ) : detail ? (
           <>
             <div className="health-periods">
-              {["日", "周", "月", "6个月", "年"].map((x) => (
+              {["日", "周", "月", "6個月", "年"].map((x) => (
                 <button
                   key={x}
                   onClick={(e) => {
@@ -138,10 +138,10 @@ export function HealthSkin(p: Props) {
               ))}
             </div>
             <p className="health-detail-value">
-              {current ? meta(current, "value", "—") : "无数据"}{" "}
+              {current ? meta(current, "value", "—") : "無數據"}{" "}
               <small>{current ? meta(current, "unit") : ""}</small>
             </p>
-            <div className="health-detail-chart" aria-label="健康记录图表">
+            <div className="health-detail-chart" aria-label="健康記錄圖表">
               {Array.from({ length: 7 }, (_, i) => (
                 <span
                   key={i}
@@ -155,14 +155,14 @@ export function HealthSkin(p: Props) {
               ))}
             </div>
             <section className="health-detail-description">
-              <h2>记录</h2>
+              <h2>記錄</h2>
               {current ? (
                 <>
                   <p>{current.body}</p>
                   <small>{current.time}</small>
                 </>
               ) : (
-                <p>暂无数据</p>
+                <p>暫無數據</p>
               )}
             </section>
           </>
@@ -171,7 +171,7 @@ export function HealthSkin(p: Props) {
             <div className="health-section-title">
               <h2>置顶</h2>
               <button onClick={() => setEditing(!editing)}>
-                {editing ? "完成" : "编辑"}
+                {editing ? "完成" : "編輯"}
               </button>
             </div>
             {editing && (
@@ -215,9 +215,9 @@ export function HealthSkin(p: Props) {
                     {id === "activity" ? (
                       <div className="health-activity-values">
                         {[
-                          ["活动", "active", "千卡"],
-                          ["锻炼", "exercise", "分钟"],
-                          ["站立", "stand", "小时"],
+                          ["活動", "active", "千卡"],
+                          ["锻炼", "exercise", "分鐘"],
+                          ["站立", "stand", "小時"],
                         ].map(([name, key, unit], n) => (
                           <div
                             key={key}
@@ -243,8 +243,8 @@ export function HealthSkin(p: Props) {
                         <div>
                           <b>
                             {i
-                              ? meta(i, "value", i.body || "无数据")
-                              : "无数据"}
+                              ? meta(i, "value", i.body || "無數據")
+                              : "無數據"}
                           </b>
                           <span>{i ? meta(i, "unit") : ""}</span>
                         </div>
@@ -271,19 +271,19 @@ export function HealthSkin(p: Props) {
             </div>
             <button className="health-all-row" onClick={() => setTab("浏览")}>
               <Heart color="#ff2d55" />
-              显示所有健康数据
+              顯示所有健康數據
               <ChevronRight />
             </button>
             <h2 className="health-trends-title">趋势</h2>
             <div className="health-trends-empty">
-              {p.items.length ? "查看健康数据中的记录" : "暂无趋势"}
+              {p.items.length ? "查看健康數據中的記錄" : "暫無趋势"}
             </div>
           </>
         ) : tab === "共享" ? (
           <section className="health-sharing">
             <Users size={54} />
-            <h2>共享健康数据</h2>
-            <p>尚未共享数据</p>
+            <h2>共享健康數據</h2>
+            <p>尚未共享數據</p>
             {p.items
               .filter((i) => i.folder === "共享")
               .map((i) => (
@@ -395,25 +395,25 @@ export function WeatherSkin(p: Props) {
       <div className="weather-stars" aria-hidden="true" />
       <div className="weather-native-scroll">
         <section className="weather-native-current">
-          <small>{item ? meta(item, "locationLabel", "城市") : "天气"}</small>
+          <small>{item ? meta(item, "locationLabel", "城市") : "天氣"}</small>
           <h1>{item?.title || "未添加城市"}</h1>
           <output>{meta(item, "temperature", "—")}°</output>
           <div className="weather-high-low">
             <span>最高 {meta(item, "high", "—")}°</span>
             <span>最低 {meta(item, "low", "—")}°</span>
           </div>
-          <p>{meta(item, "condition", "暂无天气数据")}</p>
+          <p>{meta(item, "condition", "暫無天氣數據")}</p>
           <MoonStar className="weather-moon-art" size={55} />
         </section>
         <button
           className="weather-native-card weather-air-quality"
           onClick={() => {
             read();
-            setSheet("空气质量");
+            setSheet("空氣质量");
           }}
         >
           <strong>
-            {meta(item, "aqi", "—")} · {meta(item, "aqiLabel", "空气质量")}
+            {meta(item, "aqi", "—")} · {meta(item, "aqiLabel", "空氣质量")}
           </strong>
           <div className="weather-aqi-scale">
             <i
@@ -427,20 +427,20 @@ export function WeatherSkin(p: Props) {
           </div>
           <p>
             {item?.meta.aqi
-              ? `当前 AQI (CN) 为 ${item.meta.aqi}。`
-              : "暂无空气质量数据"}
+              ? `當前 AQI (CN) 為 ${item.meta.aqi}。`
+              : "暫無空氣质量數據"}
           </p>
         </button>
         <section className="weather-native-card weather-hourly">
           <header>
             <div>
-              <strong>天气状况</strong>
+              <strong>天氣狀况</strong>
               <small>
                 {mode === "temperature"
-                  ? "气温 (°C)"
+                  ? "氣溫 (°C)"
                   : mode === "rain"
                     ? "降水概率"
-                    : "风速"}
+                    : "風速"}
               </small>
             </div>
             <div className="weather-mode-switch">
@@ -469,12 +469,12 @@ export function WeatherSkin(p: Props) {
                 key={n}
                 onClick={() => {
                   read();
-                  setSheet("逐小时天气");
+                  setSheet("逐小時天氣");
                 }}
               >
                 <strong>
                   {hourly[n]?.time ||
-                    ["现在", "—时", "—时", "—时", "—时", "日出"][n]}
+                    ["現在", "—時", "—時", "—時", "—時", "日出"][n]}
                 </strong>
                 {n === 5 ? (
                   <Sunrise size={28} color="#ffd60a" />
@@ -509,7 +509,7 @@ export function WeatherSkin(p: Props) {
               key={n}
               onClick={() => {
                 read();
-                setSheet("每日天气");
+                setSheet("每日天氣");
               }}
             >
               <strong>{d.label || d.time || "—"}</strong>
@@ -522,14 +522,14 @@ export function WeatherSkin(p: Props) {
         </section>
       </div>
       <nav className="weather-native-toolbar">
-        <button aria-label="天气地图" onClick={() => setSheet("天气地图")}>
+        <button aria-label="天氣地圖" onClick={() => setSheet("天氣地圖")}>
           <Map size={27} />
         </button>
         <div className="weather-city-dots">
           {p.items.length ? (
             p.items.map((i, n) => (
               <button
-                aria-label={"切换城市" + i.title}
+                aria-label={"切換城市" + i.title}
                 aria-current={n === index ? "true" : undefined}
                 key={i.id}
                 onClick={() => {
@@ -549,9 +549,9 @@ export function WeatherSkin(p: Props) {
       {sheet && (
         <div className="weather-native-sheet">
           <header>
-            <button aria-label="返回天气" onClick={() => setSheet("")}>
+            <button aria-label="返回天氣" onClick={() => setSheet("")}>
               <ChevronLeft />
-              天气
+              天氣
             </button>
             <strong>{sheet}</strong>
           </header>
@@ -581,7 +581,7 @@ export function WeatherSkin(p: Props) {
                     <span>{meta(i, "temperature", "—")}°</span>
                   </button>
                 ))}
-              {!p.items.length && <p>暂无城市</p>}
+              {!p.items.length && <p>暫無城市</p>}
               {p.creator && (
                 <button onClick={p.onAdd}>
                   <Plus />
@@ -589,18 +589,18 @@ export function WeatherSkin(p: Props) {
                 </button>
               )}
             </>
-          ) : sheet === "天气地图" ? (
+          ) : sheet === "天氣地圖" ? (
             <div className="weather-map-empty">
               <Map size={60} />
-              <p>暂无地图数据</p>
+              <p>暫無地圖數據</p>
             </div>
           ) : (
             <div className="weather-section-detail">
-              <h2>{item?.title || "暂无城市"}</h2>
+              <h2>{item?.title || "暫無城市"}</h2>
               <p>
-                {sheet === "空气质量"
-                  ? meta(item, "aqi", "暂无空气质量数据")
-                  : item?.body || "暂无天气记录"}
+                {sheet === "空氣质量"
+                  ? meta(item, "aqi", "暫無空氣质量數據")
+                  : item?.body || "暫無天氣記錄"}
               </p>
               {item && <small>{item.time}</small>}
             </div>
