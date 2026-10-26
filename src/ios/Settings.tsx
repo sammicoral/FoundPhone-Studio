@@ -29,7 +29,7 @@ const groups: Row[][] = [
     [Wifi, "無線局域網", "#007aff"],
     [Bluetooth, "藍牙", "#007aff"],
     [Signal, "行動網路", "#34c759"],
-    [Link, "個人热點", "#65ce88"],
+    [Link, "個人熱點", "#65ce88"],
     [Battery, "電池", "#34c759"],
     [Globe, "VPN", "#007aff"],
   ],
@@ -145,7 +145,7 @@ export function NativeSettings({
               {toggle("低電量模式", lowPower, setLowPower)}
             </div>
             <p className="settings-page-caption">
-              低電量模式仅改變虚拟裝置狀態。
+              低電量模式僅改變虛擬裝置狀態。
             </p>
           </>
         );
@@ -168,7 +168,7 @@ export function NativeSettings({
       case "軟體更新":
         return (
           <p className="settings-page-caption">
-            iOS 18.0 · 此為作品中的虚拟係統，不下載係統更新。
+            iOS 18.0 · 此為作品中的虛擬系統，不下載系統更新。
           </p>
         );
       default:
@@ -185,7 +185,7 @@ export function NativeSettings({
               )}
             </div>
             {!items.some((i) => i.folder === nav.page) && (
-              <p className="settings-page-caption">此作品沒有配置更多選項。</p>
+              <p className="settings-page-caption">此作品沒有設定更多選項。</p>
             )}
           </>
         );
@@ -259,7 +259,7 @@ export function NativeSettings({
                                   : "關閉"
                                 : name === "VPN"
                                   ? "未連接"
-                                  : name === "行動網路" || name === "個人热點"
+                                  : name === "行動網路" || name === "個人熱點"
                                     ? "關閉"
                                     : ""}
                           </small>
@@ -285,7 +285,7 @@ export function NativeSettings({
           ))}
         {creator && (
           <button className="phone-add" onClick={onSettings}>
-            編輯係統配置
+            編輯系統設定
           </button>
         )}
       </NavigationPage>
