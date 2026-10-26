@@ -19,7 +19,7 @@ import {
   Globe,
   Mic,
 } from "lucide-react";
-import type { Work, Item } from "../schema";
+import type { Work, Item, UiValue } from "../schema";
 import { IOSToggle } from "../vendor/konsta/Toggle";
 import { NavigationPage, useNavigation } from "./Navigation";
 type Row = [ComponentType<{ size?: number }>, string, string];
@@ -51,19 +51,26 @@ export function NativeSettings({
   creator,
   onItem,
   onSettings,
+  ui,
+  onUi,
 }: {
   work: Work;
   items: Item[];
   creator: boolean;
   onItem: (i: Item) => void;
   onSettings?: () => void;
+  ui?: Record<string, UiValue>;
+  onUi?: (key: string, value: UiValue) => void;
 }) {
   const nav = useNavigation(),
     [query, setQuery] = useState(""),
     [airplane, setAirplane] = useState(false),
     [wifi, setWifi] = useState(true),
     [bluetooth, setBluetooth] = useState(true),
-    [lowPower, setLowPower] = useState(false);
+    [lowPower, setLowPower] = useState(false),
+    [newPasscode, setNewPasscode] = useState(""),
+    [confirmPasscode, setConfirmPasscode] = useState(""),
+    [passcodeMessage, setPasscodeMessage] = useState("");
   const row = (label: string, value?: string, click?: () => void) => (
     <button key={label} className="settings-native-row" onClick={click}>
       <span>{label}</span>
@@ -171,6 +178,35 @@ export function NativeSettings({
             iOS 18.0 · 此為作品中的虛擬系統，不下載系統更新。
           </p>
         );
+      case "Face ID 與密碼": {
+        const configured = String(ui?.passcode ?? work.phone.passcode ?? "");
+        return (
+          <div className="settings-group passcode-settings">
+            <p className="settings-page-caption">{configured ? "已設定螢幕解鎖密碼" : "尚未設定螢幕解鎖密碼"}</p>
+            <label className="settings-native-row passcode-field">
+              <span>設定新密碼（4–12 位）</span>
+              <input aria-label="設定新密碼" type="password" inputMode="numeric" maxLength={12} value={newPasscode} onChange={(e) => setNewPasscode(e.target.value.replace(/\\D/g, ""))} placeholder="輸入數字密碼" />
+            </label>
+            <label className="settings-native-row passcode-field">
+              <span>確認新密碼</span>
+              <input aria-label="確認新密碼" type="password" inputMode="numeric" maxLength={12} value={confirmPasscode} onChange={(e) => setConfirmPasscode(e.target.value.replace(/\\D/g, ""))} placeholder="再次輸入密碼" />
+            </label>
+            <button className="phone-add" onClick={() => {
+              if (newPasscode.length < 4 || newPasscode.length > 12) { setPasscodeMessage("密碼需為 4–12 位數字。"); return; }
+              if (newPasscode !== confirmPasscode) { setPasscodeMessage("兩次輸入的密碼不一致。"); return; }
+              onUi?.("passcode", newPasscode);
+              setPasscodeMessage("已更新螢幕解鎖密碼。");
+              setNewPasscode("");
+              setConfirmPasscode("");
+            }}>設定密碼</button>
+            {configured && <button className="phone-add" onClick={() => {
+              onUi?.("passcode", "");
+              setPasscodeMessage("已移除螢幕解鎖密碼。");
+            }}>移除密碼</button>}
+            {passcodeMessage && <p className="settings-page-caption" role="status">{passcodeMessage}</p>}
+          </div>
+        );
+      }
       default:
         return (
           <>
