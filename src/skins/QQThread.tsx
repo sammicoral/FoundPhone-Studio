@@ -23,7 +23,7 @@ export function QQThread(p: Props) {
   return (
     <div className="qq-native-thread">
       <header className="qq-thread-nav">
-        <button aria-label="返回QQ消息" onClick={() => p.onThread("")}>
+        <button aria-label="返回 QQ 訊息" onClick={() => p.onThread("")}>
           <ChevronLeft size={26} />
         </button>
         <div>
