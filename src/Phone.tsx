@@ -580,7 +580,7 @@ function PhoneRuntime({
           {!creator && s.choices.length > 0 && !locked && (
             <div className="story-overlay">
               <span className="eyebrow">故事来到一个岔路口</span>
-              <h3>你会如何选择？</h3>
+              <h3>您會如何選擇？</h3>
               {s.choices.map((c) => (
                 <button
                   key={c.target}
@@ -753,7 +753,7 @@ function PhoneRuntime({
                     setContextApp("");
                   }}
                 >
-                  打开 App
+                  開啟 App
                 </button>
                 <button
                   onClick={() => {
@@ -925,7 +925,7 @@ function AppContent({
       {detail.password && !creator && !unlocks.includes(detail.id) ? (
         <div className="locked-note">
           <LockKeyhole size={36} />
-          <h3>這則內容已锁定</h3>
+          <h3>這則內容已鎖定</h3>
           <input
             type="password"
             placeholder="內容密碼"
@@ -941,7 +941,7 @@ function AppContent({
               } else setPwError("密碼錯誤");
             }}
           >
-            解锁內容
+            解鎖內容
           </button>
           <small>{pwError}</small>
         </div>
@@ -984,7 +984,7 @@ function AppContent({
     return (
       <>
         <div className="catalog-slot" hidden={!!detail}>
-          <Suspense fallback={<div className="catalog-loading">正在打开…</div>}>
+          <Suspense fallback={<div className="catalog-loading">正在開啟…</div>}>
             <Skin
               appId={app.id}
               owner={work.phone.owner}
