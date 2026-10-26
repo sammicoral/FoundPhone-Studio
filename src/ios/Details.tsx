@@ -130,13 +130,13 @@ export function NativeDetail({
             <p className="native-blue">{item.meta.phone || "尚未設定電話號碼"}</p>
           </div>
           <div className="native-detail-group">
-            <small>备注</small>
+            <small>備註</small>
             <p>{item.body}</p>
           </div>
           {call && (
             <div className="native-detail-group">
               <p>作品內模擬 · {item.title}</p>
-              <button onClick={() => setCall(false)}>结束</button>
+              <button onClick={() => setCall(false)}>結束</button>
             </div>
           )}
         </div>
@@ -152,7 +152,7 @@ export function NativeDetail({
               <Folder />
             </button>
             <span />
-            <button aria-label="复制備忘錄" onClick={copy}>
+            <button aria-label="複製備忘錄" onClick={copy}>
               {copied ? <Check /> : <Share />}
             </button>
           </footer>
@@ -190,7 +190,7 @@ export function NativeDetail({
           <h2>{item.title}</h2>
           <p>{item.body}</p>
           <small>{item.time}</small>
-          <button onClick={copy}>复制内容</button>
+          <button onClick={copy}>複製內容</button>
         </div>
       )}
     </div>
