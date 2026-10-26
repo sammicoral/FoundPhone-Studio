@@ -174,73 +174,85 @@ export function TaobaoSkin(p: Props) {
   );
 }
 export function DeliverySkin(p: Props) {
-  const { tab, setTab, q, setQ, items } = useContent(p, "商家");
-  const list = items.filter((i) =>
-    tab === "訂單" ? i.folder === "訂單" : i.folder !== "訂單",
+  const { tab, setTab, q, setQ, items } = useContent(p, "為你推薦");
+  const merchants = items.filter((i) => i.folder !== "訂單");
+  const orders = items.filter((i) => i.folder === "訂單");
+  const shown = merchants.filter((i) =>
+    (i.title + i.body + i.sender).toLowerCase().includes(q.toLowerCase()),
   );
   return (
-    <div className="catalog-skin delivery-ui">
-      <Header p={p} />
-      <div className="delivery-location">
-        <MapPin size={18} />
-        <strong>{meta(items[0], "address", "作品配送地址")}</strong>
+    <div className="catalog-skin delivery-ui uber-eats-ui">
+      <header className="uber-header">
+        <div className="uber-address">
+          <span>外送至</span>
+          <strong><MapPin size={15} /> {meta(items[0], "address", "選擇外送地址")}</strong>
+        </div>
+        <button className="uber-profile" aria-label="帳戶" onClick={() => setTab("帳戶")}>我</button>
+      </header>
+      <div className="uber-search-wrap">
+        <SearchBox value={q} set={setQ} placeholder="搜尋餐廳、料理或商品" />
       </div>
-      <SearchBox value={q} set={setQ} placeholder="搜尋商家或訂單" />
-      <div className="catalog-scroll">
-        {tab === "商家"
-          ? list.map((i) => (
-              <button
-                className="delivery-merchant"
-                key={i.id}
-                onClick={() => p.onItem(i)}
-              >
+      <div className="uber-scroll catalog-scroll">
+        {tab === "帳戶" ? (
+          <section className="uber-account">
+            <h1>帳戶</h1>
+            <button onClick={() => setTab("訂單")}>訂單紀錄 <span>›</span></button>
+            <button onClick={() => setTab("為你推薦")}>回到首頁 <span>›</span></button>
+            <p>Uber Eats 介面概念預覽</p>
+          </section>
+        ) : tab === "訂單" ? (
+          <>
+            <h1 className="uber-section-title">你的訂單</h1>
+            {orders.map((i) => (
+              <button className="uber-order" key={i.id} onClick={() => p.onItem(i)}>
                 <Media item={i} />
-                <div>
-                  <h3>{i.title}</h3>
-                  <p>
-                    <Star size={12} />
-                    {meta(i, "rating", "—")}
-                    <span>{meta(i, "duration")}</span>
-                  </p>
-                  <small>{i.body.split("\n")[0]}</small>
-                  <strong>¥ {meta(i, "price", "—")}</strong>
-                </div>
-              </button>
-            ))
-          : list.map((i) => (
-              <button
-                className="delivery-order"
-                key={i.id}
-                onClick={() => p.onItem(i)}
-              >
-                <header>
-                  <Utensils size={18} />
-                  <strong>{i.sender}</strong>
-                  <span>{meta(i, "status", "配送紀錄")}</span>
-                </header>
-                <section>
-                  <Media item={i} />
-                  <div>
-                    <strong>{i.title}</strong>
-                    <p>{i.body}</p>
-                    <small>{i.time}</small>
-                  </div>
-                  <b>¥ {meta(i, "price", "—")}</b>
-                </section>
-                <footer>
-                  <MapPin size={13} />
-                  {meta(i, "address")}
-                </footer>
+                <div><strong>{i.sender || i.title}</strong><p>{i.title}</p><small>{meta(i, "status", "訂單紀錄")} · {i.time}</small></div>
+                <span>›</span>
               </button>
             ))}
-        <Empty items={list} />
+            <Empty items={orders} />
+          </>
+        ) : (
+          <>
+            <div className="uber-welcome">
+              <h1>美食，送到你身邊。</h1>
+              <p>探索附近的餐廳與人氣料理</p>
+            </div>
+            <div className="uber-categories">
+              {[
+                ["🍔", "漢堡"], ["🍜", "麵食"], ["🧋", "飲料"],
+                ["🍣", "日式料理"], ["🍕", "披薩"], ["🥗", "健康餐"],
+              ].map(([emoji, label]) => (
+                <button key={label} onClick={() => { setTab("搜尋"); setQ(label); }}>
+                  <span>{emoji}</span><small>{label}</small>
+                </button>
+              ))}
+            </div>
+            <div className="uber-promo">
+              <div><small>附近人氣美食</small><h2>今天想吃點什麼？</h2><p>挑選喜愛的餐廳，開始探索</p></div>
+              <span>EATS</span>
+            </div>
+            <div className="uber-list-heading">
+              <h2>{tab === "搜尋" || q ? "搜尋結果" : "為你推薦"}</h2>
+              <button onClick={() => setTab("搜尋")}>查看全部</button>
+            </div>
+            {shown.map((i) => (
+              <button className="uber-merchant" key={i.id} onClick={() => p.onItem(i)}>
+                <Media item={i} />
+                <div className="uber-merchant-info">
+                  <h3>{i.title}</h3>
+                  <p><Star size={13} fill="currentColor" /> {meta(i, "rating", "4.8")} <span>·</span> {meta(i, "duration", "20–35 分鐘")}</p>
+                  <small>{i.body.split("\\n")[0] || "人氣餐點 · 外送服務"}</small>
+                  <footer><span>外送費依地址而定</span><b>{meta(i, "price", "查看菜單")}</b></footer>
+                </div>
+              </button>
+            ))}
+            <Empty items={shown} />
+          </>
+        )}
       </div>
-      <Tabs
-        tabs={["商家", "訂單"]}
-        value={tab}
-        set={setTab}
-        icons={[<Utensils />, <Receipt />]}
-      />
+      <Tabs tabs={["為你推薦", "搜尋", "訂單", "帳戶"]} value={tab} set={setTab}
+        icons={[<Home />, <MapPin />, <Receipt />, <Users />]} />
     </div>
   );
 }
