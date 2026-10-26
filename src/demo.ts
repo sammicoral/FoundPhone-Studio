@@ -23,7 +23,7 @@ export function createWork(title = "雨停之前"): Work {
     apps: registry.map((a) => ({
       id: a.id,
       name: a.name,
-      installed: [
+      installed: !["weibo", "bilibili", "alipay", "taobao", "netease"].includes(a.id) && [
         "appstore",
         "phone",
         "messages",
@@ -32,8 +32,8 @@ export function createWork(title = "雨停之前"): Work {
         "safari",
         "settings",
       ].includes(a.id),
-      visible: true,
-      dock: ["phone", "messages", "safari", "music"].includes(a.id),
+      visible: !["weibo", "bilibili", "alipay", "taobao", "netease"].includes(a.id),
+      dock: !["weibo", "bilibili", "alipay", "taobao", "netease"].includes(a.id) && ["phone", "messages", "safari", "music"].includes(a.id),
       folder:
         ![
           "appstore",
