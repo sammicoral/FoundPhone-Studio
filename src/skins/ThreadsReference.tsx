@@ -82,7 +82,7 @@ export function ThreadsReference(p: SkinProps) {
           <b>{i.sender}</b>
           <span>{i.time.slice(-5)}</span>
           <button
-            aria-label="帖子选项"
+            aria-label="貼文選項"
             onClick={() => {
               setSelected(i);
               setOptions(true);
@@ -237,7 +237,7 @@ export function ThreadsReference(p: SkinProps) {
               <label className="tr-search">
                 <Search size={18} />
                 <input
-                  aria-label="搜尋Threads内容"
+                  aria-label="搜尋Threads內容"
                   placeholder="搜尋"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
@@ -389,7 +389,7 @@ export function ThreadsReference(p: SkinProps) {
             <header>
               <b>動態</b>
               <button
-                aria-label="关闭Threads菜单"
+                aria-label="關閉Threads菜单"
                 onClick={() => setSide(false)}
               >
                 <X />
@@ -442,7 +442,7 @@ export function ThreadsReference(p: SkinProps) {
               取消
             </button>
             <b>新建串文</b>
-            <button aria-label="串文选项" onClick={() => setOptions(!options)}>
+            <button aria-label="串文選項" onClick={() => setOptions(!options)}>
               <MoreHorizontal />
             </button>
           </header>
@@ -452,7 +452,7 @@ export function ThreadsReference(p: SkinProps) {
               <b>{p.owner}</b>
               <span className="tr-muted"> › 社群或話題</span>
               <textarea
-                aria-label="串文内容"
+                aria-label="串文內容"
                 placeholder="有什麼新鮮事？"
                 value={draft}
                 inputMode="none"
@@ -466,7 +466,7 @@ export function ThreadsReference(p: SkinProps) {
           <div className="tr-compose-actions">
             <button onClick={() => setOptions(!options)}>
               <SlidersHorizontal size={21} />
-              帖子选项
+              貼文選項
             </button>
             <button
               disabled={!draft.trim()}
@@ -484,7 +484,7 @@ export function ThreadsReference(p: SkinProps) {
           {keyboard && (
             <div className="tr-keyboard">
               <div className="tr-candidates">
-                {["我", "你", "好", "他", "不", "这", "这个", "对"].map((k) => (
+                {["我", "你", "好", "他", "不", "這", "這个", "對"].map((k) => (
                   <button
                     key={k}
                     onClick={() =>
@@ -495,7 +495,7 @@ export function ThreadsReference(p: SkinProps) {
                   </button>
                 ))}
                 <button
-                  aria-label="收起串文键盘"
+                  aria-label="收起串文鍵盤"
                   onClick={() => setKeyboard(false)}
                 >
                   ⌄
@@ -561,8 +561,8 @@ export function ThreadsReference(p: SkinProps) {
       )}
       {options && (
         <div className="tr-options">
-          <b>帖子选项</b>
-          <p>所有人可以回覆</p>
+          <b>貼文選項</b>
+          <p>所有人都可以回覆</p>
           <button onClick={() => setOptions(false)}>完成</button>
         </div>
       )}
