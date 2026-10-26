@@ -120,7 +120,7 @@ export function NativeSettings({
                   </div>
                 </div>
                 <p className="settings-page-caption">
-                  連接狀態仅用於作品中的虚拟手机。
+                  連接狀態仅用於作品中的虚拟手機。
                 </p>
               </>
             )}
