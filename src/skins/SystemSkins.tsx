@@ -128,7 +128,7 @@ export function PhoneSkin(p: Props) {
       />
       {call && (
         <div className="virtual-call">
-          <small>虚拟通話</small>
+          <small>虛擬通話</small>
           <Avatar name={call} />
           <h2>{call}</h2>
           <p>這是作品內的通話模擬</p>
@@ -253,7 +253,7 @@ export function CameraSkin(p: Props) {
     <div className="catalog-skin native-camera">
       <Header p={p} />
       <div className="camera-top">
-        <span>閃光燈關闭</span>
+        <span>閃光燈關閉</span>
         <span>{mode === "影片" ? "HD · 30" : "4:3"}</span>
       </div>
       <div className="camera-view">
@@ -691,12 +691,12 @@ export function FilesSkin(p: Props) {
                   {i.media ? <Media item={i} /> : <FileText size={49} />}
                   <strong>{i.title}</strong>
                   <small>
-                    {meta(i, "extension", "文件")} ·{" "}
+                    {meta(i, "extension", "檔案")} ·{" "}
                     {meta(i, "size", i.time.slice(0, 10))}
                   </small>
                 </button>
                 <button
-                  aria-label={`下載${i.title}文本`}
+                  aria-label={`下載${i.title}文字`}
                   onClick={() =>
                     download(
                       new Blob([i.body], { type: "text/plain" }),
