@@ -86,7 +86,7 @@ export function AppIcon({
       <span className="app-icon" style={{ background: a.color }}>
         {custom ? (
           safeMedia(custom) ? (
-            <img src={safeMedia(custom)} alt="自定义图标" />
+            <img src={safeMedia(custom)} alt="自訂圖示" />
           ) : (
             <span>{custom.slice(0, 2)}</span>
           )
@@ -207,13 +207,13 @@ function PhoneRuntime({
           setOwn(saved.state);
         else {
           setOwn(dispatch(work, initialRuntime(work), "start"));
-          if (saved) setLoadError("作品已更新，已开始新的进度。");
+          if (saved) setLoadError("作品已更新，已重新開始。");
         }
         setReady(true);
       })
       .catch(() => {
         setOwn(dispatch(work, initialRuntime(work), "start"));
-        setLoadError("无法读取本地存档。本次仍可游玩。");
+        setLoadError("無法讀取本機存檔，仍可繼續使用。");
         setReady(true);
       });
     return () => {
@@ -224,7 +224,7 @@ function PhoneRuntime({
     if (!creator && !external && ready)
       void db.saves
         .put({ id: work.id, state: own })
-        .catch(() => setLoadError("存档失败，请检查浏览器存储权限。"));
+        .catch(() => setLoadError("存檔失敗，請檢查瀏覽器的儲存權限。"));
   }, [own, creator, work.id, external, ready]);
   useEffect(() => {
     if (creator || !ready) return;
@@ -283,7 +283,7 @@ function PhoneRuntime({
       setPinOpen(false);
       event("password", pin);
     } else {
-      setPinError("密码不正确");
+      setPinError("密碼錯誤");
       setPinOpen(true);
     }
   };
@@ -611,7 +611,7 @@ function PhoneRuntime({
           {!creator && s.incomingCall && (
             <div className="incoming-call-screen">
               <small>
-                {s.incomingCall.status === "ringing" ? "来电" : "通话中"} ·
+                {s.incomingCall.status === "ringing" ? "來電" : "通話中"} ·
                 作品内模拟
               </small>
               <div className="incoming-avatar">
@@ -626,7 +626,7 @@ function PhoneRuntime({
                   return record?.kind === "audio" && safeMedia(record.media) ? (
                     <audio controls src={safeMedia(record.media)} />
                   ) : (
-                    <p>这是一通虚构来电。</p>
+                    <p>这是一通虚构來電。</p>
                   );
                 })()}
               <div className="incoming-actions">
@@ -649,7 +649,7 @@ function PhoneRuntime({
                 >
                   <PhoneIcon size={25} />
                   <span>
-                    {s.incomingCall.status === "ringing" ? "拒接" : "挂断"}
+                    {s.incomingCall.status === "ringing" ? "拒接" : "掛斷"}
                   </span>
                 </button>
                 {s.incomingCall.status === "ringing" && (
@@ -775,7 +775,7 @@ function PhoneRuntime({
           )}
           <button
             className="home-indicator"
-            aria-label="返回桌面"
+            aria-label="返回主畫面"
             onClick={() => {
               if (gestureConsumed.current) return;
               if (locked) {
@@ -810,7 +810,7 @@ function AppSearch({
       <input
         autoFocus
         value={q}
-        placeholder="App 名称"
+        placeholder="App 名稱"
         onChange={(e) => set(e.target.value)}
       />
       {apps
@@ -925,10 +925,10 @@ function AppContent({
       {detail.password && !creator && !unlocks.includes(detail.id) ? (
         <div className="locked-note">
           <LockKeyhole size={36} />
-          <h3>这条内容已锁定</h3>
+          <h3>这条內容已锁定</h3>
           <input
             type="password"
-            placeholder="内容密码"
+            placeholder="內容密碼"
             value={pw}
             onChange={(e) => setPw(e.target.value)}
           />
@@ -938,10 +938,10 @@ function AppContent({
                 setUnlocks([...unlocks, detail.id]);
                 onRead(detail.id);
                 setPwError("");
-              } else setPwError("密码不正确");
+              } else setPwError("密碼錯誤");
             }}
           >
-            解锁内容
+            解锁內容
           </button>
           <small>{pwError}</small>
         </div>
@@ -1050,7 +1050,7 @@ function AppContent({
                     )
                     ?.focus()
           }
-          aria-label={creator ? "新增内容" : "搜索内容"}
+          aria-label={creator ? "新增內容" : "搜尋內容"}
         >
           {creator ? <Plus size={22} /> : <Search size={20} />}
         </button>
@@ -1165,7 +1165,7 @@ function AppContent({
                   <button key={i.id} onClick={() => read(i)}>
                     <Media item={i} />
                     <span>
-                      {i.title} {creator && i.hidden ? "· 隐藏" : ""}
+                      {i.title} {creator && i.hidden ? "· 隱藏" : ""}
                     </span>
                   </button>
                 ))}
@@ -1182,7 +1182,7 @@ function AppContent({
                     <strong>{i.sender}</strong>
                     <small>{i.time}</small>
                   </div>
-                  <button aria-label="查看帖子详情" onClick={() => read(i)}>
+                  <button aria-label="查看貼文詳情" onClick={() => read(i)}>
                     <MoreHorizontal size={20} />
                   </button>
                 </div>
@@ -1191,7 +1191,7 @@ function AppContent({
                 </button>
                 <div className="post-actions">
                   <button
-                    aria-label="虚构点赞"
+                    aria-label="模擬按讚"
                     onClick={() =>
                       setLikes(
                         likes.includes(i.id)
@@ -1205,7 +1205,7 @@ function AppContent({
                       fill={likes.includes(i.id) ? "#d67670" : "none"}
                     />
                   </button>
-                  <button aria-label="查看评论" onClick={() => read(i)}>
+                  <button aria-label="查看留言" onClick={() => read(i)}>
                     <MessageCircle size={22} />
                   </button>
                   <small>
@@ -1253,8 +1253,8 @@ function AppContent({
               <h3>这一页还很安静</h3>
               <p>
                 {creator
-                  ? "添加属于这个 App 的故事内容。"
-                  : "暂时没有可浏览的内容。"}
+                  ? "新增這個 App 的故事內容。"
+                  : "目前沒有可瀏覽的內容。"}
               </p>
             </div>
           )}
@@ -1265,10 +1265,10 @@ function AppContent({
               {app.engine === "messaging"
                 ? "聊天"
                 : app.engine === "social"
-                  ? "帖子"
+                  ? "貼文"
                   : app.engine === "media"
                     ? "素材"
-                    : "内容"}
+                    : "內容"}
             </button>
           )}
         </div>
