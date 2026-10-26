@@ -110,7 +110,6 @@ export function NativeSettings({
           </div>
         );
       case "Wi-Fi":
-      case "Wi-Fi":
         return (
           <>
             <div className="settings-group">
@@ -185,11 +184,11 @@ export function NativeSettings({
             <p className="settings-page-caption">{configured ? "已設定螢幕解鎖密碼" : "尚未設定螢幕解鎖密碼"}</p>
             <label className="settings-native-row passcode-field">
               <span>設定新密碼（4–12 位）</span>
-              <input aria-label="設定新密碼" type="password" inputMode="numeric" maxLength={12} value={newPasscode} onChange={(e) => setNewPasscode(e.target.value.replace(/\\D/g, ""))} placeholder="輸入數字密碼" />
+              <input aria-label="設定新密碼" type="password" inputMode="numeric" maxLength={12} value={newPasscode} onChange={(e) => setNewPasscode(e.target.value.replace(/\D/g, ""))} placeholder="輸入數字密碼" />
             </label>
             <label className="settings-native-row passcode-field">
               <span>確認新密碼</span>
-              <input aria-label="確認新密碼" type="password" inputMode="numeric" maxLength={12} value={confirmPasscode} onChange={(e) => setConfirmPasscode(e.target.value.replace(/\\D/g, ""))} placeholder="再次輸入密碼" />
+              <input aria-label="確認新密碼" type="password" inputMode="numeric" maxLength={12} value={confirmPasscode} onChange={(e) => setConfirmPasscode(e.target.value.replace(/\D/g, ""))} placeholder="再次輸入密碼" />
             </label>
             <button className="phone-add" onClick={() => {
               if (newPasscode.length < 4 || newPasscode.length > 12) { setPasscodeMessage("密碼需為 4–12 位數字。"); return; }
@@ -214,7 +213,7 @@ export function NativeSettings({
               {row(
                 nav.page,
                 nav.page === "Face ID 與密碼"
-                  ? work.phone.passcode
+                  ? (ui?.passcode ?? work.phone.passcode)
                     ? "已設定密碼"
                     : "未設定密碼"
                   : "",
