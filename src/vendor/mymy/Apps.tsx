@@ -52,7 +52,7 @@ export function messageRun(items: Item[], index: number) {
 const read = (p: SkinProps, i: Item) =>
   p.creator || i.password ? p.onItem(i) : p.onRead(i.id);
 function Blank() {
-  return <p className="mymy-empty">暂无内容</p>;
+  return <p className="mymy-empty">暫無內容</p>;
 }
 function Back({ onClick }: { onClick: () => void }) {
   return (
