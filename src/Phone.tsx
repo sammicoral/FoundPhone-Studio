@@ -573,13 +573,13 @@ function PhoneRuntime({
                   <AppSearch apps={installedApps} open={open} />
                 </>
               ) : (
-                <h2>手电筒已開啟</h2>
+                <h2>手電筒已開啟</h2>
               )}
             </div>
           )}
           {!creator && s.choices.length > 0 && !locked && (
             <div className="story-overlay">
-              <span className="eyebrow">故事来到一个岔路口</span>
+              <span className="eyebrow">故事來到岔路口</span>
               <h3>您會如何選擇？</h3>
               {s.choices.map((c) => (
                 <button
