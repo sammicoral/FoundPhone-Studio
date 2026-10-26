@@ -151,7 +151,7 @@ function PhoneRuntime({
   const beginUnlock = () => {
     setPinError("");
     setQuickCamera(false);
-    if (work.phone.passcode) setPinOpen(true);
+    if (work.phone.passcode || s.ui?.settings?.passcode) setPinOpen(true);
     else unlock();
   };
   const pressTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
@@ -278,7 +278,8 @@ function PhoneRuntime({
   const installedApps = work.apps.filter((a) => a.installed);
   const apps = installedApps.filter((a) => a.visible);
   const unlock = (pin = "") => {
-    if (!work.phone.passcode || pin === work.phone.passcode) {
+    const configuredPasscode = String(s.ui?.settings?.passcode ?? work.phone.passcode ?? "");
+    if (!configuredPasscode || pin === configuredPasscode) {
       setLocked(false);
       setPinOpen(false);
       event("password", pin);
@@ -1062,6 +1063,8 @@ function AppContent({
           creator={creator}
           onItem={read}
           onSettings={onSettings}
+          ui={state.ui?.[app.id]}
+          onUi={onUi}
         />
       ) : app.id === "calculator" && !detail ? (
         <NativeCalculator
