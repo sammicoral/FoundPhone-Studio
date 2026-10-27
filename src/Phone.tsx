@@ -144,11 +144,10 @@ function PhoneRuntime({
   const [banner, setBanner] = useState("");
   const noticesSeen = useRef(0);
   const [contextApp, setContextApp] = useState("");
-  const [deviceScale, setDeviceScale] = useState(0.84);
+  const [, setDeviceScale] = useState(0.84);
   const [isFullscreen, setIsFullscreen] = useState(true);
   const [viewportScale, setViewportScale] = useState({ x: 1, y: 1 });
   const shell = useRef<HTMLDivElement>(null);
-  const isFallbackFullscreen = true;
   useEffect(() => {
     const fitViewport = () => {
       const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
