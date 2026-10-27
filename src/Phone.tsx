@@ -441,8 +441,8 @@ function PhoneRuntime({
           className={`phone-screen wallpaper-${work.phone.wallpaper} ${locked ? "is-locked" : ""} ${app ? "in-app" : ""} ${keyboard ? "keyboard-open" : ""}`}
           style={(() => {
              const customImage = locked
-               ? s.ui?.settings?.lockWallpaperImage || (s.variables.boyfriend === "martin" ? s.variables.martinLockScreen : "")
-               : s.ui?.settings?.wallpaperImage || (s.variables.boyfriend === "martin" ? s.variables.martinWallpaper : "");
+               ? s.ui?.settings?.lockWallpaperImage || s.variables.memberLockScreen || (s.variables.boyfriend === "martin" ? s.variables.martinLockScreen : "")
+               : s.ui?.settings?.wallpaperImage || s.variables.memberWallpaper || (s.variables.boyfriend === "martin" ? s.variables.martinWallpaper : "");
              return customImage ? { backgroundImage: "url(" + customImage + ")", backgroundSize: "cover", backgroundPosition: "center" } : undefined;
            })()}
           data-app={app}
