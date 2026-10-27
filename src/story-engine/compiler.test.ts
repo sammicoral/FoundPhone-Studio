@@ -8,9 +8,9 @@ describe("AI story compiler", () => {
     const a = compileStory(copy()),
       b = compileStory(copy());
     expect(a.work).toEqual(b.work);
-    expect(a.work.apps).toHaveLength(50);
-    expect(a.work.apps.filter((a) => a.installed)).toHaveLength(13);
-    expect(a.work.data.wechat[0].sender).toBe("小林");
+    expect(a.work.apps).toHaveLength(41);
+    expect(a.work.apps.filter((a) => a.installed)).toHaveLength(12);
+    expect(a.work.data.messages[0].sender).toBe("小林");
   });
   it("both actual engine paths pass with password, hidden content and delayed call", () => {
     const { story, work } = compileStory(copy());
