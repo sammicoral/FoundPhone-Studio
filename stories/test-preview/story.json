@@ -60,27 +60,22 @@
     "find",
     "calculator",
     "settings",
-    "qq",
     "weibo",
     "redbook",
-    "bilibili",
     "alipay",
     "taobao",
-    "netease",
     "delivery",
     "forum",
     "whatsapp",
     "instagram",
     "tiktok",
     "twitter",
-    "telegram",
     "discord",
     "youtube",
     "line",
     "snapchat",
     "facebook",
     "messenger",
-    "reddit",
     "spotify",
     "netflix",
     "pinterest",
@@ -129,22 +124,6 @@
       ]
     },
     {
-      "id": "test-chat-qq",
-      "app": "qq",
-      "title": "测试会话",
-      "participants": [
-        "owner",
-        "test-contact"
-      ],
-      "messages": [
-        {
-          "id": "test-message-qq",
-          "body": "这是一条测试消息。",
-          "senderId": "test-contact"
-        }
-      ]
-    },
-    {
       "id": "test-chat-whatsapp",
       "app": "whatsapp",
       "title": "测试会话",
@@ -155,22 +134,6 @@
       "messages": [
         {
           "id": "test-message-whatsapp",
-          "body": "这是一条测试消息。",
-          "senderId": "test-contact"
-        }
-      ]
-    },
-    {
-      "id": "test-chat-telegram",
-      "app": "telegram",
-      "title": "测试会话",
-      "participants": [
-        "owner",
-        "test-contact"
-      ],
-      "messages": [
-        {
-          "id": "test-message-telegram",
           "body": "这是一条测试消息。",
           "senderId": "test-contact"
         }
@@ -467,16 +430,6 @@
         "meta": {}
       }
     ],
-    "bilibili": [
-      {
-        "id": "test-item-bilibili",
-        "title": "测试内容",
-        "body": "这是一条测试内容。",
-        "sender": "测试用户",
-        "kind": "text",
-        "meta": {}
-      }
-    ],
     "alipay": [
       {
         "id": "test-item-alipay",
@@ -490,16 +443,6 @@
     "taobao": [
       {
         "id": "test-item-taobao",
-        "title": "测试内容",
-        "body": "这是一条测试内容。",
-        "sender": "测试用户",
-        "kind": "text",
-        "meta": {}
-      }
-    ],
-    "netease": [
-      {
-        "id": "test-item-netease",
         "title": "测试内容",
         "body": "这是一条测试内容。",
         "sender": "测试用户",
@@ -580,16 +523,6 @@
     "facebook": [
       {
         "id": "test-item-facebook",
-        "title": "测试内容",
-        "body": "这是一条测试内容。",
-        "sender": "测试用户",
-        "kind": "text",
-        "meta": {}
-      }
-    ],
-    "reddit": [
-      {
-        "id": "test-item-reddit",
         "title": "测试内容",
         "body": "这是一条测试内容。",
         "sender": "测试用户",
