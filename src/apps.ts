@@ -1,5 +1,5 @@
 import { uid, type Work } from "./schema";
-import { getApp, registry } from "./registry";
+import { getApp, isRemovedApp, registry } from "./registry";
 export type AppConfig = Work["apps"][number];
 export const essentialApps = [
   "appstore",
@@ -53,6 +53,7 @@ export function category(id: string) {
   );
 }
 export function installApp(w: Work, id: string) {
+  if (isRemovedApp(id)) return;
   let app = w.apps.find((a) => a.id === id);
   if (!app) {
     app = {
