@@ -11,9 +11,9 @@ import {
 } from "./layout";
 const work = () => compileStory(blank).work;
 describe("device layout", () => {
-  it("keeps all 50 apps and only defaults installed", () => {
+  it("keeps all 41 available apps and only defaults installed", () => {
     const l = defaultLayout(work());
-    expect(l.apps).toHaveLength(50);
+    expect(l.apps).toHaveLength(41);
     expect(l.apps.filter((a) => a.installed)).toHaveLength(8);
   });
   it("packs different widget sizes and pages without overlap", () => {
@@ -101,23 +101,16 @@ it("migrates preview folders once while preserving custom folders and widgets", 
   const before = JSON.stringify(w);
   const old = defaultLayout(w);
   old.previewLayoutRevision = 0;
-  old.apps.find((a) => a.id === "wechat")!.folder = "聊天";
-  old.apps.find((a) => a.id === "douyin")!.folder = "国内";
-  old.apps.find((a) => a.id === "instagram")!.folder = "国际";
+  old.apps.find((a) => a.id === "instagram")!.folder = "國際";
   old.apps.find((a) => a.id === "clock")!.folder = "我的工具";
   old.widgets.push({ id: "widget-keep", type: "battery", size: "small" });
   const migrated = validateLayout(old, w);
-  for (const id of ["wechat", "douyin", "instagram"])
-    expect(migrated.apps.find((a) => a.id === id)!.folder).toBe("");
+  expect(migrated.apps.find((a) => a.id === "instagram")!.folder).toBe("");
   expect(migrated.apps.find((a) => a.id === "clock")!.folder).toBe("我的工具");
   expect(migrated.widgets).toEqual(old.widgets);
   expect(JSON.stringify(w)).toBe(before);
   const revalidated = validateLayout(migrated, w);
   for (const id of ["wechat", "douyin"]) {
-    const app = revalidated.apps.find((a) => a.id === id)!;
-    expect(app.installed).toBe(false);
-    expect(app.visible).toBe(false);
-    expect(app.dock).toBe(false);
-    expect(app.folder).toBe("");
+    expect(revalidated.apps.some((a) => a.id === id)).toBe(false);
   }
 });
