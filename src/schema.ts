@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isRemovedApp } from "./registry";
 export const uid = () => crypto.randomUUID();
 export const itemSchema = z.object({
   id: z.string(),
@@ -193,7 +194,22 @@ export function makeItem(partial: Partial<Item> = {}): Item {
   });
 }
 export function validateWork(input: unknown): Work {
-  return workSchema.parse(input);
+  const work = workSchema.parse(input);
+  work.apps = work.apps.filter((app) => !isRemovedApp(app.id));
+  for (const id of [
+    "weibo",
+    "redbook",
+    "taobao",
+    "wechat",
+    "alipay",
+    "discord",
+    "douyin",
+    "tiktok",
+    "pinterest",
+  ]) {
+    delete work.data[id];
+  }
+  return work;
 }
 export function safeMedia(value: string) {
   return /^data:(image\/(png|jpeg|webp|gif)|audio\/(mpeg|mp3|wav|ogg|webm|mp4)|video\/(mp4|webm));base64,[a-zA-Z0-9+/=\s]+$/.test(
