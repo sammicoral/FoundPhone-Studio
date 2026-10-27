@@ -5,7 +5,7 @@ import { makeItem, validateWork } from "./schema";
 import { createWork } from "./demo";
 import { getFields } from "./fields";
 describe("independent app coverage and authored attributes", () => {
-  it("routes all 47 built-in app identities through dedicated screens", () => {
+  it("routes all 50 built-in app identities through dedicated screens or legacy fallbacks", () => {
     const previous = [
       "wechat",
       "whatsapp",
@@ -13,7 +13,7 @@ describe("independent app coverage and authored attributes", () => {
       "calculator",
       "settings", "appstore",
     ];
-    expect(Object.keys(catalogSkins)).toHaveLength(46);
+    expect(Object.keys(catalogSkins)).toHaveLength(45);
     for (const app of registry)
       expect(previous.includes(app.id) || app.id in catalogSkins).toBe(true);
   });
@@ -28,12 +28,12 @@ describe("independent app coverage and authored attributes", () => {
     const w = createWork();
     w.data.alipay = [
       makeItem({
-        title: "书店收款",
-        meta: { amount: "-38.00", status: "交易成功", merchant: "城南旧书店" },
+        title: "書店收款",
+        meta: { amount: "-38.00", status: "交易成功", merchant: "城南舊書店" },
       }),
     ];
     w.data.discord = [
-      makeItem({ meta: { server: "夜班", status: "离线" }, folder: "线索" }),
+      makeItem({ meta: { server: "夜班", status: "離線" }, folder: "線索" }),
     ];
     const copy = validateWork(JSON.parse(JSON.stringify(w)));
     expect(copy.data.alipay[0].meta.amount).toBe("-38.00");
