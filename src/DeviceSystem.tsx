@@ -36,6 +36,8 @@ import {
   Airplay,
   ChevronRight,
   Lock,
+  Maximize2,
+  Minimize2,
 } from "lucide-react";
 import { motion } from "motion/react";
 import type { Work } from "./schema";
@@ -237,10 +239,16 @@ export function ControlCenter({
   battery = 94,
   network,
   close,
+  onLock,
+  onFullscreen,
+  isFullscreen,
 }: {
   battery?: number;
   network: string;
   close: () => void;
+  onLock: () => void;
+  onFullscreen: () => void;
+  isFullscreen: boolean;
 }) {
   const [rotation, setRotation] = useState(true),
     [focus, setFocus] = useState(false),
@@ -255,13 +263,13 @@ export function ControlCenter({
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: -100, opacity: 0 }}
     >
-      <button className="cc-close" aria-label="關閉控製中心" onClick={close}>
+      <button className="cc-close" aria-label="鎖定手機" title="鎖定手機" onClick={onLock}>
         <Power />
       </button>
       <button
         className="cc-edit"
-        aria-label="控製中心編輯"
-        onClick={() => setTool("編輯控製項")}
+        aria-label="控制中心編輯"
+        onClick={() => setTool("編輯控制項")}
       >
         <Plus />
       </button>
@@ -269,24 +277,20 @@ export function ControlCenter({
         <span>
           <Airplay size={13} />
         </span>
-        控製中心 <ChevronRight size={16} />
+        控制中心 <ChevronRight size={16} />
       </div>
       <div className="cc-status" aria-label={"行動網路 " + network}>
         <div>
           <span>
             <Signal size={18} />
-            <small>主號</small> 中國移動 <Wifi size={17} />
-          </span>
-          <span>
-            <Signal size={18} />
-            <small>副號</small> 中國電信
+            OO電信 <Wifi size={17} />
           </span>
         </div>
         <span>
           <Lock size={13} /> {battery}% <Battery size={27} />
         </span>
       </div>
-      <nav className="cc-page-rail" aria-label="控製中心分類">
+      <nav className="cc-page-rail" aria-label="控制中心分類">
         {[Heart, Music2, House, Radio].map((Icon, i) => (
           <button
             key={i}
@@ -361,7 +365,7 @@ export function ControlCenter({
           onClick={() => setFocus(!focus)}
         >
           <Moon />
-          <span>專註模式</span>
+          <span>專注模式</span>
           <ChevronDown size={14} />
         </button>
         <button className="cc-home" onClick={() => setTool("家庭")}>
