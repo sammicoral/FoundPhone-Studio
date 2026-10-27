@@ -848,8 +848,16 @@ export function AppArtwork({
   time?: string;
 }) {
   const [failed, setFailed] = useState(false);
-  // Always use the custom Uber Eats artwork instead of the legacy delivery.jpg asset.
-  if (id === "delivery") return <DrawnArtwork id={id} date={date} />;
+  // Use the exact user-provided image files for these two app icons.
+  const uploadedIcon =
+    id === "delivery"
+      ? new URL("../assets/app-icons/delivery.JPG", import.meta.url).href
+      : id === "weverse"
+        ? new URL("../assets/app-icons/weverse.JPG", import.meta.url).href
+        : "";
+  if (uploadedIcon && !failed) {
+    return <img className="app-artwork" src={uploadedIcon} alt="" draggable={false} onError={() => setFailed(true)} />;
+  }
   const file = originalIconFiles[id];
   if (!originalsEnabled || !file || failed)
     return <DrawnArtwork id={id} date={date} />;
