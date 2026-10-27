@@ -737,7 +737,7 @@
   gap: 10px;
   align-items: center;
 }
-.ios18 .keyboard-draft input {
+.ios18 .keyboard-draft input,\n.ios18 .keyboard-target-preview {
   background: white;
   flex: 1;
   min-width: 0;
@@ -746,7 +746,7 @@
   border-radius: 17px;
   padding: 5px 12px;
 }
-.ios18 .keyboard-candidates {
+.ios18 .keyboard-target-preview {\n  flex: 1;\n  min-width: 0;\n  max-height: 36px;\n  overflow: hidden;\n  overflow-wrap: anywhere;\n  font-size: 16px;\n  color: #333;\n  background: white;\n  border: 1px solid #ddd;\n  border-radius: 17px;\n  padding: 5px 12px;\n}\n.ios18 .keyboard-composition { font-size: 13px; color: #666; padding: 0 5px; }\n.ios18 .keyboard-candidates {
   height: 39px;
   display: flex;
   align-items: center;
@@ -776,7 +776,7 @@
   place-items: center;
   padding: 0;
 }
-.ios18 .keyboard-row:nth-of-type(4) {
+.ios18 .zhuyin-row button { font-size: 18px; min-width: 0; max-width: none; }\n.ios18 .zhuyin-row { gap: 3px; margin-bottom: 7px; }\n.ios18 .keyboard-row:nth-of-type(4) {
   padding: 0 17px;
 }
 .ios18 .keyboard-row .key-special {
