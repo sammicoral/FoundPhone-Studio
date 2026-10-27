@@ -35,6 +35,7 @@ const native = new Set([
   "taobao",
   "netease",
   "delivery",
+  "weverse",
   "forum",
   "twitter",
   "telegram",
@@ -76,7 +77,15 @@ function DrawnArtwork({ id, date }: { id: string; date?: string }) {
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
   };
-  if (id === "phone" || id === "messages") {
+  if (id === "weverse") {
+    background = "#050321";
+    art = (
+      <path
+        d="M13 18c-1.2-3.5 1.1-5.2 4.1-5.2h5.4l5.4 23.4c.6 2.4 2.1 3.6 4.1 3.6 2.2 0 3.7-1.6 4.4-4.1l5.1-19.2c.7-2.6 2.3-3.7 4.8-3.7h4.8L42.5 43c-1.8 6.4-5.3 9.7-10.7 9.7-5.1 0-8.4-2.8-10-8.4z"
+        fill="#fff"
+      />
+    );
+  } else if (id === "phone" || id === "messages") {
     background = "#23d553";
     art =
       id === "phone" ? (
