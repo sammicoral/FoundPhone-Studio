@@ -95,7 +95,6 @@ const definitions: [
   ],
   ["qq", "QQ", "messaging", "#529fd3", Users, ["訊息", "聯絡人", "動態"]],
   ["weibo", "微博", "social", "#db7652", Radio, ["關注", "探索", "我"]],
-  ],
   ["douyin", "抖音", "media", "#292c33", Video, ["推薦", "關注", "紀錄"]],
   ["bilibili", "嗶哩嗶哩", "media", "#d785a1", Tv, ["首頁", "動態", "歷史"]],
   ["alipay", "支付寶", "records", "#368dcc", Wallet, ["帳單", "卡片"]],
@@ -128,7 +127,6 @@ const definitions: [
   ],
   ["twitter", "X", "social", "#343839", AtSign, ["時間軸", "回覆"]],
   ["telegram", "Telegram", "messaging", "#62a6c8", Send, ["聊天", "頻道"]],
-  ],
   [
     "youtube",
     "YouTube",
