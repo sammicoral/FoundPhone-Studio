@@ -23,14 +23,10 @@ export function DetailedArtwork({ id }: { id: string }) {
   if (id === "delivery") {
     bg = "#06C167";
     art = (
-      <image
-        href="https://d3i4yxtzktqr9n.cloudfront.net/web-eats/static/images/iphone_icn_180x180_v2-4115ac6e73.png"
-        x="0"
-        y="0"
-        width="64"
-        height="64"
-        preserveAspectRatio="xMidYMid meet"
-      />
+      <g fontFamily="Arial, Helvetica, sans-serif" textAnchor="middle" fill="#000">
+        <text x="32" y="29" fontSize="17" fontWeight="700" letterSpacing="-.7">Uber</text>
+        <text x="32" y="47" fontSize="17" fontWeight="800" letterSpacing="-.7">Eats</text>
+      </g>
     );
   } else if (id === "appstore") {
     bg = g("blue");
