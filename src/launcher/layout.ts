@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { useState, useEffect, useMemo } from "react";
 import { workSchema, type Work } from "../schema";
-import { getApp } from "../registry";
+import { getApp, isRemovedApp } from "../registry";
 export const widgetSchema = z.object({
   id: z
     .string()
@@ -74,7 +74,27 @@ export function defaultLayout(input: Work): DeviceLayout {
 }
 export function validateLayout(raw: unknown, input: Work) {
   const w = ensureAppStore(input);
-  const layout = layoutSchema.parse(raw);
+  const source =
+    raw && typeof raw === "object" ? (raw as Record<string, unknown>) : {};
+  const sourceApps = Array.isArray(source.apps) ? source.apps : [];
+  const sourceOrder = Array.isArray(source.order) ? source.order : [];
+  const sourcePositions =
+    source.positions && typeof source.positions === "object"
+      ? (source.positions as Record<string, unknown>)
+      : {};
+  const layout = layoutSchema.parse({
+    ...source,
+    apps: sourceApps.filter(
+      (app) =>
+        !app ||
+        typeof app !== "object" ||
+        !isRemovedApp(String((app as { id?: unknown }).id ?? "")),
+    ),
+    order: sourceOrder.filter((id) => !isRemovedApp(String(id))),
+    positions: Object.fromEntries(
+      Object.entries(sourcePositions).filter(([id]) => !isRemovedApp(id)),
+    ),
+  });
   if (layout.workId !== w.id) throw Error("布局属于其他作品");
   // Keep built-in app names in sync with the canonical Traditional Chinese registry.
   for (const app of layout.apps) {
