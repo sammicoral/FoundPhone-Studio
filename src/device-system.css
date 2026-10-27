@@ -1378,3 +1378,24 @@
 .ios18 .wallpaper-preview-date { position: absolute; top: 55px; width: 100%; text-align: center; color: #fff; font-size: 9px; text-shadow: 0 1px 5px #0008; }
 .ios18 .wallpaper-preview-shortcuts { position: absolute; bottom: 12px; left: 14px; right: 14px; display:flex; justify-content:space-between; }
 .ios18 .wallpaper-preview-shortcuts i { width: 20px; height: 20px; border-radius: 50%; background: #ffffff55; border: 1px solid #ffffff77; }
+
+
+/* Viewport-filling fallback for iOS Safari and embedded browsers without Fullscreen API. */
+.phone-shell.ios-fullscreen-fallback {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  transform: none !important;
+  z-index: 9999 !important;
+}
+.phone-shell.ios-fullscreen-fallback .phone-screen {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+}
