@@ -29,7 +29,6 @@ const native = new Set([
   "instagram",
   "qq",
   "weibo",
-  "redbook",
   "douyin",
   "bilibili",
   "alipay",
@@ -37,19 +36,15 @@ const native = new Set([
   "netease",
   "delivery",
   "forum",
-  "tiktok",
   "twitter",
   "telegram",
-  "discord",
   "youtube",
   "line",
-  "snapchat",
   "facebook",
   "messenger",
   "reddit",
   "spotify",
   "netflix",
-  "pinterest",
   "threads",
 ]);
 /** Code-drawn artwork; no extracted Apple bitmap, SF Symbol or font is embedded. */
@@ -800,18 +795,12 @@ function DrawnArtwork({ id, date }: { id: string; date?: string }) {
       />
     );
   } else if (id === "delivery") {
-    background = "#ffd100";
+    background = "#fff";
     art = (
-      <text
-        x="32"
-        y="44"
-        textAnchor="middle"
-        fontSize="31"
-        fontWeight="800"
-        fill="#181818"
-      >
-        外卖
-      </text>
+      <g fontFamily="Arial, Helvetica, sans-serif" fontWeight="700" textAnchor="middle" fill="#000">
+        <text x="32" y="29" fontSize="17" letterSpacing="-.7">Uber</text>
+        <text x="32" y="47" fontSize="17" letterSpacing="-.7">Eats</text>
+      </g>
     );
   } else if (id === "forum") {
     background = "#2d89e8";
