@@ -1,6 +1,7 @@
 /* iOS 18 classic reference coordinate space: 390 × 844 CSS points. */
 .phone-shell.ios18 {
   --phone-scale: 0.84;
+  margin-inline: auto;
   width: calc(390px * var(--phone-scale) + 16px);
   height: calc(844px * var(--phone-scale) + 16px);
   padding: 8px;
