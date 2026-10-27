@@ -100,10 +100,6 @@
       "file": "youtube.png",
       "sha256": "44b71d32b63a3aa53a5b4f13d278a500fdb8def9576b5be16844c91f74ab802f"
     },
-    "discord": {
-      "file": "discord.png",
-      "sha256": "06590596dc6b6db19218c7b7378e8e48c1d162ac9d05f3aadf53a9427de61e65"
-    },
     "facebook": {
       "file": "facebook.png",
       "sha256": "6f5ee01a897a2d2c41f1724e56d8233ef80cca77ff9ca0ad4e605c3746229a24"
@@ -120,10 +116,6 @@
       "file": "spotify.png",
       "sha256": "cf286a00fa1aae97302bbc670f60365e3c72b189090fb646d4a7d0925cba8630"
     },
-    "tiktok": {
-      "file": "tiktok.png",
-      "sha256": "9a7310079b4f6703f51c8efb3b787ebb58fb709ccdc22d622afa43d0536148f5"
-    },
     "qq": {
       "file": "qq.jpg",
       "sha256": "1f8222dbac93d997aed99baca664d4e16126ad0c6d059b4a74370f43aea9072b"
@@ -135,10 +127,6 @@
     "weibo": {
       "file": "weibo.jpg",
       "sha256": "564346c165dea303ffb0765084a4a2d4d6d5d92d2b28c5fc5ea63d5b4fa642bc"
-    },
-    "redbook": {
-      "file": "redbook.jpg",
-      "sha256": "c901c288daf4aeaef0aba5fa02e22c0770a9f39a82233a816dfe5026a834a69d"
     },
     "douyin": {
       "file": "douyin.jpg",
@@ -171,14 +159,6 @@
     "netflix": {
       "file": "netflix.jpg",
       "sha256": "eab32637682348a65d41ee197822fef4bef102a0a18cdd3950715e4a4cf45a89"
-    },
-    "pinterest": {
-      "file": "pinterest.jpg",
-      "sha256": "933ec891f3922ab6b63d44cc87556c2bce2bf140d8b1436737ea7a40309753a7"
-    },
-    "snapchat": {
-      "file": "snapchat.jpg",
-      "sha256": "970577f34b765ba77672c87368bda45e9d3c85a6ebbe39870f51af2c66aa21b6"
     },
     "line": {
       "file": "line.jpg",
