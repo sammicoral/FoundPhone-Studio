@@ -797,9 +797,9 @@ function DrawnArtwork({ id, date }: { id: string; date?: string }) {
   } else if (id === "delivery") {
     background = "#fff";
     art = (
-      <g fontFamily="Arial, Helvetica, sans-serif" fontWeight="700" textAnchor="middle" fill="#000">
-        <text x="32" y="29" fontSize="17" letterSpacing="-.7">Uber</text>
-        <text x="32" y="47" fontSize="17" letterSpacing="-.7">Eats</text>
+      <g fontFamily="Arial, Helvetica, sans-serif" textAnchor="middle" fill="#000">
+        <text x="32" y="29" fontSize="17" fontWeight="500" letterSpacing="-.7">Uber</text>
+        <text x="32" y="47" fontSize="17" fontWeight="800" letterSpacing="-.7">Eats</text>
       </g>
     );
   } else if (id === "forum") {
