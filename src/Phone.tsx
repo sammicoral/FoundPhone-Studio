@@ -145,26 +145,24 @@ function PhoneRuntime({
   const noticesSeen = useRef(0);
   const [contextApp, setContextApp] = useState("");
   const [deviceScale, setDeviceScale] = useState(0.84);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [fullscreenCoverScale, setFullscreenCoverScale] = useState(1);
+  const [isFullscreen, setIsFullscreen] = useState(true);
+  const [viewportScale, setViewportScale] = useState({ x: 1, y: 1 });
   const shell = useRef<HTMLDivElement>(null);
-  const isFallbackFullscreen = isFullscreen && !document.fullscreenElement;
+  const isFallbackFullscreen = true;
   useEffect(() => {
-    const fitFullscreenCover = () => {
+    const fitViewport = () => {
       const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
       const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
-      setFullscreenCoverScale(
-        Math.max(viewportWidth / 393, viewportHeight / 852),
-      );
+      setViewportScale({ x: viewportWidth / 393, y: viewportHeight / 852 });
     };
-    fitFullscreenCover();
-    window.addEventListener("resize", fitFullscreenCover);
-    window.visualViewport?.addEventListener("resize", fitFullscreenCover);
-    window.visualViewport?.addEventListener("scroll", fitFullscreenCover);
+    fitViewport();
+    window.addEventListener("resize", fitViewport);
+    window.visualViewport?.addEventListener("resize", fitViewport);
+    window.visualViewport?.addEventListener("scroll", fitViewport);
     return () => {
-      window.removeEventListener("resize", fitFullscreenCover);
-      window.visualViewport?.removeEventListener("resize", fitFullscreenCover);
-      window.visualViewport?.removeEventListener("scroll", fitFullscreenCover);
+      window.removeEventListener("resize", fitViewport);
+      window.visualViewport?.removeEventListener("resize", fitViewport);
+      window.visualViewport?.removeEventListener("scroll", fitViewport);
     };
   }, []);
   useEffect(() => {
@@ -361,8 +359,8 @@ function PhoneRuntime({
   return (
     <div
       ref={shell}
-      style={{ "--phone-scale": deviceScale, "--fullscreen-cover-scale": fullscreenCoverScale } as CSSProperties}
-      className={`phone-shell ios18 ${work.phone.theme === "dark" ? "dark-phone" : ""} ${isFallbackFullscreen ? "ios-fullscreen-fallback" : ""}`}
+      style={{ "--phone-scale": 1, "--viewport-scale-x": viewportScale.x, "--viewport-scale-y": viewportScale.y } as CSSProperties}
+      className={`phone-shell ios18 ios-viewport-mode ${work.phone.theme === "dark" ? "dark-phone" : ""}`}
     >
       <KeyboardContext.Provider value={setKeyboard}>
         <div
@@ -382,8 +380,8 @@ function PhoneRuntime({
               }, 550);
             }
             const box = e.currentTarget.getBoundingClientRect(),
-              x = (e.clientX - box.left) / (isFallbackFullscreen ? fullscreenCoverScale : deviceScale),
-              y = (e.clientY - box.top) / (isFallbackFullscreen ? fullscreenCoverScale : deviceScale);
+              x = (e.clientX - box.left) / (box.width / 393),
+              y = (e.clientY - box.top) / (box.height / 852);
             gesture.current = {
               x,
               y,
@@ -399,7 +397,7 @@ function PhoneRuntime({
           onPointerUp={(e) => {
             clearTimeout(pressTimer.current);
             const box = e.currentTarget.getBoundingClientRect(),
-              y = (e.clientY - box.top) / (isFallbackFullscreen ? fullscreenCoverScale : deviceScale),
+              y = (e.clientY - box.top) / (box.height / 852),
               g = gesture.current;
             const dy = y - g.y;
             if (g.zone === "top" && dy > 65)
