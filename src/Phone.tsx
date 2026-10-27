@@ -146,7 +146,27 @@ function PhoneRuntime({
   const [contextApp, setContextApp] = useState("");
   const [deviceScale, setDeviceScale] = useState(0.84);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [fullscreenCoverScale, setFullscreenCoverScale] = useState(1);
   const shell = useRef<HTMLDivElement>(null);
+  const isFallbackFullscreen = isFullscreen && !document.fullscreenElement;
+  useEffect(() => {
+    const fitFullscreenCover = () => {
+      const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
+      const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+      setFullscreenCoverScale(
+        Math.max(viewportWidth / 393, viewportHeight / 852),
+      );
+    };
+    fitFullscreenCover();
+    window.addEventListener("resize", fitFullscreenCover);
+    window.visualViewport?.addEventListener("resize", fitFullscreenCover);
+    window.visualViewport?.addEventListener("scroll", fitFullscreenCover);
+    return () => {
+      window.removeEventListener("resize", fitFullscreenCover);
+      window.visualViewport?.removeEventListener("resize", fitFullscreenCover);
+      window.visualViewport?.removeEventListener("scroll", fitFullscreenCover);
+    };
+  }, []);
   useEffect(() => {
     const syncFullscreen = () => setIsFullscreen(!!document.fullscreenElement);
     document.addEventListener("fullscreenchange", syncFullscreen);
@@ -341,8 +361,8 @@ function PhoneRuntime({
   return (
     <div
       ref={shell}
-      style={{ "--phone-scale": deviceScale } as CSSProperties}
-      className={`phone-shell ios18 ${work.phone.theme === "dark" ? "dark-phone" : ""} ${isFullscreen && !document.fullscreenElement ? "ios-fullscreen-fallback" : ""}`}
+      style={{ "--phone-scale": deviceScale, "--fullscreen-cover-scale": fullscreenCoverScale } as CSSProperties}
+      className={`phone-shell ios18 ${work.phone.theme === "dark" ? "dark-phone" : ""} ${isFallbackFullscreen ? "ios-fullscreen-fallback" : ""}`}
     >
       <KeyboardContext.Provider value={setKeyboard}>
         <div
@@ -362,8 +382,8 @@ function PhoneRuntime({
               }, 550);
             }
             const box = e.currentTarget.getBoundingClientRect(),
-              x = (e.clientX - box.left) / deviceScale,
-              y = (e.clientY - box.top) / deviceScale;
+              x = (e.clientX - box.left) / (isFallbackFullscreen ? fullscreenCoverScale : deviceScale),
+              y = (e.clientY - box.top) / (isFallbackFullscreen ? fullscreenCoverScale : deviceScale);
             gesture.current = {
               x,
               y,
@@ -379,7 +399,7 @@ function PhoneRuntime({
           onPointerUp={(e) => {
             clearTimeout(pressTimer.current);
             const box = e.currentTarget.getBoundingClientRect(),
-              y = (e.clientY - box.top) / deviceScale,
+              y = (e.clientY - box.top) / (isFallbackFullscreen ? fullscreenCoverScale : deviceScale),
               g = gesture.current;
             const dy = y - g.y;
             if (g.zone === "top" && dy > 65)
