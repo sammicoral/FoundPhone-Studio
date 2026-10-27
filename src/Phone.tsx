@@ -482,7 +482,7 @@ function PhoneRuntime({
                 error={pinError}
                 onUnlock={unlock}
                 passcode={String(s.ui?.settings?.passcode ?? work.phone.passcode ?? "")}
-                wallpaperImage={s.ui?.settings?.lockWallpaperImage || (s.variables.boyfriend === "martin" ? String(s.variables.martinLockScreen || "") : "")}
+                wallpaperImage={String(s.ui?.settings?.lockWallpaperImage || (s.variables.boyfriend === "martin" ? s.variables.martinLockScreen || "" : ""))}
                 onLight={() => setPanel("light")}
                 onCamera={() => {
                   setQuickCamera(true);
@@ -542,7 +542,7 @@ function PhoneRuntime({
                 storeOpen={app === "appstore"}
                 closeStore={() => setApp("")}
                 work={work}
-                wallpaperImage={s.ui?.settings?.wallpaperImage || (s.variables.boyfriend === "martin" ? String(s.variables.martinWallpaper || "") : "")}
+                wallpaperImage={String(s.ui?.settings?.wallpaperImage || (s.variables.boyfriend === "martin" ? s.variables.martinWallpaper || "" : ""))}
                 layout={deviceLayout.layout}
                 change={deviceLayout.change}
                 importLayout={deviceLayout.importLayout}
