@@ -402,7 +402,7 @@ function PhoneRuntime({
           onFocusCapture={(e) => {
             const target = e.target as HTMLElement;
             if (target.closest(".device-keyboard")) return;
-            if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target.isContentEditable) {
+            if ((target instanceof HTMLInputElement && ["text", "search", "email", "url", "tel", "password"].includes(target.type)) || target instanceof HTMLTextAreaElement || target.isContentEditable) {
               if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) target.setAttribute("inputmode", "none");
               setKeyboardTarget(target);
               setKeyboard(true);
