@@ -1366,3 +1366,15 @@
 .ios18 .wallpaper-actions button { display: flex; align-items: center; gap: 5px; padding: 9px 10px; border-radius: 9px; background: #f2f2f7; color: #007aff; font-size: 13px; }
 .ios18 .wallpaper-actions .wallpaper-apply { background: #007aff; color: white; }
 .ios18 .wallpaper-remove { width: 100%; margin-top: 12px; padding: 13px; color: #ff3b30; background: white; border-radius: 10px; font-size: 15px; }
+
+/* Small status-bar battery percentage adjustment */
+.ios18 .ios-battery b { font-size: 9px; }
+.ios18 .ios-battery { font-size: 9px; }
+.ios18 .wallpaper-target-switch { display: flex; gap: 4px; padding: 4px; background: #e5e5ea; border-radius: 11px; margin: 12px 0 16px; }
+.ios18 .wallpaper-target-switch button { flex: 1; border-radius: 8px; padding: 9px 5px; color: #555; background: transparent; font-size: 13px; }
+.ios18 .wallpaper-target-switch button.selected { background: #fff; color: #111; box-shadow: 0 1px 3px #0002; font-weight: 600; }
+.ios18 .wallpaper-editor-preview.lock-preview .wallpaper-preview-dock { display: none; }
+.ios18 .wallpaper-editor-preview.lock-preview .wallpaper-preview-clock { top: 68px; }
+.ios18 .wallpaper-preview-date { position: absolute; top: 55px; width: 100%; text-align: center; color: #fff; font-size: 9px; text-shadow: 0 1px 5px #0008; }
+.ios18 .wallpaper-preview-shortcuts { position: absolute; bottom: 12px; left: 14px; right: 14px; display:flex; justify-content:space-between; }
+.ios18 .wallpaper-preview-shortcuts i { width: 20px; height: 20px; border-radius: 50%; background: #ffffff55; border: 1px solid #ffffff77; }
