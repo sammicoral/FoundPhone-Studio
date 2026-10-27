@@ -1024,7 +1024,7 @@ export function WeverseSkin(p: SkinProps) {
             <button className="wv-post-body" onClick={() => { p.onRead(item.id); setExpanded((old) => old.includes(item.id) ? old.filter((id) => id !== item.id) : [...old, item.id]); }}>
               {item.title && item.title !== item.sender ? <strong>{item.title}</strong> : null}
               <span>{item.body}</span>
-              {item.media ? <span className="wv-media-placeholder">▧　{item.title || "照片"}</span> : null}
+              {item.media ? <span className="wv-media-placeholder">▧ {item.title || "照片"}</span> : null}
             </button>
             <div className="wv-post-actions">
               <button className={isLiked ? "liked" : ""} aria-pressed={isLiked} onClick={() => setLiked((old) => isLiked ? old.filter((id) => id !== item.id) : [...old, item.id])}><Heart size={17} fill={isLiked ? "currentColor" : "none"} />{(item.likes || 0) + (isLiked ? 1 : 0)}</button>
