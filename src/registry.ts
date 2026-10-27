@@ -31,6 +31,7 @@ import {
   AtSign,
   Send,
   Tv,
+  Heart,
   type LucideIcon,
 } from "lucide-react";
 export type EngineKind =
@@ -178,6 +179,7 @@ const definitions: [
   ],
   ["appstore", "App Store", "system", "#087cff", ShoppingBag, ["搜尋"]],
   ["threads", "Threads", "social", "#4d5150", AtSign, ["動態", "回覆"]],
+  ["weverse", "Weverse", "social", "#6b73d9", Heart, ["社群", "媒體", "通知"]],
 ];
 export const registry: AppPlugin[] = definitions.map(
   ([id, name, engine, color, icon, tabs]) => ({
