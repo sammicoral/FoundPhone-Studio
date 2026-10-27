@@ -26,6 +26,7 @@ import {
 } from "./layout";
 type Props = {
   work: Work;
+  wallpaperImage?: string;
   initialPage?: number;
   onPageChange?: (page: number) => void;
   storeOpen?: boolean;
@@ -536,6 +537,7 @@ export function HomeLauncher(p: Props) {
       className={
         "home-screen interactive-home " + (editing ? "home-editing" : "")
       }
+      style={p.wallpaperImage ? { backgroundImage: "url(" + p.wallpaperImage + ")", backgroundSize: "cover", backgroundPosition: "center" } : undefined}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       onPointerDownCapture={beginSwipe}
