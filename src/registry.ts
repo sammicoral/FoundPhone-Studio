@@ -94,7 +94,6 @@ const definitions: [
     MessageCircle,
     ["微信", "通訊錄", "動態", "我"],
   ],
-  ["qq", "QQ", "messaging", "#529fd3", Users, ["訊息", "聯絡人", "動態"]],
   ["weibo", "微博", "social", "#db7652", Radio, ["關注", "探索", "我"]],
   [
     "redbook",
@@ -105,7 +104,6 @@ const definitions: [
     ["探索", "關注", "收藏"],
   ],
   ["douyin", "抖音", "media", "#292c33", Video, ["推薦", "關注", "紀錄"]],
-  ["bilibili", "嗶哩嗶哩", "media", "#d785a1", Tv, ["首頁", "動態", "歷史"]],
   ["alipay", "支付寶", "records", "#368dcc", Wallet, ["帳單", "卡片"]],
   [
     "taobao",
@@ -115,7 +113,6 @@ const definitions: [
     ShoppingBag,
     ["商品", "訂單", "物流"],
   ],
-  ["netease", "網易雲音樂", "media", "#cd5659", Headphones, ["探索", "播放清單"]],
   ["delivery", "Uber Eats", "records", "#06C167", Utensils, ["為你推薦", "搜尋", "訂單", "帳戶"]],
   ["forum", "論壇", "social", "#8b9776", Hash, ["貼文", "版塊"]],
   [
@@ -136,7 +133,6 @@ const definitions: [
   ],
   ["tiktok", "TikTok", "media", "#303538", Video, ["推薦", "關注"]],
   ["twitter", "X", "social", "#343839", AtSign, ["時間軸", "回覆"]],
-  ["telegram", "Telegram", "messaging", "#62a6c8", Send, ["聊天", "頻道"]],
   [
     "discord",
     "Discord",
@@ -164,7 +160,6 @@ const definitions: [
     MessageCircle,
     ["聊天", "聯絡人"],
   ],
-  ["reddit", "Reddit", "social", "#d17b57", Radio, ["社群", "貼文"]],
   ["spotify", "Spotify", "media", "#4ca977", Music, ["音樂", "播放清單"]],
   ["netflix", "Netflix", "media", "#a74d50", Film, ["影片", "我的片單"]],
   ["pinterest", "Pinterest", "social", "#b96d70", Pin, ["探索", "收藏看板"]],
