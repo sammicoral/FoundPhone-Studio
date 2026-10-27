@@ -961,7 +961,12 @@
 .phone-shell.ios18 textarea,
 .phone-shell.ios18 select,
 .phone-shell.ios18 [contenteditable="true"] {
-  font-size: max(16px, 1em);
+  /*
+   * The whole simulated phone is scaled with CSS zoom. Compensate the input's
+   * CSS font size so its final rendered size remains at least 16px; otherwise
+   * iOS Safari may zoom the outer page when the field receives focus.
+   */
+  font-size: max(calc(16px / var(--phone-scale, 1)), 1em);
 }
 
 /* Center the complete scaled device frame in its stage, independent of its width. */
