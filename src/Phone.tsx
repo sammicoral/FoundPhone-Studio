@@ -326,7 +326,6 @@ function PhoneRuntime({
     onOpen?.(id);
     event("openApp", id);
   };
-  const phoneWork = { ...work, phone: { ...work.phone, battery: 100 } };
   const installedApps = work.apps.filter((a) => a.installed);
   const apps = installedApps.filter((a) => a.visible);
   const unlock = (pin = "") => {
