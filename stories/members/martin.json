@@ -85,7 +85,16 @@
     "netflix",
     "pinterest",
     "threads",
-    "kakao"
+    "kakao",
+    {
+      "id": "weverse",
+      "name": "Weverse",
+      "installed": true,
+      "visible": true,
+      "dock": false,
+      "folder": "",
+      "icon": ""
+    }
   ],
   "contacts": [
     {
@@ -690,6 +699,66 @@
         "id": "test-appstore",
         "title": "测试内容",
         "body": "这是一条测试内容。"
+      }
+    ],
+    "weverse": [
+      {
+        "id": "weverse-martin-martin",
+        "title": "MARTIN",
+        "body": "今天練習結束得比較晚。回家的路上看到很漂亮的月亮，第一個想到的就是想傳給你看。{{playerAccount}}，你今天也辛苦了，記得好好休息。",
+        "sender": "MARTIN",
+        "time": "2026-10-25 21:14",
+        "kind": "post",
+        "folder": "feed",
+        "likes": 128,
+        "comments": [
+          "這句話怎麼有點像在跟誰說話 👀",
+          "MARTIN 今天也要早點休息！"
+        ]
+      },
+      {
+        "id": "weverse-martin-james",
+        "title": "JAMES",
+        "body": "今天的練習室日記！大家也要記得休息，明天再一起加油。",
+        "sender": "JAMES",
+        "time": "2026-10-24 20:42",
+        "kind": "post",
+        "folder": "feed",
+        "likes": 96,
+        "comments": []
+      },
+      {
+        "id": "weverse-martin-juhoon",
+        "title": "JUHOON",
+        "body": "最近有沒有推薦的電影或歌曲？想收集一些新的推薦。",
+        "sender": "JUHOON",
+        "time": "2026-10-23 19:36",
+        "kind": "post",
+        "folder": "feed",
+        "likes": 83,
+        "comments": []
+      },
+      {
+        "id": "weverse-martin-seonghyeon",
+        "title": "SEONGHYEON",
+        "body": "今天的天氣很好，出去走走感覺整個人都充電了。",
+        "sender": "SEONGHYEON",
+        "time": "2026-10-22 18:55",
+        "kind": "post",
+        "folder": "feed",
+        "likes": 110,
+        "comments": []
+      },
+      {
+        "id": "weverse-martin-keonho",
+        "title": "KEONHO",
+        "body": "大家今天有好好吃飯嗎？吃飽才有力氣做喜歡的事！",
+        "sender": "KEONHO",
+        "time": "2026-10-21 17:28",
+        "kind": "post",
+        "folder": "feed",
+        "likes": 142,
+        "comments": []
       }
     ]
   },
