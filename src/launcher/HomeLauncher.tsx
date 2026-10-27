@@ -164,7 +164,7 @@ export function HomeLauncher(p: Props) {
     el.scrollLeft = targetPage * el.clientWidth;
     setPageState(targetPage);
   }, [p.initialPage]);
-  const removedApps = new Set(["qq", "weibo", "bilibili", "alipay", "taobao", "netease", "douyin", "wechat"]);
+  const removedApps = new Set(["qq", "weibo", "bilibili", "alipay", "taobao", "netease", "douyin", "wechat", "discord", "tiktok", "pinterest", "snapchat", "redbook"]);
   const pages = packHome(homeEntries(p.layout), p.layout.positions),
     apps = p.layout.apps.filter((a) => !removedApps.has(a.id)),
     active = apps.find((a) => a.id === selected);
