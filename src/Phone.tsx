@@ -200,12 +200,15 @@ function PhoneRuntime({
     if (typeof shell.current?.requestFullscreen === "function") {
       try {
         await shell.current.requestFullscreen();
-        return;
+        // Some browsers expose requestFullscreen but don't actually enter fullscreen.
+        // Only skip the fallback if the browser confirms fullscreen state.
+        if (document.fullscreenElement) return;
       } catch {
         // iOS Safari and some embedded browsers block the Fullscreen API.
       }
     }
-    // Fallback: fill the available viewport when native fullscreen is unavailable.
+    // Fallback: fill the available viewport when native fullscreen is unavailable
+    // or the request resolves without changing document.fullscreenElement.
     setIsFullscreen(true);
   };
   const gesture = useRef({ x: 0, y: 0, time: 0, zone: "" });
