@@ -149,16 +149,26 @@ function PhoneRuntime({
   const shell = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const fitViewport = () => {
-      // Scale from width only. On iOS, innerHeight can temporarily report the
-      // keyboard-reduced viewport during startup, leaving the phone permanently tiny.
-      // The phone stays at its normal portrait scale while the native keyboard is open.
-      const scale = Math.min(1, window.innerWidth / 393);
+      // Fit the phone inside the visible browser area, including Safari's toolbars.
+      // Ignore resize events while an input is focused so the native keyboard does
+      // not make the phone jump to a smaller scale.
+      const active = document.activeElement;
+      const keyboardLikelyOpen =
+        active instanceof HTMLInputElement ||
+        active instanceof HTMLTextAreaElement ||
+        (active instanceof HTMLElement && active.isContentEditable);
+      if (keyboardLikelyOpen) return;
+      const widthScale = window.innerWidth / 393;
+      const heightScale = (window.innerHeight - 32) / 852;
+      const scale = Math.max(0.4, Math.min(1, widthScale, heightScale));
       setViewportScale({ x: scale, y: scale });
     };
     fitViewport();
     window.addEventListener("resize", fitViewport);
+    window.addEventListener("orientationchange", fitViewport);
     return () => {
       window.removeEventListener("resize", fitViewport);
+      window.removeEventListener("orientationchange", fitViewport);
     };
   }, []);
   useEffect(() => {
