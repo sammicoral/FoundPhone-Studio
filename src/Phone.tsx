@@ -149,26 +149,33 @@ function PhoneRuntime({
   const shell = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const fitViewport = () => {
-      // Use stable physical screen dimensions for scale; Safari's innerHeight
-      // changes with its browser bars and can make the phone shrink unpredictably.
-      // Keep height as the primary constraint and width as a secondary limit.
+      // Fit to the browser's current visible viewport on any device/browser.
+      // Use the visible height as the primary constraint and width only as a cap.
       const active = document.activeElement;
       const keyboardLikelyOpen =
         active instanceof HTMLInputElement ||
         active instanceof HTMLTextAreaElement ||
         (active instanceof HTMLElement && active.isContentEditable);
       if (keyboardLikelyOpen) return;
-      const widthScale = (window.innerWidth - 24) / 406;
-      const heightScale = (window.screen.height - 180) / 860;
-      const scale = Math.max(0.55, Math.min(1, heightScale, widthScale));
+      const viewport = window.visualViewport;
+      const availableWidth = viewport?.width ?? document.documentElement.clientWidth;
+      const availableHeight = viewport?.height ?? document.documentElement.clientHeight;
+      const scale = Math.max(
+        0.35,
+        Math.min(1, (availableHeight - 24) / 860, (availableWidth - 24) / 406),
+      );
       setViewportScale({ x: scale, y: scale });
     };
     fitViewport();
     window.addEventListener("resize", fitViewport);
     window.addEventListener("orientationchange", fitViewport);
+    window.visualViewport?.addEventListener("resize", fitViewport);
+    window.visualViewport?.addEventListener("scroll", fitViewport);
     return () => {
       window.removeEventListener("resize", fitViewport);
       window.removeEventListener("orientationchange", fitViewport);
+      window.visualViewport?.removeEventListener("resize", fitViewport);
+      window.visualViewport?.removeEventListener("scroll", fitViewport);
     };
   }, []);
   useEffect(() => {
