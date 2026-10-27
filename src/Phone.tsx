@@ -542,6 +542,7 @@ function PhoneRuntime({
                 storeOpen={app === "appstore"}
                 closeStore={() => setApp("")}
                 work={work}
+                wallpaperImage={s.ui?.settings?.wallpaperImage || (s.variables.boyfriend === "martin" ? String(s.variables.martinWallpaper || "") : "")}
                 layout={deviceLayout.layout}
                 change={deviceLayout.change}
                 importLayout={deviceLayout.importLayout}
