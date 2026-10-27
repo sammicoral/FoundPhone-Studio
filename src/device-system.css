@@ -1380,6 +1380,16 @@
 .ios18 .wallpaper-preview-shortcuts i { width: 20px; height: 20px; border-radius: 50%; background: #ffffff55; border: 1px solid #ffffff77; }
 
 
+/* Full-browser mode is the default: remove every remaining device-frame detail. */
+.phone-shell.ios18.ios-viewport-mode,
+.phone-shell.ios18.ios-viewport-mode .phone-screen {
+  border-radius: 0 !important;
+}
+.phone-shell.ios18.ios-viewport-mode::before,
+.phone-shell.ios18.ios-viewport-mode::after {
+  display: none !important;
+}
+
 /* Viewport-first phone layout: the entire simulated device uses the browser viewport. */
 .phone-shell.ios18.ios-viewport-mode {
   position: fixed !important;
