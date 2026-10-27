@@ -193,3 +193,14 @@ export const registry: AppPlugin[] = definitions
     description: "非官方虛構敘事範本",
   }));
 export const isRemovedApp = (id: string) => removedAppIds.has(id);
+
+export const getApp = (id: string) =>
+  registry.find((app) => app.id === id) ?? {
+    id,
+    name: id,
+    engine: "document" as const,
+    color: "#758a7c",
+    icon: Files,
+    tabs: ["內容"],
+    description: "自訂 App",
+  };
