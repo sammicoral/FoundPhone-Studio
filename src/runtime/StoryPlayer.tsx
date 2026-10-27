@@ -5,7 +5,17 @@ import { validateWork, type Work } from "../schema";
 import "../styles.css";
 import "./player.css";
 
-function personalizeWork(source: Work, playerName: string, playerAccount: string): Work {
+const BOYFRIENDS = [
+  { id: "martin", name: "MARTIN" },
+  { id: "james", name: "JAMES" },
+  { id: "juhoon", name: "JUHOON" },
+  { id: "seonghyeon", name: "SEONGHYEON" },
+  { id: "keonho", name: "KEONHO" },
+] as const;
+
+type BoyfriendId = (typeof BOYFRIENDS)[number]["id"];
+
+function personalizeWork(source: Work, playerName: string, playerAccount: string, boyfriend: BoyfriendId): Work {
   const work = structuredClone(source);
   const originalOwner = work.phone.owner;
   work.phone.owner = playerName;
@@ -13,11 +23,15 @@ function personalizeWork(source: Work, playerName: string, playerAccount: string
     ...work.variables,
     playerName,
     playerAccount,
+    boyfriend,
+    boyfriendName: BOYFRIENDS.find((member) => member.id === boyfriend)?.name ?? "MARTIN",
   };
   const replacements: Array<[string, string]> = [
     ["{{playerName}}", playerName],
     ["{{playerAccount}}", playerAccount],
     ["{{phoneOwner}}", playerName],
+    ["{{boyfriend}}", boyfriend],
+    ["{{boyfriendName}}", work.variables.boyfriendName as string],
     ["林知夏", playerName],
     ["知夏", playerName],
     ["lin.zhixia", playerAccount],
@@ -40,27 +54,27 @@ function StoryPlayer() {
   const [source, setSource] = useState<Work | null>(null);
   const [work, setWork] = useState<Work | null>(null);
   const [error, setError] = useState("");
+  const [boyfriend, setBoyfriend] = useState<BoyfriendId>("martin");
   const [playerName, setPlayerName] = useState("");
   const [playerAccount, setPlayerAccount] = useState("");
   const [formError, setFormError] = useState("");
 
   useEffect(() => {
     const abort = new AbortController();
-    fetch(
-      new URLSearchParams(location.search).get("preview") === "test"
-        ? "./test-work.json"
-        : new URLSearchParams(location.search).get("template") === "blank"
-          ? "./blank-work.json"
-          : "./work.json",
-      { signal: abort.signal },
-    )
+    const params = new URLSearchParams(location.search);
+    const sourceUrl = params.get("preview") === "test"
+      ? "./test-work.json"
+      : params.get("template") === "blank"
+        ? "./blank-work.json"
+        : "./work.json";
+    fetch(sourceUrl, { signal: abort.signal })
       .then((r) => {
         if (!r.ok) throw Error("缺少作品檔案，請執行 npm run story:build");
         return r.json();
       })
       .then((x) => {
         const w = validateWork(x);
-        document.title = w.title === "拾獲手機" ? "拾獲手機" : w.title + " · 拾獲手機";
+        document.title = "CORTIS · 拾獲手機";
         setSource(w);
       })
       .catch((e) => {
@@ -82,7 +96,7 @@ function StoryPlayer() {
       return;
     }
     if (!source) return;
-    setWork(personalizeWork(source, name, account));
+    setWork(personalizeWork(source, name, account, boyfriend));
     setFormError("");
   };
 
@@ -95,38 +109,62 @@ function StoryPlayer() {
           <div className="onboarding-card">
             <div className="onboarding-mark" aria-hidden="true">🩷</div>
             <p className="onboarding-eyebrow">YOUR STORY STARTS HERE</p>
-            <h1 id="onboarding-title">先認識一下你</h1>
+            <h1 id="onboarding-title">選擇你的男友</h1>
             <p className="onboarding-description">
-              輸入你想使用的名字與社群帳號，接著就能開啟屬於你的手機。
+              選擇想攻略的成員，再填寫你的資料，開始專屬於你的故事。
             </p>
             <form onSubmit={enterPhone}>
-              <label htmlFor="player-name">姓名／暱稱</label>
-              <input
-                id="player-name"
-                name="playerName"
-                autoComplete="nickname"
-                maxLength={60}
-                placeholder="輸入你想使用的名字"
-                value={playerName}
-                onChange={(e) => setPlayerName(e.target.value)}
-                required
-              />
-              <label htmlFor="player-account">社群帳號</label>
-              <div className="player-account-input">
-                <span aria-hidden="true">@</span>
+              <fieldset className="boyfriend-picker">
+                <legend>CHOOSE YOUR BOYFRIEND</legend>
+                <div className="boyfriend-grid">
+                  {BOYFRIENDS.map((member) => (
+                    <button
+                      className={boyfriend === member.id ? "boyfriend-option is-selected" : "boyfriend-option"}
+                      type="button"
+                      key={member.id}
+                      aria-pressed={boyfriend === member.id}
+                      onClick={() => setBoyfriend(member.id)}
+                    >
+                      <span className="boyfriend-avatar" aria-hidden="true">
+                        <span className="avatar-placeholder">{member.name.slice(0, 1)}</span>
+                      </span>
+                      <span className="boyfriend-name">{member.name}</span>
+                      <span className="boyfriend-check" aria-hidden="true">{boyfriend === member.id ? "✓" : ""}</span>
+                    </button>
+                  ))}
+                </div>
+              </fieldset>
+              <div className="player-fields">
+                <label htmlFor="player-name">你的姓名／暱稱</label>
                 <input
-                  id="player-account"
-                  name="playerAccount"
-                  autoComplete="username"
-                  maxLength={40}
-                  placeholder="輸入你的帳號（不需加 @）"
-                  value={playerAccount}
-                  onChange={(e) => setPlayerAccount(e.target.value)}
+                  id="player-name"
+                  name="playerName"
+                  autoComplete="nickname"
+                  maxLength={60}
+                  placeholder="輸入你想使用的名字"
+                  value={playerName}
+                  onChange={(e) => setPlayerName(e.target.value)}
                   required
                 />
+                <label htmlFor="player-account">你的社群帳號</label>
+                <div className="player-account-input">
+                  <span aria-hidden="true">@</span>
+                  <input
+                    id="player-account"
+                    name="playerAccount"
+                    autoComplete="username"
+                    maxLength={40}
+                    placeholder="輸入你的帳號（不需加 @）"
+                    value={playerAccount}
+                    onChange={(e) => setPlayerAccount(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
               {formError && <p className="onboarding-error" role="alert">{formError}</p>}
-              <button className="onboarding-submit" type="submit">進入我的手機 <span aria-hidden="true">→</span></button>
+              <button className="onboarding-submit" type="submit">
+                與 {BOYFRIENDS.find((member) => member.id === boyfriend)?.name} 開始故事 <span aria-hidden="true">→</span>
+              </button>
             </form>
             <p className="onboarding-footnote">無需註冊或登入；資料只用於這次故事體驗。</p>
           </div>
