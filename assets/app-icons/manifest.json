@@ -120,25 +120,9 @@
       "file": "qq.jpg",
       "sha256": "1f8222dbac93d997aed99baca664d4e16126ad0c6d059b4a74370f43aea9072b"
     },
-    "wechat": {
-      "file": "wechat.jpg",
-      "sha256": "c191157c5583055e7f2ec19f532b83f80d439f27f3809651151d8e8dcae1b019"
-    },
-    "weibo": {
-      "file": "weibo.jpg",
-      "sha256": "564346c165dea303ffb0765084a4a2d4d6d5d92d2b28c5fc5ea63d5b4fa642bc"
-    },
-    "douyin": {
-      "file": "douyin.jpg",
-      "sha256": "c1f6414b95cd4378e2948179489f4ccebcbe637b168ac26f124e32341145ccd6"
-    },
     "bilibili": {
       "file": "bilibili.jpg",
       "sha256": "79a8d2e8470207636549920ce7960d091dd7af14790a1d9cd030fa1636dd38a3"
-    },
-    "alipay": {
-      "file": "alipay.jpg",
-      "sha256": "e291d53c9892b1193d9dbc8df8f7dddf65a4cebcd76f2caf7ed00d36818be60c"
     },
     "delivery": {
       "file": "delivery.jpg",
@@ -147,10 +131,6 @@
     "netease": {
       "file": "netease.jpg",
       "sha256": "25ab1f14333f0bbc087700d381ced1638d9041ee1d2fa4654ed63d66f0e07ecf"
-    },
-    "taobao": {
-      "file": "taobao.jpg",
-      "sha256": "c24d7a86e7b4bc78e2b59465e9ae69ddccb04cc5ec99e56a217fcfc512e3e218"
     },
     "whatsapp": {
       "file": "whatsapp.jpg",
