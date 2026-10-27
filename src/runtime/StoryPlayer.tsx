@@ -26,10 +26,14 @@ function personalizeWork(source: Work, playerName: string, playerAccount: string
     boyfriend,
     boyfriendName: BOYFRIENDS.find((member) => member.id === boyfriend)?.name ?? "MARTIN",
   };
+  work.variables.memberWallpaper =
+    import.meta.env.BASE_URL + "assets/" + boyfriend + "-wallpaper.jpg";
+  work.variables.memberLockScreen =
+    import.meta.env.BASE_URL + "assets/" + boyfriend + "-lockscreen.jpg";
   if (boyfriend === "martin") {
     work.phone.wallpaper = "martin-photo";
-    work.variables.martinWallpaper = import.meta.env.BASE_URL + "assets/martin-wallpaper.jpg";
-    work.variables.martinLockScreen = import.meta.env.BASE_URL + "assets/martin-lockscreen.jpg";
+    work.variables.martinWallpaper = work.variables.memberWallpaper;
+    work.variables.martinLockScreen = work.variables.memberLockScreen;
   }
   const replacements: Array<[string, string]> = [
     ["{{playerName}}", playerName],
