@@ -151,6 +151,8 @@ function PhoneRuntime({
     const fitViewport = () => {
       // Fit to the browser's current visible viewport on any device/browser.
       // Use the visible height as the primary constraint and width only as a cap.
+      // Do not recalculate from visualViewport while the native keyboard is active:
+      // iOS can resize/zoom the visual viewport during focus and shift the whole UI.
       const active = document.activeElement;
       const keyboardLikelyOpen =
         active instanceof HTMLInputElement ||
@@ -158,13 +160,16 @@ function PhoneRuntime({
         (active instanceof HTMLElement && active.isContentEditable);
       if (keyboardLikelyOpen) return;
       const viewport = window.visualViewport;
-      const availableWidth = viewport?.width ?? document.documentElement.clientWidth;
-      const availableHeight = viewport?.height ?? document.documentElement.clientHeight;
+      const availableWidth = document.documentElement.clientWidth;
+      const availableHeight = window.innerHeight;
+      // Account for the shell's 8px padding on each side; keep a small safety margin.
       const scale = Math.max(
         0.35,
-        Math.min(1, (availableHeight - 24) / 860, (availableWidth - 24) / 406),
+        Math.min(1, (availableHeight - 8) / 860, (availableWidth - 8) / 406),
       );
-      setViewportScale({ x: scale, y: scale });
+      setViewportScale((current) =>
+        Math.abs(current.x - scale) < 0.005 ? current : { x: scale, y: scale },
+      );
     };
     fitViewport();
     window.addEventListener("resize", fitViewport);
