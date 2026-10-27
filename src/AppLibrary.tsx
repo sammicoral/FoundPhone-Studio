@@ -46,7 +46,7 @@ export function AppManager({
     [error, setError] = useState(""),
     [dragging, setDragging] = useState("");
   const drag = useRef("");
-  const removedApps = new Set(["qq", "weibo", "bilibili", "alipay", "taobao", "netease", "douyin", "wechat", "discord", "tiktok", "pinterest", "snapchat", "redbook"]);
+  const removedApps = new Set(["qq", "bilibili", "netease", "reddit", "telegram", "weibo", "alipay", "taobao", "douyin", "wechat", "discord", "tiktok", "pinterest", "snapchat", "redbook"]);
   const catalog = [
     ...work.apps.filter((a) => !removedApps.has(a.id)),
     ...registry
