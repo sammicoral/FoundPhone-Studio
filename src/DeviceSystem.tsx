@@ -353,6 +353,14 @@ export function ControlCenter({
         >
           <Monitor />
         </button>
+        <button
+          className="cc-square"
+          onClick={onFullscreen}
+          aria-label={isFullscreen ? "退出全螢幕" : "切換全螢幕"}
+          title={isFullscreen ? "退出全螢幕" : "切換全螢幕"}
+        >
+          {isFullscreen ? <Minimize2 /> : <Maximize2 />}
+        </button>
         <SliderModule
           type="brightness"
           value={brightness}
