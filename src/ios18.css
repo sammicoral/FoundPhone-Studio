@@ -954,3 +954,20 @@
   font-size: 12px;
 }
 
+
+
+/* Prevent iOS Safari from auto-zooming the page when small text inputs receive focus. */
+.phone-shell.ios18 input,
+.phone-shell.ios18 textarea,
+.phone-shell.ios18 select,
+.phone-shell.ios18 [contenteditable="true"] {
+  font-size: max(16px, 1em);
+}
+
+/* Center the complete scaled device frame in its stage, independent of its width. */
+.phone-shell.ios18 {
+  flex: 0 0 auto;
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+}
