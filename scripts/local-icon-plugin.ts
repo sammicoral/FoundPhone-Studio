@@ -21,7 +21,13 @@ export function localIconPlugin(command: string): Plugin {
         { file: string }
       >)
     : {};
-  const files = new Set(Object.values(manifest).map((x) => x.file));
+  // Removed optional app icons may still be listed in an older manifest.
+  // Only ship files that are actually present in the checked-out repository.
+  const files = new Set(
+    Object.values(manifest)
+      .map((x) => x.file)
+      .filter((file) => existsSync(path.join(directory, file))),
+  );
   return {
     name: "foundphone-local-icons",
     config() {
