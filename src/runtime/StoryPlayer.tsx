@@ -26,6 +26,11 @@ function personalizeWork(source: Work, playerName: string, playerAccount: string
     boyfriend,
     boyfriendName: BOYFRIENDS.find((member) => member.id === boyfriend)?.name ?? "MARTIN",
   };
+  if (boyfriend === "martin") {
+    work.phone.wallpaper = "martin-photo";
+    work.variables.martinWallpaper = "/assets/martin-wallpaper.jpg";
+    work.variables.martinLockScreen = "/assets/martin-lockscreen.jpg";
+  }
   const replacements: Array<[string, string]> = [
     ["{{playerName}}", playerName],
     ["{{playerAccount}}", playerAccount],
