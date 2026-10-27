@@ -20,7 +20,6 @@ import {
   Calculator,
   Globe,
   Mic,
-  ArrowUp,
   ChevronUp,
   Plus,
   Power,
@@ -474,7 +473,7 @@ export function DeviceKeyboard({ close, target }: { close: () => void; target: H
         {mode === "zhuyin" ? (
           <>
             <span className="keyboard-composition">{composition || "注音"}</span>
-            {suggestions.map((v) => <button key={v} onClick={() => { insertText(v, composition.length); setComposition(""); }}>{v}</button>)}
+            {suggestions.map((v) => <button key={v} onClick={() => { insertText(v); setComposition(""); }}>{v}</button>)}
           </>
         ) : (
           ["你好", "謝謝", "可以"].map((v) => <button key={v} onClick={() => insertText(v)}>{v}</button>)
