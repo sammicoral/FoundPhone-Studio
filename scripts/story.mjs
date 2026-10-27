@@ -119,13 +119,14 @@ try {
     );
 
     // Each member has an independent source file and generated runtime work.
+    const { testStory: testMemberStory } = await server.ssrLoadModule("/src/story-engine/testStory.ts");
     const members = ["martin", "james", "juhoon", "seonghyeon", "keonho"];
     await mkdir("public/member-stories", { recursive: true });
     for (const member of members) {
       const memberFile = `stories/members/${member}.json`;
       const memberRaw = JSON.parse(await readFile(memberFile, "utf8"));
       const compiled = compileStory(memberRaw);
-      const memberErrors = testStory(compiled.story, compiled.work);
+      const memberErrors = testMemberStory(compiled.story, compiled.work);
       if (memberErrors.length) {
         throw Error(`${memberFile}: ${memberErrors.join("\\n")}`);
       }
