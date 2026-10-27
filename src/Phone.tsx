@@ -166,6 +166,27 @@ function PhoneRuntime({
     document.addEventListener("fullscreenchange", syncFullscreen);
     return () => document.removeEventListener("fullscreenchange", syncFullscreen);
   }, []);
+  useEffect(() => {
+    if (!isFullscreen) return;
+    const body = document.body;
+    const root = document.documentElement;
+    const previousBodyOverflow = body.style.overflow;
+    const previousRootOverflow = root.style.overflow;
+    const previousBodyPosition = body.style.position;
+    const previousBodyWidth = body.style.width;
+    // Prevent iOS Safari from scrolling the document while fullscreen fallback is active.
+    body.style.overflow = "hidden";
+    root.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.width = "100%";
+    window.scrollTo(0, 0);
+    return () => {
+      body.style.overflow = previousBodyOverflow;
+      root.style.overflow = previousRootOverflow;
+      body.style.position = previousBodyPosition;
+      body.style.width = previousBodyWidth;
+    };
+  }, [isFullscreen]);
   const toggleFullscreen = async () => {
     if (document.fullscreenElement) {
       try { await document.exitFullscreen(); } catch { setIsFullscreen(false); }
