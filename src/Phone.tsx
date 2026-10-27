@@ -146,7 +146,22 @@ function PhoneRuntime({
   const [contextApp, setContextApp] = useState("");
   const [deviceScale, setDeviceScale] = useState(0.84);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [fullscreenFitScale, setFullscreenFitScale] = useState(1);
   const shell = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const fitFullscreen = () => {
+      const width = document.documentElement.clientWidth || window.innerWidth;
+      const height = window.visualViewport?.height || window.innerHeight;
+      setFullscreenFitScale(Math.min(width / 393, height / 852));
+    };
+    fitFullscreen();
+    window.addEventListener("resize", fitFullscreen);
+    window.visualViewport?.addEventListener("resize", fitFullscreen);
+    return () => {
+      window.removeEventListener("resize", fitFullscreen);
+      window.visualViewport?.removeEventListener("resize", fitFullscreen);
+    };
+  }, []);
   useEffect(() => {
     const syncFullscreen = () => setIsFullscreen(!!document.fullscreenElement);
     document.addEventListener("fullscreenchange", syncFullscreen);
@@ -341,7 +356,7 @@ function PhoneRuntime({
   return (
     <div
       ref={shell}
-      style={{ "--phone-scale": deviceScale } as CSSProperties}
+      style={{ "--phone-scale": deviceScale, "--fullscreen-fit-scale": fullscreenFitScale } as CSSProperties}
       className={`phone-shell ios18 ${work.phone.theme === "dark" ? "dark-phone" : ""} ${isFullscreen && !document.fullscreenElement ? "ios-fullscreen-fallback" : ""}`}
     >
       <KeyboardContext.Provider value={setKeyboard}>
