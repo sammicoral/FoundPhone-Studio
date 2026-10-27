@@ -159,7 +159,6 @@ function PhoneRuntime({
         active instanceof HTMLTextAreaElement ||
         (active instanceof HTMLElement && active.isContentEditable);
       if (keyboardLikelyOpen) return;
-      const viewport = window.visualViewport;
       const availableWidth = document.documentElement.clientWidth;
       const availableHeight = window.innerHeight;
       // Account for the shell's 8px padding on each side; keep a small safety margin.
