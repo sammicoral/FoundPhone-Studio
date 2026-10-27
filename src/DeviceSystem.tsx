@@ -422,80 +422,82 @@ export function ControlCenter({
     </motion.div>
   );
 }
-export function DeviceKeyboard({ close }: { close: () => void }) {
-  const [value, setValue] = useState(""),
-    [shift, setShift] = useState(false),
-    [numbers, setNumbers] = useState(false);
+export function DeviceKeyboard({ close, target }: { close: () => void; target: HTMLElement | null }) {
+  const [mode, setMode] = useState<"zhuyin" | "english" | "numbers">("zhuyin");
+  const [shift, setShift] = useState(false);
+  const [composition, setComposition] = useState("");
+  const currentValue = () => {
+    if (!target) return "";
+    if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) return target.value;
+    return target.textContent || "";
+  };
+  const insertText = (text: string, replaceLength = 0) => {
+    if (!target) return;
+    if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) {
+      const start = target.selectionStart ?? target.value.length;
+      const end = target.selectionEnd ?? start;
+      const value = target.value;
+      const next = value.slice(0, start - replaceLength) + text + value.slice(end);
+      const setter = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(target), "value")?.set;
+      setter?.call(target, next);
+      target.dispatchEvent(new Event("input", { bubbles: true }));
+      const cursor = start - replaceLength + text.length;
+      target.setSelectionRange(cursor, cursor);
+    } else if (target.isContentEditable) {
+      target.textContent = currentValue() + text;
+      target.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+    target.focus({ preventScroll: true });
+  };
+  const candidates: Record<string, string[]> = {
+    "ㄋㄧˇ": ["你", "妳", "你好"],
+    "ㄨㄛˇ": ["我", "我們"],
+    "ㄏㄠˇ": ["好", "很好", "好嗎"],
+    "ㄕˋ": ["是", "事", "試"],
+    "ㄅㄨˋ": ["不", "部", "步"],
+    "ㄧㄡˇ": ["有", "又"],
+    "ㄓㄜˋ": ["這", "這個"],
+    "ㄎㄜˇ": ["可", "可以"],
+    "ㄇㄚ˙": ["嗎", "嘛"],
+    "ㄒㄧㄝˋ": ["謝", "謝謝"],
+  };
+  const suggestions = candidates[composition] || (composition ? [composition, "好", "你"] : ["你好", "謝謝", "可以", "知道了"]);
+  const zhuyinRows = ["ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏ", "ㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙ", "ㄧㄨㄩㄚㄛㄜㄝㄞㄟㄠㄡ", "ㄢㄣㄤㄥㄦ˙ˊˇˋ"];
+  const keyRows = mode === "numbers" ? ["1234567890", "-/:;()&@"] : ["qwertyuiop", "asdfghjkl", "zxcvbnm"];
   return (
     <div className="device-keyboard" role="dialog" aria-label="螢幕鍵盤">
       <div className="keyboard-draft">
-        <input
-          autoFocus
-          aria-label="訊息草稿"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          placeholder="輸入訊息"
-        />
-        <button aria-label="收起鍵盤" onClick={close}>
-          <ChevronDown />
-        </button>
+        <div className="keyboard-target-preview">{currentValue() || "點按下方鍵盤輸入"}</div>
+        <button aria-label="收起鍵盤" onClick={close}><ChevronDown /></button>
       </div>
       <div className="keyboard-candidates">
-        {(value ? [value, "好", "知道了"] : ["我", "你", "好"]).map(
-          (v, i) => (
-            <button key={i} onClick={() => setValue(value + v)}>
-              {v}
-            </button>
-          ),
+        {mode === "zhuyin" ? (
+          <>
+            <span className="keyboard-composition">{composition || "注音"}</span>
+            {suggestions.map((v) => <button key={v} onClick={() => { insertText(v, composition.length); setComposition(""); }}>{v}</button>)}
+          </>
+        ) : (
+          ["你好", "謝謝", "可以"].map((v) => <button key={v} onClick={() => insertText(v)}>{v}</button>)
         )}
       </div>
-      {(numbers
-        ? ["1234567890", "-/:;()¥&@", ".,?!'"]
-        : ["qwertyuiop", "asdfghjkl", "zxcvbnm"]
-      ).map((row, i) => (
+      {mode === "zhuyin" ? zhuyinRows.map((row, i) => (
+        <div className="keyboard-row zhuyin-row" key={i}>
+          {[...row].map((k) => <button key={k} onClick={() => setComposition(composition + k)}>{k}</button>)}
+          {i === zhuyinRows.length - 1 && <button className="key-special" onClick={() => setComposition(composition.slice(0, -1))}><Delete size={18} /></button>}
+        </div>
+      )) : keyRows.map((row, i) => (
         <div className="keyboard-row" key={i}>
-          {i === 2 && (
-            <button
-              className="key-special"
-              aria-label="切換大小寫"
-              onClick={() => setShift(!shift)}
-            >
-              <ArrowUp size={19} />
-            </button>
-          )}
-          {[...row].map((k) => (
-            <button
-              key={k}
-              onClick={() => setValue(value + (shift ? k.toUpperCase() : k))}
-            >
-              {shift ? k.toUpperCase() : k}
-            </button>
-          ))}
-          {i === 2 && (
-            <button
-              className="key-special"
-              aria-label="退格"
-              onClick={() => setValue(value.slice(0, -1))}
-            >
-              <Delete size={20} />
-            </button>
-          )}
+          {[...row].map((k) => <button key={k} onClick={() => insertText(shift ? k.toUpperCase() : k)}>{shift ? k.toUpperCase() : k}</button>)}
+          {i === keyRows.length - 1 && <button className="key-special" onClick={() => insertText("", 1)}><Delete size={18} /></button>}
         </div>
       ))}
       <div className="keyboard-row keyboard-bottom">
-        <button onClick={() => setNumbers(!numbers)}>
-          {numbers ? "ABC" : "123"}
-        </button>
-        <button className="key-space" onClick={() => setValue(value + " ")}>
-          空格
-        </button>
-        <button onClick={close}>完成</button>
+        <button onClick={() => setMode(mode === "zhuyin" ? "english" : mode === "english" ? "numbers" : "zhuyin")}>{mode === "zhuyin" ? "ABC" : mode === "english" ? "123" : "注音"}</button>
+        {mode !== "zhuyin" && <button onClick={() => setShift(!shift)}>⇧</button>}
+        <button className="key-space" onClick={() => { insertText(" "); setComposition(""); }}>空格</button>
+        <button onClick={() => { setComposition(""); close(); }}>完成</button>
       </div>
-      <div className="keyboard-accessories">
-        <Globe size={24} />
-        <small>草稿</small>
-        <Mic size={23} />
-      </div>
+      <div className="keyboard-accessories"><Globe size={24} /><small>繁體中文</small><Mic size={23} /></div>
     </div>
   );
 }
