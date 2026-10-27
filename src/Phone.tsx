@@ -158,8 +158,10 @@ function PhoneRuntime({
         (active instanceof HTMLElement && active.isContentEditable);
       const visualViewport = window.visualViewport;
       const visualHeight = visualViewport?.height ?? window.innerHeight;
+      const layoutHeight =
+        document.documentElement.clientHeight || window.innerHeight;
       const keyboardActuallyVisible =
-        inputFocused && visualHeight < window.innerHeight - 120;
+        inputFocused && visualHeight < layoutHeight - 120;
 
       if (keyboardActuallyVisible) {
         keyboardViewportWasOpen.current = true;
