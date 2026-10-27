@@ -989,3 +989,52 @@ export function InstagramSkin(p: SkinProps) {
     </div>
   );
 }
+
+
+/** Fictional Weverse-style community feed for the interactive phone story. */
+export function WeverseSkin(p: SkinProps) {
+  const [tab, setTab] = useState("全部");
+  const [liked, setLiked] = useState<string[]>([]);
+  const [expanded, setExpanded] = useState<string[]>([]);
+  const members = ["MARTIN", "JAMES", "JUHOON", "SEONGHYEON", "KEONHO"];
+  const posts = p.items.filter((item) => !item.hidden && (item.kind === "post" || item.folder === "feed" || item.folder === "貼文"));
+  const visiblePosts = posts.filter((item) => tab === "全部" || item.sender.toUpperCase() === tab);
+  return (
+    <div className="weverse-ui independent-skin">
+      <header className="wv-header">
+        <div className="wv-brand"><span className="wv-brand-mark">W</span><strong>Weverse</strong></div>
+        <button aria-label="搜尋社群" onClick={() => setTab("全部")}><Search size={19} /></button>
+      </header>
+      <div className="wv-community">
+        <div className="wv-community-art"><span>CORTIS</span><small>OFFICIAL COMMUNITY</small></div>
+        <div className="wv-community-info"><div><strong>CORTIS</strong><span>官方社群</span></div><button onClick={() => setTab("全部")}>加入中 ✓</button></div>
+      </div>
+      <nav className="wv-tabs" aria-label="成員貼文篩選">
+        {["全部", ...members].map((member) => (
+          <button key={member} className={tab === member ? "active" : ""} aria-pressed={tab === member} onClick={() => setTab(member)}>{member === "全部" ? "最新貼文" : member}</button>
+        ))}
+      </nav>
+      <div className="wv-feed">
+        {visiblePosts.length ? visiblePosts.map((item) => {
+          const isLiked = liked.includes(item.id);
+          const isExpanded = expanded.includes(item.id);
+          const comments = item.comments || [];
+          return <article className="wv-post" key={item.id}>
+            <div className="wv-post-head"><span className="wv-avatar">{item.sender.slice(0, 1)}</span><div><strong>{item.sender}</strong><small>{item.time || "剛剛"} · CORTIS</small></div><span className="wv-member-badge">ARTIST</span></div>
+            <button className="wv-post-body" onClick={() => { p.onRead(item.id); setExpanded((old) => old.includes(item.id) ? old.filter((id) => id !== item.id) : [...old, item.id]); }}>
+              {item.title && item.title !== item.sender ? <strong>{item.title}</strong> : null}
+              <span>{item.body}</span>
+              {item.media ? <span className="wv-media-placeholder">▧　{item.title || "照片"}</span> : null}
+            </button>
+            <div className="wv-post-actions">
+              <button className={isLiked ? "liked" : ""} aria-pressed={isLiked} onClick={() => setLiked((old) => isLiked ? old.filter((id) => id !== item.id) : [...old, item.id])}><Heart size={17} fill={isLiked ? "currentColor" : "none"} />{(item.likes || 0) + (isLiked ? 1 : 0)}</button>
+              <button onClick={() => setExpanded((old) => old.includes(item.id) ? old.filter((id) => id !== item.id) : [...old, item.id])}><MessageCircle size={17} />{comments.length || "留言"}</button>
+            </div>
+            {isExpanded && <div className="wv-comments">{comments.length ? comments.map((comment, index) => <p key={index}><strong>COER</strong> {comment}</p>) : <p className="wv-no-comments">還沒有留言，來看看其他貼文吧。</p>}</div>}
+          </article>;
+        }) : <div className="wv-empty"><span>♡</span><strong>還沒有貼文</strong><p>這個成員的貼文之後會出現在這裡。</p></div>}
+      </div>
+      <nav className="wv-bottom-nav"><button className="active" onClick={() => setTab("全部")}>⌂<span>社群</span></button><button onClick={() => setTab("全部")}>▧<span>媒體</span></button><button onClick={() => setTab("全部")}>♧<span>通知</span></button><button onClick={() => setTab("全部")}>♡<span>我的</span></button></nav>
+    </div>
+  );
+}
