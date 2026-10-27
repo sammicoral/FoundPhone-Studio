@@ -376,8 +376,8 @@ function PhoneRuntime({
               }, 550);
             }
             const box = e.currentTarget.getBoundingClientRect(),
-              x = (e.clientX - box.left) / deviceScale,
-              y = (e.clientY - box.top) / deviceScale;
+              x = (e.clientX - box.left) / (isFullscreen ? fullscreenFitScale : deviceScale),
+              y = (e.clientY - box.top) / (isFullscreen ? fullscreenFitScale : deviceScale);
             gesture.current = {
               x,
               y,
@@ -393,7 +393,7 @@ function PhoneRuntime({
           onPointerUp={(e) => {
             clearTimeout(pressTimer.current);
             const box = e.currentTarget.getBoundingClientRect(),
-              y = (e.clientY - box.top) / deviceScale,
+              y = (e.clientY - box.top) / (isFullscreen ? fullscreenFitScale : deviceScale),
               g = gesture.current;
             const dy = y - g.y;
             if (g.zone === "top" && dy > 65)
