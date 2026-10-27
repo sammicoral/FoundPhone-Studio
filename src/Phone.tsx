@@ -357,7 +357,7 @@ function PhoneRuntime({
     <div
       ref={shell}
       style={{ "--phone-scale": deviceScale, "--fullscreen-fit-scale": fullscreenFitScale } as CSSProperties}
-      className={`phone-shell ios18 ${work.phone.theme === "dark" ? "dark-phone" : ""} ${isFullscreen && !document.fullscreenElement ? "ios-fullscreen-fallback" : ""}`}
+      className={`phone-shell ios18 ${work.phone.theme === "dark" ? "dark-phone" : ""} ${isFullscreen ? "ios-fullscreen-fallback" : ""}`}
     >
       <KeyboardContext.Provider value={setKeyboard}>
         <div
