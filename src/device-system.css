@@ -1408,6 +1408,9 @@
   height: 852px !important;
   max-width: none !important;
   border-radius: 0 !important;
-  transform: translate(-50%, -50%) scale(var(--fullscreen-cover-scale, 1)) !important;
+  translate: -50% -50% !important;
+  scale: var(--fullscreen-cover-scale, 1) !important;
+  transform: none !important;
   transform-origin: center center !important;
+  flex: none !important;
 }
