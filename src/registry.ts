@@ -31,7 +31,6 @@ import {
   AtSign,
   Send,
   Tv,
-  Heart,
   type LucideIcon,
 } from "lucide-react";
 export type EngineKind =
