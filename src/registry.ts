@@ -180,8 +180,10 @@ const definitions: [
   ["threads", "Threads", "social", "#4d5150", AtSign, ["動態", "回覆"]],
   ["weverse", "Weverse", "social", "#6b73d9", Heart, ["社群", "媒體", "通知"]],
 ];
-export const registry: AppPlugin[] = definitions.map(
-  ([id, name, engine, color, icon, tabs]) => ({
+const removedAppIds = new Set(["weibo", "redbook", "taobao", "wechat", "alipay", "discord", "douyin", "tiktok", "pinterest"]);
+export const registry: AppPlugin[] = definitions
+  .filter(([id]) => !removedAppIds.has(id))
+  .map(([id, name, engine, color, icon, tabs]) => ({
     id,
     name,
     engine,
@@ -189,15 +191,5 @@ export const registry: AppPlugin[] = definitions.map(
     icon,
     tabs,
     description: "非官方虛構敘事範本",
-  }),
-);
-export const getApp = (id: string) =>
-  registry.find((a) => a.id === id) ?? {
-    id,
-    name: id,
-    engine: "document" as const,
-    color: "#758a7c",
-    icon: Files,
-    tabs: ["內容"],
-    description: "自訂 App",
-  };
+  }));
+export const isRemovedApp = (id: string) => removedAppIds.has(id);
