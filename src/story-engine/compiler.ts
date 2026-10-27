@@ -7,7 +7,7 @@ import {
   safeMedia,
   type Work,
 } from "../schema";
-import { registry } from "../registry";
+import { isRemovedApp, registry } from "../registry";
 import { validateGraph } from "../engine";
 const id = z.string().regex(/^[a-zA-Z][a-zA-Z0-9_.-]*$/, "需要稳定的英文 ID");
 const content = itemSchema
@@ -108,6 +108,13 @@ export class StoryIssue extends Error {
 }
 export function compileStory(raw: unknown): { story: Story; work: Work } {
   const s = storySchema.parse(raw);
+  s.installedApps = s.installedApps.filter(
+    (app) => !isRemovedApp(typeof app === "string" ? app : app.id),
+  );
+  s.chats = s.chats.filter((chat) => !isRemovedApp(chat.app));
+  s.content = Object.fromEntries(
+    Object.entries(s.content).filter(([app]) => !isRemovedApp(app)),
+  );
   const fail = (p: string, m: string): never => {
     throw new StoryIssue(p, m);
   };
