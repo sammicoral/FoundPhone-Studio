@@ -30,6 +30,15 @@ function personalizeWork(source: Work, playerName: string, playerAccount: string
   work.apps = work.apps.filter((app) => !PERMANENTLY_REMOVED_APPS.has(app.id));
   for (const id of PERMANENTLY_REMOVED_APPS) delete work.data[id];
   const originalOwner = work.phone.owner;
+  // Give each member story its own default phone passcode; players can change it in Settings.
+  const defaultPasscodes: Record<BoyfriendId, string> = {
+    martin: "0320",
+    james: "1014",
+    juhoon: "0103",
+    seonghyeon: "0113",
+    keonho: "0214",
+  };
+  work.phone.passcode = defaultPasscodes[boyfriend];
   work.phone.owner = playerName;
   work.variables = {
     ...work.variables,
