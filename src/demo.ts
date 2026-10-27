@@ -88,30 +88,6 @@ export function createWork(title = "雨停之前"): Work {
         folder: a.tabs[0],
       }),
     ];
-  w.data.wechat = [
-    makeItem({
-      id: "wx1",
-      title: "小林",
-      sender: "小林",
-      body: "知夏，你的手機是不是落在捷運上了？",
-      time: "2026-09-01 08:30",
-    }),
-    makeItem({
-      id: "wx2",
-      title: "小林",
-      sender: "我",
-      body: "如果有人撿到，請幫我看看備忘錄。",
-      outgoing: true,
-      time: "2026-09-01 08:32",
-    }),
-    makeItem({
-      id: "wx3",
-      title: "小林",
-      sender: "小林",
-      body: "還有一張照片。它比你想像的更重要。",
-      time: "2026-09-01 08:34",
-    }),
-  ];
   w.data.notes = [
     makeItem({
       id: "note-clue",
