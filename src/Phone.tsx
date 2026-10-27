@@ -153,12 +153,24 @@ function PhoneRuntime({
     return () => document.removeEventListener("fullscreenchange", syncFullscreen);
   }, []);
   const toggleFullscreen = async () => {
-    try {
-      if (document.fullscreenElement) await document.exitFullscreen();
-      else await shell.current?.requestFullscreen();
-    } catch {
-      setLoadError("目前的瀏覽器不支援全螢幕模式。");
+    if (document.fullscreenElement) {
+      try { await document.exitFullscreen(); } catch { setIsFullscreen(false); }
+      return;
     }
+    if (isFullscreen) {
+      setIsFullscreen(false);
+      return;
+    }
+    if (typeof shell.current?.requestFullscreen === "function") {
+      try {
+        await shell.current.requestFullscreen();
+        return;
+      } catch {
+        // iOS Safari and some embedded browsers block the Fullscreen API.
+      }
+    }
+    // Fallback: fill the available viewport when native fullscreen is unavailable.
+    setIsFullscreen(true);
   };
   const gesture = useRef({ x: 0, y: 0, time: 0, zone: "" });
   const [launchOrigin, setLaunchOrigin] = useState(screenOrigin);
@@ -330,7 +342,7 @@ function PhoneRuntime({
     <div
       ref={shell}
       style={{ "--phone-scale": deviceScale } as CSSProperties}
-      className={`phone-shell ios18 ${work.phone.theme === "dark" ? "dark-phone" : ""}`}
+      className={`phone-shell ios18 ${work.phone.theme === "dark" ? "dark-phone" : ""} ${isFullscreen && !document.fullscreenElement ? "ios-fullscreen-fallback" : ""}`}
     >
       <KeyboardContext.Provider value={setKeyboard}>
         <div
