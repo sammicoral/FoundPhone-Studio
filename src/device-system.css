@@ -1384,18 +1384,31 @@
 .phone-shell.ios-fullscreen-fallback {
   position: fixed !important;
   inset: 0 !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  padding: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
   height: 100dvh !important;
   max-width: none !important;
   max-height: none !important;
   margin: 0 !important;
+  border: 0 !important;
   border-radius: 0 !important;
+  box-shadow: none !important;
   transform: none !important;
   z-index: 9999 !important;
+  overflow: hidden !important;
+  background: transparent !important;
 }
 .phone-shell.ios-fullscreen-fallback .phone-screen {
+  position: absolute !important;
+  inset: 0 !important;
+  box-sizing: border-box !important;
   width: 100% !important;
+  min-width: 0 !important;
   height: 100% !important;
+  min-height: 0 !important;
   border-radius: 0 !important;
+  transform: none !important;
 }
