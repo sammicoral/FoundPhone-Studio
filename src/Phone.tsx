@@ -139,6 +139,7 @@ function PhoneRuntime({
   const [pinOpen, setPinOpen] = useState(false);
   const [quickCamera, setQuickCamera] = useState(false);
   const [keyboard, setKeyboard] = useState(false);
+  const [keyboardTarget, setKeyboardTarget] = useState<HTMLElement | null>(null);
   const [recent, setRecent] = useState<string[]>([]);
   const appSnapshots = useRef(new Map<string, HTMLElement>());
   const [banner, setBanner] = useState("");
@@ -325,6 +326,7 @@ function PhoneRuntime({
     onOpen?.(id);
     event("openApp", id);
   };
+  const phoneWork = { ...work, phone: { ...work.phone, battery: 100 } };
   const installedApps = work.apps.filter((a) => a.installed);
   const apps = installedApps.filter((a) => a.visible);
   const unlock = (pin = "") => {
@@ -397,6 +399,15 @@ function PhoneRuntime({
            })()}
           data-app={app}
           onDragStart={(e) => e.preventDefault()}
+          onFocusCapture={(e) => {
+            const target = e.target as HTMLElement;
+            if (target.closest(".device-keyboard")) return;
+            if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target.isContentEditable) {
+              if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) target.setAttribute("inputmode", "none");
+              setKeyboardTarget(target);
+              setKeyboard(true);
+            }
+          }}
           onPointerDown={(e) => {
             gestureConsumed.current = false;
             const button = (e.target as HTMLElement).closest<HTMLElement>(
@@ -482,17 +493,17 @@ function PhoneRuntime({
               <StatusGlyph kind="cellular" />
               <StatusGlyph kind="wifi" />
               <span
-                className={`ios-battery${work.phone.battery <= 20 ? " low-battery" : ""}`}
+                className="ios-battery"
               >
-                <span style={{ width: `${work.phone.battery}%` }} />
-                <b>{work.phone.battery}</b>
+                <span style={{ width: "100%" }} />
+                <b>100</b>
               </span>
             </button>
           </div>
           <AnimatePresence mode="wait">
             {locked && !(quickCamera && app === "camera") ? (
               <DeviceLock
-                work={clockWork}
+                work={{ ...clockWork, phone: { ...clockWork.phone, battery: 100 } }}
                 time={displayTime}
                 notices={s.notifications}
                 onDismiss={dismissNotice}
@@ -613,7 +624,7 @@ function PhoneRuntime({
           )}
           {panel === "control" && (
             <ControlCenter
-              battery={work.phone.battery}
+              battery={100}
               network={work.phone.network}
               close={() => setPanel("")}
               onLock={() => { setPanel(""); setLocked(true); setPinOpen(false); setApp(""); setKeyboard(false); }}
@@ -847,7 +858,7 @@ function PhoneRuntime({
               </div>
             </div>
           )}
-          {keyboard && <DeviceKeyboard close={() => setKeyboard(false)} />}
+          {keyboard && <DeviceKeyboard target={keyboardTarget} close={() => setKeyboard(false)} />}
           {loadError && (
             <button className="runtime-error" onClick={() => setLoadError("")}>
               {loadError}
