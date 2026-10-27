@@ -111,9 +111,14 @@ export function compileStory(raw: unknown): { story: Story; work: Work } {
   s.installedApps = s.installedApps.filter(
     (app) => !isRemovedApp(typeof app === "string" ? app : app.id),
   );
-  s.chats = s.chats.filter((chat) => !isRemovedApp(chat.app));
+  s.chats = s.chats.map((chat) =>
+    isRemovedApp(chat.app) ? { ...chat, app: "messages" } : chat,
+  );
   s.content = Object.fromEntries(
-    Object.entries(s.content).filter(([app]) => !isRemovedApp(app)),
+    Object.entries(s.content).map(([app, items]) => [
+      isRemovedApp(app) ? (app === "wechat" ? "messages" : "notes") : app,
+      items,
+    ]),
   );
   const fail = (p: string, m: string): never => {
     throw new StoryIssue(p, m);
