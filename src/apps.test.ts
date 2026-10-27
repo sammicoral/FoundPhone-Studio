@@ -38,20 +38,20 @@ describe("optional app lifecycle", () => {
     const w = createWork();
     installApp(w, "whatsapp");
     const data = structuredClone(w.data.whatsapp);
-    removeFromHome(w, "wechat");
+    removeFromHome(w, "whatsapp");
     expect(w.apps.find((a) => a.id === "whatsapp")).toMatchObject({
       installed: true,
       visible: false,
     });
-    expect(w.data.wechat).toEqual(data);
-    uninstallApp(w, "wechat", true);
-    expect(w.apps.find((a) => a.id === "wechat")?.installed).toBe(false);
-    installApp(w, "wechat");
-    expect(w.apps.find((a) => a.id === "wechat")).toMatchObject({
+    expect(w.data.whatsapp).toEqual(data);
+    uninstallApp(w, "whatsapp", true);
+    expect(w.apps.find((a) => a.id === "whatsapp")?.installed).toBe(false);
+    installApp(w, "whatsapp");
+    expect(w.apps.find((a) => a.id === "whatsapp")).toMatchObject({
       installed: true,
       visible: true,
     });
-    expect(w.data.wechat).toEqual(data);
+    expect(w.data.whatsapp).toEqual(data);
   });
   it("deletes app data only when selected and reinstall starts empty", () => {
     const w = createWork();
@@ -63,17 +63,17 @@ describe("optional app lifecycle", () => {
   });
   it("preserves icon, name, folders, order and install state on roundtrip", () => {
     const w = createWork();
-    installApp(w, "wechat");
-    const a = w.apps.find((a) => a.id === "wechat")!;
-    a.name = "私人消息";
+    installApp(w, "whatsapp");
+    const a = w.apps.find((a) => a.id === "whatsapp")!;
+    a.name = "私人訊息";
     a.icon = "信";
     a.folder = "社交";
-    moveApp(w, "wechat", "phone");
-    uninstallApp(w, "whatsapp", true);
+    moveApp(w, "whatsapp", "phone");
+    uninstallApp(w, "instagram", true);
     const copy = validateWork(JSON.parse(JSON.stringify(w)));
     expect(copy).toEqual(w);
-    expect(copy.apps[0].id).toBe("wechat");
-    expect(copy.apps.find((a) => a.id === "whatsapp")?.installed).toBe(false);
+    expect(copy.apps[0].id).toBe("whatsapp");
+    expect(copy.apps.find((a) => a.id === "instagram")?.installed).toBe(false);
   });
   it("blocks installation of removed apps", () => {
     const w = createWork();
