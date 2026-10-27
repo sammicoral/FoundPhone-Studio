@@ -145,7 +145,21 @@ function PhoneRuntime({
   const noticesSeen = useRef(0);
   const [contextApp, setContextApp] = useState("");
   const [deviceScale, setDeviceScale] = useState(0.84);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const shell = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const syncFullscreen = () => setIsFullscreen(!!document.fullscreenElement);
+    document.addEventListener("fullscreenchange", syncFullscreen);
+    return () => document.removeEventListener("fullscreenchange", syncFullscreen);
+  }, []);
+  const toggleFullscreen = async () => {
+    try {
+      if (document.fullscreenElement) await document.exitFullscreen();
+      else await shell.current?.requestFullscreen();
+    } catch {
+      setLoadError("目前的瀏覽器不支援全螢幕模式。");
+    }
+  };
   const gesture = useRef({ x: 0, y: 0, time: 0, zone: "" });
   const [launchOrigin, setLaunchOrigin] = useState(screenOrigin);
 
@@ -545,6 +559,9 @@ function PhoneRuntime({
               battery={work.phone.battery}
               network={work.phone.network}
               close={() => setPanel("")}
+              onLock={() => { setPanel(""); setLocked(true); setPinOpen(false); setApp(""); setKeyboard(false); }}
+              onFullscreen={toggleFullscreen}
+              isFullscreen={isFullscreen}
             />
           )}
           {panel && panel !== "control" && panel !== "switcher" && (
