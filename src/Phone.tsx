@@ -149,8 +149,9 @@ function PhoneRuntime({
   const shell = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const fitViewport = () => {
-      // Fit the whole phone to the available viewport height first, then width.
-      // Safari's keyboard changes the visible height, so don't rescale while typing.
+      // Use stable physical screen dimensions for scale; Safari's innerHeight
+      // changes with its browser bars and can make the phone shrink unpredictably.
+      // Keep height as the primary constraint and width as a secondary limit.
       const active = document.activeElement;
       const keyboardLikelyOpen =
         active instanceof HTMLInputElement ||
@@ -158,8 +159,8 @@ function PhoneRuntime({
         (active instanceof HTMLElement && active.isContentEditable);
       if (keyboardLikelyOpen) return;
       const widthScale = (window.innerWidth - 24) / 406;
-      const heightScale = (window.innerHeight - 32) / 860;
-      const scale = Math.max(0.4, Math.min(1, widthScale, heightScale));
+      const heightScale = (window.screen.height - 180) / 860;
+      const scale = Math.max(0.55, Math.min(1, heightScale, widthScale));
       setViewportScale({ x: scale, y: scale });
     };
     fitViewport();
