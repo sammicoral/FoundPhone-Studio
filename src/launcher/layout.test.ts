@@ -117,7 +117,7 @@ it("migrates preview folders once while preserving custom folders and widgets", 
 
 it("removes retired apps from legacy saved layouts", () => {
   const w = work();
-  const layout = defaultLayout(w) as any;
+  const layout = structuredClone(defaultLayout(w));
   layout.apps.push(
     { id: "wechat", name: "微信", installed: true, visible: true, dock: false, folder: "", icon: "" },
     { id: "alipay", name: "支付寶", installed: true, visible: true, dock: false, folder: "", icon: "" },
