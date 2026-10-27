@@ -147,23 +147,50 @@ function PhoneRuntime({
   const [isFullscreen, setIsFullscreen] = useState(true);
   const [viewportScale, setViewportScale] = useState({ x: 1, y: 1 });
   const shell = useRef<HTMLDivElement>(null);
+  const keyboardViewportWasOpen = useRef(false);
   useEffect(() => {
+    let restoreTimer: ReturnType<typeof setTimeout> | undefined;
     const fitViewport = () => {
-      // Keep the phone scale tied to the layout viewport, not Safari's temporary
-      // keyboard viewport. iOS may keep the input focused after the keyboard closes,
-      // so focus alone must never prevent the scale from being restored.
       const active = document.activeElement;
       const inputFocused =
         active instanceof HTMLInputElement ||
         active instanceof HTMLTextAreaElement ||
         (active instanceof HTMLElement && active.isContentEditable);
-      const visualHeight = window.visualViewport?.height ?? window.innerHeight;
+      const visualViewport = window.visualViewport;
+      const visualHeight = visualViewport?.height ?? window.innerHeight;
       const keyboardActuallyVisible =
         inputFocused && visualHeight < window.innerHeight - 120;
-      if (keyboardActuallyVisible) return;
+
+      if (keyboardActuallyVisible) {
+        keyboardViewportWasOpen.current = true;
+        return;
+      }
+
+      // When iOS hides its keyboard, Safari can leave the page zoomed and scrolled
+      // even though the visual viewport has returned. Blur the stale input focus,
+      // then reset the page position and recalculate the original phone scale.
+      if (keyboardViewportWasOpen.current) {
+        keyboardViewportWasOpen.current = false;
+        if (restoreTimer) clearTimeout(restoreTimer);
+        restoreTimer = setTimeout(() => {
+          const focused = document.activeElement;
+          if (
+            focused instanceof HTMLInputElement ||
+            focused instanceof HTMLTextAreaElement ||
+            (focused instanceof HTMLElement && focused.isContentEditable)
+          ) {
+            focused.blur();
+          }
+          window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+          const width = document.documentElement.clientWidth;
+          const height = document.documentElement.clientHeight || window.innerHeight;
+          const scale = Math.max(0.35, Math.min(1, (height - 8) / 860, (width - 8) / 406));
+          setViewportScale({ x: scale, y: scale });
+        }, 120);
+      }
+
       const availableWidth = document.documentElement.clientWidth;
       const availableHeight = document.documentElement.clientHeight || window.innerHeight;
-      // Account for the shell's 8px padding on each side; keep a small safety margin.
       const scale = Math.max(
         0.35,
         Math.min(1, (availableHeight - 8) / 860, (availableWidth - 8) / 406),
@@ -177,11 +204,14 @@ function PhoneRuntime({
     window.addEventListener("orientationchange", fitViewport);
     window.visualViewport?.addEventListener("resize", fitViewport);
     window.visualViewport?.addEventListener("scroll", fitViewport);
+    window.addEventListener("focusout", fitViewport, true);
     return () => {
+      if (restoreTimer) clearTimeout(restoreTimer);
       window.removeEventListener("resize", fitViewport);
       window.removeEventListener("orientationchange", fitViewport);
       window.visualViewport?.removeEventListener("resize", fitViewport);
       window.visualViewport?.removeEventListener("scroll", fitViewport);
+      window.removeEventListener("focusout", fitViewport, true);
     };
   }, []);
   useEffect(() => {
