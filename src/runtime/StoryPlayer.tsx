@@ -15,8 +15,20 @@ const BOYFRIENDS = [
 
 type BoyfriendId = (typeof BOYFRIENDS)[number]["id"];
 
+const PERMANENTLY_REMOVED_APPS = new Set([
+  "qq",
+  "bilibili",
+  "netease",
+  "reddit",
+  "telegram",
+]);
+
 function personalizeWork(source: Work, playerName: string, playerAccount: string, boyfriend: BoyfriendId): Work {
   const work = structuredClone(source);
+  // Sanitize the selected story before the first render so removed apps never
+  // flash on the home screen, even if a cached story JSON still contains them.
+  work.apps = work.apps.filter((app) => !PERMANENTLY_REMOVED_APPS.has(app.id));
+  for (const id of PERMANENTLY_REMOVED_APPS) delete work.data[id];
   const originalOwner = work.phone.owner;
   work.phone.owner = playerName;
   work.variables = {
