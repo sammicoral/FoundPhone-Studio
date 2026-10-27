@@ -150,17 +150,16 @@ function PhoneRuntime({
   const shell = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const fitFullscreen = () => {
-      const width = document.documentElement.clientWidth || window.innerWidth;
-      const height = window.visualViewport?.height || window.innerHeight;
+      // Use the layout viewport, not visualViewport: on iOS the visual viewport
+      // can shrink when browser chrome or the keyboard changes, making the phone
+      // unexpectedly smaller when fullscreen is toggled.
+      const width = Math.max(document.documentElement.clientWidth, window.innerWidth);
+      const height = window.innerHeight;
       setFullscreenFitScale(Math.min(width / 393, height / 852));
     };
     fitFullscreen();
     window.addEventListener("resize", fitFullscreen);
-    window.visualViewport?.addEventListener("resize", fitFullscreen);
-    return () => {
-      window.removeEventListener("resize", fitFullscreen);
-      window.visualViewport?.removeEventListener("resize", fitFullscreen);
-    };
+    return () => window.removeEventListener("resize", fitFullscreen);
   }, []);
   useEffect(() => {
     const syncFullscreen = () => setIsFullscreen(!!document.fullscreenElement);
