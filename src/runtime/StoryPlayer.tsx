@@ -136,8 +136,13 @@ function StoryPlayer() {
                       aria-pressed={boyfriend === member.id}
                       onClick={() => setBoyfriend(member.id)}
                     >
-                      <span className="boyfriend-avatar" aria-hidden="true">
-                        <span className="avatar-placeholder">{member.name.slice(0, 1)}</span>
+                      <span className="boyfriend-avatar">
+                        <img
+                          className="boyfriend-avatar-image"
+                          src={import.meta.env.BASE_URL + "assets/" + member.id + "-avatar.jpg"}
+                          alt={member.name + " 頭像"}
+                          loading="lazy"
+                        />
                       </span>
                       <span className="boyfriend-name">{member.name}</span>
                       <span className="boyfriend-check" aria-hidden="true">{boyfriend === member.id ? "✓" : ""}</span>
