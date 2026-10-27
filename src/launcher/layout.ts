@@ -125,7 +125,7 @@ export function validateLayout(raw: unknown, input: Work) {
     for (const app of layout.apps) {
       if (
         visibleApps.includes(app.id) ||
-        ["中国", "国内", "国际", "海外", "国内App", "国际App"].includes(
+        ["中国", "国内", "国际", "海外", "国内App", "国际App", "國內", "國際", "海外App"].includes(
           app.folder,
         )
       ) {
