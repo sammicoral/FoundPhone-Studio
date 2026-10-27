@@ -25,6 +25,8 @@ import {
   Play,
   Headphones,
   Film,
+  Hash,
+  Video,
   AtSign,
   Send,
   Tv,
