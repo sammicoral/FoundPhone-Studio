@@ -41,7 +41,6 @@ import {
   type CSSProperties,
 } from "react";
 import { AnimatePresence } from "motion/react";
-import { createPortal } from "react-dom";
 import {
   ChevronLeft,
   Plus,
@@ -167,21 +166,6 @@ function PhoneRuntime({
     document.addEventListener("fullscreenchange", syncFullscreen);
     return () => document.removeEventListener("fullscreenchange", syncFullscreen);
   }, []);
-  useEffect(() => {
-    if (!isFullscreen) return;
-    const body = document.body;
-    const root = document.documentElement;
-    const previousBodyOverflow = body.style.overflow;
-    const previousRootOverflow = root.style.overflow;
-    // Lock document scrolling without fixing the body itself. On iOS Safari,
-    // position: fixed on body can shift the layout viewport and move the portal.
-    body.style.overflow = "hidden";
-    root.style.overflow = "hidden";
-    return () => {
-      body.style.overflow = previousBodyOverflow;
-      root.style.overflow = previousRootOverflow;
-    };
-  }, [isFullscreen]);
   const toggleFullscreen = async () => {
     if (document.fullscreenElement) {
       try { await document.exitFullscreen(); } catch { setIsFullscreen(false); }
@@ -194,15 +178,12 @@ function PhoneRuntime({
     if (typeof shell.current?.requestFullscreen === "function") {
       try {
         await shell.current.requestFullscreen();
-        // Some browsers expose requestFullscreen but don't actually enter fullscreen.
-        // Only skip the fallback if the browser confirms fullscreen state.
-        if (document.fullscreenElement) return;
+        return;
       } catch {
         // iOS Safari and some embedded browsers block the Fullscreen API.
       }
     }
-    // Fallback: fill the available viewport when native fullscreen is unavailable
-    // or the request resolves without changing document.fullscreenElement.
+    // Fallback: fill the available viewport when native fullscreen is unavailable.
     setIsFullscreen(true);
   };
   const gesture = useRef({ x: 0, y: 0, time: 0, zone: "" });
@@ -371,7 +352,7 @@ function PhoneRuntime({
       ),
     });
   if (!ready) return <div className="phone-loading">正在恢復進度…</div>;
-  const phoneContent = (
+  return (
     <div
       ref={shell}
       style={{ "--phone-scale": deviceScale, "--fullscreen-fit-scale": fullscreenFitScale } as CSSProperties}
@@ -864,7 +845,6 @@ function PhoneRuntime({
       </KeyboardContext.Provider>
     </div>
   );
-  return isFullscreen ? createPortal(phoneContent, document.body) : phoneContent;
 }
 function AppSearch({
   apps,
