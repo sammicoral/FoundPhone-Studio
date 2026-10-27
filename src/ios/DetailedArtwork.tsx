@@ -21,11 +21,11 @@ export function DetailedArtwork({ id }: { id: string }) {
   let bg = g("paper"),
     art: ReactNode;
   if (id === "delivery") {
-    bg = "#06C167";
+    bg = "#fff";
     art = (
-      <g fill="#fff" fontFamily="Arial, Helvetica, sans-serif" fontWeight="700">
-        <text x="7" y="28" fontSize="14" letterSpacing="-.7">UBER</text>
-        <text x="7" y="43" fontSize="14" letterSpacing="-.7">EATS</text>
+      <g fontFamily="Arial, Helvetica, sans-serif" textAnchor="middle" fill="#000">
+        <text x="32" y="29" fontSize="17" fontWeight="500" letterSpacing="-.7">Uber</text>
+        <text x="32" y="47" fontSize="17" fontWeight="800" letterSpacing="-.7">Eats</text>
       </g>
     );
   } else if (id === "appstore") {
