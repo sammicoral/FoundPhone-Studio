@@ -72,6 +72,7 @@ export function DeviceLock({
   onCamera,
   onLight,
   passcode,
+  wallpaperImage,
 }: {
   work: Work;
   time: string;
@@ -84,6 +85,7 @@ export function DeviceLock({
   onCamera: () => void;
   onLight: () => void;
   passcode?: string;
+  wallpaperImage?: string;
 }) {
   const [code, setCode] = useState("");
   const activePasscode = passcode ?? work.phone.passcode;
@@ -108,6 +110,7 @@ export function DeviceLock({
   return (
     <motion.div
       className={"lock-screen device-lock " + (pinOpen ? "pin-open" : "")}
+      style={wallpaperImage ? { backgroundImage: "url(" + wallpaperImage + ")", backgroundSize: "cover", backgroundPosition: "center" } : undefined}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ y: -852, opacity: 0 }}
