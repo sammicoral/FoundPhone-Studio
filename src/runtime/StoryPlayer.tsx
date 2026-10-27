@@ -93,7 +93,7 @@ function StoryPlayer() {
       ) : source ? (
         <section className="player-onboarding" aria-labelledby="onboarding-title">
           <div className="onboarding-card">
-            <div className="onboarding-mark" aria-hidden="true">✳</div>
+            <div className="onboarding-mark" aria-hidden="true">🩷</div>
             <p className="onboarding-eyebrow">YOUR STORY STARTS HERE</p>
             <h1 id="onboarding-title">先認識一下你</h1>
             <p className="onboarding-description">
@@ -125,7 +125,6 @@ function StoryPlayer() {
                   required
                 />
               </div>
-              <p className="onboarding-hint">這些資料會用來顯示手機機主與社群帳號。</p>
               {formError && <p className="onboarding-error" role="alert">{formError}</p>}
               <button className="onboarding-submit" type="submit">進入我的手機 <span aria-hidden="true">→</span></button>
             </form>
