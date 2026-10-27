@@ -21,7 +21,7 @@ export function DetailedArtwork({ id }: { id: string }) {
   let bg = g("paper"),
     art: ReactNode;
   if (id === "delivery") {
-    bg = "#fff";
+    bg = "#06C167";
     art = (
       <g fontFamily="Arial, Helvetica, sans-serif" textAnchor="middle" fill="#000">
         <text x="32" y="29" fontSize="17" fontWeight="500" letterSpacing="-.7">Uber</text>
