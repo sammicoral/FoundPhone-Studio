@@ -152,7 +152,9 @@ function PhoneRuntime({
     const fitViewport = () => {
       const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
       const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
-      setViewportScale({ x: viewportWidth / 393, y: viewportHeight / 852 });
+      // Keep the 393×852 phone canvas proportional; fit it entirely inside the viewport.
+      const scale = Math.min(viewportWidth / 393, viewportHeight / 852);
+      setViewportScale({ x: scale, y: scale });
     };
     fitViewport();
     window.addEventListener("resize", fitViewport);
