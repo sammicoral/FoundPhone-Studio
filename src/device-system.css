@@ -1380,10 +1380,8 @@
 .ios18 .wallpaper-preview-shortcuts i { width: 20px; height: 20px; border-radius: 50%; background: #ffffff55; border: 1px solid #ffffff77; }
 
 
-/* Fullscreen fallback: cover the browser's available viewport with one phone page.
-   Scale the fixed 393x852 canvas proportionally, cropping its top/bottom as needed;
-   never stretch the page or reveal the adjacent home-screen page. */
-.phone-shell.ios-fullscreen-fallback {
+/* Viewport-first phone layout: the entire simulated device uses the browser viewport. */
+.phone-shell.ios18.ios-viewport-mode {
   position: fixed !important;
   inset: 0 !important;
   width: 100vw !important;
@@ -1398,19 +1396,19 @@
   overflow: hidden !important;
   transform: none !important;
   box-shadow: none !important;
+  background: transparent !important;
   z-index: 9999 !important;
 }
-.phone-shell.ios-fullscreen-fallback .phone-screen {
+.phone-shell.ios18.ios-viewport-mode .phone-screen {
   position: absolute !important;
-  left: 50% !important;
-  top: 50% !important;
+  left: 0 !important;
+  top: 0 !important;
   width: 393px !important;
   height: 852px !important;
   max-width: none !important;
   border-radius: 0 !important;
-  translate: -50% -50% !important;
-  scale: var(--fullscreen-cover-scale, 1) !important;
-  transform: none !important;
-  transform-origin: center center !important;
+  transform: scaleX(var(--viewport-scale-x, 1)) scaleY(var(--viewport-scale-y, 1)) !important;
+  transform-origin: top left !important;
   flex: none !important;
+  overflow: hidden !important;
 }
