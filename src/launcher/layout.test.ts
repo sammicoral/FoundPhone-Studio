@@ -114,3 +114,18 @@ it("migrates preview folders once while preserving custom folders and widgets", 
     expect(revalidated.apps.some((a) => a.id === id)).toBe(false);
   }
 });
+
+it("removes retired apps from legacy saved layouts", () => {
+  const w = work();
+  const layout = defaultLayout(w) as any;
+  layout.apps.push(
+    { id: "wechat", name: "微信", installed: true, visible: true, dock: false, folder: "", icon: "" },
+    { id: "alipay", name: "支付寶", installed: true, visible: true, dock: false, folder: "", icon: "" },
+  );
+  layout.order.push("wechat", "alipay");
+  layout.positions.wechat = { page: 0, x: 1, y: 1 };
+  const migrated = validateLayout(layout, w);
+  expect(migrated.apps.some((app) => ["wechat", "alipay"].includes(app.id))).toBe(false);
+  expect(migrated.order).not.toContain("wechat");
+  expect(migrated.positions.wechat).toBeUndefined();
+});
