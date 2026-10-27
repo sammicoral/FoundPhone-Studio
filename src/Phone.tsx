@@ -250,7 +250,11 @@ function PhoneRuntime({
       .then((saved) => {
         if (!active) return;
         if (saved && saved.state.revision === work.updatedAt)
-          setOwn(saved.state);
+          setOwn({
+            ...saved.state,
+            // Keep per-player values from the currently selected story when restoring progress.
+            variables: { ...saved.state.variables, ...work.variables },
+          });
         else {
           setOwn(dispatch(work, initialRuntime(work), "start"));
           if (saved) setLoadError("作品已更新，已重新開始。");
