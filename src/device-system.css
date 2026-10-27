@@ -1384,7 +1384,8 @@
 .phone-shell.ios-fullscreen-fallback {
   position: fixed !important;
   inset: 0 !important;
-  display: block !important;
+  display: grid !important;
+  place-items: center !important;
   box-sizing: border-box !important;
   padding: 0 !important;
   width: 100vw !important;
@@ -1399,16 +1400,18 @@
   transform: none !important;
   z-index: 9999 !important;
   overflow: hidden !important;
-  background: transparent !important;
+  background: #000 !important;
 }
 .phone-shell.ios-fullscreen-fallback .phone-screen {
-  position: absolute !important;
-  inset: 0 !important;
+  position: relative !important;
+  inset: auto !important;
   box-sizing: border-box !important;
-  width: 100% !important;
-  min-width: 0 !important;
-  height: 100% !important;
-  min-height: 0 !important;
-  border-radius: 0 !important;
-  transform: none !important;
+  flex: none !important;
+  width: 393px !important;
+  min-width: 393px !important;
+  height: 852px !important;
+  min-height: 852px !important;
+  border-radius: 45px !important;
+  transform: scale(var(--fullscreen-fit-scale, 1)) !important;
+  transform-origin: center center !important;
 }
