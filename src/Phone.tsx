@@ -149,18 +149,20 @@ function PhoneRuntime({
   const shell = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const fitViewport = () => {
-      // Fit to the browser's current visible viewport on any device/browser.
-      // Use the visible height as the primary constraint and width only as a cap.
-      // Do not recalculate from visualViewport while the native keyboard is active:
-      // iOS can resize/zoom the visual viewport during focus and shift the whole UI.
+      // Keep the phone scale tied to the layout viewport, not Safari's temporary
+      // keyboard viewport. iOS may keep the input focused after the keyboard closes,
+      // so focus alone must never prevent the scale from being restored.
       const active = document.activeElement;
-      const keyboardLikelyOpen =
+      const inputFocused =
         active instanceof HTMLInputElement ||
         active instanceof HTMLTextAreaElement ||
         (active instanceof HTMLElement && active.isContentEditable);
-      if (keyboardLikelyOpen) return;
+      const visualHeight = window.visualViewport?.height ?? window.innerHeight;
+      const keyboardActuallyVisible =
+        inputFocused && visualHeight < window.innerHeight - 120;
+      if (keyboardActuallyVisible) return;
       const availableWidth = document.documentElement.clientWidth;
-      const availableHeight = window.innerHeight;
+      const availableHeight = document.documentElement.clientHeight || window.innerHeight;
       // Account for the shell's 8px padding on each side; keep a small safety margin.
       const scale = Math.max(
         0.35,
