@@ -18,7 +18,6 @@ import {
 import {
   DeviceLock,
   ControlCenter,
-  DeviceKeyboard,
   KeyboardContext,
   NativeSettings,
 } from "./DeviceSystem";
@@ -139,7 +138,6 @@ function PhoneRuntime({
   const [pinOpen, setPinOpen] = useState(false);
   const [quickCamera, setQuickCamera] = useState(false);
   const [keyboard, setKeyboard] = useState(false);
-  const [keyboardTarget, setKeyboardTarget] = useState<HTMLElement | null>(null);
   const [recent, setRecent] = useState<string[]>([]);
   const appSnapshots = useRef(new Map<string, HTMLElement>());
   const [banner, setBanner] = useState("");
@@ -151,20 +149,17 @@ function PhoneRuntime({
   const shell = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const fitViewport = () => {
-      const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
-      const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
-      // Keep the 393×852 phone canvas proportional; fit it entirely inside the viewport.
+      // Use the layout viewport, not visualViewport: iOS shrinks visualViewport
+      // when the native keyboard opens, which must not resize the simulated phone.
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
       const scale = Math.min(viewportWidth / 393, viewportHeight / 852);
       setViewportScale({ x: scale, y: scale });
     };
     fitViewport();
     window.addEventListener("resize", fitViewport);
-    window.visualViewport?.addEventListener("resize", fitViewport);
-    window.visualViewport?.addEventListener("scroll", fitViewport);
     return () => {
       window.removeEventListener("resize", fitViewport);
-      window.visualViewport?.removeEventListener("resize", fitViewport);
-      window.visualViewport?.removeEventListener("scroll", fitViewport);
     };
   }, []);
   useEffect(() => {
@@ -398,15 +393,6 @@ function PhoneRuntime({
            })()}
           data-app={app}
           onDragStart={(e) => e.preventDefault()}
-          onFocusCapture={(e) => {
-            const target = e.target as HTMLElement;
-            if (target.closest(".device-keyboard")) return;
-            if ((target instanceof HTMLInputElement && ["text", "search", "email", "url", "tel", "password"].includes(target.type)) || target instanceof HTMLTextAreaElement || target.isContentEditable) {
-              if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) target.setAttribute("inputmode", "none");
-              setKeyboardTarget(target);
-              setKeyboard(true);
-            }
-          }}
           onPointerDown={(e) => {
             gestureConsumed.current = false;
             const button = (e.target as HTMLElement).closest<HTMLElement>(
@@ -857,7 +843,6 @@ function PhoneRuntime({
               </div>
             </div>
           )}
-          {keyboard && <DeviceKeyboard target={keyboardTarget} close={() => setKeyboard(false)} />}
           {loadError && (
             <button className="runtime-error" onClick={() => setLoadError("")}>
               {loadError}
