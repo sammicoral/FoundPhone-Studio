@@ -482,6 +482,7 @@ function PhoneRuntime({
                 error={pinError}
                 onUnlock={unlock}
                 passcode={String(s.ui?.settings?.passcode ?? work.phone.passcode ?? "")}
+                wallpaperImage={s.ui?.settings?.lockWallpaperImage || (s.variables.boyfriend === "martin" ? String(s.variables.martinLockScreen || "") : "")}
                 onLight={() => setPanel("light")}
                 onCamera={() => {
                   setQuickCamera(true);
