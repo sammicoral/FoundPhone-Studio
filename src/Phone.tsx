@@ -173,19 +173,13 @@ function PhoneRuntime({
     const root = document.documentElement;
     const previousBodyOverflow = body.style.overflow;
     const previousRootOverflow = root.style.overflow;
-    const previousBodyPosition = body.style.position;
-    const previousBodyWidth = body.style.width;
-    // Prevent iOS Safari from scrolling the document while fullscreen fallback is active.
+    // Lock document scrolling without fixing the body itself. On iOS Safari,
+    // position: fixed on body can shift the layout viewport and move the portal.
     body.style.overflow = "hidden";
     root.style.overflow = "hidden";
-    body.style.position = "fixed";
-    body.style.width = "100%";
-    window.scrollTo(0, 0);
     return () => {
       body.style.overflow = previousBodyOverflow;
       root.style.overflow = previousRootOverflow;
-      body.style.position = previousBodyPosition;
-      body.style.width = previousBodyWidth;
     };
   }, [isFullscreen]);
   const toggleFullscreen = async () => {
