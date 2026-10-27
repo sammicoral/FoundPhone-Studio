@@ -149,11 +149,10 @@ function PhoneRuntime({
   const shell = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const fitViewport = () => {
-      // Use the layout viewport, not visualViewport: iOS shrinks visualViewport
-      // when the native keyboard opens, which must not resize the simulated phone.
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
-      const scale = Math.min(viewportWidth / 393, viewportHeight / 852);
+      // Scale from width only. On iOS, innerHeight can temporarily report the
+      // keyboard-reduced viewport during startup, leaving the phone permanently tiny.
+      // The phone stays at its normal portrait scale while the native keyboard is open.
+      const scale = Math.min(1, window.innerWidth / 393);
       setViewportScale({ x: scale, y: scale });
     };
     fitViewport();
