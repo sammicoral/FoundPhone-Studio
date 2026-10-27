@@ -149,19 +149,17 @@ function PhoneRuntime({
   const shell = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const fitViewport = () => {
-      // Use the device's full screen dimensions, not innerHeight: Safari changes
-      // innerHeight as its toolbars and keyboard appear, which causes scale jumps.
+      // Fit the whole phone to the available viewport height first, then width.
+      // Safari's keyboard changes the visible height, so don't rescale while typing.
       const active = document.activeElement;
       const keyboardLikelyOpen =
         active instanceof HTMLInputElement ||
         active instanceof HTMLTextAreaElement ||
         (active instanceof HTMLElement && active.isContentEditable);
       if (keyboardLikelyOpen) return;
-      const widthScale = window.innerWidth / 393;
-      // Reserve space for Safari's top and bottom browser controls without using
-      // its transient visible viewport height.
-      const heightScale = (window.screen.height - 100) / 852;
-      const scale = Math.max(0.55, Math.min(1, widthScale, heightScale));
+      const widthScale = (window.innerWidth - 24) / 406;
+      const heightScale = (window.innerHeight - 32) / 860;
+      const scale = Math.max(0.4, Math.min(1, widthScale, heightScale));
       setViewportScale({ x: scale, y: scale });
     };
     fitViewport();
@@ -389,7 +387,7 @@ function PhoneRuntime({
   return (
     <div
       ref={shell}
-      style={{ "--phone-scale": 1, "--viewport-scale-x": viewportScale.x, "--viewport-scale-y": viewportScale.y } as CSSProperties}
+      style={{ "--phone-scale": viewportScale.x } as CSSProperties}
       className={`phone-shell ios18 ios-viewport-mode ${work.phone.theme === "dark" ? "dark-phone" : ""}`}
     >
       <KeyboardContext.Provider value={setKeyboard}>
