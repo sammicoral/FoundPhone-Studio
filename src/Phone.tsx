@@ -341,7 +341,26 @@ function PhoneRuntime({
   useEffect(() => {
     if (app && !work.apps.some((a) => a.id === app && a.installed)) setApp("");
   }, [app, work.apps]);
-  const displayTime = creator ? work.phone.time : s.time || work.phone.time;
+  const [realNow, setRealNow] = useState(() => Date.now());
+  useEffect(() => {
+    const timer = window.setInterval(() => setRealNow(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+  const taipeiNow = new Date(realNow);
+  const displayTime = new Intl.DateTimeFormat("zh-TW", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+    timeZone: "Asia/Taipei",
+  }).format(taipeiNow);
+  const taipeiDateParts = new Intl.DateTimeFormat("en-CA", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    timeZone: "Asia/Taipei",
+  }).formatToParts(taipeiNow);
+  const displayDate = `${taipeiDateParts.find((part) => part.type === "year")?.value}-${taipeiDateParts.find((part) => part.type === "month")?.value}-${taipeiDateParts.find((part) => part.type === "day")?.value}`;
+  const clockWork = { ...work, phone: { ...work.phone, date: displayDate } };
   const plugin = getApp(app);
   useEffect(() => {
     const count = s.notifications.length;
@@ -473,11 +492,7 @@ function PhoneRuntime({
           <AnimatePresence mode="wait">
             {locked && !(quickCamera && app === "camera") ? (
               <DeviceLock
-                work={
-                  s.date
-                    ? { ...work, phone: { ...work.phone, date: s.date } }
-                    : work
-                }
+                work={clockWork}
                 time={displayTime}
                 notices={s.notifications}
                 onDismiss={dismissNotice}
@@ -545,7 +560,7 @@ function PhoneRuntime({
                 }
                 storeOpen={app === "appstore"}
                 closeStore={() => setApp("")}
-                work={work}
+                work={clockWork}
                 wallpaperImage={String(s.ui?.settings?.wallpaperImage || (s.variables.boyfriend === "martin" ? s.variables.martinWallpaper || "" : ""))}
                 layout={deviceLayout.layout}
                 change={deviceLayout.change}
