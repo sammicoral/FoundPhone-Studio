@@ -41,6 +41,7 @@ import {
   type CSSProperties,
 } from "react";
 import { AnimatePresence } from "motion/react";
+import { createPortal } from "react-dom";
 import {
   ChevronLeft,
   Plus,
@@ -373,7 +374,7 @@ function PhoneRuntime({
       ),
     });
   if (!ready) return <div className="phone-loading">正在恢復進度…</div>;
-  return (
+  const phoneContent = (
     <div
       ref={shell}
       style={{ "--phone-scale": deviceScale, "--fullscreen-fit-scale": fullscreenFitScale } as CSSProperties}
@@ -866,6 +867,7 @@ function PhoneRuntime({
       </KeyboardContext.Provider>
     </div>
   );
+  return isFullscreen ? createPortal(phoneContent, document.body) : phoneContent;
 }
 function AppSearch({
   apps,
