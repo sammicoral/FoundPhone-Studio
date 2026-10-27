@@ -110,14 +110,30 @@ try {
       "public/blank-work.json",
       JSON.stringify(blank, null, 2) + "\n",
     );
-    {
-      const preview = compileStory(
-        JSON.parse(await readFile("stories/test-preview/story.json", "utf8")),
-      ).work;
+    const preview = compileStory(
+      JSON.parse(await readFile("stories/test-preview/story.json", "utf8")),
+    ).work;
+    await writeFile(
+      "public/test-work.json",
+      JSON.stringify(preview, null, 2) + "\n",
+    );
+
+    // Each member has an independent source file and generated runtime work.
+    const members = ["martin", "james", "juhoon", "seonghyeon", "keonho"];
+    await mkdir("public/member-stories", { recursive: true });
+    for (const member of members) {
+      const memberFile = `stories/members/${member}.json`;
+      const memberRaw = JSON.parse(await readFile(memberFile, "utf8"));
+      const compiled = compileStory(memberRaw);
+      const memberErrors = testStory(compiled.story, compiled.work);
+      if (memberErrors.length) {
+        throw Error(`${memberFile}: ${memberErrors.join("\\n")}`);
+      }
       await writeFile(
-        "public/test-work.json",
-        JSON.stringify(preview, null, 2) + "\n",
+        `public/member-stories/${member}.json`,
+        JSON.stringify(compiled.work, null, 2) + "\n",
       );
+      console.log(`${memberFile}: build passed`);
     }
   } else if (!["validate", "test"].includes(mode))
     throw Error("未知命令 " + mode);
