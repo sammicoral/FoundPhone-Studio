@@ -31,6 +31,7 @@ export function createWork(title = "雨停之前"): Work {
         "notes",
         "safari",
         "settings",
+        "weverse",
       ].includes(a.id),
       visible: !["qq", "weibo", "bilibili", "alipay", "taobao", "netease", "douyin", "wechat"].includes(a.id),
       dock: !["qq", "weibo", "bilibili", "alipay", "taobao", "netease", "douyin", "wechat"].includes(a.id) && ["phone", "messages", "safari", "music"].includes(a.id),
