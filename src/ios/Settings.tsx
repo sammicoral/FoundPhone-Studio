@@ -79,12 +79,15 @@ export function NativeSettings({
     [passcodeStep, setPasscodeStep] = useState("menu"),
     [passcodeMode, setPasscodeMode] = useState("4"),
     [wallpaperPreview, setWallpaperPreview] = useState(""),
+    [wallpaperTarget, setWallpaperTarget] = useState("home"),
     [cropX, setCropX] = useState(50),
     [cropY, setCropY] = useState(50),
     [cropZoom, setCropZoom] = useState(1),
     [wallpaperMessage, setWallpaperMessage] = useState("");
   const uploadRef = useRef<HTMLInputElement>(null);
-  const currentWallpaper = String(ui?.wallpaperImage ?? "");
+  const currentHomeWallpaper = String(ui?.wallpaperImage ?? "");
+  const currentLockWallpaper = String(ui?.lockWallpaperImage ?? "");
+  const currentWallpaper = wallpaperTarget === "lock" ? currentLockWallpaper : currentHomeWallpaper;
   const configuredPasscode = String(ui?.passcode ?? work.phone.passcode ?? "");
   const saveCroppedWallpaper = () => {
     if (!wallpaperPreview) return;
@@ -99,7 +102,7 @@ export function NativeSettings({
       const context = canvas.getContext("2d");
       if (!context) { setWallpaperMessage("無法處理圖片，請換一張試試。"); return; }
       context.drawImage(image, -sx, -sy, drawWidth, drawHeight);
-      onUi?.("wallpaperImage", canvas.toDataURL("image/jpeg", 0.84));
+      onUi?.(wallpaperTarget === "lock" ? "lockWallpaperImage" : "wallpaperImage", canvas.toDataURL("image/jpeg", 0.84));
       setWallpaperPreview(""); setWallpaperMessage("已套用新壁紙。");
     };
     image.onerror = () => setWallpaperMessage("圖片讀取失敗，請重新選擇。");
@@ -269,10 +272,11 @@ export function NativeSettings({
       case "壁紙":
         return (
           <div className="wallpaper-settings">
-            <p className="settings-page-caption">自訂主畫面與鎖定畫面的壁紙。</p>
-            <div className="wallpaper-editor-preview"><div className="wallpaper-editor-phone" style={{backgroundImage: "url(" + (wallpaperPreview || currentWallpaper) + ")"}}>
+            <p className="settings-page-caption">選擇要自訂的畫面，並挑選喜歡的照片。</p>
+            <div className="wallpaper-target-switch" role="group" aria-label="選擇壁紙類型"><button className={wallpaperTarget === "lock" ? "selected" : ""} onClick={() => { setWallpaperTarget("lock"); setWallpaperPreview(""); setWallpaperMessage(""); }}>鎖定畫面</button><button className={wallpaperTarget === "home" ? "selected" : ""} onClick={() => { setWallpaperTarget("home"); setWallpaperPreview(""); setWallpaperMessage(""); }}>主畫面</button></div>
+            <div className={"wallpaper-editor-preview" + (wallpaperTarget === "lock" ? " lock-preview" : "")}><div className="wallpaper-editor-phone" style={{backgroundImage: "url(" + (wallpaperPreview || currentWallpaper) + ")"}}>
               {!wallpaperPreview && !currentWallpaper && <div className="wallpaper-default-art"><span/><span/></div>}
-              <div className="wallpaper-preview-island" /><div className="wallpaper-preview-clock">9:41</div><div className="wallpaper-preview-dock"><i/><i/><i/><i/></div>
+              <div className="wallpaper-preview-island" />{wallpaperTarget === "lock" && <div className="wallpaper-preview-date">10月27日 星期二</div>}<div className="wallpaper-preview-clock">9:41</div>{wallpaperTarget === "lock" ? <div className="wallpaper-preview-shortcuts"><i/><i/></div> : <div className="wallpaper-preview-dock"><i/><i/><i/><i/></div>}
             </div></div>
             <input ref={uploadRef} type="file" accept="image/*" hidden onChange={e => {
               const file = e.target.files?.[0]; if (!file) return;
@@ -293,7 +297,7 @@ export function NativeSettings({
                 <div className="wallpaper-actions"><button onClick={() => {setCropX(50);setCropY(50);setCropZoom(1);}}><RotateCcw size={16}/>重設裁切</button><button className="wallpaper-apply" onClick={saveCroppedWallpaper}><CheckCircle2 size={16}/>套用壁紙</button></div>
               </div>
             </>}
-            {currentWallpaper && <button className="wallpaper-remove" onClick={() => {onUi?.("wallpaperImage","");setWallpaperMessage("已還原預設壁紙。");}}>移除自訂壁紙</button>}
+            {currentWallpaper && <button className="wallpaper-remove" onClick={() => {onUi?.(wallpaperTarget === "lock" ? "lockWallpaperImage" : "wallpaperImage","");setWallpaperMessage("已還原預設壁紙。");}}>移除自訂壁紙</button>}
             {wallpaperMessage && <p className="settings-page-caption" role="status">{wallpaperMessage}</p>}
           </div>
         );
