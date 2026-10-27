@@ -3,7 +3,6 @@ import { registry } from "./registry";
 import { catalogSkins } from "./skins/catalog";
 import { makeItem, validateWork } from "./schema";
 import { createWork } from "./demo";
-import { getFields } from "./fields";
 describe("independent app coverage and authored attributes", () => {
   it("routes all remaining built-in app identities through dedicated screens or legacy fallbacks", () => {
     const previous = [
@@ -24,21 +23,15 @@ describe("independent app coverage and authored attributes", () => {
     expect(validateWork(w).data.notes[0].meta).toEqual({});
     expect(validateWork(w).data.whatsapp[0].avatar).toBe("");
   });
-  it("roundtrips authored amounts, status, server and position data", () => {
+  it("removes retired app data when validating legacy works", () => {
     const w = createWork();
-    w.data.alipay = [
-      makeItem({
-        title: "書店收款",
-        meta: { amount: "-38.00", status: "交易成功", merchant: "城南舊書店" },
-      }),
-    ];
-    w.data.discord = [
-      makeItem({ meta: { server: "夜班", status: "離線" }, folder: "線索" }),
-    ];
+    w.data.wechat = [makeItem({ title: "legacy" })];
+    w.data.alipay = [makeItem({ title: "legacy" })];
     const copy = validateWork(JSON.parse(JSON.stringify(w)));
-    expect(copy.data.alipay[0].meta.amount).toBe("-38.00");
-    expect(copy.data.discord[0].meta.server).toBe("夜班");
-    expect(getFields("alipay").some((f) => f.key === "amount")).toBe(true);
+    expect(copy.data.wechat).toBeUndefined();
+    expect(copy.data.alipay).toBeUndefined();
+    expect(copy.apps.some((app) => app.id === "wechat")).toBe(false);
+    expect(copy.apps.some((app) => app.id === "alipay")).toBe(false);
   });
   it("rejects non-string or oversized authored attribute values", () => {
     expect(() =>
