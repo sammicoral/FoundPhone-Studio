@@ -83,7 +83,7 @@ function StoryPlayer() {
     return () => abort.abort();
   }, []);
 
-  const enterPhone = (event: FormEvent<HTMLFormElement>) => {
+  const enterPhone = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const name = playerName.trim();
     const account = playerAccount.trim().replace(/^@+/, "");
@@ -91,13 +91,19 @@ function StoryPlayer() {
       setFormError("請填寫姓名／暱稱與社群帳號。");
       return;
     }
-    if (account.length > 40) {
-      setFormError("帳號請控制在 40 個字元以內。");
+    if (!/^[A-Za-z0-9._]{1,40}$/.test(account)) {
+      setFormError("帳號只能使用英文字母、數字、句點（.）與底線（_），最多 40 個字元。");
       return;
     }
-    if (!source) return;
-    setWork(personalizeWork(source, name, account, boyfriend));
     setFormError("");
+    try {
+      const response = await fetch("./member-stories/" + boyfriend + ".json");
+      if (!response.ok) throw Error("無法載入這位成員的故事，請稍後再試。");
+      const memberStory = validateWork(await response.json());
+      setWork(personalizeWork(memberStory, name, account, boyfriend));
+    } catch (e) {
+      setFormError(e instanceof Error ? e.message : "故事載入失敗，請稍後再試。");
+    }
   };
 
   return (
@@ -154,7 +160,7 @@ function StoryPlayer() {
                     name="playerAccount"
                     autoComplete="username"
                     maxLength={40}
-                    placeholder="輸入你的帳號（不需加 @）"
+                    placeholder="輸入英文、數字、. 或 _"
                     value={playerAccount}
                     onChange={(e) => setPlayerAccount(e.target.value)}
                     required
