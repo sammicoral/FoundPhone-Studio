@@ -26,7 +26,7 @@ describe("optional app lifecycle", () => {
         .map((a) => a.id)
         .sort(),
     ).toEqual([...essentialApps].sort());
-    expect(w.apps).toHaveLength(50);
+    expect(w.apps).toHaveLength(41);
   });
   it("upgrades old format v1 app records without uninstalling existing apps", () => {
     const old = createWork();
@@ -36,10 +36,10 @@ describe("optional app lifecycle", () => {
   });
   it("distinguishes home removal from uninstall and keeps content on request", () => {
     const w = createWork();
-    installApp(w, "wechat");
-    const data = structuredClone(w.data.wechat);
+    installApp(w, "whatsapp");
+    const data = structuredClone(w.data.whatsapp);
     removeFromHome(w, "wechat");
-    expect(w.apps.find((a) => a.id === "wechat")).toMatchObject({
+    expect(w.apps.find((a) => a.id === "whatsapp")).toMatchObject({
       installed: true,
       visible: false,
     });
@@ -55,11 +55,11 @@ describe("optional app lifecycle", () => {
   });
   it("deletes app data only when selected and reinstall starts empty", () => {
     const w = createWork();
-    installApp(w, "instagram");
-    uninstallApp(w, "instagram", false);
-    expect(w.data.instagram).toBeUndefined();
-    installApp(w, "instagram");
-    expect(w.data.instagram).toEqual([]);
+    installApp(w, "whatsapp");
+    uninstallApp(w, "whatsapp", false);
+    expect(w.data.whatsapp).toBeUndefined();
+    installApp(w, "whatsapp");
+    expect(w.data.whatsapp).toEqual([]);
   });
   it("preserves icon, name, folders, order and install state on roundtrip", () => {
     const w = createWork();
@@ -74,6 +74,12 @@ describe("optional app lifecycle", () => {
     expect(copy).toEqual(w);
     expect(copy.apps[0].id).toBe("wechat");
     expect(copy.apps.find((a) => a.id === "whatsapp")?.installed).toBe(false);
+  });
+  it("blocks installation of removed apps", () => {
+    const w = createWork();
+    installApp(w, "wechat");
+    expect(w.apps.some((a) => a.id === "wechat")).toBe(false);
+    expect(w.data.wechat).toBeUndefined();
   });
   it("retains custom app identity across uninstall and reinstall", () => {
     const w = createWork();
