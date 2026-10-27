@@ -1403,6 +1403,7 @@
   background: #000 !important;
 }
 .phone-shell.ios-fullscreen-fallback .phone-screen {
+  zoom: 1 !important;
   position: relative !important;
   inset: auto !important;
   box-sizing: border-box !important;
