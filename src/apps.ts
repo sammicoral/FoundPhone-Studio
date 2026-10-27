@@ -9,6 +9,7 @@ export const essentialApps = [
   "notes",
   "safari",
   "settings",
+  "weverse",
 ];
 const systemApps = new Set([
   "appstore",
