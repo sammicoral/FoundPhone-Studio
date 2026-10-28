@@ -4933,3 +4933,22 @@ label {
     min-height: 100dvh !important;
   }
 }
+
+/* The phone stage can extend beyond its own content height on mobile Safari;
+   keep the surrounding workspace black so the page never reveals a white band. */
+.studio,
+.main-workspace,
+.creator-layout,
+.phone-stage,
+.phone-presentation {
+  background: #000 !important;
+}
+.main-workspace {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+.creator-layout,
+.phone-stage {
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+}
