@@ -3262,7 +3262,10 @@ label {
   color: #86868b;
 }
 .phone-stage {
-  background: #f1f1f3;
+  background: #000 !important;
+}
+.phone-presentation {
+  background: #000;
 }
 .stage-heading {
   padding-top: 21px;
