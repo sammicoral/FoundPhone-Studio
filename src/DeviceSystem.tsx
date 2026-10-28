@@ -84,7 +84,6 @@ export function DeviceLock({
   onCamera: () => void;
   onLight: () => void;
   passcode?: string;
-  wallpaperImage?: string;
 }) {
   const [code, setCode] = useState("");
   const activePasscode = passcode ?? work.phone.passcode;
