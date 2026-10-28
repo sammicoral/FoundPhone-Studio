@@ -164,11 +164,7 @@ export function DeviceLock({
         <div className="device-passcode">
           <LockKeyhole size={22} />
           <h2>輸入密碼</h2>
-          {hint && (
-            <div key={hintKey} className="passcode-birthday-hint" role="status">
-              {hint}
-            </div>
-          )}
+
           <div
             className={"passcode-dots " + (error ? "pin-shake" : "")}
             aria-label={"已輸入" + code.length + "位密碼"}
@@ -226,6 +222,11 @@ export function DeviceLock({
           <span role="status" className="pin-error">
             {error}
           </span>
+          {hint && (
+            <div key={hintKey} className="passcode-birthday-hint" role="status">
+              {hint}
+            </div>
+          )}
           {!/^[0-9]+$/.test(activePasscode) && (
             <button onClick={() => onUnlock(code)}>解鎖</button>
           )}
