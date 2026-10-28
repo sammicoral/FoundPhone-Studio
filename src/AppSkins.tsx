@@ -1068,8 +1068,8 @@ export function WeverseSkin(p: SkinProps) {
           <div className="wv-topline"><button onClick={() => setSearching(!searching)}><Search size={20}/></button><strong>社群</strong><button onClick={() => setSearching(!searching)}><Plus size={22}/></button></div>
           {searching && <label className="wv-search"><Search size={18}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="請輸入藝人姓名"/></label>}
           <div className="wv-scroll">
-            <h2 className="wv-section-title">我的社群</h2><button className="wv-my-community" onClick={() => setCommunityTab("CORTIS")}><span className="wv-cortis-icon">C</span><span>CORTIS</span><i>●</i></button>
-            <button className="wv-promo" onClick={() => setCommunityTab("CORTIS")}>OPEN! ASC2NT <small>立即前往查看</small><span>團體圖片預留區</span></button>
+            <h2 className="wv-section-title">我的社群</h2><button className="wv-my-community" onClick={() => setCommunityTab("Home")}><span className="wv-cortis-icon">C</span><span>CORTIS</span><i>●</i></button>
+            <button className="wv-promo" onClick={() => setCommunityTab("Home")}>OPEN! ASC2NT <small>立即前往查看</small><span>團體圖片預留區</span></button>
             <h2 className="wv-section-title">全部社群</h2>
             <div className="wv-filter-row">{["全部","Weverse DM","New","Group","Artist"].map(t=><button key={t} className={filter===t?"active":""} onClick={()=>setFilter(t)}>{t}</button>)}</div>
             {communities.filter(c=>c.name.toLowerCase().includes(query.toLowerCase())).map(c=><div className="wv-community-row" key={c.name}><span className="wv-community-icon">{c.name.slice(0,1)}</span><div><strong>{c.name}</strong><small>{c.members}</small></div><button onClick={()=>toggle(joined,setJoined,c.name)}>{joined.includes(c.name)?"已加入":"加入"}</button></div>)}
