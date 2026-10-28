@@ -1049,7 +1049,6 @@ export function WeverseSkin(p: SkinProps) {
   const tabs = ["首頁", "社群", "Shop", "DM", "More"];
   return (
     <div className="weverse-ui independent-skin">
-      <div className="wv-status"><span>11:00 ♥</span><span>▮▮▮ 4G ▰</span></div>
       {bottomTab === "首頁" && <>
         <header className="wv-header">
           <strong className="wv-wordmark">weverse</strong>
