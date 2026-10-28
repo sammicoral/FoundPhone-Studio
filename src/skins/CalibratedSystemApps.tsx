@@ -352,10 +352,12 @@ function listMeta(
   key: string,
 ): {
   time?: string;
-  temperature?: string;
-  low?: string;
-  high?: string;
+  temperature?: string | number;
+  low?: string | number;
+  high?: string | number;
   label?: string;
+  rain?: string | number;
+  wind?: string | number;
 }[] {
   try {
     const v = JSON.parse(meta(item, key, "[]"));
