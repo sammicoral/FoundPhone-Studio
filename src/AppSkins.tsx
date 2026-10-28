@@ -1097,7 +1097,7 @@ export function WeverseSkin(p: SkinProps) {
           {settingsOpen&&<div className="wv-settings-panel"><strong>設定</strong><p>附加功能設定</p><button onClick={()=>setSettingsOpen(false)}>關閉</button></div>}
         </div>
       </>}
-      <nav className="wv-bottom-nav">{tabs.map((t,i)=><button key={t} className={bottomTab===t?"active":""} onClick={()=>{setBottomTab(t);setSearching(false);}}><span className="wv-nav-icon">{[<Home size={21}/>,<Grid size={21}/>,<ShoppingBag size={21}/>,<Send size={21}/>,<MoreHorizontal size={21}/>][i]}</span><span>{t}</span></button>)}</nav>
+      <nav className="wv-bottom-nav">{tabs.map((t,i)=><button key={t} className={bottomTab===t?"active":""} onClick={()=>{setBottomTab(t);setSearching(false);}}><span className="wv-nav-icon">{i === 0 ? <Home size={21}/> : i === 1 ? <Grid size={21}/> : i === 2 ? <ShoppingBag size={21}/> : i === 3 ? <Send size={21}/> : <MoreHorizontal size={21}/>}</span><span>{t}</span></button>)}</nav>
     </div>
   );
 }
