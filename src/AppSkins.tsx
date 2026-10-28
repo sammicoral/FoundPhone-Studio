@@ -1090,8 +1090,8 @@ export function WeverseSkin(p: SkinProps) {
       {bottomTab === "More" && <>
         <div className="wv-topline"><strong>More</strong><button aria-label="設定" onClick={()=>setSettingsOpen(!settingsOpen)}><Settings size={22}/></button></div>
         <div className="wv-scroll">
-          <div className="wv-profile"><strong>{p.owner || "Sammi Wu"}</strong><button>會員資訊</button><p>♡ 我的 Membership　›</p></div>
-          <div className="wv-points">✿　0 <button>儲值</button></div>
+          <div className="wv-profile"><strong>{p.owner || "Sammi Wu"}</strong><button>會員資訊</button><p>♡ 我的 Membership ›</p></div>
+          <div className="wv-points">✿ 0 <button>儲值</button></div>
           <div className="wv-tools-grid">{["Shop 訂單紀錄","活動申請紀錄","媒體購買紀錄"].map(t=><button key={t}>{t}</button>)}</div>
           <div className="wv-menu-list">{["優惠券","我的收藏集","最近瀏覽的媒體","已儲存的影片","已儲存的 QR 碼","Weverse Magazine","通知設定","語言設定","服務資訊及條款","登出","刪除帳號"].map(t=><button key={t} onClick={()=>t==="通知設定"||t==="語言設定"?setSettingsOpen(true):undefined}>{t}<span>›</span></button>)}</div>
           {settingsOpen&&<div className="wv-settings-panel"><strong>設定</strong><p>附加功能設定</p><button onClick={()=>setSettingsOpen(false)}>關閉</button></div>}
