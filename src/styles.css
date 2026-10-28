@@ -4921,3 +4921,5 @@ label {
   background: #e34f58;
   transform: rotate(135deg);
 }
+
+@media (max-width: 700px) { .creator-layout, .main-workspace, .phone-stage, .phone-presentation { background: #000 !important; } .creator-layout, .phone-stage { min-height: 100vh; min-height: 100dvh; } }
