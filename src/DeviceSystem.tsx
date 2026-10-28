@@ -71,7 +71,6 @@ export function DeviceLock({
   onCamera,
   onLight,
   passcode,
-  wallpaperImage,
 }: {
   work: Work;
   time: string;
