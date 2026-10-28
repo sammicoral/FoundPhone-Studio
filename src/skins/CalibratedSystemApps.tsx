@@ -475,8 +475,13 @@ export function WeatherSkin(p: Props) {
         <header><button aria-label="返回天氣" onClick={() => setSheet("")}><ChevronLeft />天氣</button><strong>{sheet}</strong></header>
         {sheet === "城市列表" ? <>
           <label className="weather-city-search"><Search size={18} /><input placeholder="搜尋城市" value={query} onChange={(e) => setQuery(e.target.value)} /></label>
-          {p.items.filter((i) => i.title.includes(query)).map((i) => <button className="weather-city-row" key={i.id} onClick={() => { setIndex(p.items.indexOf(i)); setSheet(""); p.onRead(i.id); }}><strong>{i.title}</strong><span>{meta(i, "temperature", "—")}°</span></button>)}
-          {!p.items.length && <p>目前以首爾即時天氣為主</p>}{p.creator && <button onClick={p.onAdd}><Plus />添加城市</button>}
+          {(!query || ["首爾", "首尔", "Seoul"].some((name) => name.toLowerCase().includes(query.toLowerCase()) || query.toLowerCase().includes(name.toLowerCase()))) ? (
+            <button className="weather-city-row" onClick={() => setSheet("")}>
+              <strong>首爾</strong>
+              <span>{liveWeather ? `${liveWeather.temperature}° · ${liveWeather.condition}` : "正在取得天氣…"}</span>
+            </button>
+          ) : <p>找不到這個城市</p>}
+          {p.creator && <button onClick={p.onAdd}><Plus />添加城市</button>}
         </> : sheet === "天氣地圖" ? <div className="weather-map-empty"><Map size={60} /><p>暫無地圖資料</p></div> :
           <div className="weather-section-detail">
             <section className="weather-native-current" aria-label="首爾即時天氣">
