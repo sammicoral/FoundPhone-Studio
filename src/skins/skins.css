@@ -4225,6 +4225,18 @@
 }
 
 
+/* Keep Weverse readable on its dark background, overriding shared light-theme text defaults. */
+.weverse-ui,
+.weverse-ui :is(h1,h2,h3,h4,p,span,strong,em,b,i,small,label,time,li,dt,dd,summary) {
+  color: #f2f2f2;
+}
+.weverse-ui :is(.wv-home-tabs button,.wv-detail-tabs button) {
+  color: #bdbdbd;
+}
+.weverse-ui :is(.wv-post-author small,.wv-community-row small,.wv-post-expanded,.wv-comments p,.wv-empty,.wv-search,.wv-feed-label button,.wv-profile button,.wv-menu-list span,.wv-blank-card) {
+  color: #aaa;
+}
+
 /* Weverse-inspired community UI. All content is fictional and authored for this story. */
 .weverse-ui { height:100%; min-height:0; display:flex; flex-direction:column; overflow:hidden; background:#000; color:#f7f7f7; font-size:14px; }
 .weverse-ui button { cursor:pointer; color:inherit; background:none; border:0; font:inherit; }
