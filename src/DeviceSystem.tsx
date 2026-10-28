@@ -109,7 +109,6 @@ export function DeviceLock({
   return (
     <motion.div
       className={"lock-screen device-lock " + (pinOpen ? "pin-open" : "")}
-      style={wallpaperImage ? { backgroundImage: "url(" + wallpaperImage + ")", backgroundSize: "cover", backgroundPosition: "center" } : undefined}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ y: -852, opacity: 0 }}
