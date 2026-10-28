@@ -442,8 +442,8 @@ export function MymyInstagram(p: SkinProps) {
           >
             <ArrowLeft />
           </button>
-          <span className="igl2">
-            {selected ? "貼文" : tab === "首頁" ? "Instagram" : tab === "个人首頁" ? (p.account ? "@" + p.account : "个人首頁") : tab}
+          <span className={"igl2" + (!selected && tab === "个人首頁" ? " ig-profile-title" : "")}>
+            {selected ? "貼文" : tab === "首頁" ? "Instagram" : tab === "个人首頁" ? (p.account || "个人首頁") : tab}
           </span>
           <button aria-label="打开私訊" onClick={() => setTab("私訊")}>
             <Send />
