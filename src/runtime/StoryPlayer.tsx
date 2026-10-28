@@ -21,6 +21,7 @@ const PERMANENTLY_REMOVED_APPS = new Set([
   "netease",
   "reddit",
   "telegram",
+  "snapchat",
 ]);
 
 function personalizeWork(source: Work, playerName: string, playerAccount: string, boyfriend: BoyfriendId): Work {
@@ -121,8 +122,8 @@ function StoryPlayer() {
       setFormError("請填寫姓名／暱稱與社群帳號。");
       return;
     }
-    if (!/^[A-Za-z0-9._]{1,40}$/.test(account)) {
-      setFormError("帳號只能使用英文字母、數字、句點（.）與底線（_），最多 40 個字元。");
+    if (!/^[A-Za-z0-9._]{1,40}$/.test(account) || account.startsWith(".") || account.endsWith(".") || /^[._]+$/.test(account)) {
+      setFormError("帳號需為 1–40 個英文字母、數字、句點（.）或底線（_）；不可只包含符號，句點也不能放在開頭或結尾。");
       return;
     }
     setFormError("");
