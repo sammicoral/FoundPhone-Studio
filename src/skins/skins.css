@@ -4269,6 +4269,7 @@
 .weverse-ui .wv-detail-tabs { display:flex; flex-shrink:0; justify-content:space-around; border-bottom:1px solid #333; background:#000; }
 .weverse-ui .wv-detail-tabs button { padding:13px 8px 10px; color:#aaa; font-size:14px; font-weight:750; border-bottom:3px solid transparent; }
 .weverse-ui .wv-detail-tabs button.active { color:#fff; border-bottom-color:#fff; }
+.weverse-ui .wv-detail-tabs button:focus-visible,.weverse-ui .wv-bottom-nav button:focus-visible { outline:2px solid #57d0dc; outline-offset:2px; }
 .weverse-ui .wv-feed-cats { padding-top:12px; }
 .weverse-ui .wv-feed-label { display:flex; justify-content:space-between; align-items:center; margin:8px 17px 13px; }
 .weverse-ui .wv-feed-label strong { font-size:18px; }
