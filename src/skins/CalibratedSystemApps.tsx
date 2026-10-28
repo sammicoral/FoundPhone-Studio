@@ -457,7 +457,7 @@ export function WeatherSkin(p: Props) {
             </button>))}</div>
         </section>
         <section className="weather-native-card weather-days">{(daily.length ? daily : [{ label: "今天", low: liveWeather?.low ?? meta(item, "low", "—"), high: liveWeather?.high ?? meta(item, "high", "—") }]).map((d, n) => (
-          <button key={n} onClick={() => { read(); setSheet("每日天氣"); }}><strong>{d.label || d.time || "—"}</strong><CloudSun size={23} /><span>{d.low || "—"}°</span><i /><b>{d.high || "—"}°</b></button>))}</section>
+          <button key={n} onClick={() => { read(); setSheet("每日天氣"); }}><strong>{d.label || "—"}</strong><CloudSun size={23} /><span>{d.low || "—"}°</span><i /><b>{d.high || "—"}°</b></button>))}</section>
       </div>
       <nav className="weather-native-toolbar">
         <button aria-label="天氣地圖" onClick={() => setSheet("天氣地圖")}><Map size={27} /></button>
