@@ -995,7 +995,7 @@ export function InstagramSkin(p: SkinProps) {
 export function WeverseSkin(p: SkinProps) {
   const [bottomTab, setBottomTab] = useState("首頁");
   const [homeTab, setHomeTab] = useState("My Feed");
-  const [communityTab, setCommunityTab] = useState("CORTIS");
+  const [communityTab, setCommunityTab] = useState("探索社群");
   const [feedTab, setFeedTab] = useState("Highlight");
   const [filter, setFilter] = useState("全部");
   const [joined, setJoined] = useState<string[]>(["CORTIS"]);
