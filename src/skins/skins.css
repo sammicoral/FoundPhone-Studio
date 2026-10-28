@@ -4226,46 +4226,102 @@
 
 
 /* Weverse-inspired community UI. All content is fictional and authored for this story. */
-.weverse-ui { height:100%; min-height:0; display:flex; flex-direction:column; background:#f6f7fb; color:#22232a; font-size:12px; }
-.weverse-ui button { cursor:pointer; }
-.weverse-ui .wv-header { height:49px; flex-shrink:0; padding:0 15px; display:flex; align-items:center; justify-content:space-between; background:#fff; border-bottom:1px solid #ececf2; }
-.weverse-ui .wv-brand { display:flex; align-items:center; gap:8px; font-size:16px; }
-.weverse-ui .wv-brand-mark { display:grid; place-items:center; width:25px; height:25px; border-radius:8px; background:#6b73d9; color:#fff; font-weight:800; }
-.weverse-ui .wv-header button { display:grid; place-items:center; width:32px; height:32px; color:#4c4e5c; }
-.weverse-ui .wv-community { flex-shrink:0; padding:12px 13px 10px; background:#fff; }
-.weverse-ui .wv-community-art { height:100px; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; background:linear-gradient(135deg,#20253c,#555e91 55%,#c4b8e6); color:white; letter-spacing:4px; font-weight:800; font-size:21px; }
-.weverse-ui .wv-community-art small { font-size:8px; letter-spacing:2px; font-weight:500; }
-.weverse-ui .wv-community-info { display:flex; align-items:center; justify-content:space-between; padding:10px 1px 0; }
-.weverse-ui .wv-community-info div { display:flex; align-items:center; gap:7px; }
-.weverse-ui .wv-community-info strong { font-size:14px; }
-.weverse-ui .wv-community-info span { color:#888a99; font-size:10px; }
-.weverse-ui .wv-community-info button { padding:6px 10px; border-radius:16px; background:#eeefff; color:#656dcc; font-size:10px; font-weight:700; }
-.weverse-ui .wv-tabs { display:flex; gap:15px; overflow-x:auto; flex-shrink:0; padding:0 13px; background:#fff; border-bottom:1px solid #e8e9f0; scrollbar-width:none; }
-.weverse-ui .wv-tabs button { flex-shrink:0; padding:12px 0 10px; color:#8b8c99; font-size:10px; border-bottom:2px solid transparent; }
-.weverse-ui .wv-tabs button.active { color:#5d65ce; border-bottom-color:#686fd7; font-weight:700; }
-.weverse-ui .wv-feed { flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; }
-.weverse-ui .wv-post { margin:8px 9px; padding:12px; border-radius:11px; background:#fff; border:1px solid #eeeff4; }
-.weverse-ui .wv-post-head { display:flex; align-items:center; gap:8px; }
-.weverse-ui .wv-avatar { display:grid; place-items:center; flex-shrink:0; width:35px; height:35px; border-radius:50%; background:linear-gradient(135deg,#d9dcff,#a9b0f4); color:#4d55b9; font-weight:800; }
-.weverse-ui .wv-post-head div { display:flex; flex-direction:column; gap:3px; min-width:0; }
-.weverse-ui .wv-post-head strong { font-size:11px; }
-.weverse-ui .wv-post-head small { font-size:9px; color:#999aa7; }
-.weverse-ui .wv-member-badge { margin-left:auto; padding:4px 6px; border-radius:5px; background:#f1f1ff; color:#686fd0; font-size:8px; font-weight:800; }
-.weverse-ui .wv-post-body { display:flex; flex-direction:column; gap:8px; width:100%; text-align:left; padding:13px 1px 10px; line-height:1.65; white-space:pre-wrap; overflow-wrap:anywhere; color:#30313a; font-size:12px; }
-.weverse-ui .wv-post-body strong { font-size:11px; }
-.weverse-ui .wv-media-placeholder { display:grid; place-items:center; min-height:105px; border-radius:8px; background:linear-gradient(135deg,#e7e8f5,#f4e8f0); color:#7479b6; font-size:10px; }
-.weverse-ui .wv-post-actions { display:flex; gap:18px; padding-top:8px; border-top:1px solid #f0f0f4; }
-.weverse-ui .wv-post-actions button { display:flex; align-items:center; gap:5px; color:#858694; font-size:10px; }
-.weverse-ui .wv-post-actions button.liked { color:#e46a91; }
-.weverse-ui .wv-comments { padding:9px 8px 0; margin-top:8px; border-top:1px solid #f0f0f4; }
-.weverse-ui .wv-comments p { margin:4px 0; line-height:1.5; color:#666876; font-size:10px; }
-.weverse-ui .wv-comments strong { color:#6269ca; margin-right:4px; }
-.weverse-ui .wv-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; min-height:180px; color:#858694; text-align:center; }
-.weverse-ui .wv-empty span { font-size:28px; color:#8187df; }
-.weverse-ui .wv-empty strong { color:#555765; }
-.weverse-ui .wv-empty p { font-size:10px; }
-.weverse-ui .wv-bottom-nav { display:flex; justify-content:space-around; flex-shrink:0; padding:8px 5px 10px; border-top:1px solid #e8e9f0; background:#fff; }
-.weverse-ui .wv-bottom-nav button { display:flex; flex-direction:column; align-items:center; gap:3px; color:#9697a5; font-size:18px; line-height:1; min-width:42px; }
-.weverse-ui .wv-bottom-nav button span { font-size:9px; }
-.weverse-ui .wv-bottom-nav button.active { color:#686fd7; }
-.phone-shell .phone-screen:has(.weverse-ui) .status-bar { background:#fff; color:#262735; }
+.weverse-ui { height:100%; min-height:0; display:flex; flex-direction:column; overflow:hidden; background:#000; color:#f7f7f7; font-size:14px; }
+.weverse-ui button { cursor:pointer; color:inherit; background:none; border:0; font:inherit; }
+.weverse-ui .wv-status { height:34px; flex-shrink:0; padding:6px 18px 0; display:flex; align-items:center; justify-content:space-between; background:#000; color:#fff; font-size:13px; font-weight:650; }
+.weverse-ui .wv-header { flex-shrink:0; height:53px; padding:0 15px; display:flex; align-items:center; justify-content:space-between; background:#000; }
+.weverse-ui .wv-wordmark { font-size:28px; font-weight:900; letter-spacing:-1.8px; font-style:italic; }
+.weverse-ui .wv-header>div { display:flex; align-items:center; gap:13px; }
+.weverse-ui .wv-header button { position:relative; display:grid; place-items:center; width:30px; height:34px; font-size:23px; }
+.weverse-ui .wv-header button i { position:absolute; top:-2px; right:-5px; border-radius:12px; padding:2px 5px; background:#ff5b65; font-size:9px; font-style:normal; }
+.weverse-ui .wv-home-tabs { flex-shrink:0; display:flex; justify-content:space-between; gap:15px; padding:0 15px; background:#000; }
+.weverse-ui .wv-home-tabs button { padding:9px 0 12px; white-space:nowrap; color:#aaa; font-size:15px; font-weight:750; border-bottom:3px solid transparent; }
+.weverse-ui .wv-home-tabs button.active { color:#fff; border-bottom-color:#fff; }
+.weverse-ui .wv-scroll { flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:none; padding-bottom:12px; }
+.weverse-ui .wv-scroll::-webkit-scrollbar { display:none; }
+.weverse-ui .wv-section-title { margin:22px 16px 14px; font-size:19px; line-height:1.3; font-weight:800; }
+.weverse-ui .wv-topline { flex-shrink:0; display:flex; align-items:center; justify-content:space-between; min-height:55px; padding:0 17px; }
+.weverse-ui .wv-topline strong { font-size:20px; }
+.weverse-ui .wv-search { display:flex; align-items:center; gap:9px; margin:10px 16px 15px; padding:11px 13px; border-radius:28px; background:#191919; color:#aaa; }
+.weverse-ui .wv-search input { width:100%; min-width:0; border:0; outline:0; background:transparent; color:#fff; font:inherit; }
+.weverse-ui .wv-my-community { position:relative; display:flex; flex-direction:column; align-items:center; gap:8px; margin:0 18px 20px; padding:10px 12px; font-size:13px; color:#aaa!important; }
+.weverse-ui .wv-my-community i { position:absolute; top:5px; right:4px; color:#ff655d; font-size:11px; }
+.weverse-ui .wv-cortis-icon,.weverse-ui .wv-community-icon { display:grid; place-items:center; flex-shrink:0; width:65px; height:65px; border-radius:22px; background:#a4c8a8; color:#050505; font-size:32px; font-weight:900; }
+.weverse-ui .wv-promo { position:relative; display:flex; flex-direction:column; gap:5px; margin:8px 16px 25px; padding:17px 16px; width:calc(100% - 32px); border-radius:14px; background:#d86d83!important; text-align:left; font-size:16px; font-weight:800; }
+.weverse-ui .wv-promo small { font-size:12px; font-weight:500; }
+.weverse-ui .wv-promo span { position:absolute; right:0; top:0; bottom:0; width:25%; display:grid; place-items:center; padding:5px; border-radius:0 14px 14px 0; background:#b9566e; color:#fff; font-size:9px; text-align:center; }
+.weverse-ui .wv-filter-row { display:flex; gap:8px; overflow-x:auto; padding:0 16px 14px; scrollbar-width:none; }
+.weverse-ui .wv-filter-row button { flex-shrink:0; border:1px solid #363636; border-radius:24px; padding:8px 13px; white-space:nowrap; font-size:13px; }
+.weverse-ui .wv-filter-row button.active { background:#f4f4f4; color:#111; border-color:#f4f4f4; }
+.weverse-ui .wv-community-row { display:flex; align-items:center; gap:12px; padding:14px 17px; min-height:85px; }
+.weverse-ui .wv-community-row .wv-community-icon { width:57px; height:57px; border-radius:18px; background:#252525; color:#eee; font-size:24px; }
+.weverse-ui .wv-community-row>div { flex:1; min-width:0; display:flex; flex-direction:column; gap:5px; }
+.weverse-ui .wv-community-row strong { font-size:16px; font-weight:800; }
+.weverse-ui .wv-community-row small { color:#858585; font-size:11px; line-height:1.35; }
+.weverse-ui .wv-community-row>button { padding:9px 14px; border-radius:25px; background:#57d0dc; color:#061719; font-weight:750; }
+.weverse-ui .wv-detail-hero { position:relative; flex-shrink:0; min-height:245px; overflow:hidden; background:linear-gradient(180deg,#777 0%,#4d4d4d 62%,#000 100%); }
+.weverse-ui .wv-back { position:absolute; z-index:2; top:9px; left:10px; display:grid; place-items:center; width:35px; height:35px; }
+.weverse-ui .wv-hero-image { height:158px; display:grid; place-items:center; color:#ddd; font-size:11px; background:linear-gradient(145deg,#888,#444); }
+.weverse-ui .wv-detail-title { position:relative; margin-top:-22px; padding:0 12px 15px; text-align:center; background:linear-gradient(transparent,#000 36%); }
+.weverse-ui .wv-detail-title small { font-size:12px; font-weight:700; }
+.weverse-ui .wv-detail-title h1 { margin:7px 0 10px; font-size:38px; line-height:1.05; font-weight:900; letter-spacing:1px; }
+.weverse-ui .wv-detail-title button { padding:8px 18px; border:1px solid #aaa; border-radius:25px; font-size:14px; font-weight:700; }
+.weverse-ui .wv-detail-tabs { display:flex; flex-shrink:0; justify-content:space-around; border-bottom:1px solid #333; background:#000; }
+.weverse-ui .wv-detail-tabs button { padding:13px 8px 10px; color:#aaa; font-size:14px; font-weight:750; border-bottom:3px solid transparent; }
+.weverse-ui .wv-detail-tabs button.active { color:#fff; border-bottom-color:#fff; }
+.weverse-ui .wv-feed-cats { padding-top:12px; }
+.weverse-ui .wv-feed-label { display:flex; justify-content:space-between; align-items:center; margin:8px 17px 13px; }
+.weverse-ui .wv-feed-label strong { font-size:18px; }
+.weverse-ui .wv-feed-label button { display:flex; align-items:center; gap:5px; color:#bbb; font-size:12px; }
+.weverse-ui .wv-post { margin:12px 12px; padding:15px 14px 0; border-radius:16px; background:#202020; overflow:hidden; }
+.weverse-ui .wv-post-head { display:flex; align-items:center; gap:10px; }
+.weverse-ui .wv-avatar { display:grid; place-items:center; flex-shrink:0; width:40px; height:40px; border-radius:50%; background:#555; color:#fff; font-size:17px; font-weight:800; }
+.weverse-ui .wv-post-author { display:flex; flex-direction:column; gap:3px; min-width:0; }
+.weverse-ui .wv-post-author strong { font-size:15px; font-weight:800; }
+.weverse-ui .wv-post-author small { color:#888; font-size:12px; }
+.weverse-ui .wv-verified { display:inline-grid; place-items:center; width:13px; height:13px; margin-left:5px; border-radius:50%; background:#45d1dc; color:#000; font-size:9px; }
+.weverse-ui .wv-more-button { margin-left:auto; color:#aaa!important; }
+.weverse-ui .wv-post-body { display:flex; flex-direction:column; gap:10px; width:100%; text-align:left; padding:16px 1px; line-height:1.55; white-space:pre-wrap; overflow-wrap:anywhere; color:#f4f4f4; font-size:15px; }
+.weverse-ui .wv-post-body strong { font-size:15px; }
+.weverse-ui .wv-post-expanded { color:#aaa; font-size:12px; }
+.weverse-ui .wv-media-placeholder { display:grid; place-items:center; min-height:180px; margin:0 -15px; background:#292929; color:#888; font-size:12px; }
+.weverse-ui .wv-post-actions { display:flex; align-items:center; gap:20px; padding:13px 0; border-top:1px solid #393939; }
+.weverse-ui .wv-post-actions button { display:flex; align-items:center; gap:6px; color:#eee; font-size:13px; }
+.weverse-ui .wv-post-actions button.liked { color:#ff606b; }
+.weverse-ui .wv-post-actions .wv-save { margin-left:auto; }
+.weverse-ui .wv-comments { padding:9px 0 14px; border-top:1px solid #393939; }
+.weverse-ui .wv-comments p { margin:5px 0; line-height:1.5; color:#ccc; font-size:12px; }
+.weverse-ui .wv-comments strong { margin-right:4px; }
+.weverse-ui .wv-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:150px; padding:20px; color:#aaa; text-align:center; }
+.weverse-ui .wv-announcements { margin:0 14px; padding:10px 15px; border-radius:14px; background:#202020; }
+.weverse-ui .wv-announcements p { padding:12px 0; margin:0; border-bottom:1px solid #383838; font-size:13px; font-weight:650; }
+.weverse-ui .wv-blank-card { display:grid; place-items:center; min-height:150px; margin:14px 16px; padding:20px; border-radius:15px; background:#202020; color:#777; text-align:center; }
+.weverse-ui .wv-spot { text-align:center; }
+.weverse-ui .wv-spot-art { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px; min-height:255px; margin:10px 14px 22px; border-radius:20px; background:linear-gradient(150deg,#56d9df,#c0f4ed); color:#fff; }
+.weverse-ui .wv-spot-art span { font-size:70px; color:#ec4b9a; }
+.weverse-ui .wv-spot-art strong { color:#fff; font-size:22px; }
+.weverse-ui .wv-spot-art small { color:#fff; font-size:12px; }
+.weverse-ui .wv-spot h2 { margin:0 16px 7px; font-size:19px; }
+.weverse-ui .wv-spot p { color:#aaa; }
+.weverse-ui .wv-pill-row { display:flex; gap:10px; padding:20px 16px; margin-top:25px; border-top:1px solid #333; }
+.weverse-ui .wv-pill-row button { padding:9px 13px; border:1px solid #444; border-radius:22px; }
+.weverse-ui .wv-profile,.weverse-ui .wv-points,.weverse-ui .wv-tools-grid,.weverse-ui .wv-menu-list { margin:12px 12px; padding:17px; border-radius:17px; background:#191919; }
+.weverse-ui .wv-profile { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:15px; }
+.weverse-ui .wv-profile strong { font-size:20px; }
+.weverse-ui .wv-profile button { color:#888; text-decoration:underline; font-size:12px; }
+.weverse-ui .wv-profile p { flex-basis:100%; margin:4px 0; font-size:16px; font-weight:700; }
+.weverse-ui .wv-points { display:flex; align-items:center; justify-content:space-between; font-size:20px; font-weight:800; }
+.weverse-ui .wv-points button { padding:9px 15px; border-radius:12px; background:#00c9d5; color:#111; font-size:14px; }
+.weverse-ui .wv-tools-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; padding:18px 8px; }
+.weverse-ui .wv-tools-grid button { min-height:55px; font-size:11px; }
+.weverse-ui .wv-menu-list { display:flex; flex-direction:column; padding:4px 16px; }
+.weverse-ui .wv-menu-list button { display:flex; justify-content:space-between; align-items:center; min-height:53px; text-align:left; border-bottom:1px solid #303030; font-size:14px; }
+.weverse-ui .wv-menu-list button:last-child { border-bottom:0; color:#ff6666; }
+.weverse-ui .wv-menu-list span { color:#777; font-size:22px; }
+.weverse-ui .wv-settings-panel { margin:12px; padding:16px; border-radius:15px; background:#222; }
+.weverse-ui .wv-settings-panel button { float:right; color:#5dd4df; }
+.weverse-ui .wv-bottom-nav { z-index:3; display:flex; justify-content:space-around; flex-shrink:0; padding:8px 3px calc(9px + env(safe-area-inset-bottom, 0px)); border-top:1px solid #292929; background:rgba(24,24,24,.97); }
+.weverse-ui .wv-bottom-nav button { display:flex; flex:1; flex-direction:column; align-items:center; justify-content:center; gap:4px; min-width:0; padding:5px 0; border-radius:30px; color:#eee; font-size:11px; }
+.weverse-ui .wv-bottom-nav button.active { background:#414141; }
+.weverse-ui .wv-nav-icon { display:grid; place-items:center; min-height:25px; }
+.phone-shell .phone-screen:has(.weverse-ui) .status-bar { background:#000; color:#fff; }
