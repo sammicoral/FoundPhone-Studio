@@ -510,8 +510,17 @@ function PhoneRuntime({
             }
           }}
         >
-          <div className="wallpaper-orb orb-one" />
-          <div className="wallpaper-orb orb-two" />
+          {!(
+            s.variables.memberWallpaper ||
+            s.variables.memberLockScreen ||
+            s.ui?.settings?.wallpaperImage ||
+            s.ui?.settings?.lockWallpaperImage
+          ) && (
+            <>
+              <div className="wallpaper-orb orb-one" />
+              <div className="wallpaper-orb orb-two" />
+            </>
+          )}
           <div className="status-bar">
             <button
               onClick={() =>
