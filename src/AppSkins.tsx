@@ -750,7 +750,7 @@ export function InstagramSkin(p: SkinProps) {
         >
           <ChevronLeft size={22} />
         </button>
-        <strong>{dm ? "私訊" : tab === "個人檔案" && p.account ? "@" + p.account : p.name}</strong>
+        <strong>{dm ? "私訊" : p.account ? "@" + p.account : p.name}</strong>
         <div>
           {p.creator && (
             <button aria-label="新增內容" onClick={p.onAdd}>
