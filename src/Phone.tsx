@@ -396,20 +396,20 @@ function PhoneRuntime({
     const timer = window.setInterval(() => setRealNow(Date.now()), 1000);
     return () => window.clearInterval(timer);
   }, []);
-  const taipeiNow = new Date(realNow);
+  const koreaNow = new Date(realNow);
   const displayTime = new Intl.DateTimeFormat("zh-TW", {
     hour: "2-digit",
     minute: "2-digit",
     hourCycle: "h23",
-    timeZone: "Asia/Taipei",
-  }).format(taipeiNow);
-  const taipeiDateParts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Seoul",
+  }).format(koreaNow);
+  const koreaDateParts = new Intl.DateTimeFormat("en-CA", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
-    timeZone: "Asia/Taipei",
-  }).formatToParts(taipeiNow);
-  const displayDate = `${taipeiDateParts.find((part) => part.type === "year")?.value}-${taipeiDateParts.find((part) => part.type === "month")?.value}-${taipeiDateParts.find((part) => part.type === "day")?.value}`;
+    timeZone: "Asia/Seoul",
+  }).formatToParts(koreaNow);
+  const displayDate = `${koreaDateParts.find((part) => part.type === "year")?.value}-${koreaDateParts.find((part) => part.type === "month")?.value}-${koreaDateParts.find((part) => part.type === "day")?.value}`;
   const clockWork = { ...work, phone: { ...work.phone, date: displayDate } };
   const plugin = getApp(app);
   useEffect(() => {
