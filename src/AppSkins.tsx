@@ -991,50 +991,113 @@ export function InstagramSkin(p: SkinProps) {
 }
 
 
-/** Fictional Weverse-style community feed for the interactive phone story. */
+/** Weverse-inspired community app shell with Home, Community, Shop, DM and More sections. */
 export function WeverseSkin(p: SkinProps) {
-  const [tab, setTab] = useState("全部");
+  const [bottomTab, setBottomTab] = useState("首頁");
+  const [homeTab, setHomeTab] = useState("My Feed");
+  const [communityTab, setCommunityTab] = useState("CORTIS");
+  const [feedTab, setFeedTab] = useState("Highlight");
+  const [filter, setFilter] = useState("全部");
+  const [joined, setJoined] = useState<string[]>(["CORTIS"]);
   const [liked, setLiked] = useState<string[]>([]);
+  const [saved, setSaved] = useState<string[]>([]);
   const [expanded, setExpanded] = useState<string[]>([]);
+  const [query, setQuery] = useState("");
+  const [searching, setSearching] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const members = ["MARTIN", "JAMES", "JUHOON", "SEONGHYEON", "KEONHO"];
+  const communities = [
+    { name: "TREASURE", members: "CHOI HYUN SUK · JIHOON · YOSHI · JUNKYU · YOON JAE HYUK +5" },
+    { name: "BLACKPINK", members: "JISOO · JENNIE · ROSÉ · LISA" },
+    { name: "AND2BLE", members: "ZHANGHAO · YOOSEUNGEON · RICKY · KIMGYUVIN · HANYUJIN" },
+    { name: "ENHYPEN", members: "JUNGWON · HEESEUNG · JAY · JAKE · SUNGHOON +2" },
+    { name: "TOMORROW X TOGETHER", members: "SOOBIN · YEONJUN · BEOMGYU · TAEHYUN · HUENINGKAI" },
+  ];
   const posts = p.items.filter((item) => !item.hidden && (item.kind === "post" || item.folder === "feed" || item.folder === "貼文"));
-  const visiblePosts = posts.filter((item) => tab === "全部" || item.sender.toUpperCase() === tab);
+  const visiblePosts = posts.filter((item) => {
+    const matchesMember = feedTab !== "Artist" || members.includes(item.sender.toUpperCase());
+    const matchesQuery = !query || (item.sender + " " + item.body + " " + (item.title || "")).toLowerCase().includes(query.toLowerCase());
+    return matchesMember && matchesQuery;
+  });
+  const toggle = (list: string[], setter: (value: string[]) => void, id: string) =>
+    setter(list.includes(id) ? list.filter((value) => value !== id) : [...list, id]);
+  const postCard = (item: Item) => {
+    const isLiked = liked.includes(item.id);
+    const isSaved = saved.includes(item.id);
+    const isExpanded = expanded.includes(item.id);
+    const comments = item.comments || [];
+    return <article className="wv-post" key={item.id}>
+      <div className="wv-post-head">
+        <span className="wv-avatar">{item.sender.slice(0, 1)}</span>
+        <div className="wv-post-author"><strong>{item.sender}<span className="wv-verified">✿</span></strong><small>{item.time || "剛剛"}</small></div>
+        <button className="wv-more-button" aria-label="更多貼文選項" onClick={() => setExpanded((old) => old.includes(item.id) ? old.filter((id) => id !== item.id) : [...old, item.id])}><MoreHorizontal size={20}/></button>
+      </div>
+      <button className="wv-post-body" onClick={() => { p.onRead(item.id); toggle(expanded, setExpanded, item.id); }}>
+        {item.title && item.title !== item.sender ? <strong>{item.title}</strong> : null}
+        <span>{item.body}</span>
+        {item.media ? <span className="wv-media-placeholder">照片／影片</span> : null}
+        {isExpanded && <span className="wv-post-expanded">CORTIS 社群貼文 · 查看留言與完整內容</span>}
+      </button>
+      <div className="wv-post-actions">
+        <button className={isLiked ? "liked" : ""} aria-pressed={isLiked} onClick={() => toggle(liked, setLiked, item.id)}><Heart size={20} fill={isLiked ? "currentColor" : "none"}/><span>{(item.likes || 0) + (isLiked ? 1 : 0) || ""}</span></button>
+        <button onClick={() => toggle(expanded, setExpanded, item.id)}><MessageCircle size={20}/><span>{comments.length || ""}</span></button>
+        <button className="wv-save" aria-label="收藏貼文" aria-pressed={isSaved} onClick={() => toggle(saved, setSaved, item.id)}><Bookmark size={19} fill={isSaved ? "currentColor" : "none"}/></button>
+      </div>
+      {isExpanded && <div className="wv-comments">{comments.length ? comments.map((comment, index) => <p key={index}><strong>COER</strong> {comment}</p>) : <p>還沒有留言。</p>}</div>}
+    </article>;
+  };
+  const tabs = ["首頁", "社群", "Shop", "DM", "More"];
   return (
     <div className="weverse-ui independent-skin">
-      <header className="wv-header">
-        <div className="wv-brand"><span className="wv-brand-mark">W</span><strong>Weverse</strong></div>
-        <button aria-label="搜尋社群" onClick={() => setTab("全部")}><Search size={19} /></button>
-      </header>
-      <div className="wv-community">
-        <div className="wv-community-art"><span>CORTIS</span><small>OFFICIAL COMMUNITY</small></div>
-        <div className="wv-community-info"><div><strong>CORTIS</strong><span>官方社群</span></div><button onClick={() => setTab("全部")}>加入中 ✓</button></div>
-      </div>
-      <nav className="wv-tabs" aria-label="成員貼文篩選">
-        {["全部", ...members].map((member) => (
-          <button key={member} className={tab === member ? "active" : ""} aria-pressed={tab === member} onClick={() => setTab(member)}>{member === "全部" ? "最新貼文" : member}</button>
-        ))}
-      </nav>
-      <div className="wv-feed">
-        {visiblePosts.length ? visiblePosts.map((item) => {
-          const isLiked = liked.includes(item.id);
-          const isExpanded = expanded.includes(item.id);
-          const comments = item.comments || [];
-          return <article className="wv-post" key={item.id}>
-            <div className="wv-post-head"><span className="wv-avatar">{item.sender.slice(0, 1)}</span><div><strong>{item.sender}</strong><small>{item.time || "剛剛"} · CORTIS</small></div><span className="wv-member-badge">ARTIST</span></div>
-            <button className="wv-post-body" onClick={() => { p.onRead(item.id); setExpanded((old) => old.includes(item.id) ? old.filter((id) => id !== item.id) : [...old, item.id]); }}>
-              {item.title && item.title !== item.sender ? <strong>{item.title}</strong> : null}
-              <span>{item.body}</span>
-              {item.media ? <span className="wv-media-placeholder">▧ {item.title || "照片"}</span> : null}
-            </button>
-            <div className="wv-post-actions">
-              <button className={isLiked ? "liked" : ""} aria-pressed={isLiked} onClick={() => setLiked((old) => isLiked ? old.filter((id) => id !== item.id) : [...old, item.id])}><Heart size={17} fill={isLiked ? "currentColor" : "none"} />{(item.likes || 0) + (isLiked ? 1 : 0)}</button>
-              <button onClick={() => setExpanded((old) => old.includes(item.id) ? old.filter((id) => id !== item.id) : [...old, item.id])}><MessageCircle size={17} />{comments.length || "留言"}</button>
-            </div>
-            {isExpanded && <div className="wv-comments">{comments.length ? comments.map((comment, index) => <p key={index}><strong>COER</strong> {comment}</p>) : <p className="wv-no-comments">還沒有留言，來看看其他貼文吧。</p>}</div>}
-          </article>;
-        }) : <div className="wv-empty"><span>♡</span><strong>還沒有貼文</strong><p>這個成員的貼文之後會出現在這裡。</p></div>}
-      </div>
-      <nav className="wv-bottom-nav"><button className="active" onClick={() => setTab("全部")}>⌂<span>社群</span></button><button onClick={() => setTab("全部")}>▧<span>媒體</span></button><button onClick={() => setTab("全部")}>♧<span>通知</span></button><button onClick={() => setTab("全部")}>♡<span>我的</span></button></nav>
+      <div className="wv-status"><span>11:00 ♥</span><span>▮▮▮ 4G ▰</span></div>
+      {bottomTab === "首頁" && <>
+        <header className="wv-header">
+          <strong className="wv-wordmark">weverse</strong>
+          <div><button aria-label="Weverse 通知"><Star size={23}/></button><button aria-label="通知" onClick={() => setHomeTab("通知")}>♧<i>28</i></button></div>
+        </header>
+        <nav className="wv-home-tabs">{["My Feed", "Discover", "Party", "Spot"].map(t => <button key={t} className={homeTab === t ? "active" : ""} onClick={() => setHomeTab(t)}>{t}</button>)}</nav>
+        {homeTab === "Spot" ? <div className="wv-scroll wv-spot">
+          <div className="wv-spot-art"><span>✦</span><strong>Weverse Spot</strong><small>遠端候位 · Stamp Rally · Pickup</small></div>
+          <h2>Weverse Spot 就從這裡開始</h2><p>輕鬆樂享所有活動吧</p>
+          <div className="wv-pill-row"><button>我的藝人</button><button>地區⌄</button></div>
+          <h3>Now on Spot：今日活動</h3><div className="wv-blank-card">活動圖片預留區</div>
+        </div> : homeTab === "Discover" ? <div className="wv-scroll"><h2 className="wv-section-title">探索社群</h2><label className="wv-search"><Search size={18}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder="搜尋藝人／社群"/></label>{communities.filter(c => c.name.toLowerCase().includes(query.toLowerCase())).map(c => <div className="wv-community-row" key={c.name}><span className="wv-community-icon">W</span><div><strong>{c.name}</strong><small>{c.members}</small></div><button onClick={() => toggle(joined,setJoined,c.name)}>{joined.includes(c.name) ? "已加入" : "加入"}</button></div>)}</div> : homeTab === "Party" ? <div className="wv-scroll"><h2 className="wv-section-title">Party</h2><div className="wv-blank-card">Party 活動與直播預留區</div></div> : <div className="wv-scroll"><h2 className="wv-section-title">藝人動態</h2>{visiblePosts.length ? visiblePosts.map(postCard) : <div className="wv-empty">目前沒有新貼文</div>}</div>}
+      </>}
+      {bottomTab === "社群" && <>
+        {!communityTab || communityTab === "探索社群" ? <>
+          <div className="wv-topline"><button onClick={() => setSearching(!searching)}><Search size={20}/></button><strong>社群</strong><button onClick={() => setSearching(!searching)}><Plus size={22}/></button></div>
+          {searching && <label className="wv-search"><Search size={18}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="請輸入藝人姓名"/></label>}
+          <div className="wv-scroll">
+            <h2 className="wv-section-title">我的社群</h2><button className="wv-my-community" onClick={() => setCommunityTab("CORTIS")}><span className="wv-cortis-icon">C</span><span>CORTIS</span><i>●</i></button>
+            <button className="wv-promo" onClick={() => setCommunityTab("CORTIS")}>OPEN! ASC2NT <small>立即前往查看</small><span>團體圖片預留區</span></button>
+            <h2 className="wv-section-title">全部社群</h2>
+            <div className="wv-filter-row">{["全部","Weverse DM","New","Group","Artist"].map(t=><button key={t} className={filter===t?"active":""} onClick={()=>setFilter(t)}>{t}</button>)}</div>
+            {communities.filter(c=>c.name.toLowerCase().includes(query.toLowerCase())).map(c=><div className="wv-community-row" key={c.name}><span className="wv-community-icon">{c.name.slice(0,1)}</span><div><strong>{c.name}</strong><small>{c.members}</small></div><button onClick={()=>toggle(joined,setJoined,c.name)}>{joined.includes(c.name)?"已加入":"加入"}</button></div>)}
+          </div>
+        </> : <>
+          <div className="wv-detail-hero"><button className="wv-back" onClick={()=>setCommunityTab("探索社群")}><ChevronLeft/></button><div className="wv-hero-image">團體封面圖片預留區</div><div className="wv-detail-title"><small>722萬 members · ✓ 已加入</small><h1>CORTIS</h1><button onClick={()=>setJoined(old=>old.includes("CORTIS")?old.filter(x=>x!=="CORTIS"):[...old,"CORTIS"])}>♡ Membership⌄</button></div></div>
+          <nav className="wv-detail-tabs">{["Home","Feed","LIVE·Media","Shop"].map(t=><button key={t} className={communityTab===t?"active":""} onClick={()=>setCommunityTab(t)}>{t}</button>)}</nav>
+          <div className="wv-scroll">
+            {communityTab === "Home" ? <><h2 className="wv-section-title">公告</h2><div className="wv-announcements"><p>[공지] CORTIS GLOBAL OFFICIAL FANCLUB</p><p>[NOTICE] CORTIS The 2nd EP</p></div><h2 className="wv-section-title">Calendar</h2><div className="wv-blank-card">行事曆預留區</div></> :
+            communityTab === "Shop" ? <><h2 className="wv-section-title">Shop</h2><div className="wv-blank-card">官方商品預留區</div></> :
+            communityTab === "LIVE·Media" ? <><h2 className="wv-section-title">最新 LIVE</h2><div className="wv-blank-card">LIVE／影音縮圖預留區</div></> :
+            <><div className="wv-filter-row wv-feed-cats">{["Highlight","Fan","Artist","Party"].map(t=><button key={t} className={feedTab===t?"active":""} onClick={()=>setFeedTab(t)}>{t}</button>)}</div><div className="wv-feed-label"><strong>Feed</strong><button onClick={()=>setSearching(!searching)}><Search size={15}/> 篩選條件</button></div>{searching&&<label className="wv-search"><Search size={18}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="搜尋貼文"/></label>}{visiblePosts.length?visiblePosts.map(postCard):<div className="wv-empty">這裡會顯示 CORTIS 的最新貼文</div>}</>}
+          </div>
+        </>}
+      </>}
+      {bottomTab === "Shop" && <div className="wv-scroll"><h2 className="wv-section-title">Shop</h2><div className="wv-blank-card">商品圖片與購物功能預留區</div></div>}
+      {bottomTab === "DM" && <div className="wv-scroll"><h2 className="wv-section-title">Weverse DM</h2><div className="wv-empty">目前沒有訊息</div></div>}
+      {bottomTab === "More" && <>
+        <div className="wv-topline"><strong>More</strong><button aria-label="設定" onClick={()=>setSettingsOpen(!settingsOpen)}><Settings size={22}/></button></div>
+        <div className="wv-scroll">
+          <div className="wv-profile"><strong>{p.owner || "Sammi Wu"}</strong><button>會員資訊</button><p>♡ 我的 Membership　›</p></div>
+          <div className="wv-points">✿　0 <button>儲值</button></div>
+          <div className="wv-tools-grid">{["Shop 訂單紀錄","活動申請紀錄","媒體購買紀錄"].map(t=><button key={t}>{t}</button>)}</div>
+          <div className="wv-menu-list">{["優惠券","我的收藏集","最近瀏覽的媒體","已儲存的影片","已儲存的 QR 碼","Weverse Magazine","通知設定","語言設定","服務資訊及條款","登出","刪除帳號"].map(t=><button key={t} onClick={()=>t==="通知設定"||t==="語言設定"?setSettingsOpen(true):undefined}>{t}<span>›</span></button>)}</div>
+          {settingsOpen&&<div className="wv-settings-panel"><strong>設定</strong><p>附加功能設定</p><button onClick={()=>setSettingsOpen(false)}>關閉</button></div>}
+        </div>
+      </>}
+      <nav className="wv-bottom-nav">{tabs.map((t,i)=><button key={t} className={bottomTab===t?"active":""} onClick={()=>{setBottomTab(t);setSearching(false);}}><span className="wv-nav-icon">{[<Home size={21}/>,<Grid size={21}/>,<ShoppingBag size={21}/>,<Send size={21}/>,<MoreHorizontal size={21}/>][i]}</span><span>{t}</span></button>)}</nav>
     </div>
   );
 }
