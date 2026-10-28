@@ -4923,3 +4923,13 @@ label {
 }
 
 @media (max-width: 700px) { .creator-layout, .main-workspace, .phone-stage, .phone-presentation { background: #000 !important; } .creator-layout, .phone-stage { min-height: 100vh; min-height: 100dvh; } }
+
+@media (max-width: 700px) {
+  html, body, #root, .studio, .main-workspace, .creator-layout, .phone-stage, .phone-presentation {
+    background: #000 !important;
+  }
+  .studio, .main-workspace, .creator-layout, .phone-stage {
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+  }
+}
