@@ -255,6 +255,14 @@ function PhoneRuntime({
   );
   const gestureConsumed = useRef(false);
   const [pinError, setPinError] = useState("");
+  const [passcodeHint, setPasscodeHint] = useState("");
+  const [passcodeHintKey, setPasscodeHintKey] = useState(0);
+  const wrongDefaultPasscodeAttempts = useRef(0);
+  useEffect(() => {
+    if (!passcodeHint) return;
+    const timer = window.setTimeout(() => setPasscodeHint(""), 3000);
+    return () => window.clearTimeout(timer);
+  }, [passcodeHintKey, passcodeHint]);
   const [folder, setFolder] = useState("");
   const [panel, setPanel] = useState("");
   const [own, setOwn] = useState(() => initialRuntime(work));
@@ -386,6 +394,17 @@ function PhoneRuntime({
     } else {
       setPinError("密碼錯誤");
       setPinOpen(true);
+      const hasCustomPasscode = Boolean(String(s.ui?.settings?.passcode ?? ""));
+      if (!hasCustomPasscode) {
+        wrongDefaultPasscodeAttempts.current += 1;
+        if (wrongDefaultPasscodeAttempts.current > 10) {
+          const memberName = String(s.variables.boyfriendName ?? "MARTIN");
+          setPasscodeHint("提示：" + memberName + "’s birthday");
+          setPasscodeHintKey((key) => key + 1);
+        }
+      } else {
+        setPasscodeHint("");
+      }
     }
   };
   useEffect(() => {
@@ -558,6 +577,8 @@ function PhoneRuntime({
                 pinOpen={pinOpen}
                 setPinOpen={setPinOpen}
                 error={pinError}
+                 hint={passcodeHint}
+                 hintKey={passcodeHintKey}
                 onUnlock={unlock}
                 passcode={String(s.ui?.settings?.passcode ?? work.phone.passcode ?? "")}
                 onLight={() => setPanel("light")}
