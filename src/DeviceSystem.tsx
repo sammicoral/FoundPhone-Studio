@@ -71,6 +71,8 @@ export function DeviceLock({
   onCamera,
   onLight,
   passcode,
+  hint = "",
+  hintKey = 0,
 }: {
   work: Work;
   time: string;
@@ -83,6 +85,8 @@ export function DeviceLock({
   onCamera: () => void;
   onLight: () => void;
   passcode?: string;
+  hint?: string;
+  hintKey?: number;
 }) {
   const [code, setCode] = useState("");
   const activePasscode = passcode ?? work.phone.passcode;
@@ -160,6 +164,11 @@ export function DeviceLock({
         <div className="device-passcode">
           <LockKeyhole size={22} />
           <h2>輸入密碼</h2>
+          {hint && (
+            <div key={hintKey} className="passcode-birthday-hint" role="status">
+              {hint}
+            </div>
+          )}
           <div
             className={"passcode-dots " + (error ? "pin-shake" : "")}
             aria-label={"已輸入" + code.length + "位密碼"}
