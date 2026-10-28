@@ -388,6 +388,13 @@ export function WeatherSkin(p: Props) {
     hourly: { time: string; temperature: number; rain: number; wind: number }[];
     daily: { label: string; low: number; high: number }[];
   } | null>(null);
+  const [seoulTime, setSeoulTime] = useState(() => new Date().toLocaleTimeString("zh-TW", { hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: "Asia/Seoul" }));
+  useEffect(() => {
+    const updateClock = () => setSeoulTime(new Date().toLocaleTimeString("zh-TW", { hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: "Asia/Seoul" }));
+    updateClock();
+    const clockTimer = window.setInterval(updateClock, 60 * 1000);
+    return () => window.clearInterval(clockTimer);
+  }, []);
   useEffect(() => {
     let active = true;
     const load = async () => {
@@ -471,7 +478,21 @@ export function WeatherSkin(p: Props) {
           {p.items.filter((i) => i.title.includes(query)).map((i) => <button className="weather-city-row" key={i.id} onClick={() => { setIndex(p.items.indexOf(i)); setSheet(""); p.onRead(i.id); }}><strong>{i.title}</strong><span>{meta(i, "temperature", "—")}°</span></button>)}
           {!p.items.length && <p>目前以首爾即時天氣為主</p>}{p.creator && <button onClick={p.onAdd}><Plus />添加城市</button>}
         </> : sheet === "天氣地圖" ? <div className="weather-map-empty"><Map size={60} /><p>暫無地圖資料</p></div> :
-          <div className="weather-section-detail"><h2>首爾</h2><p>{sheet === "空氣品質" ? (liveWeather ? `濕度 ${liveWeather.humidity}% · 風速 ${liveWeather.wind} km/h` : "暫無即時資料") : item?.body || "即時天氣資料每 15 分鐘更新"}</p>{item && <small>{item.time}</small>}</div>}
+          <div className="weather-section-detail">
+            <section className="weather-native-current" aria-label="首爾即時天氣">
+              <small>首爾 · 即時天氣</small>
+              <h1>首爾</h1>
+              <time>{seoulTime}</time>
+              <output>{liveWeather?.temperature ?? meta(item, "temperature", "—")}°</output>
+              <div className="weather-high-low">
+                <span>最高 {liveWeather?.high ?? meta(item, "high", "—")}°</span>
+                <span>最低 {liveWeather?.low ?? meta(item, "low", "—")}°</span>
+              </div>
+              <p>{liveWeather?.condition ?? meta(item, "condition", "正在取得首爾天氣…")}</p>
+            </section>
+            <p>{sheet === "空氣品質" ? (liveWeather ? `濕度 ${liveWeather.humidity}% · 風速 ${liveWeather.wind} 公里/小時` : "暫無即時資料") : item?.body || "即時天氣資料每 15 分鐘更新"}</p>
+            {item && <small>{item.time}</small>}
+          </div>}
       </div>}
     </div>
   );
