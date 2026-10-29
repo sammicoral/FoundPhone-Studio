@@ -953,10 +953,16 @@ function PhoneRuntime({
             onPointerUp={(e) => {
               e.stopPropagation();
               const deltaY = e.clientY - gesture.current.y;
+              const elapsed = Date.now() - gesture.current.time;
               if (deltaY > -30) return;
               gestureConsumed.current = true;
               if (locked) {
                 beginUnlock();
+                return;
+              }
+              if (elapsed > 450) {
+                captureApp();
+                setPanel("switcher");
                 return;
               }
               captureApp();
