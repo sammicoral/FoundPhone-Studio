@@ -933,19 +933,10 @@ function PhoneRuntime({
           )}
           <button
             className="home-indicator"
-            aria-label="返回主畫面"
-            onClick={() => {
-              if (gestureConsumed.current) return;
-              if (locked) {
-                beginUnlock();
-                return;
-              }
-              captureApp();
-              setHomeRequest((n) => n + 1);
-              setKeyboard(false);
-              setApp("");
-              setFolder("");
-              setPanel("");
+            aria-label="從底部向上滑動以返回主畫面"
+            onClick={(e) => {
+              // The home indicator is gesture-only; tapping it must not navigate.
+              e.preventDefault();
             }}
           />
           <div className="screen-dimmer" />
