@@ -1006,6 +1006,8 @@ export function WeverseSkin(p: SkinProps) {
   const [query, setQuery] = useState("");
   const [searching, setSearching] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [selectedArtist, setSelectedArtist] = useState("");
+  const [artistProfileTab, setArtistProfileTab] = useState("貼文");
   const members = ["MARTIN", "JAMES", "JUHOON", "SEONGHYEON", "KEONHO"];
   const weverseAliases: Record<string, string> = {
     MARTIN: "m.j. edwards",
@@ -1049,8 +1051,8 @@ export function WeverseSkin(p: SkinProps) {
     const comments = item.comments || [];
     return <article className="wv-post" key={item.id}>
       <div className="wv-post-head">
-        <span className="wv-avatar">{getWeverseAvatarPath(item.sender) && <img src={getWeverseAvatarPath(item.sender)} alt="" onError={(event) => { event.currentTarget.style.display = "none"; }} />}{getWeverseName(item.sender).slice(0, 1)}</span>
-        <div className="wv-post-author"><strong>{getWeverseName(item.sender)}{isCortisArtist(item.sender) && <svg className="wv-verified" viewBox="0 0 24 24" aria-label="官方認證藝人" role="img"><path className="wv-verified-bg" d="M12 1.1 15.1 4.1 19.4 4.6 19.9 8.9 22.9 12 19.9 15.1 19.4 19.4 15.1 19.9 12 22.9 8.9 19.9 4.6 19.4 4.1 15.1 1.1 12 4.1 8.9 4.6 4.6 8.9 4.1Z" /><path className="wv-verified-check" d="m7.3 12.2 3 3 6.4-6.5" /></svg>}</strong><small>{item.time || "剛剛"}</small></div>
+        <button className="wv-avatar wv-profile-link" aria-label={getWeverseName(item.sender)} onClick={() => isCortisArtist(item.sender) && setSelectedArtist(getWeverseCanonicalName(item.sender))}>{getWeverseAvatarPath(item.sender) && <img src={getWeverseAvatarPath(item.sender)} alt="" onError={(event) => { event.currentTarget.style.display = "none"; }} />}{getWeverseName(item.sender).slice(0, 1)}</button>
+        <div className="wv-post-author"><strong><button className="wv-artist-name" onClick={() => isCortisArtist(item.sender) && setSelectedArtist(getWeverseCanonicalName(item.sender))}>{getWeverseName(item.sender)}</button>{isCortisArtist(item.sender) && <svg className="wv-verified" viewBox="0 0 24 24" aria-label="官方認證藝人" role="img"><path className="wv-verified-bg" d="M12 1.1 15.1 4.1 19.4 4.6 19.9 8.9 22.9 12 19.9 15.1 19.4 19.4 15.1 19.9 12 22.9 8.9 19.9 4.6 19.4 4.1 15.1 1.1 12 4.1 8.9 4.6 4.6 8.9 4.1Z" /><path className="wv-verified-check" d="m7.3 12.2 3 3 6.4-6.5" /></svg>}</strong><small>{item.time || "剛剛"}</small></div>
         <button className="wv-more-button" aria-label="更多貼文選項" onClick={() => setExpanded((old) => old.includes(item.id) ? old.filter((id) => id !== item.id) : [...old, item.id])}><MoreHorizontal size={20}/></button>
       </div>
       <button className="wv-post-body" onClick={() => { p.onRead(item.id); toggle(expanded, setExpanded, item.id); }}>
@@ -1068,6 +1070,30 @@ export function WeverseSkin(p: SkinProps) {
     </article>;
   };
   const tabs = ["首頁", "社群", "Shop", "DM", "More"];
+  if (selectedArtist) {
+    const artistName = weverseAliases[selectedArtist] || selectedArtist;
+    const artistPosts = posts.filter((item) => getWeverseCanonicalName(item.sender) === selectedArtist);
+    return (
+      <div className="weverse-ui independent-skin wv-artist-profile-page">
+        <header className="wv-artist-profile-hero">
+          <button className="wv-profile-back" aria-label="返回" onClick={() => setSelectedArtist("")}><ChevronLeft size={25}/></button>
+          <button className="wv-profile-share" aria-label="分享"><Send size={22}/></button>
+          <div className="wv-profile-photo-placeholder" aria-hidden="true"></div>
+          <div className="wv-profile-summary">
+            <div className="wv-profile-avatar-placeholder"></div>
+            <strong>{artistName}<svg className="wv-verified wv-verified-profile" viewBox="0 0 24 24" aria-label="官方認證藝人" role="img"><path className="wv-verified-bg" d="M12 1.1 15.1 4.1 19.4 4.6 19.9 8.9 22.9 12 19.9 15.1 19.4 19.4 15.1 19.9 12 22.9 8.9 19.9 4.6 19.4 4.1 15.1 1.1 12 4.1 8.9 4.6 4.6 8.9 4.1Z"/><path className="wv-verified-check wv-verified-check-profile" d="m7.3 12.2 3 3 6.4-6.5"/></svg></strong>
+            <span className="wv-profile-stat">15</span><span className="wv-profile-stat-label">收藏集</span>
+            <button className="wv-following-button">✓ 正在追蹤</button>
+          </div>
+        </header>
+        <div className="wv-profile-mini-gallery"><div></div><div></div><div></div><div></div><div></div></div>
+        <nav className="wv-profile-tabs">{["貼文","留言","Party"].map(tab => <button key={tab} className={artistProfileTab === tab ? "active" : ""} onClick={() => setArtistProfileTab(tab)}>{tab}</button>)}</nav>
+        <div className="wv-profile-feed">
+          {artistProfileTab === "貼文" ? (artistPosts.length ? artistPosts.map(postCard) : <div className="wv-empty">目前沒有貼文</div>) : <div className="wv-empty">{artistProfileTab === "留言" ? "目前沒有留言" : "目前沒有 Party 活動"}</div>}
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="weverse-ui independent-skin">
       {bottomTab === "首頁" && <>
