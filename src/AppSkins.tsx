@@ -1050,7 +1050,7 @@ export function WeverseSkin(p: SkinProps) {
     return <article className="wv-post" key={item.id}>
       <div className="wv-post-head">
         <span className="wv-avatar">{getWeverseAvatarPath(item.sender) && <img src={getWeverseAvatarPath(item.sender)} alt="" onError={(event) => { event.currentTarget.style.display = "none"; }} />}{getWeverseName(item.sender).slice(0, 1)}</span>
-        <div className="wv-post-author"><strong>{getWeverseName(item.sender)}{isCortisArtist(item.sender) && <svg className="wv-verified" viewBox="0 0 24 24" aria-label="官方認證藝人" role="img"><path className="wv-verified-bg" d="M12 0.8 15 3.1 18.8 2.8 20.2 6.3 23.3 8.5 22.5 12.2 23.3 15.9 20.2 18.1 18.8 21.6 15 21.3 12 23.2 9 21.3 5.2 21.6 3.8 18.1 .7 15.9 1.5 12.2 .7 8.5 3.8 6.3 5.2 2.8 9 3.1Z" /><path className="wv-verified-check" d="m7.1 12.2 3.1 3.1 6.8-7" /></svg>}</strong><small>{item.time || "剛剛"}</small></div>
+        <div className="wv-post-author"><strong>{getWeverseName(item.sender)}{isCortisArtist(item.sender) && <svg className="wv-verified" viewBox="0 0 24 24" aria-label="官方認證藝人" role="img"><path className="wv-verified-bg" d="M12 1.1 15.1 4.1 19.4 4.6 19.9 8.9 22.9 12 19.9 15.1 19.4 19.4 15.1 19.9 12 22.9 8.9 19.9 4.6 19.4 4.1 15.1 1.1 12 4.1 8.9 4.6 4.6 8.9 4.1Z" /><path className="wv-verified-check" d="m7.3 12.2 3 3 6.4-6.5" /></svg>}</strong><small>{item.time || "剛剛"}</small></div>
         <button className="wv-more-button" aria-label="更多貼文選項" onClick={() => setExpanded((old) => old.includes(item.id) ? old.filter((id) => id !== item.id) : [...old, item.id])}><MoreHorizontal size={20}/></button>
       </div>
       <button className="wv-post-body" onClick={() => { p.onRead(item.id); toggle(expanded, setExpanded, item.id); }}>
