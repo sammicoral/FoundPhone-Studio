@@ -4633,23 +4633,69 @@
 }
 
 
-/* Final proportional CORTIS cover: about half the available phone viewport, no exposed grey seam */
+/* CORTIS cover: balanced height and continuous image-to-title gradient */
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero {
-  height:340px !important;
-  min-height:340px !important;
+  box-sizing:border-box !important;
+  height:370px !important;
+  min-height:370px !important;
   max-height:none !important;
-  flex:0 0 340px !important;
+  flex:0 0 370px !important;
   overflow:hidden !important;
   background:#252525 !important;
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image {
-  height:220px !important;
-  min-height:220px !important;
+  display:block !important;
+  position:relative !important;
+  box-sizing:border-box !important;
+  width:100% !important;
+  height:245px !important;
+  min-height:245px !important;
+  overflow:hidden !important;
+}
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image img {
+  position:absolute !important;
+  inset:0 !important;
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center 35% !important;
+}
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image::after {
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  pointer-events:none !important;
+  background:linear-gradient(to bottom,
+    rgba(119,119,119,0) 62%,
+    rgba(119,119,119,.18) 75%,
+    rgba(119,119,119,.55) 87%,
+    #777 100%) !important;
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title {
-  min-height:150px !important;
-  height:150px !important;
+  display:block !important;
+  position:relative !important;
+  z-index:2 !important;
+  box-sizing:border-box !important;
+  width:100% !important;
+  min-height:155px !important;
+  height:155px !important;
   margin-top:-30px !important;
   padding:38px 12px 18px !important;
-  background:linear-gradient(to bottom,rgba(119,119,119,0) 0%,rgba(119,119,119,.7) 22%,#777 48%,#252525 100%) !important;
+  overflow:visible !important;
+  text-align:center !important;
+  background:linear-gradient(to bottom,
+    #777 0%,
+    rgba(119,119,119,.96) 18%,
+    rgba(90,90,90,.94) 42%,
+    rgba(55,55,55,.98) 72%,
+    #252525 100%) !important;
+}
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title small,
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title h1,
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title button {
+  position:relative !important;
+  z-index:3 !important;
+  visibility:visible !important;
+  opacity:1 !important;
 }
