@@ -1116,7 +1116,6 @@ export function WeverseSkin(p: SkinProps) {
           {searching && <label className="wv-search"><Search size={18}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="請輸入藝人姓名"/></label>}
           <div className="wv-scroll">
             <h2 className="wv-section-title">我的社群</h2><button className="wv-my-community" onClick={() => setCommunityTab("Home")}><span className="wv-cortis-icon"><img src={import.meta.env.BASE_URL + "assets/weverse/group/weverse-cortis-avatar.jpg"} alt="" onError={(event) => { event.currentTarget.style.display = "none"; }} />C</span><span>CORTIS</span><i>●</i></button>
-            <button className="wv-promo" onClick={() => setCommunityTab("Home")}>OPEN! ASC2NT <small>立即前往查看</small><span>團體圖片預留區</span></button>
             <h2 className="wv-section-title">全部社群</h2>
             <div className="wv-filter-row">{["全部","Weverse DM","New","Group","Artist"].map(t=>{const locked=["Weverse DM","New","Group","Artist"].includes(t);return <button key={t} className={!locked&&filter===t?"active":locked?"wv-disabled-filter":""} disabled={locked} onClick={()=>{if(!locked)setFilter(t);}}>{t}</button>})}</div>
             {communities.filter(c=>c.name.toLowerCase().includes(query.toLowerCase())).map(c=><div className="wv-community-row" key={c.name}><span className="wv-community-icon">{c.name.slice(0,1)}</span><div><strong>{c.name}</strong><small>{c.members}</small></div><button disabled onClick={()=>{}}>{joined.includes(c.name)?"已加入":"加入"}</button></div>)}
