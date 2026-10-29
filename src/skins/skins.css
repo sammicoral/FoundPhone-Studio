@@ -4652,12 +4652,13 @@
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title h1 {
   font-size:43.89px !important;
   line-height:1.05 !important;
-  transform:translateY(-2px) !important;
+  transform:translateY(-9px) !important;
   transform-origin:center center !important;
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title small {
-  transform:translateY(-4px) !important;
+  transform:translateY(-11px) !important;
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title button {
-  transform:none !important;
+  font-size:13.58px !important;
+  transform:translateY(-7px) !important;
 }
