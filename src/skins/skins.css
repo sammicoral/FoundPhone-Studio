@@ -1,4 +1,33 @@
 
+/* Refine CORTIS About card and make the community cover collapse while scrolling */
+.weverse-ui .wv-about-card { margin:0 12px 14px; padding:16px 14px 0; border-radius:24px; }
+.weverse-ui .wv-about-members-preview { gap:12px; overflow-x:auto; overflow-y:hidden; padding:0 0 12px; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; touch-action:pan-x; scrollbar-width:none; }
+.weverse-ui .wv-about-members-preview::-webkit-scrollbar { display:none; }
+.weverse-ui .wv-about-preview-member { flex:0 0 78px; gap:7px; scroll-snap-align:start; }
+.weverse-ui .wv-about-avatar-placeholder { width:70px; height:70px; }
+.weverse-ui .wv-about-preview-member>span:last-child { font-size:11px; line-height:1.2; overflow-wrap:anywhere; }
+.weverse-ui .wv-about-card>p { padding:10px 0 16px; font-size:16px; line-height:1.45; }
+.weverse-ui .wv-about-more { width:calc(100% + 28px); margin:0 -14px; min-height:54px; font-size:16px; }
+.weverse-ui .wv-about-add { right:12px; bottom:-8px; width:52px; height:52px; }
+.weverse-ui .wv-about-add svg { width:24px; height:24px; }
+.weverse-ui .wv-community-detail-scroll { flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:none; background:#000; }
+.weverse-ui .wv-community-detail-scroll::-webkit-scrollbar { display:none; }
+.weverse-ui .wv-community-detail-scroll .wv-detail-tabs { position:sticky; top:0; z-index:5; }
+.weverse-ui .wv-community-detail-scroll .wv-detail-hero { height:245px; min-height:245px; transition:height .22s ease,min-height .22s ease; }
+.weverse-ui .wv-community-detail-scroll .wv-detail-hero.collapsed { height:64px; min-height:64px; background:#777 !important; }
+.weverse-ui .wv-community-detail-scroll .wv-detail-hero.collapsed .wv-hero-image { display:none; }
+.weverse-ui .wv-community-detail-scroll .wv-detail-hero.collapsed .wv-detail-title { display:none; }
+.weverse-ui .wv-community-detail-scroll .wv-detail-hero.collapsed::after { content:"CORTIS"; position:absolute; left:58px; top:17px; color:#fff; font-size:23px; font-weight:800; letter-spacing:.2px; }
+.weverse-ui .wv-community-detail-scroll .wv-detail-hero.collapsed .wv-back { top:14px; }
+@media (max-width:420px) {
+ .weverse-ui .wv-about-card { padding:14px 12px 0; border-radius:22px; }
+ .weverse-ui .wv-about-preview-member { flex-basis:72px; }
+ .weverse-ui .wv-about-avatar-placeholder { width:64px; height:64px; }
+ .weverse-ui .wv-about-card>p { font-size:15px; }
+ .weverse-ui .wv-about-more { width:calc(100% + 24px); margin:0 -12px; }
+}
+
+
 /* CORTIS community About section */
 .weverse-ui .wv-about-card { position:relative; margin:0 12px 20px; padding:24px 18px 0; border-radius:30px; overflow:visible; background:#202020; color:#f7f7f7; }
 .weverse-ui .wv-about-members-preview { display:flex; gap:20px; overflow:hidden; padding:0 1px 18px; }
