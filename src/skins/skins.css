@@ -4578,3 +4578,56 @@
 
 .weverse-ui .wv-community-icon { position:relative; overflow:hidden; }
 .weverse-ui .wv-community-icon img { display:block; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
+
+
+/* Authoritative CORTIS cover sizing — placed last to override legacy conflicting rules */
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero {
+  box-sizing:border-box !important;
+  height:430px !important;
+  min-height:430px !important;
+  max-height:none !important;
+  flex:0 0 430px !important;
+  overflow:visible !important;
+  position:relative !important;
+  background:#777 !important;
+}
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image {
+  display:block !important;
+  position:relative !important;
+  box-sizing:border-box !important;
+  width:100% !important;
+  height:280px !important;
+  min-height:280px !important;
+  overflow:hidden !important;
+}
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image img {
+  position:absolute !important;
+  inset:0 !important;
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center 35% !important;
+}
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title {
+  display:block !important;
+  position:relative !important;
+  z-index:2 !important;
+  box-sizing:border-box !important;
+  width:100% !important;
+  min-height:150px !important;
+  height:auto !important;
+  margin-top:-38px !important;
+  padding:48px 12px 22px !important;
+  overflow:visible !important;
+  text-align:center !important;
+  background:linear-gradient(to bottom,rgba(119,119,119,0) 0%,rgba(119,119,119,.7) 22%,#777 48%,#252525 100%) !important;
+}
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title small,
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title h1,
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title button {
+  position:relative !important;
+  z-index:3 !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
