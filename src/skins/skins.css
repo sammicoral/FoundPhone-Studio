@@ -4421,3 +4421,6 @@
 .weverse-ui .wv-post-author .wv-verified { display:inline-block; align-self:auto; width:11px; height:11px; margin-left:2px; vertical-align:baseline; transform:translateY(-3px); }
 .weverse-ui .wv-post-head .wv-profile-link { cursor:pointer; }
 .weverse-ui .wv-profile-summary .wv-verified-profile { width:13px; height:13px; margin-left:2px; transform:translateY(-2px); }
+
+.weverse-ui .wv-profile-avatar-placeholder { position:relative; overflow:hidden; }
+.weverse-ui .wv-profile-avatar-placeholder img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:50%; }
