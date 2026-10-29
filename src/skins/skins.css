@@ -4614,8 +4614,8 @@
   height:120% !important;
   object-fit:cover !important;
   object-position:center center !important;
-  -webkit-mask-image:linear-gradient(to bottom, #000 48%, rgba(0,0,0,.94) 58%, rgba(0,0,0,.68) 72%, rgba(0,0,0,.3) 87%, transparent 100%) !important;
-  mask-image:linear-gradient(to bottom, #000 48%, rgba(0,0,0,.94) 58%, rgba(0,0,0,.68) 72%, rgba(0,0,0,.3) 87%, transparent 100%) !important;
+  -webkit-mask-image:linear-gradient(to bottom, #000 48%, rgba(0,0,0,.88) 58%, rgba(0,0,0,.58) 70%, rgba(0,0,0,.26) 82%, rgba(0,0,0,.06) 89%, transparent 92%) !important;
+  mask-image:linear-gradient(to bottom, #000 48%, rgba(0,0,0,.88) 58%, rgba(0,0,0,.58) 70%, rgba(0,0,0,.26) 82%, rgba(0,0,0,.06) 89%, transparent 92%) !important;
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image::after {
   content:none !important;
