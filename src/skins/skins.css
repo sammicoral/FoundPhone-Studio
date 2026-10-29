@@ -4648,10 +4648,10 @@
   visibility:visible !important;
   opacity:1 !important;
 }
-/* Enlarge only the CORTIS title by 10%; reserve the extra height above it so
-   the member count can move slightly up while the Membership button stays fixed. */
+/* Base title is 38px; 41.8px is exactly 110% of the original size. */
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title h1 {
-  font-size:110% !important;
+  font-size:41.8px !important;
+  line-height:1.05 !important;
   transform:translateY(-2px) !important;
   transform-origin:center center !important;
 }
