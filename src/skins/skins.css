@@ -4633,7 +4633,7 @@
 }
 
 
-/* CORTIS hero: align the members higher like the official reference and lower the text slightly */
+/* CORTIS hero: lift the group photo and use the soft grey blurred fade from the reference */
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero {
   position:relative !important;
   isolation:isolate !important;
@@ -4648,7 +4648,7 @@
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image {
   position:absolute !important;
   inset:0 !important;
-  z-index:0 !important;
+  z-index:1 !important;
   display:block !important;
   width:100% !important;
   height:100% !important;
@@ -4662,33 +4662,50 @@
   width:100% !important;
   height:100% !important;
   object-fit:cover !important;
-  object-position:center 60% !important;
+  object-position:center 76% !important;
 }
-/* A single overlay spans the entire hero so the fade has no horizontal seam */
+/* Blur the lower part of the photo into grey, rather than placing a flat panel over it */
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image::after {
+  content:"" !important;
+  display:block !important;
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  height:52% !important;
+  z-index:2 !important;
+  pointer-events:none !important;
+  -webkit-backdrop-filter:blur(16px) !important;
+  backdrop-filter:blur(16px) !important;
+  background:linear-gradient(to bottom,
+    rgba(145,145,145,0) 0%,
+    rgba(145,145,145,.12) 18%,
+    rgba(145,145,145,.48) 48%,
+    rgba(125,125,125,.86) 72%,
+    rgba(95,95,95,.96) 100%) !important;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.5) 20%,#000 48%) !important;
+  mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.5) 20%,#000 48%) !important;
+}
+/* Keep the full cover darkening gradual and continuous under the text */
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero::before {
   content:"" !important;
   position:absolute !important;
-  z-index:1 !important;
+  z-index:2 !important;
   inset:0 !important;
   pointer-events:none !important;
   background:linear-gradient(to bottom,
     rgba(119,119,119,0) 0%,
-    rgba(119,119,119,0) 42%,
-    rgba(119,119,119,.08) 50%,
-    rgba(119,119,119,.22) 58%,
-    rgba(105,105,105,.48) 67%,
-    rgba(75,75,75,.78) 79%,
-    rgba(45,45,45,.94) 91%,
+    rgba(119,119,119,0) 45%,
+    rgba(119,119,119,.04) 54%,
+    rgba(105,105,105,.16) 64%,
+    rgba(75,75,75,.34) 76%,
+    rgba(45,45,45,.72) 90%,
     #252525 100%) !important;
-}
-.weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image::after {
-  content:none !important;
-  display:none !important;
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title {
   display:block !important;
   position:absolute !important;
-  z-index:2 !important;
+  z-index:3 !important;
   left:0 !important;
   right:0 !important;
   bottom:2px !important;
@@ -4706,7 +4723,7 @@
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title h1,
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title button {
   position:relative !important;
-  z-index:3 !important;
+  z-index:4 !important;
   visibility:visible !important;
   opacity:1 !important;
 }
