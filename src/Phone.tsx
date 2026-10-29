@@ -944,7 +944,11 @@ function PhoneRuntime({
                 time: Date.now(),
                 zone: "home-indicator",
               };
-              try { e.currentTarget.setPointerCapture(e.pointerId); } catch {}
+              try {
+                e.currentTarget.setPointerCapture(e.pointerId);
+              } catch {
+                // Pointer capture may be unavailable in embedded browsers.
+              }
             }}
             onPointerUp={(e) => {
               e.stopPropagation();
