@@ -1033,7 +1033,7 @@ export function WeverseSkin(p: SkinProps) {
   const communities = [
     { name: "TREASURE", members: "CHOI HYUN SUK · JIHOON · YOSHI · JUNKYU · YOON JAE HYUK +5" },
     { name: "BLACKPINK", members: "JISOO · JENNIE · ROSÉ · LISA" },
-    { name: "AND2BLE", members: "ZHANGHAO · YOOSEUNGEON · RICKY · KIMGYUVIN · HANYUJIN" },
+    { name: "BTS", members: "RM · 진 · 슈가 · 제이홉 · 지민 · 뷔 · 정국" },
     { name: "ENHYPEN", members: "JUNGWON · HEESEUNG · JAY · JAKE · SUNGHOON +2" },
     { name: "TOMORROW X TOGETHER", members: "SOOBIN · YEONJUN · BEOMGYU · TAEHYUN · HUENINGKAI" },
   ];
