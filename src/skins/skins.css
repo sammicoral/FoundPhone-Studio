@@ -4613,7 +4613,7 @@
   width:100% !important;
   height:100% !important;
   object-fit:cover !important;
-  object-position:center center !important;
+  object-position:center top !important;
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image::after {
   content:none !important;
@@ -4635,13 +4635,7 @@
   padding:54px 12px 18px !important;
   overflow:visible !important;
   text-align:center !important;
-  background:linear-gradient(to bottom,
-    rgba(119,119,119,0) 0%,
-    rgba(119,119,119,.04) 14%,
-    rgba(119,119,119,.16) 30%,
-    rgba(105,105,105,.38) 48%,
-    rgba(75,75,75,.68) 72%,
-    #252525 100%) !important;
+  background:#252525 !important;
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title small,
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title h1,
