@@ -4580,7 +4580,7 @@
 .weverse-ui .wv-community-icon img { display:block; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
 
 
-/* Authoritative CORTIS cover sizing: compact hero with a continuous grey fade into the title */
+/* Authoritative CORTIS cover sizing: slight photo and title alignment adjustments */
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero {
   box-sizing:border-box !important;
   height:365px !important;
@@ -4604,7 +4604,7 @@
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image img {
   position:absolute !important;
-  top:-20% !important;
+  top:-15% !important;
   left:0 !important;
   display:block !important;
   width:100% !important;
@@ -4628,7 +4628,7 @@
   width:100% !important;
   min-height:127px !important;
   height:auto !important;
-  margin-top:-46px !important;
+  margin-top:-64px !important;
   padding:54px 12px 18px !important;
   overflow:visible !important;
   text-align:center !important;
