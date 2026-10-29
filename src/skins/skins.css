@@ -1,3 +1,49 @@
+
+/* CORTIS community About section */
+.weverse-ui .wv-about-card { position:relative; margin:0 12px 20px; padding:24px 18px 0; border-radius:30px; overflow:visible; background:#202020; color:#f7f7f7; }
+.weverse-ui .wv-about-members-preview { display:flex; gap:20px; overflow:hidden; padding:0 1px 18px; }
+.weverse-ui .wv-about-preview-member { display:flex; flex:0 0 104px; min-width:0; flex-direction:column; align-items:center; gap:10px; text-align:center; }
+.weverse-ui .wv-about-avatar-placeholder { display:block; width:92px; height:92px; flex-shrink:0; border-radius:50%; background:#393939; border:1px solid #505050; }
+.weverse-ui .wv-about-preview-member>span:last-child { max-width:100%; font-size:13px; letter-spacing:.2px; overflow-wrap:anywhere; }
+.weverse-ui .wv-about-card>p { margin:0; padding:14px 0 24px; font-size:19px; line-height:1.5; }
+.weverse-ui .wv-about-more { display:flex; justify-content:center; align-items:center; gap:8px; width:calc(100% + 36px); margin:0 -18px; min-height:70px; border-top:1px solid #393939; color:#c8c8c8; font-size:18px; }
+.weverse-ui .wv-about-more svg { transform:rotate(180deg); }
+.weverse-ui .wv-about-add { position:absolute; right:18px; bottom:-12px; display:grid; place-items:center; width:72px; height:72px; border:2px solid #bdbdbd; border-radius:50%; background:#f6f6f6; color:#050505; }
+.weverse-ui .wv-about-page { flex:1; min-height:0; overflow-y:auto; padding:0 14px 28px; background:#000; color:#f7f7f7; scrollbar-width:thin; scrollbar-color:#777 #000; }
+.weverse-ui .wv-about-page-header { display:grid; grid-template-columns:40px 1fr 40px; align-items:center; min-height:62px; margin:0 -2px 28px; text-align:center; }
+.weverse-ui .wv-about-page-header button { display:grid; place-items:center; width:36px; height:42px; }
+.weverse-ui .wv-about-page-header button svg { transform:rotate(180deg); }
+.weverse-ui .wv-about-page-header strong { font-size:20px; }
+.weverse-ui .wv-about-profile { display:flex; justify-content:space-between; align-items:center; gap:16px; margin:0 4px 36px; }
+.weverse-ui .wv-about-profile h1 { margin:0 0 20px; font-size:38px; line-height:1.1; font-weight:900; }
+.weverse-ui .wv-about-profile>img { width:94px; height:94px; object-fit:cover; border-radius:28px; }
+.weverse-ui .wv-about-socials { display:flex; gap:12px; }
+.weverse-ui .wv-about-socials span { display:grid; place-items:center; width:44px; height:44px; border:1px solid #333; border-radius:50%; font-size:24px; font-weight:700; }
+.weverse-ui .wv-about-description { margin:0 4px 28px; font-size:19px; line-height:1.5; }
+.weverse-ui .wv-about-debut { display:flex; align-items:center; gap:18px; margin:0 4px 28px; min-height:58px; }
+.weverse-ui .wv-about-calendar-icon { font-size:30px; line-height:1; }
+.weverse-ui .wv-about-debut div { display:flex; flex-direction:column; gap:4px; }
+.weverse-ui .wv-about-debut strong { font-size:18px; }
+.weverse-ui .wv-about-debut small { color:#888; font-size:15px; }
+.weverse-ui .wv-about-member-list { display:flex; flex-direction:column; gap:12px; }
+.weverse-ui .wv-about-member { overflow:hidden; border-radius:24px; background:#202020; }
+.weverse-ui .wv-about-member>button { display:flex; align-items:center; gap:16px; width:100%; min-height:94px; padding:14px 17px; text-align:left; }
+.weverse-ui .wv-about-member-avatar { width:66px; height:66px; flex-shrink:0; border-radius:50%; background:#393939; }
+.weverse-ui .wv-about-member strong { flex:1; font-size:21px; font-weight:500; }
+.weverse-ui .wv-about-chevron { transform:rotate(-90deg); transition:transform .15s ease; }
+.weverse-ui .wv-about-chevron.open { transform:rotate(90deg); }
+.weverse-ui .wv-about-member-details { padding:0 18px 18px 99px; color:#aaa; font-size:14px; }
+@media (max-width:420px) {
+ .weverse-ui .wv-about-card { padding-top:18px; }
+ .weverse-ui .wv-about-preview-member { flex-basis:88px; }
+ .weverse-ui .wv-about-avatar-placeholder { width:78px; height:78px; }
+ .weverse-ui .wv-about-card>p { font-size:17px; }
+ .weverse-ui .wv-about-profile>img { width:78px; height:78px; border-radius:24px; }
+ .weverse-ui .wv-about-member>button { min-height:82px; }
+ .weverse-ui .wv-about-member-avatar { width:56px; height:56px; }
+ .weverse-ui .wv-about-member strong { font-size:18px; }
+}
+
 /* Shared controls, not shared page layouts. Each app owns its page structure. */
 .catalog-skin {
   display: flex;
