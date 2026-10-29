@@ -4414,3 +4414,10 @@
 .weverse-ui .wv-profile-tabs button.active { color:#f5f5f5; border-bottom-color:#aaa; }
 .weverse-ui .wv-profile-feed { flex:1; min-height:0; overflow:auto; padding:12px 10px; background:#000; }
 .weverse-ui .wv-profile-feed .wv-post { margin-bottom:12px; }
+
+/* Tight badge placement: anchor to name, not the entire author row */
+.weverse-ui .wv-post-author strong { display:inline-flex; align-items:baseline; gap:0; width:max-content; max-width:100%; }
+.weverse-ui .wv-post-author .wv-artist-name { display:inline; line-height:1.2; cursor:pointer; }
+.weverse-ui .wv-post-author .wv-verified { display:inline-block; align-self:auto; width:11px; height:11px; margin-left:2px; vertical-align:baseline; transform:translateY(-3px); }
+.weverse-ui .wv-post-head .wv-profile-link { cursor:pointer; }
+.weverse-ui .wv-profile-summary .wv-verified-profile { width:13px; height:13px; margin-left:2px; transform:translateY(-2px); }
