@@ -1,15 +1,17 @@
 
-/* Explicitly preserve the full cover until the user scrolls past the collapse threshold */
-.weverse-ui .wv-community-detail-scroll > .wv-detail-hero:not(.collapsed) { height:245px !important; min-height:245px !important; flex:0 0 245px !important; background:#777 !important; }
-.weverse-ui .wv-community-detail-scroll > .wv-detail-hero:not(.collapsed) .wv-hero-image { display:grid !important; height:245px !important; }
-.weverse-ui .wv-community-detail-scroll > .wv-detail-hero:not(.collapsed) .wv-detail-title { display:block !important; }
-.weverse-ui .wv-community-detail-scroll > .wv-detail-hero:not(.collapsed) .wv-collapsed-title,
-.weverse-ui .wv-community-detail-scroll > .wv-detail-hero:not(.collapsed) .wv-collapsed-member-avatar { display:none !important; }
-.weverse-ui .wv-community-detail-scroll > .wv-detail-hero.collapsed { height:64px !important; min-height:64px !important; flex:0 0 64px !important; }
-.weverse-ui .wv-community-detail-scroll > .wv-detail-hero.collapsed .wv-hero-image,
-.weverse-ui .wv-community-detail-scroll > .wv-detail-hero.collapsed .wv-detail-title { display:none !important; }
-.weverse-ui .wv-community-detail-scroll > .wv-detail-hero.collapsed .wv-collapsed-title,
-.weverse-ui .wv-community-detail-scroll > .wv-detail-hero.collapsed .wv-collapsed-member-avatar { display:block !important; }
+/* Stable CORTIS collapse: keep the full hero intact and show a separate sticky compact bar */
+.weverse-ui .wv-community-detail-scroll { position:relative; overflow-anchor:none; }
+.weverse-ui .wv-community-compact-bar { position:sticky; top:0; z-index:20; display:flex; align-items:center; flex:0 0 64px; height:64px; margin-bottom:-64px; padding:0 16px; box-sizing:border-box; background:rgba(135,135,135,.94); -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px); color:#fff; opacity:0; visibility:hidden; pointer-events:none; }
+.weverse-ui .wv-community-compact-bar.visible { opacity:1; visibility:visible; pointer-events:auto; }
+.weverse-ui .wv-community-compact-bar .wv-back { position:static; flex:0 0 42px; width:42px; height:44px; padding:0; color:#fff; }
+.weverse-ui .wv-community-compact-bar>strong { margin-left:8px; font-size:23px; line-height:1; font-weight:800; }
+.weverse-ui .wv-community-compact-bar .wv-collapsed-member-avatar { display:block; width:40px; height:40px; flex:0 0 40px; margin-left:auto; border:2px solid rgba(255,255,255,.85); border-radius:50%; background:rgba(255,255,255,.16); }
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero { position:relative; flex:0 0 245px !important; height:245px !important; min-height:245px !important; overflow:hidden; background:#777 !important; }
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero .wv-hero-image { display:grid !important; width:100%; height:245px !important; }
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero .wv-detail-title { display:block !important; }
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero .wv-collapsed-title,
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero .wv-collapsed-member-avatar { display:none !important; }
+
 
 
 /* Compact sticky-looking CORTIS bar during scroll, with reversible collapse */
