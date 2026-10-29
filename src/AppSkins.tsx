@@ -1027,7 +1027,7 @@ export function WeverseSkin(p: SkinProps) {
   const isCortisArtist = (sender: string) => Boolean(getWeverseCanonicalName(sender));
   const getWeverseAvatarPath = (sender: string) => {
     const canonical = getWeverseCanonicalName(sender);
-    return canonical ? "/assets/weverse/members/" + canonical.toLowerCase() + "/weverse-" + canonical.toLowerCase() + "-avatar.jpg" : "";
+    return canonical ? import.meta.env.BASE_URL + "assets/weverse/members/" + canonical.toLowerCase() + "/weverse-" + canonical.toLowerCase() + "-avatar.jpg" : "";
   };
   const communities = [
     { name: "TREASURE", members: "CHOI HYUN SUK · JIHOON · YOSHI · JUNKYU · YOON JAE HYUK +5" },
@@ -1080,7 +1080,7 @@ export function WeverseSkin(p: SkinProps) {
           <button className="wv-profile-share" aria-label="分享"><Send size={22}/></button>
           <div className="wv-profile-photo-placeholder" aria-hidden="true"></div>
           <div className="wv-profile-summary">
-            <div className="wv-profile-avatar-placeholder"></div>
+            <div className="wv-profile-avatar-placeholder"><img src={getWeverseAvatarPath(selectedArtist)} alt={artistName} onError={(event) => { event.currentTarget.style.display = "none"; }} /></div>
             <strong>{artistName}<svg className="wv-verified wv-verified-profile" viewBox="0 0 24 24" aria-label="官方認證藝人" role="img"><path className="wv-verified-bg" d="M12 1.1 15.1 4.1 19.4 4.6 19.9 8.9 22.9 12 19.9 15.1 19.4 19.4 15.1 19.9 12 22.9 8.9 19.9 4.6 19.4 4.1 15.1 1.1 12 4.1 8.9 4.6 4.6 8.9 4.1Z"/><path className="wv-verified-check wv-verified-check-profile" d="m7.3 12.2 3 3 6.4-6.5"/></svg></strong>
             <span className="wv-profile-stat">15</span><span className="wv-profile-stat-label">收藏集</span>
             <button className="wv-following-button">✓ 正在追蹤</button>
@@ -1114,14 +1114,14 @@ export function WeverseSkin(p: SkinProps) {
           <div className="wv-topline"><button onClick={() => setSearching(!searching)}><Search size={20}/></button><strong>社群</strong><button onClick={() => setSearching(!searching)}><Plus size={22}/></button></div>
           {searching && <label className="wv-search"><Search size={18}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="請輸入藝人姓名"/></label>}
           <div className="wv-scroll">
-            <h2 className="wv-section-title">我的社群</h2><button className="wv-my-community" onClick={() => setCommunityTab("Home")}><span className="wv-cortis-icon"><img src="/assets/weverse/group/weverse-cortis-avatar.jpg" alt="" onError={(event) => { event.currentTarget.style.display = "none"; }} />C</span><span>CORTIS</span><i>●</i></button>
+            <h2 className="wv-section-title">我的社群</h2><button className="wv-my-community" onClick={() => setCommunityTab("Home")}><span className="wv-cortis-icon"><img src={import.meta.env.BASE_URL + "assets/weverse/group/weverse-cortis-avatar.jpg"} alt="" onError={(event) => { event.currentTarget.style.display = "none"; }} />C</span><span>CORTIS</span><i>●</i></button>
             <button className="wv-promo" onClick={() => setCommunityTab("Home")}>OPEN! ASC2NT <small>立即前往查看</small><span>團體圖片預留區</span></button>
             <h2 className="wv-section-title">全部社群</h2>
             <div className="wv-filter-row">{["全部","Weverse DM","New","Group","Artist"].map(t=><button key={t} className={filter===t?"active":""} onClick={()=>setFilter(t)}>{t}</button>)}</div>
             {communities.filter(c=>c.name.toLowerCase().includes(query.toLowerCase())).map(c=><div className="wv-community-row" key={c.name}><span className="wv-community-icon">{c.name.slice(0,1)}</span><div><strong>{c.name}</strong><small>{c.members}</small></div><button onClick={()=>toggle(joined,setJoined,c.name)}>{joined.includes(c.name)?"已加入":"加入"}</button></div>)}
           </div>
         </> : <>
-          <div className="wv-detail-hero"><button className="wv-back" onClick={()=>setCommunityTab("探索社群")}><ChevronLeft/></button><div className="wv-hero-image"><img src="/assets/weverse/group/weverse-cortis-cover.JPG" alt="CORTIS 社群封面" onError={(event) => { event.currentTarget.style.display = "none"; }} /></div><div className="wv-detail-title"><small>722萬 members · ✓ 已加入</small><h1>CORTIS</h1><button onClick={()=>setJoined(old=>old.includes("CORTIS")?old.filter(x=>x!=="CORTIS"):[...old,"CORTIS"])}>♡ Membership⌄</button></div></div>
+          <div className="wv-detail-hero"><button className="wv-back" onClick={()=>setCommunityTab("探索社群")}><ChevronLeft/></button><div className="wv-hero-image"><img src={import.meta.env.BASE_URL + "assets/weverse/group/weverse-cortis-cover.JPG"} alt="CORTIS 社群封面" onError={(event) => { event.currentTarget.style.display = "none"; }} /></div><div className="wv-detail-title"><small>722萬 members · ✓ 已加入</small><h1>CORTIS</h1><button onClick={()=>setJoined(old=>old.includes("CORTIS")?old.filter(x=>x!=="CORTIS"):[...old,"CORTIS"])}>♡ Membership⌄</button></div></div>
           <nav className="wv-detail-tabs">{["Home","Feed","LIVE·Media","Shop"].map(t=><button key={t} className={communityTab===t?"active":""} onClick={()=>setCommunityTab(t)}>{t}</button>)}</nav>
           <div className="wv-scroll">
             {communityTab === "Home" ? <><h2 className="wv-section-title">公告</h2><div className="wv-announcements"><p>[공지] CORTIS GLOBAL OFFICIAL FANCLUB</p><p>[NOTICE] CORTIS The 2nd EP</p></div><h2 className="wv-section-title">Calendar</h2><div className="wv-blank-card">行事曆預留區</div></> :
