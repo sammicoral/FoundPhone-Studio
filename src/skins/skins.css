@@ -4600,7 +4600,7 @@
   width:100% !important;
   height:238px !important;
   min-height:238px !important;
-  overflow:hidden !important;
+  overflow:visible !important;
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image {
   background:#777 !important;
@@ -4611,7 +4611,7 @@
   left:0 !important;
   display:block !important;
   width:100% !important;
-  height:100% !important;
+  height:365px !important;
   object-fit:cover !important;
   object-position:center top !important;
 }
@@ -4635,7 +4635,7 @@
   padding:54px 12px 18px !important;
   overflow:visible !important;
   text-align:center !important;
-  background:#252525 !important;
+  background:transparent !important;
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title small,
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title h1,
