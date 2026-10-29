@@ -1,4 +1,13 @@
 
+/* Ensure the CORTIS cover, title, member count and Membership control all fit */
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero { height:350px !important; min-height:350px !important; flex:0 0 350px !important; overflow:hidden; }
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero .wv-hero-image { height:245px !important; }
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero .wv-detail-title { margin-top:-92px !important; padding:58px 12px 18px !important; min-height:145px; box-sizing:border-box; }
+.weverse-ui .wv-community-compact-bar { transition:opacity .24s ease, background-color .24s ease; }
+.weverse-ui .wv-community-compact-bar:not(.visible) { transition:opacity .2s ease, visibility 0s linear .2s; }
+.weverse-ui .wv-community-compact-bar.visible { visibility:visible; }
+
+
 /* Stable CORTIS collapse: keep the full hero intact and show a separate sticky compact bar */
 .weverse-ui .wv-community-detail-scroll { position:relative; overflow-anchor:none; }
 .weverse-ui .wv-community-compact-bar { position:sticky; top:0; z-index:20; display:flex; align-items:center; flex:0 0 64px; height:64px; margin-bottom:-64px; padding:0 16px; box-sizing:border-box; background:rgba(135,135,135,.94); -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px); color:#fff; opacity:0; visibility:hidden; pointer-events:none; }
