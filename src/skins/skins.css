@@ -4580,13 +4580,13 @@
 .weverse-ui .wv-community-icon img { display:block; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
 
 
-/* Authoritative CORTIS cover sizing: full photo with a continuous grey fade into the title */
+/* Authoritative CORTIS cover sizing: compact hero with a continuous grey fade into the title */
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero {
   box-sizing:border-box !important;
-  height:430px !important;
-  min-height:430px !important;
+  height:365px !important;
+  min-height:365px !important;
   max-height:none !important;
-  flex:0 0 430px !important;
+  flex:0 0 365px !important;
   overflow:hidden !important;
   position:relative !important;
   isolation:isolate !important;
@@ -4598,8 +4598,8 @@
   z-index:0 !important;
   box-sizing:border-box !important;
   width:100% !important;
-  height:280px !important;
-  min-height:280px !important;
+  height:238px !important;
+  min-height:238px !important;
   overflow:hidden !important;
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image img {
@@ -4612,7 +4612,6 @@
   object-fit:cover !important;
   object-position:center center !important;
 }
-/* Do not use backdrop-filter here: it was painting a blurred slab over the wrong half */
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image::after {
   content:none !important;
   display:none !important;
@@ -4627,10 +4626,10 @@
   z-index:2 !important;
   box-sizing:border-box !important;
   width:100% !important;
-  min-height:150px !important;
+  min-height:127px !important;
   height:auto !important;
-  margin-top:-54px !important;
-  padding:64px 12px 22px !important;
+  margin-top:-46px !important;
+  padding:54px 12px 18px !important;
   overflow:visible !important;
   text-align:center !important;
   background:linear-gradient(to bottom,
