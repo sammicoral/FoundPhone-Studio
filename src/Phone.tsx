@@ -934,9 +934,40 @@ function PhoneRuntime({
           <button
             className="home-indicator"
             aria-label="從底部向上滑動以返回主畫面"
+            style={{ touchAction: "none" }}
+            onPointerDown={(e) => {
+              // Handle the home-indicator gesture here so the phone-wide
+              // gesture handler cannot reinterpret a slow swipe as app switcher.
+              e.stopPropagation();
+              gesture.current = {
+                ...gesture.current,
+                y: e.clientY,
+                time: Date.now(),
+                zone: "home-indicator",
+              };
+              try { e.currentTarget.setPointerCapture(e.pointerId); } catch {}
+            }}
+            onPointerUp={(e) => {
+              e.stopPropagation();
+              const startY = gesture.current.y;
+              const deltaY = e.clientY - startY;
+              if (deltaY > -35) return;
+              gestureConsumed.current = true;
+              if (locked) {
+                beginUnlock();
+                return;
+              }
+              captureApp();
+              setHomeRequest((n) => n + 1);
+              setKeyboard(false);
+              setApp("");
+              setFolder("");
+              setPanel("");
+            }}
             onClick={(e) => {
-              // The home indicator is gesture-only; tapping it must not navigate.
+              // Tapping the indicator does nothing; an upward swipe is required.
               e.preventDefault();
+              e.stopPropagation();
             }}
           />
           <div className="screen-dimmer" />
