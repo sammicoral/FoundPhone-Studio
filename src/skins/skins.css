@@ -4377,13 +4377,12 @@
   border-radius: inherit;
 }
 .weverse-ui .wv-hero-image { position: relative; overflow: hidden; }
+.weverse-ui .wv-hero-image { width:100%; height:245px; }
 .weverse-ui .wv-hero-image img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  position:absolute !important; display:block; inset:0; width:100% !important; height:100% !important;
+  max-width:none; max-height:none; object-fit:cover !important; object-position:center 35%;
 }
+.weverse-ui .wv-detail-title { position:relative; z-index:1; margin-top:-92px; padding-top:58px; background:linear-gradient(transparent,rgba(0,0,0,.9) 35%,#000 80%); }
 
 /* Weverse artist profile page and aligned verification badges */
 .weverse-ui .wv-post-author strong { display: flex; align-items: center; gap: 0; line-height: 1.25; }
@@ -4418,9 +4417,9 @@
 /* Tight badge placement: anchor to name, not the entire author row */
 .weverse-ui .wv-post-author strong { display:inline-flex; align-items:baseline; gap:0; width:max-content; max-width:100%; }
 .weverse-ui .wv-post-author .wv-artist-name { display:inline; line-height:1.2; cursor:pointer; }
-.weverse-ui .wv-post-author .wv-verified { display:inline-block; align-self:auto; width:11px; height:11px; margin-left:2px; vertical-align:baseline; transform:translateY(-3px); }
+.weverse-ui .wv-post-author .wv-verified { display:inline-block; align-self:auto; width:11px; height:11px; margin-left:2px; vertical-align:middle; transform:translateY(0); }
 .weverse-ui .wv-post-head .wv-profile-link { cursor:pointer; }
 .weverse-ui .wv-profile-summary .wv-verified-profile { width:13px; height:13px; margin-left:2px; transform:translateY(-2px); }
 
-.weverse-ui .wv-profile-avatar-placeholder { position:relative; overflow:hidden; }
-.weverse-ui .wv-profile-avatar-placeholder img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:50%; }
+.weverse-ui .wv-profile-avatar-placeholder { position:relative; display:block; flex:0 0 76px; width:76px; height:76px; min-width:76px; min-height:76px; overflow:hidden; border-radius:50%; }
+.weverse-ui .wv-profile-avatar-placeholder img { position:absolute !important; display:block; inset:0; width:100% !important; height:100% !important; max-width:none; max-height:none; object-fit:cover !important; border-radius:50%; }
