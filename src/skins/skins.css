@@ -4271,6 +4271,8 @@
 .weverse-ui .wv-community-row strong { font-size:16px; font-weight:800; }
 .weverse-ui .wv-community-row small { color:#858585; font-size:11px; line-height:1.35; }
 .weverse-ui .wv-community-row>button { padding:9px 14px; border-radius:25px; background:#57d0dc; color:#061719; font-weight:750; }
+.weverse-ui .wv-community-row>button:disabled { opacity:1; cursor:default; }
+.weverse-ui .wv-filter-row button.wv-disabled-filter { color:#fff !important; cursor:default; }
 .weverse-ui .wv-detail-hero { position:relative; flex-shrink:0; min-height:245px; overflow:hidden; background:linear-gradient(180deg,#777 0%,#4d4d4d 62%,#000 100%); }
 .weverse-ui .wv-back { position:absolute; z-index:2; top:9px; left:10px; display:grid; place-items:center; width:35px; height:35px; }
 .weverse-ui .wv-hero-image { height:158px; display:grid; place-items:center; color:#ddd; font-size:11px; background:linear-gradient(145deg,#888,#444); }
