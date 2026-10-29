@@ -1,3 +1,4 @@
+import weverseHomeLogo from "../assets/app-icons/weverse-home-logo.png";
 import { NativeComposer } from "./DeviceSystem";
 import { useSkinState } from "./skinState";
 import { useState } from "react";
@@ -1098,7 +1099,7 @@ export function WeverseSkin(p: SkinProps) {
     <div className="weverse-ui independent-skin">
       {bottomTab === "首頁" && <>
         <header className="wv-header">
-          <img className="wv-wordmark" src={import.meta.env.BASE_URL + "assets/app-icons/weverse-home-logo.png"} alt="weverse" />
+          <img className="wv-wordmark" src={weverseHomeLogo} alt="weverse" />
           <div><button aria-label="Weverse 通知"><Star size={23}/></button><button aria-label="通知" onClick={() => setHomeTab("通知")}>♧<i>28</i></button></div>
         </header>
         <nav className="wv-home-tabs">{["My Feed", "Discover", "Party", "Spot"].map(t => <button key={t} className={homeTab === t ? "active" : ""} onClick={() => setHomeTab(t)}>{t}</button>)}</nav>
