@@ -1,4 +1,13 @@
 
+/* Final CORTIS hero sizing and black safe-area background */
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero { box-sizing:border-box; height:370px !important; min-height:370px !important; flex:0 0 370px !important; }
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero .wv-hero-image { height:245px !important; min-height:245px; }
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero .wv-detail-title { display:block !important; margin-top:-92px !important; padding:58px 12px 22px !important; min-height:145px; box-sizing:border-box; }
+.phone-shell .phone-screen:has(.weverse-ui) { background:#000 !important; }
+.phone-shell .phone-screen:has(.weverse-ui) .home-indicator { color:#fff !important; }
+.app-screen:has(.weverse-ui) { background:#000 !important; padding-bottom:0 !important; }
+
+
 /* Ensure the CORTIS cover, title, member count and Membership control all fit */
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero { height:350px !important; min-height:350px !important; flex:0 0 350px !important; overflow:hidden; }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero .wv-hero-image { height:245px !important; }
