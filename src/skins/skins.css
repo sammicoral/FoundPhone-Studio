@@ -4656,7 +4656,13 @@
   transform-origin:center center !important;
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title small {
+  display:block !important;
+  position:relative !important;
+  margin:0 0 12px !important;
   transform:translateY(-19px) !important;
+}
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title h1 {
+  margin-top:7px !important;
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title button {
   font-size:13.58px !important;
