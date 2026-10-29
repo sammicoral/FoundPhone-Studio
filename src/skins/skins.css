@@ -4384,3 +4384,33 @@
   height: 100%;
   object-fit: cover;
 }
+
+/* Weverse artist profile page and aligned verification badges */
+.weverse-ui .wv-post-author strong { display: flex; align-items: center; gap: 0; line-height: 1.25; }
+.weverse-ui .wv-artist-name {
+  appearance: none; border: 0; padding: 0; margin: 0; background: transparent;
+  color: inherit; font: inherit; font-weight: inherit; line-height: inherit; text-align: left;
+}
+.weverse-ui .wv-profile-link { border: 0; padding: 0; cursor: pointer; }
+.weverse-ui .wv-verified { vertical-align: middle; align-self: center; flex: 0 0 auto; transform: translateY(-1px); }
+.weverse-ui .wv-artist-profile-page { display:flex; flex-direction:column; height:100%; min-height:0; background:#000; color:#f5f5f5; overflow:hidden; }
+.weverse-ui .wv-artist-profile-hero { position:relative; flex:0 0 340px; min-height:340px; overflow:hidden; background:linear-gradient(145deg,#5c5960,#29292d 65%,#555); }
+.weverse-ui .wv-profile-photo-placeholder { position:absolute; inset:0; background:linear-gradient(180deg,rgba(255,255,255,.05),transparent 50%,rgba(0,0,0,.18)); }
+.weverse-ui .wv-profile-back,.weverse-ui .wv-profile-share { position:absolute; z-index:2; top:20px; border:0; background:transparent; color:#fff; padding:6px; }
+.weverse-ui .wv-profile-back { left:12px; }
+.weverse-ui .wv-profile-share { right:12px; }
+.weverse-ui .wv-profile-summary { position:absolute; inset:70px 12px 18px; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:5px; }
+.weverse-ui .wv-profile-avatar-placeholder { width:76px; height:76px; border-radius:50%; border:3px solid #20c8d2; background:rgba(255,255,255,.1); margin-bottom:8px; }
+.weverse-ui .wv-profile-summary > strong { display:flex; align-items:center; justify-content:center; gap:5px; font-size:24px; font-weight:800; line-height:1.2; }
+.weverse-ui .wv-verified-profile { width:14px; height:14px; margin-left:2px; transform:none; }
+.weverse-ui .wv-verified-check-profile { stroke:#fff; }
+.weverse-ui .wv-profile-stat { margin-top:12px; font-size:18px; font-weight:700; }
+.weverse-ui .wv-profile-stat-label { color:#c9c9c9; font-size:13px; }
+.weverse-ui .wv-following-button { margin-top:14px; border:1px solid rgba(255,255,255,.65); border-radius:24px; padding:8px 22px; background:transparent; color:#fff; font-size:14px; font-weight:700; }
+.weverse-ui .wv-profile-mini-gallery { display:flex; gap:10px; padding:14px 16px; background:#000; overflow:hidden; }
+.weverse-ui .wv-profile-mini-gallery > div { flex:1; min-width:0; aspect-ratio:1/1.25; border-radius:9px; background:#171717; }
+.weverse-ui .wv-profile-tabs { display:flex; flex:0 0 48px; border-bottom:1px solid #242424; background:#000; }
+.weverse-ui .wv-profile-tabs button { flex:1; border:0; border-bottom:2px solid transparent; background:transparent; color:#aaa; font-size:15px; font-weight:700; }
+.weverse-ui .wv-profile-tabs button.active { color:#f5f5f5; border-bottom-color:#aaa; }
+.weverse-ui .wv-profile-feed { flex:1; min-height:0; overflow:auto; padding:12px 10px; background:#000; }
+.weverse-ui .wv-profile-feed .wv-post { margin-bottom:12px; }
