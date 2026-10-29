@@ -1,4 +1,17 @@
 
+/* Explicitly preserve the full cover until the user scrolls past the collapse threshold */
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero:not(.collapsed) { height:245px !important; min-height:245px !important; flex:0 0 245px !important; background:#777 !important; }
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero:not(.collapsed) .wv-hero-image { display:grid !important; height:245px !important; }
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero:not(.collapsed) .wv-detail-title { display:block !important; }
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero:not(.collapsed) .wv-collapsed-title,
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero:not(.collapsed) .wv-collapsed-member-avatar { display:none !important; }
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero.collapsed { height:64px !important; min-height:64px !important; flex:0 0 64px !important; }
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero.collapsed .wv-hero-image,
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero.collapsed .wv-detail-title { display:none !important; }
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero.collapsed .wv-collapsed-title,
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero.collapsed .wv-collapsed-member-avatar { display:block !important; }
+
+
 /* Compact sticky-looking CORTIS bar during scroll, with reversible collapse */
 .weverse-ui .wv-community-detail-scroll { overflow-anchor:none; }
 .weverse-ui .wv-community-detail-scroll .wv-detail-hero { position:relative; overflow:hidden; flex:0 0 auto; }
