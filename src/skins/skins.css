@@ -4242,7 +4242,7 @@
 .weverse-ui button { cursor:pointer; color:inherit; background:none; border:0; font:inherit; }
 .weverse-ui .wv-status { height:34px; flex-shrink:0; padding:6px 18px 0; display:flex; align-items:center; justify-content:space-between; background:#000; color:#fff; font-size:13px; font-weight:650; }
 .weverse-ui .wv-header { flex-shrink:0; height:53px; padding:0 15px; display:flex; align-items:center; justify-content:space-between; background:#000; }
-.weverse-ui .wv-wordmark { font-size:28px; font-weight:900; letter-spacing:-1.8px; font-style:italic; }
+.weverse-ui .wv-wordmark { display:block; width:104px; height:auto; max-height:30px; object-fit:contain; object-position:left center; }
 .weverse-ui .wv-header>div { display:flex; align-items:center; gap:13px; }
 .weverse-ui .wv-header button { position:relative; display:grid; place-items:center; width:30px; height:34px; font-size:23px; }
 .weverse-ui .wv-header button i { position:absolute; top:-2px; right:-5px; border-radius:12px; padding:2px 5px; background:#ff5b65; font-size:9px; font-style:normal; }
