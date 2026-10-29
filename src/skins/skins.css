@@ -4633,7 +4633,7 @@
 }
 
 
-/* CORTIS cover: a single gradient layer spans the image and title; lower the text group slightly */
+/* CORTIS hero: keep the photo behind the entire title area and fade it with one overlay */
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero {
   position:relative !important;
   isolation:isolate !important;
@@ -4645,30 +4645,14 @@
   overflow:hidden !important;
   background:#252525 !important;
 }
-.weverse-ui .wv-community-detail-scroll > .wv-detail-hero::before {
-  content:"" !important;
-  position:absolute !important;
-  z-index:1 !important;
-  inset:0 !important;
-  pointer-events:none !important;
-  background:linear-gradient(to bottom,
-    rgba(119,119,119,0) 0%,
-    rgba(119,119,119,0) 34%,
-    rgba(119,119,119,.08) 43%,
-    rgba(119,119,119,.25) 51%,
-    rgba(119,119,119,.58) 61%,
-    rgba(95,95,95,.84) 72%,
-    rgba(55,55,55,.96) 86%,
-    #252525 100%) !important;
-}
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image {
-  display:block !important;
-  position:relative !important;
+  position:absolute !important;
+  inset:0 !important;
   z-index:0 !important;
-  box-sizing:border-box !important;
+  display:block !important;
   width:100% !important;
-  height:245px !important;
-  min-height:245px !important;
+  height:100% !important;
+  min-height:100% !important;
   overflow:hidden !important;
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image img {
@@ -4678,23 +4662,42 @@
   width:100% !important;
   height:100% !important;
   object-fit:cover !important;
-  object-position:center 35% !important;
+  object-position:center 42% !important;
 }
-/* Disable the separate image fade and title gradient that caused the visible seam */
+/* One overlay covers the full photo and text area, so no separate surfaces can form a seam */
+.weverse-ui .wv-community-detail-scroll > .wv-detail-hero::before {
+  content:"" !important;
+  position:absolute !important;
+  z-index:1 !important;
+  inset:0 !important;
+  pointer-events:none !important;
+  background:linear-gradient(to bottom,
+    rgba(119,119,119,0) 0%,
+    rgba(119,119,119,0) 42%,
+    rgba(119,119,119,.08) 50%,
+    rgba(119,119,119,.22) 58%,
+    rgba(105,105,105,.48) 67%,
+    rgba(75,75,75,.78) 79%,
+    rgba(45,45,45,.94) 91%,
+    #252525 100%) !important;
+}
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-hero-image::after {
   content:none !important;
   display:none !important;
 }
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero > .wv-detail-title {
   display:block !important;
-  position:relative !important;
+  position:absolute !important;
   z-index:2 !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:8px !important;
   box-sizing:border-box !important;
   width:100% !important;
-  height:185px !important;
-  min-height:185px !important;
-  margin-top:-60px !important;
-  padding:42px 12px 18px !important;
+  height:auto !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:0 12px 18px !important;
   overflow:visible !important;
   text-align:center !important;
   background:transparent !important;
