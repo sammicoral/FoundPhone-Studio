@@ -4633,7 +4633,7 @@
 }
 
 
-/* CORTIS hero: keep the photo behind the entire title area and fade it with one overlay */
+/* CORTIS hero: align the members higher like the official reference and lower the text slightly */
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero {
   position:relative !important;
   isolation:isolate !important;
@@ -4662,9 +4662,9 @@
   width:100% !important;
   height:100% !important;
   object-fit:cover !important;
-  object-position:center 42% !important;
+  object-position:center 60% !important;
 }
-/* One overlay covers the full photo and text area, so no separate surfaces can form a seam */
+/* A single overlay spans the entire hero so the fade has no horizontal seam */
 .weverse-ui .wv-community-detail-scroll > .wv-detail-hero::before {
   content:"" !important;
   position:absolute !important;
@@ -4691,13 +4691,13 @@
   z-index:2 !important;
   left:0 !important;
   right:0 !important;
-  bottom:8px !important;
+  bottom:2px !important;
   box-sizing:border-box !important;
   width:100% !important;
   height:auto !important;
   min-height:0 !important;
   margin:0 !important;
-  padding:0 12px 18px !important;
+  padding:0 12px 12px !important;
   overflow:visible !important;
   text-align:center !important;
   background:transparent !important;
