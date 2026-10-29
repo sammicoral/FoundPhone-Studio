@@ -1102,7 +1102,7 @@ export function WeverseSkin(p: SkinProps) {
           <img className="wv-wordmark" src={weverseHomeLogo} alt="weverse" />
           <div><button aria-label="Weverse 通知"><Star size={23}/></button><button aria-label="通知" onClick={() => setHomeTab("通知")}>♧<i>28</i></button></div>
         </header>
-        <nav className="wv-home-tabs">{["My Feed", "Discover", "Party", "Spot"].map(t => <button key={t} className={homeTab === t ? "active" : ""} onClick={() => setHomeTab(t)}>{t}</button>)}</nav>
+        <nav className="wv-home-tabs">{["My Feed", "Discover", "Party", "Spot"].map(t => <button key={t} className={homeTab === t ? "active" : ""} onClick={() => { if (t === "Discover" || t === "Party") return; setHomeTab(t); }}>{t}</button>)}</nav>
         {homeTab === "Spot" ? <div className="wv-scroll wv-spot">
           <div className="wv-spot-art"><span>✦</span><strong>Weverse Spot</strong><small>遠端候位 · Stamp Rally · Pickup</small></div>
           <h2>Weverse Spot 就從這裡開始</h2><p>輕鬆樂享所有活動吧</p>
