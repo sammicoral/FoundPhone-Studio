@@ -242,7 +242,7 @@ function PhoneRuntime({
     setIsFullscreen(true);
   };
   const gesture = useRef({ x: 0, y: 0, time: 0, zone: "" });
-  const homeIndicatorTouchY = useRef<number | null>(null);
+  const homeIndicatorTouchY = useRef<{ y: number; time: number } | null>(null);
   const [launchOrigin, setLaunchOrigin] = useState(screenOrigin);
 
   const beginUnlock = () => {
@@ -974,17 +974,23 @@ function PhoneRuntime({
             }}
             onTouchStart={(e) => {
               e.stopPropagation();
-              homeIndicatorTouchY.current = e.changedTouches[0]?.clientY ?? null;
+              const y = e.changedTouches[0]?.clientY;
+              homeIndicatorTouchY.current = y == null ? null : { y, time: Date.now() };
             }}
             onTouchEnd={(e) => {
               e.stopPropagation();
-              const startY = homeIndicatorTouchY.current;
+              const start = homeIndicatorTouchY.current;
               const endY = e.changedTouches[0]?.clientY;
               homeIndicatorTouchY.current = null;
-              if (startY == null || endY == null || endY - startY > -30) return;
+              if (!start || endY == null || endY - start.y > -30) return;
               gestureConsumed.current = true;
               if (locked) {
                 beginUnlock();
+                return;
+              }
+              if (Date.now() - start.time > 450) {
+                captureApp();
+                setPanel("switcher");
                 return;
               }
               captureApp();
