@@ -4685,3 +4685,20 @@
 }
 .weverse-ui .wv-about-members-preview::-webkit-scrollbar { display:none !important; }
 .weverse-ui .wv-about-preview-member { flex-shrink:0 !important; }
+
+
+/* CORTIS About card: keep member names on one line and tighten vertical spacing */
+.weverse-ui .wv-about-preview-member > span:last-child {
+  white-space:nowrap !important;
+  overflow-wrap:normal !important;
+  word-break:keep-all !important;
+  font-size:12px !important;
+  line-height:1.2 !important;
+}
+.weverse-ui .wv-about-members-preview {
+  padding-bottom:10px !important;
+  gap:16px !important;
+}
+.weverse-ui .wv-about-preview-member { gap:7px !important; }
+.weverse-ui .wv-about-card > p { padding-top:8px !important; padding-bottom:20px !important; }
+.weverse-ui .wv-about-card { padding-top:20px !important; }
