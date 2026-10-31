@@ -4702,3 +4702,39 @@
 .weverse-ui .wv-about-preview-member { gap:7px !important; }
 .weverse-ui .wv-about-card > p { padding-top:8px !important; padding-bottom:20px !important; }
 .weverse-ui .wv-about-card { padding-top:20px !important; }
+
+
+/* Fix official CORTIS About preview portraits: constrain images to circular avatar frames */
+.weverse-ui .wv-about-members-preview .wv-about-avatar-placeholder {
+  position:relative !important;
+  display:block !important;
+  flex:0 0 92px !important;
+  width:92px !important;
+  height:92px !important;
+  min-width:92px !important;
+  min-height:92px !important;
+  overflow:hidden !important;
+  border-radius:50% !important;
+  background:#393939 !important;
+}
+.weverse-ui .wv-about-members-preview .wv-about-avatar-placeholder img {
+  position:absolute !important;
+  inset:0 !important;
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  max-width:none !important;
+  max-height:none !important;
+  object-fit:cover !important;
+  object-position:center !important;
+  border-radius:inherit !important;
+}
+@media (max-width:420px) {
+  .weverse-ui .wv-about-members-preview .wv-about-avatar-placeholder {
+    flex-basis:78px !important;
+    width:78px !important;
+    height:78px !important;
+    min-width:78px !important;
+    min-height:78px !important;
+  }
+}
