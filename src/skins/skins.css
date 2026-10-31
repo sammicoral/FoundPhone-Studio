@@ -4665,3 +4665,8 @@
   font-size:13.58px !important;
   transform:translateY(-7px) !important;
 }
+
+
+/* Slightly raise the Weverse bottom navigation hit area for easier tapping */
+.weverse-ui .wv-bottom-nav { padding-top:12px !important; }
+.weverse-ui .wv-bottom-nav button { padding-top:8px !important; padding-bottom:5px !important; }
