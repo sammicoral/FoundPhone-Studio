@@ -4670,3 +4670,18 @@
 /* Slightly raise the Weverse bottom navigation hit area for easier tapping */
 .weverse-ui .wv-bottom-nav { padding-top:12px !important; }
 .weverse-ui .wv-bottom-nav button { padding-top:8px !important; padding-bottom:5px !important; }
+
+
+/* Restore horizontal touch scrolling for the CORTIS About member preview */
+.weverse-ui .wv-about-members-preview {
+  display:flex !important;
+  flex-wrap:nowrap !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  -webkit-overflow-scrolling:touch !important;
+  touch-action:pan-x !important;
+  overscroll-behavior-x:contain;
+  scrollbar-width:none;
+}
+.weverse-ui .wv-about-members-preview::-webkit-scrollbar { display:none !important; }
+.weverse-ui .wv-about-preview-member { flex-shrink:0 !important; }
