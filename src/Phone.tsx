@@ -186,7 +186,7 @@ function PhoneRuntime({
           window.scrollTo({ top: 0, left: 0, behavior: "auto" });
           const width = document.documentElement.clientWidth;
           const height = document.documentElement.clientHeight || window.innerHeight;
-          const scale = Math.max(0.35, Math.min(1, (height - 8) / 860, (width - 8) / 406));
+          const scale = Math.max(0.35, Math.min(1.1, (height - 8) / 860, (width - 8) / 406) * 1.1);
           setViewportScale({ x: scale, y: scale });
         }, 120);
       }
@@ -195,7 +195,7 @@ function PhoneRuntime({
       const availableHeight = document.documentElement.clientHeight || window.innerHeight;
       const scale = Math.max(
         0.35,
-        Math.min(1, (availableHeight - 8) / 860, (availableWidth - 8) / 406),
+        Math.min(1.1, (availableHeight - 8) / 860, (availableWidth - 8) / 406) * 1.1,
       );
       setViewportScale((current) =>
         Math.abs(current.x - scale) < 0.005 ? current : { x: scale, y: scale },
