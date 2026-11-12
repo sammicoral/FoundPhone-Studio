@@ -78,8 +78,10 @@ describe("optional app lifecycle", () => {
   it("blocks installation of removed apps", () => {
     const w = createWork();
     installApp(w, "wechat");
-    expect(w.apps.some((a) => a.id === "wechat")).toBe(false);
+    installApp(w, "line");
+    expect(w.apps.some((a) => a.id === "wechat" || a.id === "line")).toBe(false);
     expect(w.data.wechat).toBeUndefined();
+    expect(w.data.line).toBeUndefined();
   });
   it("retains custom app identity across uninstall and reinstall", () => {
     const w = createWork();
