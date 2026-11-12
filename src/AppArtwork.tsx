@@ -40,7 +40,6 @@ const native = new Set([
   "twitter",
   "telegram",
   "youtube",
-  "line",
   "facebook",
   "messenger",
   "reddit",
@@ -596,26 +595,6 @@ function DrawnArtwork({ id, date }: { id: string; date?: string }) {
           strokeWidth="5"
           strokeLinecap="round"
         />
-      </>
-    );
-  } else if (id === "line") {
-    background = "#06c755";
-    art = (
-      <>
-        <path
-          d="M32 10C17 10 6 19 6 30c0 10 9 18 22 20l-2 8c0 3 19-9 24-14 17-15 3-34-18-34z"
-          fill="white"
-        />
-        <text
-          x="32"
-          y="35"
-          textAnchor="middle"
-          fontSize="16"
-          fontWeight="800"
-          fill="#06c755"
-        >
-          LINE
-        </text>
       </>
     );
   } else if (id === "discord") {
