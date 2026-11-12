@@ -26,7 +26,7 @@ describe("optional app lifecycle", () => {
         .map((a) => a.id)
         .sort(),
     ).toEqual([...essentialApps].sort());
-    expect(w.apps).toHaveLength(35);
+    expect(w.apps).toHaveLength(34);
   });
   it("upgrades old format v1 app records without uninstalling existing apps", () => {
     const old = createWork();
@@ -82,6 +82,21 @@ describe("optional app lifecycle", () => {
     expect(w.apps.some((a) => a.id === "wechat" || a.id === "line")).toBe(false);
     expect(w.data.wechat).toBeUndefined();
     expect(w.data.line).toBeUndefined();
+
+    const legacy = createWork();
+    legacy.apps.push({
+      id: "line",
+      name: "LINE",
+      installed: true,
+      visible: true,
+      dock: false,
+      folder: "",
+      icon: "",
+    });
+    legacy.data.line = [];
+    const restored = validateWork(legacy);
+    expect(restored.apps.some((app) => app.id === "line")).toBe(false);
+    expect(restored.data.line).toBeUndefined();
   });
   it("retains custom app identity across uninstall and reinstall", () => {
     const w = createWork();
