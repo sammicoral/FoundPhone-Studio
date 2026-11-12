@@ -140,10 +140,6 @@
       "file": "netflix.jpg",
       "sha256": "eab32637682348a65d41ee197822fef4bef102a0a18cdd3950715e4a4cf45a89"
     },
-    "line": {
-      "file": "line.jpg",
-      "sha256": "be79e060a89099034924cda9f695923eb0da873675a7ee903bc0f3704d582cae"
-    },
     "reminders": {
       "file": "reminders.jpg",
       "sha256": "05813d23b0c15948b569cd13a230f2826ba97991550fec710d8bc98e3593f029"
