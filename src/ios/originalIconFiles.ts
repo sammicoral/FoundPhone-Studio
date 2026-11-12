@@ -45,7 +45,6 @@ export const originalIconFiles: Record<string, string> = {
   netflix: "netflix.jpg",
   pinterest: "pinterest.jpg",
   snapchat: "snapchat.jpg",
-  line: "line.jpg",
   reminders: "reminders.jpg",
   kakao: "kakao.jpg",
 };
