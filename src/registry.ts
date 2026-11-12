@@ -146,7 +146,6 @@ const definitions: [
     Play,
     ["首頁", "訂閱", "播放清單"],
   ],
-  ["line", "LINE", "messaging", "#5db873", MessageCircle, ["聊天", "好友"]],
   ["snapchat", "Snapchat", "social", "#ccbb49", Camera, ["動態", "回憶"]],
   ["facebook", "Facebook", "social", "#587bb5", Users, ["動態", "個人檔案"]],
   [
@@ -172,7 +171,7 @@ const definitions: [
   ["threads", "Threads", "social", "#4d5150", AtSign, ["動態", "回覆"]],
   ["weverse", "Weverse", "social", "#6b73d9", Heart, ["社群", "媒體", "通知"]],
 ];
-const removedAppIds = new Set(["qq", "bilibili", "netease", "reddit", "telegram", "weibo", "redbook", "taobao", "wechat", "alipay", "discord", "douyin", "tiktok", "pinterest", "snapchat"]);
+const removedAppIds = new Set(["qq", "bilibili", "netease", "reddit", "telegram", "weibo", "redbook", "taobao", "wechat", "alipay", "discord", "douyin", "tiktok", "pinterest", "snapchat", "line"]);
 export const registry: AppPlugin[] = definitions
   .filter(([id]) => !removedAppIds.has(id))
   .map(([id, name, engine, color, icon, tabs]) => ({
