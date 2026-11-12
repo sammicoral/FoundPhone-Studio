@@ -206,6 +206,7 @@ export function validateWork(input: unknown): Work {
     "douyin",
     "tiktok",
     "pinterest",
+    "line",
   ]) {
     delete work.data[id];
   }
