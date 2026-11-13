@@ -94,7 +94,7 @@
   "contacts": [
     {
       "id": "james",
-      "name": "JAMES",
+      "name": "凡😼",
       "bio": "CORTIS"
     }
   ],
@@ -198,7 +198,7 @@
     {
       "id": "test-chat-kakao",
       "app": "kakao",
-      "title": "JAMES",
+      "title": "凡😼",
       "participants": [
         "owner",
         "james"
