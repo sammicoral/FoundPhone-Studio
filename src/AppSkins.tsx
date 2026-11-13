@@ -1103,37 +1103,37 @@ export function WeverseSkin(p: SkinProps) {
   }, [selectedPostId]);
   if (selectedPost) {
     const seededFanComments = [
-      "오늘 무대도 정말 기대하고 있어요!",
-      "주훈아 오늘도 너무 멋있어 🩷",
-      "이번 사진 분위기 너무 좋다",
-      "항상 응원하고 있어요. 건강 잘 챙겨!",
-      "컴백 기다리고 있을게요!",
-      "오늘 하루도 행복하게 보내길 바라",
-      "이 착장 진짜 잘 어울려요",
-      "사진 더 많이 올려 주세요!",
-      "보고 싶었어요 ㅠㅠ",
-      "무대에서 만나요!",
-      "오늘도 사랑해요",
-      "이 순간 공유해 줘서 고마워요",
-      "저녁은 먹었어요? 꼭 챙겨 먹기!",
-      "매일 좋은 에너지 받고 있어요",
-      "너무 귀여워요 ㅋㅋㅋ",
-      "다음 라이브도 기다릴게요",
-      "항상 멤버들 응원합니다!",
-      "이 사진 저장해도 되나요 🥹",
-      "오늘도 수고 많았어요",
-      "오래오래 함께해요",
-      "대만에서도 많이 응원하고 있어요!",
-      "언제나 네 편이야",
-      "이 분위기 너무 좋아요",
-      "좋은 밤 보내요!",
+      "今天的舞台也好期待！",
+      "主訓今天也太帥了吧 🩷",
+      "這張照片的氛圍真的很好",
+      "一直都在支持你，記得照顧好身體！",
+      "好期待下一次回歸！",
+      "希望你今天也能度過開心的一天",
+      "這套衣服真的很適合你",
+      "拜託再多分享一些照片！",
+      "真的好想你們",
+      "演出現場見！",
+      "今天也最喜歡你了",
+      "謝謝你和我們分享這個瞬間",
+      "晚餐吃了嗎？一定要好好吃飯！",
+      "每天都從你們身上獲得好多力量",
+      "真的太可愛了吧！",
+      "也好期待下一次直播",
+      "一直都會支持所有成員！",
+      "這張照片可以收藏嗎 🥹",
+      "今天也辛苦了，早點休息！",
+      "希望能一直陪伴你們走下去",
+      "台灣的粉絲也一直都很支持你們！",
+      "無論如何都會站在你這邊",
+      "好喜歡這次照片的感覺",
+      "今天也要有個美好的夜晚！",
     ];
     const comments = [...(selectedPost.comments || []), ...(localComments[selectedPost.id] || [])];
     const fanComments = comments.length ? comments : seededFanComments;
     const artistComments = [
-      { author: getWeverseName(selectedPost.sender), body: selectedPost.meta?.artistComment || "COER 오늘도 와 줘서 고마워요! 항상 응원해 줘서 힘이 돼요 🩷" },
-      { author: weverseAliases.JAMES, body: "다들 밥 잘 챙겨 먹어요!! 오늘도 고마워요" },
-      { author: weverseAliases.MARTIN, body: "여러분 덕분에 오늘도 행복해요. 사랑해요!" },
+      { author: getWeverseName(selectedPost.sender), body: selectedPost.meta?.artistComment || "謝謝你們今天也來找我們！一直以來的支持都帶給我們很多力量 🩷" },
+      { author: weverseAliases.JAMES, body: "大家都要記得好好吃飯！！今天也謝謝你們" },
+      { author: weverseAliases.MARTIN, body: "多虧有你們，今天也過得很幸福。愛你們！" },
     ];
     const pinnedReply = selectedPost.meta?.pinnedReply || "";
     const sendComment = () => {
@@ -1157,7 +1157,7 @@ export function WeverseSkin(p: SkinProps) {
           <section className="wv-comment-thread">
             <div className="wv-comment-thread-heading"><strong>藝人留言 {artistComments.length + (pinnedReply ? 1 : 0)}</strong><span>⌃</span></div>
             {pinnedReply && <article className="wv-thread-comment wv-pinned-reply"><div className="wv-thread-avatar">{getWeverseName(selectedPost.sender).slice(0,1)}</div><div className="wv-thread-content"><div className="wv-thread-meta"><strong>{getWeverseName(selectedPost.sender)} <span className="wv-verified-dot">✦</span></strong><small>藝人回覆 · 置頂</small></div><p>{pinnedReply}</p><div className="wv-thread-like"><Heart size={14}/> 10K+</div></div></article>}
-            {artistComments.map((comment, index) => <article className="wv-thread-comment wv-artist-thread-comment" key={selectedPost.id + "-artist-" + index}><div className="wv-thread-avatar wv-artist-thread-avatar">{comment.author.slice(0,1)}</div><div className="wv-thread-content"><div className="wv-thread-meta"><strong>{comment.author} <span className="wv-verified-dot">✦</span></strong><small>11. 13. 16:{String(40 + index).padStart(2,"0")}</small></div><p>{comment.body}</p><div className="wv-thread-like"><Heart size={14}/> 10K+</div></div></article>)}
+            {artistComments.map((comment, index) => { const artistMember = getWeverseCanonicalName(comment.author); const avatarPath = getWeverseAvatarPath(artistMember || selectedPost.sender); return <article className="wv-thread-comment wv-artist-thread-comment" key={selectedPost.id + "-artist-" + index}><div className="wv-thread-avatar wv-artist-thread-avatar">{avatarPath && <img src={avatarPath} alt="" onError={(event) => { event.currentTarget.style.display = "none"; }} />}</div><div className="wv-thread-content"><div className="wv-thread-meta"><strong>{comment.author} <span className="wv-verified-dot">✦</span></strong><small>11. 13. 16:{String(40 + index).padStart(2,"0")}</small></div><p>{comment.body}</p><div className="wv-thread-like"><Heart size={14}/> 10K+</div></div></article>; })}
             <div className="wv-comment-thread-heading wv-all-comments-heading"><strong>全部留言 10K+</strong></div>
             {fanComments.map((comment, index) => <article className="wv-thread-comment" key={selectedPost.id + "-comment-" + index}><div className="wv-thread-avatar wv-default-fan-avatar" aria-hidden="true"></div><div className="wv-thread-content"><div className="wv-thread-meta"><strong>{["주훈우주","coer_lover","keonho_nh","bluehour","cortisfan"][index % 5]}</strong><small>11. 13. 19:{String(51 - (index % 45)).padStart(2,"0")}</small></div><p>{comment}</p><div className="wv-thread-like"><Heart size={14}/></div></div></article>)}
           </section>
