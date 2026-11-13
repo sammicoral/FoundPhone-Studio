@@ -128,8 +128,11 @@ export function compileStory(raw: unknown): { story: Story; work: Work } {
     if (names.has(v)) fail(p, "重复 ID: " + v);
     names.add(v);
   };
-  const contacts = new Map(s.contacts.map((c) => [c.id, c]));
-  s.contacts.forEach((c, i) => unique(c.id, `contacts.${i}.id`));
+  const contacts = new Map<string, Story["contacts"][number]>();
+  s.contacts.forEach((c, i) => {
+    unique(c.id, `contacts.${i}.id`);
+    contacts.set(c.id, c);
+  });
   const configuredIds = s.installedApps.map((a) =>
     typeof a === "string" ? a : a.id,
   );
