@@ -1129,21 +1129,44 @@ export function WeverseSkin(p: SkinProps) {
     const comments = [...(selectedPost.comments || []), ...(localComments[selectedPost.id] || [])];
     const fanComments = comments.length ? comments : seededFanComments;
     const fanNicknames = [
-      "金主訓的女友💗", "永遠支持Martin", "想念一隻詹咪", "LOVE CORTIS FOREVER",
-      "今天也被主訓可愛到", "건호야 사랑해", "MARTIN的小雲朵", "CORTIS頭號跟屁蟲",
-      "詹咪今天吃飯了嗎", "努力存錢去見CORTIS", "小狗觀察日記", "주훈이 내 별",
-      "世界上最幸福的COER", "五個都要幸福", "Mimi不想上班", "마틴의 비타민",
-      "主訓請看我一眼🥹", "CORTIS腦袋寄放處", "今天也在想你們", "JAMES保護協會",
-      "안녕 나는 코어", "下次一定搶到票", "草莓牛奶派來的", "只想看你們吃播",
-      "Martin的快樂小狗", "詹咪的迷妹日常", "오늘도 코르티스", "宇宙第一COER",
-      "上課偷看Weverse", "五個人的快樂粉絲", "請叫我簽售幸運兒", "CORTIS永動機",
-      "主訓今天有想我嗎", "小熊餅乾不加糖", "永遠站在你們這邊", "JAMES的迷路粉絲",
+      "LOVE CORTIS FOREVER", "mimi.zip", "주훈이 내 별", "MARTIN's cloud ☁️",
+      "詹咪今天睡醒了嗎", "blueberry_jam", "건호 바라기", "not your average COER",
+      "永遠支持Martin", "jamesplsnotice", "小狗飼養員", "성현아 밥 먹어",
+      "CORTIS on repeat", "lattewithmartin", "今天也不想上班", "주훈이 여친💗",
+      "just_one_more fancam", "Keonho's smile", "詹咪的迷路粉絲", "moonstruck",
+      "김주훈 보조개 수집가", "MARTIN的小雲朵", "potato_with_feelings", "CORTIS archive",
+      "主訓請看我一眼🥹", "tiny star", "james的右耳", "오늘도 코어",
+      "sleepy_coer", "五個都要幸福", "cloud nine", "martinluvclub",
+      "건호야 사랑해", "咖啡續命中", "CORTIS fan account", "jamiejam",
+      "주훈이의 행운", "Mimi不想上班", "our little universe", "seonghyun.zip",
+      "詹咪今天吃飯了嗎", "peachy keen", "always with CORTIS", "고양이 집사",
+      "簽售一定會中", "martin's playlist", "별빛 아래 COER", "noona's camera roll",
+      "草莓牛奶派來的", "JAMES保護協會", "a little bit obsessed", "건빵",
+      "主訓的微笑收藏家", "daydreaming", "CORTIS or nothing", "오늘도 행복하자",
+      "下次一定搶到票", "matcha mood", "詹咪的迷妹日記", "우리 다섯 별",
+      "monday survivor", "五個人的快樂粉絲", "hello from taipei", "주훈아 최고야",
+      "小熊餅乾不加糖", "Martin's tiny fan", "별사탕", "just here for JAMES",
+      "COER since day one", "想念一隻詹咪", "sunny side up", "성현이 웃음버튼",
+      "CORTIS腦袋寄放處", "late night scroller", "my bias is all five", "主訓今天有想我嗎",
+      "건호의 비타민", "請叫我簽售幸運兒", "jamjam.zip", "love from hong kong",
+      "今天也在想你們", "작고 소중한 코어", "JAMES的迷路粉絲", "random potato",
+      "MARTIN enthusiast", "五個都要健康", "주훈 is my serotonin", "afterglow",
+      "宇宙第一COER", "CORTIS永動機", "kimchi fried rice", "詹咪請喝水",
+      "우리의 청춘", "from COER with love", "小狗觀察日記", "the fifth member's mom",
     ];
-    const getFanNickname = (index: number) => fanNicknames[(index + postSeed) % fanNicknames.length];
+    // Shuffle the full nickname pool with a post-specific seed so each post gets a different set and order.
+    let nicknameSeed = (postSeed ^ 0x5f3759df) >>> 0;
+    const shuffledNicknames = [...fanNicknames];
+    for (let i = shuffledNicknames.length - 1; i > 0; i--) {
+      nicknameSeed = (nicknameSeed * 1664525 + 1013904223) >>> 0;
+      const j = nicknameSeed % (i + 1);
+      [shuffledNicknames[i], shuffledNicknames[j]] = [shuffledNicknames[j], shuffledNicknames[i]];
+    }
+    const getFanNickname = (index: number) => shuffledNicknames[index % shuffledNicknames.length];
     const artistComments = [
       { author: getWeverseName(selectedPost.sender), body: selectedPost.meta?.artistComment || "看到大家的留言真的很開心，謝謝你們一直陪著我們！🩷", replyTo: "" },
       { author: weverseAliases.JAMES, body: "你們有注意到這個小細節嗎？下次再跟大家分享！", replyTo: "" },
-      { author: weverseAliases.MARTIN, body: "謝謝 @"+getFanNickname(2)+" 留言！你說的那件事我們也有記得，真的很感謝你一直支持。", replyTo: getFanNickname(2) },
+      { author: weverseAliases.MARTIN, body: "你說的那個我也有注意到ㅋㅋ 下次再拍給你看！", replyTo: getFanNickname(2) },
     ];    const pinnedReply = selectedPost.meta?.pinnedReply || "";
     const sendComment = () => {
       const value = commentDraft.trim();
