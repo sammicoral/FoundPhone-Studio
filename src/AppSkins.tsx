@@ -1055,7 +1055,7 @@ export function WeverseSkin(p: SkinProps) {
   const getPostEngagementCount = (item: Item, isLiked: boolean) => {
     // Posts shown with a time-only label are treated as newly published.
     // Their engagement starts just below the 10K display cap and rises quickly.
-    const isFreshPost = /^\\d{1,2}:\\d{2}$/.test(item.time.trim()) || /^(剛剛|剛才|\\d+分鐘前)$/.test(item.time.trim());
+    const isFreshPost = /^\d{1,2}:\d{2}$/.test(item.time.trim()) || /^(剛剛|剛才|\d+分鐘前)$/.test(item.time.trim());
     const freshBase = Math.min(9999, 9700 + Math.floor(weverseElapsedSeconds / 5) * 35);
     const count = isFreshPost ? freshBase : 10000;
     return Math.min(10000, count + (isLiked ? 1 : 0)) >= 10000
