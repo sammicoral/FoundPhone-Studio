@@ -52,6 +52,11 @@ function personalizeWork(source: Work, playerName: string, playerAccount: string
     import.meta.env.BASE_URL + "assets/" + boyfriend + "-wallpaper.jpg";
   work.variables.memberLockScreen =
     import.meta.env.BASE_URL + "assets/" + boyfriend + "-lockscreen.jpg";
+  const memberAvatar = import.meta.env.BASE_URL + "assets/" + boyfriend + "-avatar.jpg";
+  for (const item of work.data.kakao || []) {
+    item.avatar = memberAvatar;
+    item.meta.contactAvatar = memberAvatar;
+  }
   if (boyfriend === "martin") {
     work.phone.wallpaper = "martin-photo";
     work.variables.martinWallpaper = work.variables.memberWallpaper;
