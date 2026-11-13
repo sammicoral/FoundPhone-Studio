@@ -269,10 +269,10 @@ export function MymyKakao(p: SkinProps) {
                     key={g.title}
                     onClick={() => p.onThread(g.title)}
                   >
-                    <Avatar name={last.sender || g.title} src={last.avatar} />
+                    <Avatar name={last.meta.contactName || g.title} src={last.meta.contactAvatar || last.avatar} />
                     <span className="kzkn">
-                      <b>{g.title}</b>
-                      <small>{tab === "好友" ? last.sender : last.body}</small>
+                      <b>{last.meta.contactName || g.title}</b>
+                      <small>{tab === "好友" ? last.meta.contactBio || "" : last.body}</small>
                     </span>
                     <span className="kzkmt">
                       {last.time.slice(-5)}
