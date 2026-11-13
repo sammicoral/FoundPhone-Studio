@@ -94,7 +94,7 @@
   "contacts": [
     {
       "id": "juhoon",
-      "name": "JUHOON",
+      "name": "🐷훈",
       "bio": "CORTIS"
     }
   ],
@@ -198,7 +198,7 @@
     {
       "id": "test-chat-kakao",
       "app": "kakao",
-      "title": "JUHOON",
+      "title": "🐷훈",
       "participants": [
         "owner",
         "juhoon"
