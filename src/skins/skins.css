@@ -4831,3 +4831,22 @@
   object-position:center;
   border-radius:inherit;
 }
+
+
+/* Keep the artist verification mark snug against the display name in comments. */
+.weverse-ui .wv-thread-meta strong {
+  display:inline-flex;
+  align-items:center;
+  gap:1px;
+  width:max-content;
+  max-width:100%;
+}
+.weverse-ui .wv-thread-meta strong .wv-verified {
+  display:inline-block;
+  flex:0 0 11px;
+  width:11px;
+  height:11px;
+  margin:0 0 0 1px;
+  vertical-align:middle;
+  transform:none;
+}
