@@ -1,7 +1,7 @@
 import weverseHomeLogo from "../assets/app-icons/weverse-home-logo.png";
-import { NativeComposer } from "./DeviceSystem";
+import { KeyboardContext, NativeComposer } from "./DeviceSystem";
 import { useSkinState } from "./skinState";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   ChevronLeft,
   Plus,
@@ -1008,6 +1008,10 @@ export function WeverseSkin(p: SkinProps) {
   const [searching, setSearching] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [selectedArtist, setSelectedArtist] = useState("");
+  const [selectedPostId, setSelectedPostId] = useState("");
+  const [commentDraft, setCommentDraft] = useState("");
+  const [localComments, setLocalComments] = useState<Record<string, string[]>>({});
+  const setDeviceKeyboard = useContext(KeyboardContext);
   const [artistProfileTab, setArtistProfileTab] = useState("貼文");
   const [communityHeaderCollapsed, setCommunityHeaderCollapsed] = useState(false);
   const [weverseElapsedSeconds, setWeverseElapsedSeconds] = useState(0);
@@ -1068,7 +1072,7 @@ export function WeverseSkin(p: SkinProps) {
     const isLiked = liked.includes(item.id);
     const isSaved = saved.includes(item.id);
     const isExpanded = expanded.includes(item.id);
-    const comments = item.comments || [];
+    const comments = [...(item.comments || []), ...(localComments[item.id] || [])];
     return <article className="wv-post" key={item.id}>
       <div className="wv-post-head" onClickCapture={(event) => { const target = event.target as HTMLElement; if (isCortisArtist(item.sender) && target.closest(".wv-artist-name, .wv-profile-link, .wv-post-author")) { setSelectedArtist(getWeverseCanonicalName(item.sender)); } }}>
         <button className="wv-avatar wv-profile-link" aria-label={getWeverseName(item.sender)} onClick={() => isCortisArtist(item.sender) && setSelectedArtist(getWeverseCanonicalName(item.sender))}>{getWeverseAvatarPath(item.sender) && <img src={getWeverseAvatarPath(item.sender)} alt="" onError={(event) => { event.currentTarget.style.display = "none"; }} />}{getWeverseName(item.sender).slice(0, 1)}</button>
@@ -1083,12 +1087,47 @@ export function WeverseSkin(p: SkinProps) {
       </button>
       <div className="wv-post-actions">
         <button className={isLiked ? "liked" : ""} aria-pressed={isLiked} onClick={() => toggle(liked, setLiked, item.id)}><Heart size={20} fill={isLiked ? "currentColor" : "none"}/><span>{getPostEngagementCount(item, isLiked)}</span></button>
-        <button onClick={() => toggle(expanded, setExpanded, item.id)}><MessageCircle size={20}/><span>{getPostEngagementCount(item, false)}</span></button>
+        <button aria-label="查看留言" onClick={() => { setSelectedPostId(item.id); setCommentDraft(""); }}><MessageCircle size={20}/><span>{getPostEngagementCount(item, false)}</span></button>
         <button className="wv-save" aria-label="收藏貼文" aria-pressed={isSaved} onClick={() => toggle(saved, setSaved, item.id)}><Bookmark size={19} fill={isSaved ? "currentColor" : "none"}/></button>
       </div>
       {isExpanded && <div className="wv-comments">{comments.length ? comments.map((comment, index) => <p key={index}><strong>COER</strong> {comment}</p>) : <p>還沒有留言。</p>}</div>}
     </article>;
   };
+  const selectedPost = posts.find((item) => item.id === selectedPostId);
+  if (selectedPost) {
+    const comments = [...(selectedPost.comments || []), ...(localComments[selectedPost.id] || [])];
+    const pinnedReply = selectedPost.meta?.pinnedReply || "";
+    const sendComment = () => {
+      const value = commentDraft.trim();
+      if (!value) return;
+      setLocalComments((current) => ({ ...current, [selectedPost.id]: [...(current[selectedPost.id] || []), value] }));
+      setCommentDraft("");
+      setDeviceKeyboard(false);
+    };
+    return (
+      <div className="weverse-ui independent-skin wv-post-detail">
+        <header className="wv-post-detail-header">
+          <button aria-label="返回" onClick={() => { setSelectedPostId(""); setDeviceKeyboard(false); }}><ChevronLeft size={23}/></button>
+          <div><strong>貼文</strong><small>前往社群 ›</small></div>
+          <button aria-label="分享貼文"><Send size={20}/></button>
+        </header>
+        <div className="wv-post-detail-scroll">
+          {postCard(selectedPost)}
+          <div className="wv-comment-summary">按讚 {getPostEngagementCount(selectedPost, liked.includes(selectedPost.id))} · 留言 {getPostEngagementCount(selectedPost, false)}</div>
+          <section className="wv-comment-thread">
+            <div className="wv-comment-thread-heading"><strong>藝人留言 {comments.length + (pinnedReply ? 1 : 0)}</strong><span>⌃</span></div>
+            {pinnedReply && <article className="wv-thread-comment wv-pinned-reply"><div className="wv-thread-avatar">{getWeverseName(selectedPost.sender).slice(0,1)}</div><div className="wv-thread-content"><div className="wv-thread-meta"><strong>{getWeverseName(selectedPost.sender)} <span className="wv-verified-dot">✦</span></strong><small>藝人回覆 · 置頂</small></div><p>{pinnedReply}</p><div className="wv-thread-like"><Heart size={14}/> 10K+</div></div></article>}
+            {comments.map((comment, index) => <article className="wv-thread-comment" key={selectedPost.id + "-comment-" + index}><div className="wv-thread-avatar">{index % 2 === 0 ? "C" : "♡"}</div><div className="wv-thread-content"><div className="wv-thread-meta"><strong>{index % 2 === 0 ? "COER" : "cortislover"}</strong><small>11. 13. 13:{String(5 + index).padStart(2,"0")}</small></div><p>{comment}</p><div className="wv-thread-like"><Heart size={14}/> 10K+</div></div></article>)}
+            {!comments.length && !pinnedReply && <div className="wv-empty">目前還沒有留言</div>}
+          </section>
+        </div>
+        <form className="wv-comment-composer" onSubmit={(event) => { event.preventDefault(); sendComment(); }}>
+          <input aria-label="輸入留言" value={commentDraft} onChange={(event) => setCommentDraft(event.target.value)} onFocus={() => setDeviceKeyboard(true)} onClick={() => setDeviceKeyboard(true)} placeholder="請輸入留言..." />
+          <button type="submit" disabled={!commentDraft.trim()}>發送</button>
+        </form>
+      </div>
+    );
+  }
   const tabs = ["首頁", "社群", "Shop", "DM", "More"];
   if (selectedArtist) {
     const artistName = weverseAliases[selectedArtist] || selectedArtist;
