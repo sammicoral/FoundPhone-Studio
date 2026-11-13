@@ -1163,7 +1163,7 @@ export function WeverseSkin(p: SkinProps) {
           </section>
         </div>
         <form className="wv-comment-composer" onSubmit={(event) => { event.preventDefault(); sendComment(); }}>
-          <input ref={commentInputRef} aria-label="輸入留言" autoComplete="off" enterKeyHint="send" value={commentDraft} onChange={(event) => setCommentDraft(event.target.value)} onFocus={() => setDeviceKeyboard(true)} onClick={() => setDeviceKeyboard(true)} placeholder="請輸入留言..." />
+          <input ref={commentInputRef} aria-label="輸入留言" autoFocus autoComplete="off" enterKeyHint="send" value={commentDraft} onChange={(event) => setCommentDraft(event.target.value)} onFocus={() => setDeviceKeyboard(true)} onClick={() => setDeviceKeyboard(true)} placeholder="請輸入留言..." />
           <button type="submit" disabled={!commentDraft.trim()}>發送</button>
         </form>
       </div>
