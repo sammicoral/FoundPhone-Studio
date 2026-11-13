@@ -1,7 +1,7 @@
 import weverseHomeLogo from "../assets/app-icons/weverse-home-logo.png";
 import { KeyboardContext, NativeComposer } from "./DeviceSystem";
 import { useSkinState } from "./skinState";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   ChevronLeft,
   Plus,
@@ -1011,6 +1011,7 @@ export function WeverseSkin(p: SkinProps) {
   const [selectedPostId, setSelectedPostId] = useState("");
   const [commentDraft, setCommentDraft] = useState("");
   const [localComments, setLocalComments] = useState<Record<string, string[]>>({});
+  const commentInputRef = useRef<HTMLInputElement>(null);
   const setDeviceKeyboard = useContext(KeyboardContext);
   const [artistProfileTab, setArtistProfileTab] = useState("貼文");
   const [communityHeaderCollapsed, setCommunityHeaderCollapsed] = useState(false);
@@ -1094,8 +1095,46 @@ export function WeverseSkin(p: SkinProps) {
     </article>;
   };
   const selectedPost = posts.find((item) => item.id === selectedPostId);
+  useEffect(() => {
+    if (selectedPostId) {
+      const frame = window.requestAnimationFrame(() => commentInputRef.current?.focus());
+      return () => window.cancelAnimationFrame(frame);
+    }
+  }, [selectedPostId]);
   if (selectedPost) {
+    const seededFanComments = [
+      "오늘 무대도 정말 기대하고 있어요!",
+      "주훈아 오늘도 너무 멋있어 🩷",
+      "이번 사진 분위기 너무 좋다",
+      "항상 응원하고 있어요. 건강 잘 챙겨!",
+      "컴백 기다리고 있을게요!",
+      "오늘 하루도 행복하게 보내길 바라",
+      "이 착장 진짜 잘 어울려요",
+      "사진 더 많이 올려 주세요!",
+      "보고 싶었어요 ㅠㅠ",
+      "무대에서 만나요!",
+      "오늘도 사랑해요",
+      "이 순간 공유해 줘서 고마워요",
+      "저녁은 먹었어요? 꼭 챙겨 먹기!",
+      "매일 좋은 에너지 받고 있어요",
+      "너무 귀여워요 ㅋㅋㅋ",
+      "다음 라이브도 기다릴게요",
+      "항상 멤버들 응원합니다!",
+      "이 사진 저장해도 되나요 🥹",
+      "오늘도 수고 많았어요",
+      "오래오래 함께해요",
+      "대만에서도 많이 응원하고 있어요!",
+      "언제나 네 편이야",
+      "이 분위기 너무 좋아요",
+      "좋은 밤 보내요!",
+    ];
     const comments = [...(selectedPost.comments || []), ...(localComments[selectedPost.id] || [])];
+    const fanComments = comments.length ? comments : seededFanComments;
+    const artistComments = [
+      { author: getWeverseName(selectedPost.sender), body: selectedPost.meta?.artistComment || "COER 오늘도 와 줘서 고마워요! 항상 응원해 줘서 힘이 돼요 🩷" },
+      { author: weverseAliases.JAMES, body: "다들 밥 잘 챙겨 먹어요!! 오늘도 고마워요" },
+      { author: weverseAliases.MARTIN, body: "여러분 덕분에 오늘도 행복해요. 사랑해요!" },
+    ];
     const pinnedReply = selectedPost.meta?.pinnedReply || "";
     const sendComment = () => {
       const value = commentDraft.trim();
@@ -1103,6 +1142,7 @@ export function WeverseSkin(p: SkinProps) {
       setLocalComments((current) => ({ ...current, [selectedPost.id]: [...(current[selectedPost.id] || []), value] }));
       setCommentDraft("");
       setDeviceKeyboard(false);
+      commentInputRef.current?.blur();
     };
     return (
       <div className="weverse-ui independent-skin wv-post-detail">
@@ -1115,14 +1155,15 @@ export function WeverseSkin(p: SkinProps) {
           {postCard(selectedPost)}
           <div className="wv-comment-summary">按讚 {getPostEngagementCount(selectedPost, liked.includes(selectedPost.id))} · 留言 {getPostEngagementCount(selectedPost, false)}</div>
           <section className="wv-comment-thread">
-            <div className="wv-comment-thread-heading"><strong>藝人留言 {comments.length + (pinnedReply ? 1 : 0)}</strong><span>⌃</span></div>
+            <div className="wv-comment-thread-heading"><strong>藝人留言 {artistComments.length + (pinnedReply ? 1 : 0)}</strong><span>⌃</span></div>
             {pinnedReply && <article className="wv-thread-comment wv-pinned-reply"><div className="wv-thread-avatar">{getWeverseName(selectedPost.sender).slice(0,1)}</div><div className="wv-thread-content"><div className="wv-thread-meta"><strong>{getWeverseName(selectedPost.sender)} <span className="wv-verified-dot">✦</span></strong><small>藝人回覆 · 置頂</small></div><p>{pinnedReply}</p><div className="wv-thread-like"><Heart size={14}/> 10K+</div></div></article>}
-            {comments.map((comment, index) => <article className="wv-thread-comment" key={selectedPost.id + "-comment-" + index}><div className="wv-thread-avatar">{index % 2 === 0 ? "C" : "♡"}</div><div className="wv-thread-content"><div className="wv-thread-meta"><strong>{index % 2 === 0 ? "COER" : "cortislover"}</strong><small>11. 13. 13:{String(5 + index).padStart(2,"0")}</small></div><p>{comment}</p><div className="wv-thread-like"><Heart size={14}/> 10K+</div></div></article>)}
-            {!comments.length && !pinnedReply && <div className="wv-empty">目前還沒有留言</div>}
+            {artistComments.map((comment, index) => <article className="wv-thread-comment wv-artist-thread-comment" key={selectedPost.id + "-artist-" + index}><div className="wv-thread-avatar wv-artist-thread-avatar">{comment.author.slice(0,1)}</div><div className="wv-thread-content"><div className="wv-thread-meta"><strong>{comment.author} <span className="wv-verified-dot">✦</span></strong><small>11. 13. 16:{String(40 + index).padStart(2,"0")}</small></div><p>{comment.body}</p><div className="wv-thread-like"><Heart size={14}/> 10K+</div></div></article>)}
+            <div className="wv-comment-thread-heading wv-all-comments-heading"><strong>全部留言 10K+</strong></div>
+            {fanComments.map((comment, index) => <article className="wv-thread-comment" key={selectedPost.id + "-comment-" + index}><div className="wv-thread-avatar wv-default-fan-avatar" aria-hidden="true"></div><div className="wv-thread-content"><div className="wv-thread-meta"><strong>{["주훈우주","coer_lover","keonho_nh","bluehour","cortisfan"][index % 5]}</strong><small>11. 13. 19:{String(51 - (index % 45)).padStart(2,"0")}</small></div><p>{comment}</p><div className="wv-thread-like"><Heart size={14}/></div></div></article>)}
           </section>
         </div>
         <form className="wv-comment-composer" onSubmit={(event) => { event.preventDefault(); sendComment(); }}>
-          <input aria-label="輸入留言" value={commentDraft} onChange={(event) => setCommentDraft(event.target.value)} onFocus={() => setDeviceKeyboard(true)} onClick={() => setDeviceKeyboard(true)} placeholder="請輸入留言..." />
+          <input ref={commentInputRef} aria-label="輸入留言" autoComplete="off" enterKeyHint="send" value={commentDraft} onChange={(event) => setCommentDraft(event.target.value)} onFocus={() => setDeviceKeyboard(true)} onClick={() => setDeviceKeyboard(true)} placeholder="請輸入留言..." />
           <button type="submit" disabled={!commentDraft.trim()}>發送</button>
         </form>
       </div>
