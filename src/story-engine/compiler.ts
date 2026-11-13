@@ -223,6 +223,10 @@ export function compileStory(raw: unknown): { story: Story; work: Work } {
             ...m.meta,
             conversationId: chat.id,
             participants: chat.participants.join(","),
+            contactName:
+              contacts.get(chat.participants.find((participant) => participant !== "owner") || "")?.name || chat.title,
+            contactBio:
+              contacts.get(chat.participants.find((participant) => participant !== "owner") || "")?.bio || "",
           },
         },
         `chats.${n}.messages.${j}`,
