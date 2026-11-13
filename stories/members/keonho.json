@@ -94,7 +94,7 @@
   "contacts": [
     {
       "id": "keonho",
-      "name": "KEONHO",
+      "name": "🐶💕",
       "bio": "CORTIS"
     }
   ],
@@ -198,7 +198,7 @@
     {
       "id": "test-chat-kakao",
       "app": "kakao",
-      "title": "KEONHO",
+      "title": "🐶💕",
       "participants": [
         "owner",
         "keonho"
