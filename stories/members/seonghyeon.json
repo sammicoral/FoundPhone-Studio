@@ -94,7 +94,7 @@
   "contacts": [
     {
       "id": "seonghyeon",
-      "name": "SEONGHYEON",
+      "name": "ㅇㅅㅎ",
       "bio": "CORTIS"
     }
   ],
@@ -198,7 +198,7 @@
     {
       "id": "test-chat-kakao",
       "app": "kakao",
-      "title": "SEONGHYEON",
+      "title": "ㅇㅅㅎ",
       "participants": [
         "owner",
         "seonghyeon"
