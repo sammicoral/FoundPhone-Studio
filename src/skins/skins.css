@@ -4738,3 +4738,52 @@
     min-height:78px !important;
   }
 }
+
+
+/* Weverse post detail: dedicated comment thread and composer above the keyboard */
+.weverse-ui.wv-post-detail {
+  display:flex !important;
+  flex-direction:column !important;
+  height:100% !important;
+  min-height:0 !important;
+  overflow:hidden !important;
+  background:#000 !important;
+  color:#f5f5f5 !important;
+}
+.weverse-ui .wv-post-detail-header {
+  display:flex;
+  flex:0 0 52px;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 12px;
+  border-bottom:1px solid #252525;
+  background:#000;
+}
+.weverse-ui .wv-post-detail-header > button { display:grid; place-items:center; width:36px; height:40px; color:#fff; }
+.weverse-ui .wv-post-detail-header > div { display:flex; flex-direction:column; align-items:center; gap:2px; }
+.weverse-ui .wv-post-detail-header strong { font-size:15px; }
+.weverse-ui .wv-post-detail-header small { color:#777; font-size:10px; }
+.weverse-ui .wv-post-detail-scroll { flex:1 1 auto; min-height:0; overflow-y:auto; overscroll-behavior:contain; padding-bottom:10px; }
+.weverse-ui .wv-post-detail-scroll > .wv-post { margin:0; border-radius:0; padding-top:13px; background:#000; }
+.weverse-ui .wv-post-detail-scroll > .wv-post .wv-media-placeholder { min-height:260px; }
+.weverse-ui .wv-comment-summary { padding:9px 16px; border-top:1px solid #292929; color:#aaa; font-size:11px; }
+.weverse-ui .wv-comment-thread { padding:12px 12px 18px; }
+.weverse-ui .wv-comment-thread-heading { display:flex; align-items:center; justify-content:space-between; margin:0 2px 12px; font-size:14px; }
+.weverse-ui .wv-comment-thread-heading span { color:#888; }
+.weverse-ui .wv-thread-comment { display:flex; gap:9px; padding:9px 0 13px; }
+.weverse-ui .wv-thread-avatar { display:grid; place-items:center; flex:0 0 32px; width:32px; height:32px; border-radius:50%; background:#454545; color:#fff; font-size:13px; font-weight:800; }
+.weverse-ui .wv-thread-content { flex:1; min-width:0; padding:9px 11px; border-radius:12px; background:#1c1c1e; }
+.weverse-ui .wv-thread-meta { display:flex; align-items:center; gap:7px; }
+.weverse-ui .wv-thread-meta strong { font-size:11px; }
+.weverse-ui .wv-thread-meta small { color:#858585; font-size:10px; }
+.weverse-ui .wv-thread-content p { margin:7px 0 9px; color:#eee; font-size:12px; line-height:1.5; white-space:pre-wrap; overflow-wrap:anywhere; }
+.weverse-ui .wv-thread-like { display:flex; align-items:center; gap:5px; color:#aaa; font-size:10px; }
+.weverse-ui .wv-pinned-reply .wv-thread-content { border:1px solid #4a4141; background:#242020; }
+.weverse-ui .wv-pinned-reply .wv-thread-meta strong { color:#fff; }
+.weverse-ui .wv-verified-dot { color:#55d5df; font-size:10px; }
+.weverse-ui .wv-comment-composer { display:flex; flex:0 0 auto; align-items:center; gap:9px; min-height:53px; padding:7px 12px calc(7px + env(safe-area-inset-bottom, 0px)); border-top:1px solid #292929; background:#111; }
+.weverse-ui .wv-comment-composer input { flex:1; min-width:0; height:36px; padding:0 14px; border:1px solid #393939; border-radius:22px; outline:none; background:#050505; color:#fff; font-size:13px; }
+.weverse-ui .wv-comment-composer input::placeholder { color:#777; }
+.weverse-ui .wv-comment-composer button { padding:8px 10px; color:#57d0dc; font-size:12px; font-weight:700; }
+.weverse-ui .wv-comment-composer button:disabled { opacity:.35; }
+.phone-screen.keyboard-open .weverse-ui.wv-post-detail .wv-comment-composer { padding-bottom:7px; }
