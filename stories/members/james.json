@@ -105,13 +105,13 @@
       "title": "测试会话",
       "participants": [
         "owner",
-        "test-contact"
+        "james"
       ],
       "messages": [
         {
           "id": "test-message-messages",
           "body": "这是一条测试消息。",
-          "senderId": "test-contact"
+          "senderId": "james"
         }
       ]
     },
@@ -121,13 +121,13 @@
       "title": "测试会话",
       "participants": [
         "owner",
-        "test-contact"
+        "james"
       ],
       "messages": [
         {
           "id": "test-message-wechat",
           "body": "这是一条测试消息。",
-          "senderId": "test-contact"
+          "senderId": "james"
         }
       ]
     },
@@ -137,13 +137,13 @@
       "title": "测试会话",
       "participants": [
         "owner",
-        "test-contact"
+        "james"
       ],
       "messages": [
         {
           "id": "test-message-whatsapp",
           "body": "这是一条测试消息。",
-          "senderId": "test-contact"
+          "senderId": "james"
         }
       ]
     },
@@ -153,13 +153,13 @@
       "title": "测试会话",
       "participants": [
         "owner",
-        "test-contact"
+        "james"
       ],
       "messages": [
         {
           "id": "test-message-discord",
           "body": "这是一条测试消息。",
-          "senderId": "test-contact"
+          "senderId": "james"
         }
       ]
     },
@@ -169,13 +169,13 @@
       "title": "测试会话",
       "participants": [
         "owner",
-        "test-contact"
+        "james"
       ],
       "messages": [
         {
           "id": "test-message-line",
           "body": "这是一条测试消息。",
-          "senderId": "test-contact"
+          "senderId": "james"
         }
       ]
     },
@@ -185,13 +185,13 @@
       "title": "测试会话",
       "participants": [
         "owner",
-        "test-contact"
+        "james"
       ],
       "messages": [
         {
           "id": "test-message-messenger",
           "body": "这是一条测试消息。",
-          "senderId": "test-contact"
+          "senderId": "james"
         }
       ]
     },
