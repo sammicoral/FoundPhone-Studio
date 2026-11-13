@@ -1,7 +1,7 @@
 import weverseHomeLogo from "../assets/app-icons/weverse-home-logo.png";
 import { NativeComposer } from "./DeviceSystem";
 import { useSkinState } from "./skinState";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ChevronLeft,
   Plus,
@@ -1010,6 +1010,14 @@ export function WeverseSkin(p: SkinProps) {
   const [selectedArtist, setSelectedArtist] = useState("");
   const [artistProfileTab, setArtistProfileTab] = useState("貼文");
   const [communityHeaderCollapsed, setCommunityHeaderCollapsed] = useState(false);
+  const [weverseElapsedSeconds, setWeverseElapsedSeconds] = useState(0);
+  useEffect(() => {
+    const startedAt = Date.now();
+    const timer = window.setInterval(() => {
+      setWeverseElapsedSeconds(Math.floor((Date.now() - startedAt) / 1000));
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, []);
   const members = ["MARTIN", "JAMES", "JUHOON", "SEONGHYEON", "KEONHO"];
   const weverseAliases: Record<string, string> = {
     MARTIN: "m.j. edwards",
@@ -1044,6 +1052,16 @@ export function WeverseSkin(p: SkinProps) {
     const matchesQuery = !query || (item.sender + " " + item.body + " " + (item.title || "")).toLowerCase().includes(query.toLowerCase());
     return matchesMember && matchesQuery;
   });
+  const getPostEngagementCount = (item: Item, isLiked: boolean) => {
+    // Posts shown with a time-only label are treated as newly published.
+    // Their engagement starts just below the 10K display cap and rises quickly.
+    const isFreshPost = /^\\d{1,2}:\\d{2}$/.test(item.time.trim()) || /^(剛剛|剛才|\\d+分鐘前)$/.test(item.time.trim());
+    const freshBase = Math.min(9999, 9700 + Math.floor(weverseElapsedSeconds / 5) * 35);
+    const count = isFreshPost ? freshBase : 10000;
+    return Math.min(10000, count + (isLiked ? 1 : 0)) >= 10000
+      ? "10K+"
+      : (count + (isLiked ? 1 : 0)).toLocaleString("en-US");
+  };
   const toggle = (list: string[], setter: (value: string[]) => void, id: string) =>
     setter(list.includes(id) ? list.filter((value) => value !== id) : [...list, id]);
   const postCard = (item: Item) => {
@@ -1064,8 +1082,8 @@ export function WeverseSkin(p: SkinProps) {
         {isExpanded && <span className="wv-post-expanded">CORTIS 社群貼文 · 查看留言與完整內容</span>}
       </button>
       <div className="wv-post-actions">
-        <button className={isLiked ? "liked" : ""} aria-pressed={isLiked} onClick={() => toggle(liked, setLiked, item.id)}><Heart size={20} fill={isLiked ? "currentColor" : "none"}/><span>{(item.likes || 0) + (isLiked ? 1 : 0) || ""}</span></button>
-        <button onClick={() => toggle(expanded, setExpanded, item.id)}><MessageCircle size={20}/><span>{comments.length || ""}</span></button>
+        <button className={isLiked ? "liked" : ""} aria-pressed={isLiked} onClick={() => toggle(liked, setLiked, item.id)}><Heart size={20} fill={isLiked ? "currentColor" : "none"}/><span>{getPostEngagementCount(item, isLiked)}</span></button>
+        <button onClick={() => toggle(expanded, setExpanded, item.id)}><MessageCircle size={20}/><span>{getPostEngagementCount(item, false)}</span></button>
         <button className="wv-save" aria-label="收藏貼文" aria-pressed={isSaved} onClick={() => toggle(saved, setSaved, item.id)}><Bookmark size={19} fill={isSaved ? "currentColor" : "none"}/></button>
       </div>
       {isExpanded && <div className="wv-comments">{comments.length ? comments.map((comment, index) => <p key={index}><strong>COER</strong> {comment}</p>) : <p>還沒有留言。</p>}</div>}
