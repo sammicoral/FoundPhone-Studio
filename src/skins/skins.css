@@ -4787,3 +4787,25 @@
 .weverse-ui .wv-comment-composer button { padding:8px 10px; color:#57d0dc; font-size:12px; font-weight:700; }
 .weverse-ui .wv-comment-composer button:disabled { opacity:.35; }
 .phone-screen.keyboard-open .weverse-ui.wv-post-detail .wv-comment-composer { padding-bottom:7px; }
+
+
+/* Use neutral blank avatars for generated Weverse fan comments. */
+.weverse-ui .wv-thread-avatar.wv-default-fan-avatar {
+  background:#4a4a4a !important;
+  color:transparent !important;
+}
+.weverse-ui .wv-artist-thread-comment .wv-thread-content {
+  background:#202020;
+}
+.weverse-ui .wv-all-comments-heading {
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px solid #292929;
+}
+.weverse-ui .wv-comment-composer input {
+  -webkit-appearance:none;
+  appearance:none;
+  touch-action:manipulation;
+  user-select:text;
+  -webkit-user-select:text;
+}
