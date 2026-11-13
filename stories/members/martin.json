@@ -93,10 +93,9 @@
   ],
   "contacts": [
     {
-      "id": "test-contact",
-      "name": "测试联系人",
-      "phone": "",
-      "bio": "这是一条测试内容。"
+      "id": "martin",
+      "name": "MARTIN",
+      "bio": "CORTIS"
     }
   ],
   "chats": [
@@ -199,20 +198,20 @@
     {
       "id": "test-chat-kakao",
       "app": "kakao",
-      "title": "测试会话",
+      "title": "MARTIN",
       "participants": [
         "owner",
-        "test-contact"
+        "martin"
       ],
       "messages": [
         {
-          "id": "test-message-kakao",
-          "body": "这是一条测试消息。",
-          "senderId": "test-contact"
+          "id": "martin-kakao-hi",
+          "body": "嗨！",
+          "senderId": "martin"
         },
         {
-          "id": "test-reply-kakao",
-          "body": "这是一条测试回复。",
+          "id": "martin-kakao-reply",
+          "body": "剛剛想到你～",
           "senderId": "owner"
         }
       ]
