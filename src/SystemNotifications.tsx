@@ -20,7 +20,7 @@ export function notificationContent(
   return {
     title: contact?.title || appName,
     body: match ? match[3] : text,
-    appId: app?.id ?? "messages",
+    appId: app?.id ?? (appName.toLowerCase() === "kakaotalk" ? "kakao" : "messages"),
     avatar,
   };
 }
@@ -37,7 +37,7 @@ export function SystemNotifications({
   apps: Work["apps"];
   contacts?: Work["data"]["contacts"];
   memberAvatar?: string;
-  onOpen: () => void;
+  onOpen: (text: string) => void;
   onDismiss: (index: number) => void;
   compact?: boolean;
 }) {
@@ -68,7 +68,7 @@ export function SystemNotifications({
                 if (info.offset.x < -80) onDismiss(index);
               }}
             >
-              <button className="notice-open" onClick={onOpen}>
+              <button className="notice-open" onClick={() => onOpen(text)}>
                 <span className="notice-app-art">
                   {n.avatar ? (
                     <img
