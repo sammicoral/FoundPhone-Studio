@@ -95,7 +95,8 @@ export function Avatar({
 }) {
   const embeddedImage = safeMedia(src);
   const localImage =
-    /^(?:\\/(?!\\/)|\\.\\/)assets\\/[A-Za-z0-9_./-]+\\.(?:png|jpe?g|webp|gif)$/i.test(src) &&
+    (src.startsWith("/assets/") || src.startsWith("./assets/")) &&
+    /\\.(png|jpe?g|webp|gif)$/i.test(src) &&
     !src.split("/").includes("..");
   const imageSrc = embeddedImage?.startsWith("data:image/")
     ? embeddedImage
