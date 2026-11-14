@@ -3,7 +3,7 @@
   "id": "cortis-martin-story",
   "title": "CORTIS · MARTIN",
   "description": "MARTIN 專屬故事線。此檔案獨立於其他成員，後續劇情請編輯本檔。",
-  "revision": 2,
+  "revision": 3,
   "phone": {
     "owner": "机主",
     "date": "2026-10-25",
@@ -804,6 +804,11 @@
           "type": "notification",
           "key": "kakao",
           "value": "KakaoTalk: 好餓ㅜㅜ"
+        },
+        {
+          "type": "ending",
+          "key": "martin-opening-complete",
+          "value": "MARTIN opening messages delivered"
         }
       ],
       "next": [],
@@ -813,5 +818,16 @@
       "y": 580
     }
   ],
-  "tests": []
+  "tests": [
+    {
+      "name": "MARTIN 開場四則 KakaoTalk 訊息依序送達",
+      "steps": [
+        {
+          "advanceMs": 5400
+        }
+      ],
+      "ending": "MARTIN opening messages delivered",
+      "expectUnlocked": []
+    }
+  ]
 }
