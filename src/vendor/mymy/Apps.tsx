@@ -271,6 +271,27 @@ export function MymyKakao(p: SkinProps) {
               .filter((g) => g.title.includes(query.trim()))
               .map((g) => {
                 const last = g.items.at(-1)!;
+                const latestSent = sent.reduce<{
+                  body: string;
+                  time: string;
+                } | null>((latest, raw) => {
+                  try {
+                    const entry: unknown = JSON.parse(raw);
+                    if (
+                      Array.isArray(entry) &&
+                      entry.length === 3 &&
+                      entry.every((value) => typeof value === "string") &&
+                      entry[0] === g.title
+                    ) {
+                      return { body: entry[1], time: entry[2] };
+                    }
+                  } catch {
+                    // Ignore malformed locally stored messages.
+                  }
+                  return latest;
+                }, null);
+                const preview = latestSent?.body ?? last.body;
+                const previewTime = latestSent?.time ?? last.time;
                 return (
                   <button
                     className="kzkr kzkcr"
@@ -280,10 +301,10 @@ export function MymyKakao(p: SkinProps) {
                     <Avatar name={last.meta.contactName || g.title} src={last.meta.contactAvatar || last.avatar} />
                     <span className="kzkn">
                       <b>{last.meta.contactName || g.title}</b>
-                      <small>{tab === "好友" ? last.meta.contactBio || "" : last.body}</small>
+                      <small>{tab === "好友" ? last.meta.contactBio || "" : preview}</small>
                     </span>
                     <span className="kzkmt">
-                      {last.time.slice(-5)}
+                      {previewTime.slice(-5)}
                       {last.meta.unread && (
                         <i className="kzkbd">{last.meta.unread}</i>
                       )}
