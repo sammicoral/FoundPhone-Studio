@@ -423,7 +423,6 @@ export function ControlCenter({
       {powerMenuOpen && (
         <div className="cc-power-overlay" role="dialog" aria-modal="true" aria-label="電源選項">
           <div className="cc-power-menu">
-            <strong>電源選項</strong>
             <button onClick={() => { setPowerMenuOpen(false); onLock(); }}>鎖定螢幕</button>
             <button className="cc-power-restart" onClick={() => { setPowerMenuOpen(false); setRestartConfirmOpen(true); }}>重新開機</button>
             <button className="cc-power-cancel" onClick={() => setPowerMenuOpen(false)}>取消</button>
