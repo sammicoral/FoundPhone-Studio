@@ -139,6 +139,7 @@ export function DeviceLock({
                 notices={notices}
                 apps={work.apps}
                 contacts={work.data.contacts}
+                memberAvatar={String(work.variables.memberAvatar || "")}
                 onOpen={open}
                 onDismiss={onDismiss}
               />
