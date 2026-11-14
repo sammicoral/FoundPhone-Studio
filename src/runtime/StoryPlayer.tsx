@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { createRoot } from "react-dom/client";
 import { Phone } from "../Phone";
+import { db } from "../persistence";
 import { validateWork, type Work } from "../schema";
 import "../styles.css";
 import "./player.css";
@@ -120,6 +121,15 @@ function StoryPlayer() {
     return () => abort.abort();
   }, []);
 
+  const restartStory = async () => {
+    if (work) await db.saves.delete(work.id);
+    setWork(null);
+    setBoyfriend("martin");
+    setPlayerName("");
+    setPlayerAccount("");
+    setFormError("");
+  };
+
   const enterPhone = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const name = playerName.trim();
@@ -146,7 +156,7 @@ function StoryPlayer() {
   return (
     <main className="story-runtime">
       {work ? (
-        <Phone work={work} />
+        <Phone work={work} onRestart={restartStory} />
       ) : source ? (
         <section className="player-onboarding" aria-labelledby="onboarding-title">
           <div className="onboarding-card">
