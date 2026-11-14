@@ -253,6 +253,7 @@ export function ControlCenter({
   network,
   close,
   onLock,
+  onRestart,
   onFullscreen,
   isFullscreen,
 }: {
@@ -260,6 +261,7 @@ export function ControlCenter({
   network: string;
   close: () => void;
   onLock: () => void;
+  onRestart: () => void;
   onFullscreen: () => void;
   isFullscreen: boolean;
 }) {
@@ -269,6 +271,8 @@ export function ControlCenter({
   const [brightness, setBrightness] = useState(50),
     [volume, setVolume] = useState(25);
   const [tool, setTool] = useState("");
+  const [powerMenuOpen, setPowerMenuOpen] = useState(false);
+  const [restartConfirmOpen, setRestartConfirmOpen] = useState(false);
   return (
     <motion.div
       className="system-panel device-control"
@@ -276,7 +280,7 @@ export function ControlCenter({
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: -100, opacity: 0 }}
     >
-      <button className="cc-close" aria-label="鎖定手機" title="鎖定手機" onClick={onLock}>
+      <button className="cc-close" aria-label="電源選項" title="電源選項" onClick={() => setPowerMenuOpen(true)}>
         <Power />
       </button>
       <button
@@ -416,6 +420,26 @@ export function ControlCenter({
           </button>
         ))}
       </div>
+      {powerMenuOpen && (
+        <div className="cc-power-overlay" role="dialog" aria-modal="true" aria-label="電源選項">
+          <div className="cc-power-menu">
+            <strong>電源選項</strong>
+            <button onClick={() => { setPowerMenuOpen(false); onLock(); }}>鎖定螢幕</button>
+            <button className="cc-power-restart" onClick={() => { setPowerMenuOpen(false); setRestartConfirmOpen(true); }}>重新開機</button>
+            <button className="cc-power-cancel" onClick={() => setPowerMenuOpen(false)}>取消</button>
+          </div>
+        </div>
+      )}
+      {restartConfirmOpen && (
+        <div className="cc-power-overlay" role="alertdialog" aria-modal="true" aria-labelledby="cc-restart-title">
+          <div className="cc-power-menu cc-restart-confirm">
+            <strong id="cc-restart-title">重新開機</strong>
+            <p>選擇重新開機將會強制重置整個故事，確定重新開機？</p>
+            <button className="cc-power-restart" onClick={onRestart}>確定</button>
+            <button className="cc-power-cancel" onClick={() => setRestartConfirmOpen(false)}>取消</button>
+          </div>
+        </div>
+      )}
       {tool && (
         <div className="cc-tool">
           <strong>{tool}</strong>
