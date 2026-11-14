@@ -8,7 +8,7 @@ export function notificationContent(
   apps: Work["apps"],
   contacts: Work["data"]["contacts"] = [],
 ) {
-  const match = text.match(/^([^|:：]+)(?:\\|([^:：]+))?[:：]\\s*([\\s\\S]*)$/);
+  const match = text.match(/^([^|:：]+)(?:\|([^:：]+))?[:：]\s*([\s\S]*)$/);
   const appName = match?.[1] ?? "信息";
   const senderId = match?.[2];
   const contact = senderId
