@@ -53,6 +53,7 @@ function personalizeWork(source: Work, playerName: string, playerAccount: string
   work.variables.memberLockScreen =
     import.meta.env.BASE_URL + "assets/" + boyfriend + "-lockscreen.jpg";
   const memberAvatar = import.meta.env.BASE_URL + "assets/" + boyfriend + "-avatar.jpg";
+  work.variables.memberAvatar = memberAvatar;
   for (const item of work.data.kakao || []) {
     item.avatar = memberAvatar;
     item.meta.contactAvatar = memberAvatar;
