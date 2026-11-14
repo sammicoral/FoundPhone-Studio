@@ -629,6 +629,7 @@ function PhoneRuntime({
                     );
                   }}
                   work={work}
+                  virtualTime={virtualTime}
                 />
               </AppWindow>
             ) : (
@@ -1082,6 +1083,7 @@ function AppContent({
   onSettings,
   onUi,
   work,
+  virtualTime,
 }: {
   app: AppPlugin;
   name: string;
@@ -1095,6 +1097,7 @@ function AppContent({
   onSettings?: () => void;
   onUi?: (key: string, value: UiValue) => void;
   work: Work;
+  virtualTime: string;
 }) {
   const [detail, setDetail] = useState<Item | null>(null);
   const [thread, setThread] = useState("");
