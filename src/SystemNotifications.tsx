@@ -7,6 +7,7 @@ export function notificationContent(
   text: string,
   apps: Work["apps"],
   contacts: Work["data"]["contacts"] = [],
+  memberAvatar = "",
 ) {
   const match = text.match(/^([^|:：]+)(?:\|([^:：]+))?[:：]\s*([\s\S]*)$/);
   const appName = match?.[1] ?? "信息";
@@ -15,11 +16,7 @@ export function notificationContent(
     ? contacts.find((item) => item.id === senderId || item.id === senderId + "-card")
     : undefined;
   const app = apps.find((item) => item.id === appName.toLowerCase() || item.name === appName);
-  const avatar =
-    contact?.avatar ||
-    (senderId === "martin"
-      ? "/assets/weverse/members/martin/weverse-martin-avatar.jpg"
-      : "");
+  const avatar = contact?.avatar || (senderId ? memberAvatar : "");
   return {
     title: contact?.title || appName,
     body: match ? match[3] : text,
@@ -31,6 +28,7 @@ export function SystemNotifications({
   notices,
   apps,
   contacts = [],
+  memberAvatar = "",
   onOpen,
   onDismiss,
   compact = false,
@@ -38,6 +36,7 @@ export function SystemNotifications({
   notices: string[];
   apps: Work["apps"];
   contacts?: Work["data"]["contacts"];
+  memberAvatar?: string;
   onOpen: () => void;
   onDismiss: (index: number) => void;
   compact?: boolean;
@@ -54,7 +53,7 @@ export function SystemNotifications({
     >
       <div className="notice-cards">
         {shown.map(({ text, index }) => {
-          const n = notificationContent(text, apps, contacts);
+          const n = notificationContent(text, apps, contacts, memberAvatar);
           return (
             <motion.div
               layout
