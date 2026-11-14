@@ -138,6 +138,7 @@ export function DeviceLock({
                 compact
                 notices={notices}
                 apps={work.apps}
+                contacts={work.data.contacts}
                 onOpen={open}
                 onDismiss={onDismiss}
               />
