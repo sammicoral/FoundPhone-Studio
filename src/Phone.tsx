@@ -433,7 +433,12 @@ function PhoneRuntime({
   const clockWork = { ...work, phone: { ...work.phone, date: displayDate } };
   const plugin = getApp(app);
   const bannerNotice = banner
-    ? notificationContent(banner, work.apps, work.data.contacts)
+    ? notificationContent(
+        banner,
+        work.apps,
+        work.data.contacts,
+        String(work.variables.memberAvatar || ""),
+      )
     : null;
   useEffect(() => {
     const count = s.notifications.length;
