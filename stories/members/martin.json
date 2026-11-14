@@ -805,6 +805,22 @@
           "key": "kakao",
           "value": "KakaoTalk|martin: 好餓ㅜㅜ"
         },
+      ],
+      "next": [],
+      "once": true,
+      "delayMs": 1800,
+      "x": 120,
+      "y": 580
+    },
+    {
+      "id": "martin-opening-manual-ending",
+      "label": "手動結束開場測試流程",
+      "type": "ending",
+      "event": "manual-ending",
+      "target": "",
+      "conditions": [],
+      "logic": "and",
+      "actions": [
         {
           "type": "ending",
           "key": "martin-opening-complete",
@@ -813,8 +829,7 @@
       ],
       "next": [],
       "once": true,
-      "delayMs": 1800,
-      "x": 120,
+      "x": 420,
       "y": 580
     }
   ],
@@ -824,6 +839,9 @@
       "steps": [
         {
           "advanceMs": 5400
+        },
+        {
+          "event": "manual-ending"
         }
       ],
       "ending": "MARTIN opening messages delivered",
