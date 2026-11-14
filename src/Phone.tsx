@@ -141,6 +141,7 @@ function PhoneRuntime({
   const [recent, setRecent] = useState<string[]>([]);
   const appSnapshots = useRef(new Map<string, HTMLElement>());
   const [banner, setBanner] = useState("");
+  const [pendingNotificationApp, setPendingNotificationApp] = useState("");
   const noticesSeen = useRef(0);
   const [contextApp, setContextApp] = useState("");
   const [, setDeviceScale] = useState(0.84);
@@ -386,12 +387,15 @@ function PhoneRuntime({
   };
   const installedApps = work.apps.filter((a) => a.installed);
   const apps = installedApps.filter((a) => a.visible);
-  const unlock = (pin = "") => {
+  const unlock = (pin = "", destinationApp = "") => {
     const configuredPasscode = String(s.ui?.settings?.passcode ?? work.phone.passcode ?? "");
     if (!configuredPasscode || pin === configuredPasscode) {
       setLocked(false);
       setPinOpen(false);
       event("password", pin);
+      const nextApp = destinationApp || pendingNotificationApp;
+      setPendingNotificationApp("");
+      if (nextApp) open(nextApp);
     } else {
       setPinError("密碼錯誤");
       setPinOpen(true);
@@ -406,6 +410,26 @@ function PhoneRuntime({
       } else {
         setPasscodeHint("");
       }
+    }
+  };
+  const handleNotificationOpen = (notice: string) => {
+    const destinationApp = notificationContent(
+      notice,
+      work.apps,
+      work.data.contacts,
+      String(work.variables.memberAvatar || ""),
+    ).appId;
+    setPanel("");
+    if (locked) {
+      const configuredPasscode = String(s.ui?.settings?.passcode ?? work.phone.passcode ?? "");
+      if (configuredPasscode) {
+        setPendingNotificationApp(destinationApp);
+        beginUnlock();
+      } else {
+        unlock("", destinationApp);
+      }
+    } else {
+      open(destinationApp);
     }
   };
   useEffect(() => {
@@ -583,6 +607,7 @@ function PhoneRuntime({
                 time={displayTime}
                 notices={s.notifications}
                 onDismiss={dismissNotice}
+                onNotificationOpen={handleNotificationOpen}
                 pinOpen={pinOpen}
                 setPinOpen={setPinOpen}
                 error={pinError}
@@ -725,12 +750,8 @@ function PhoneRuntime({
                       notices={s.notifications}
                       apps={work.apps}
                       contacts={work.data.contacts}
-                      onOpen={() => {
-                        setPanel("");
-                        if (locked) beginUnlock();
-                        else if (installedApps.some((a) => a.id === "messages"))
-                          open("messages");
-                      }}
+                      memberAvatar={String(work.variables.memberAvatar || "")}
+                      onOpen={handleNotificationOpen}
                       onDismiss={dismissNotice}
                     />
                   ) : (
@@ -852,8 +873,9 @@ function PhoneRuntime({
             <button
               className="device-banner"
               onClick={() => {
+                const notice = banner;
                 setBanner("");
-                setPanel("notification");
+                handleNotificationOpen(notice);
               }}
             >
               {bannerNotice?.avatar ? (
