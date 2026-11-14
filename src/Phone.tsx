@@ -118,6 +118,7 @@ function PhoneRuntime({
   onAdd,
   onSettings,
   onOpen,
+  onRestart,
   runtime: external,
   onRuntime,
 }: {
@@ -128,6 +129,7 @@ function PhoneRuntime({
   onAdd?: (app: string) => void;
   onSettings?: () => void;
   onOpen?: (app: string) => void;
+  onRestart?: () => void;
   runtime?: Runtime;
   onRuntime?: (s: Runtime) => void;
 }) {
@@ -746,6 +748,7 @@ function PhoneRuntime({
               network={work.phone.network}
               close={() => setPanel("")}
               onLock={() => { setPanel(""); setLocked(true); setPinOpen(false); setApp(""); setKeyboard(false); }}
+              onRestart={() => onRestart?.()}
               onFullscreen={toggleFullscreen}
               isFullscreen={isFullscreen}
             />
