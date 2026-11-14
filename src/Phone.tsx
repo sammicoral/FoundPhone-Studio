@@ -1204,7 +1204,7 @@ function AppContent({
               appId={app.id}
               owner={work.phone.owner}
               account={String(work.variables.playerAccount ?? "")}
-              virtualTime={state.time}
+              virtualTime={displayTime}
               ui={state.ui?.[app.id]}
               onUi={creator ? undefined : onUi}
               name={name}
