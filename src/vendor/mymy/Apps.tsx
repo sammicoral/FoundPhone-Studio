@@ -283,7 +283,7 @@ export function MymyKakao(p: SkinProps) {
                       <small>{tab === "好友" ? last.meta.contactBio || "" : last.body}</small>
                     </span>
                     <span className="kzkmt">
-                      {p.virtualTime || last.time.slice(-5)}
+                      {last.time.slice(-5)}
                       {last.meta.unread && (
                         <i className="kzkbd">{last.meta.unread}</i>
                       )}
