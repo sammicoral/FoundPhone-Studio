@@ -148,7 +148,11 @@ export function MymyKakao(p: SkinProps) {
                     {m.media ? <Media item={m} /> : m.body}
                   </button>
                   {!m.outgoing && run.last && (
-                    <span className="kzt">{m.time.slice(-5)}</span>
+                    <span className="kzt">
+                      {i === messages.length - 1
+                        ? p.virtualTime || m.time.slice(-5)
+                        : m.time.slice(-5)}
+                    </span>
                   )}
                 </div>
               );
@@ -165,7 +169,11 @@ export function MymyKakao(p: SkinProps) {
                   JSON.stringify([
                     p.thread,
                     draft.trim(),
-                    p.virtualTime || "09:41",
+                    p.virtualTime || new Date().toLocaleTimeString("zh-TW", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hourCycle: "h23",
+                    }),
                   ]),
                 ]);
                 setDraft("");
@@ -275,7 +283,7 @@ export function MymyKakao(p: SkinProps) {
                       <small>{tab === "好友" ? last.meta.contactBio || "" : last.body}</small>
                     </span>
                     <span className="kzkmt">
-                      {last.time.slice(-5)}
+                      {p.virtualTime || last.time.slice(-5)}
                       {last.meta.unread && (
                         <i className="kzkbd">{last.meta.unread}</i>
                       )}
