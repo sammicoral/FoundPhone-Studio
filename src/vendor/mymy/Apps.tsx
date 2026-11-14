@@ -63,7 +63,9 @@ function Back({ onClick }: { onClick: () => void }) {
 }
 export function MymyKakao(p: SkinProps) {
   const [tab, setTab] = useSkinState<string>(p, "mymyTab", "聊天"),
-    [sent, setSent] = useSkinState<string[]>(p, "mymyKktSent", []),
+    [sent, setSent] = useState<string[]>(() =>
+      Array.isArray(p.ui?.mymyKktSent) ? (p.ui.mymyKktSent as string[]) : [],
+    ),
     [draft, setDraft] = useState(""),
     [query, setQuery] = useState(""),
     [menu, setMenu] = useState(false);
@@ -164,7 +166,7 @@ export function MymyKakao(p: SkinProps) {
             onSubmit={(e) => {
               e.preventDefault();
               if (draft.trim()) {
-                setSent([
+                const nextSent = [
                   ...sent,
                   JSON.stringify([
                     p.thread,
@@ -175,7 +177,9 @@ export function MymyKakao(p: SkinProps) {
                       hourCycle: "h23",
                     }),
                   ]),
-                ]);
+                ];
+                setSent(nextSent);
+                p.onUi?.("mymyKktSent", nextSent);
                 setDraft("");
               }
             }}
