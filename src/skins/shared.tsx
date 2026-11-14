@@ -93,10 +93,19 @@ export function Avatar({
   round?: boolean;
   src?: string;
 }) {
+  const embeddedImage = safeMedia(src);
+  const localImage =
+    /^(?:\\/(?!\\/)|\\.\\/)assets\\/[A-Za-z0-9_./-]+\\.(?:png|jpe?g|webp|gif)$/i.test(src) &&
+    !src.split("/").includes("..");
+  const imageSrc = embeddedImage?.startsWith("data:image/")
+    ? embeddedImage
+    : localImage
+      ? src
+      : "";
   return (
     <span className={`catalog-avatar ${round ? "round" : ""}`}>
-      {safeMedia(src)?.startsWith("data:image/") ? (
-        <img src={safeMedia(src)} alt="" />
+      {imageSrc ? (
+        <img src={imageSrc} alt="" />
       ) : (
         name.slice(0, 1) || "人"
       )}
