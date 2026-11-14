@@ -295,7 +295,7 @@ export function MymyKakao(p: SkinProps) {
                   return latest;
                 }, null);
                 const preview = latestSent?.body ?? last.body;
-                const previewTime = latestSent?.time ?? last.time;
+                const previewTime = latestSent?.time ?? (p.virtualTime || last.time);
                 return (
                   <button
                     className="kzkr kzkcr"
