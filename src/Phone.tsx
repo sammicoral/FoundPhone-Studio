@@ -548,7 +548,12 @@ function PhoneRuntime({
               y = (e.clientY - box.top) / (box.height / 852),
               g = gesture.current;
             const dy = y - g.y;
-            if (g.zone === "top" && dy > 65)
+            if (panel === "control" && dy < -55) {
+              // The control center overlays the locked screen, so prioritize
+              // its swipe-to-dismiss gesture before the lock-screen unlock gesture.
+              gestureConsumed.current = true;
+              setPanel("");
+            } else if (g.zone === "top" && dy > 65)
               setPanel(g.x > 230 ? "control" : "notification");
             else if ((g.zone === "bottom" || g.zone === "lock") && dy < -55) {
               gestureConsumed.current = true;
