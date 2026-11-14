@@ -432,6 +432,9 @@ function PhoneRuntime({
   const displayDate = `${koreaDateParts.find((part) => part.type === "year")?.value}-${koreaDateParts.find((part) => part.type === "month")?.value}-${koreaDateParts.find((part) => part.type === "day")?.value}`;
   const clockWork = { ...work, phone: { ...work.phone, date: displayDate } };
   const plugin = getApp(app);
+  const bannerNotice = banner
+    ? notificationContent(banner, work.apps, work.data.contacts)
+    : null;
   useEffect(() => {
     const count = s.notifications.length;
     if (!locked && work.phone.notifications && count > noticesSeen.current) {
@@ -716,6 +719,7 @@ function PhoneRuntime({
                     <SystemNotifications
                       notices={s.notifications}
                       apps={work.apps}
+                      contacts={work.data.contacts}
                       onOpen={() => {
                         setPanel("");
                         if (locked) beginUnlock();
@@ -847,13 +851,18 @@ function PhoneRuntime({
                 setPanel("notification");
               }}
             >
-              <AppIcon
-                id={notificationContent(banner, work.apps).appId}
-                small
-              />
+              {bannerNotice?.avatar ? (
+                <img
+                  src={bannerNotice.avatar}
+                  alt=""
+                  style={{ width: 34, height: 34, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
+                />
+              ) : (
+                <AppIcon id={bannerNotice?.appId ?? "messages"} small />
+              )}
               <span>
-                <strong>{notificationContent(banner, work.apps).title}</strong>
-                <span>{notificationContent(banner, work.apps).body}</span>
+                <strong>{bannerNotice?.title}</strong>
+                <span>{bannerNotice?.body}</span>
               </span>
             </button>
           )}
