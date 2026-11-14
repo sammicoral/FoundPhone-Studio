@@ -764,7 +764,7 @@
         "martin-opening-delay-2"
       ],
       "once": true,
-      "delayMs": 1800,
+      "delayMs": 3000,
       "x": 120,
       "y": 260
     },
@@ -787,7 +787,7 @@
         "martin-opening-delay-3"
       ],
       "once": true,
-      "delayMs": 1800,
+      "delayMs": 3000,
       "x": 120,
       "y": 420
     },
@@ -808,7 +808,7 @@
       ],
       "next": [],
       "once": true,
-      "delayMs": 1800,
+      "delayMs": 3000,
       "x": 120,
       "y": 580
     },
@@ -838,7 +838,7 @@
       "name": "MARTIN 開場四則 KakaoTalk 訊息依序送達",
       "steps": [
         {
-          "advanceMs": 5400
+          "advanceMs": 9000
         },
         {
           "event": "manual-ending"
