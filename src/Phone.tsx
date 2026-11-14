@@ -629,6 +629,7 @@ function PhoneRuntime({
                     );
                   }}
                   work={work}
+                  virtualTime={displayTime}
                 />
               </AppWindow>
             ) : (
@@ -1206,7 +1207,7 @@ function AppContent({
               appId={app.id}
               owner={work.phone.owner}
               account={String(work.variables.playerAccount ?? "")}
-              virtualTime={displayTime}
+              virtualTime={virtualTime}
               ui={state.ui?.[app.id]}
               onUi={creator ? undefined : onUi}
               name={name}
