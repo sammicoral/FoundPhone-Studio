@@ -308,7 +308,7 @@ export function MymyKakao(p: SkinProps) {
                       <small>{tab === "好友" ? last.meta.contactBio || "" : preview}</small>
                     </span>
                     <span className="kzkmt">
-                      {previewTime.slice(-5)}
+                      {tab !== "好友" && previewTime.slice(-5)}
                       {last.meta.unread && (
                         <i className="kzkbd">{last.meta.unread}</i>
                       )}
