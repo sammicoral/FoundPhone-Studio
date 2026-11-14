@@ -3,7 +3,7 @@
   "id": "cortis-martin-story",
   "title": "CORTIS · MARTIN",
   "description": "MARTIN 專屬故事線。此檔案獨立於其他成員，後續劇情請編輯本檔。",
-  "revision": 1,
+  "revision": 2,
   "phone": {
     "owner": "机主",
     "date": "2026-10-25",
@@ -213,6 +213,30 @@
           "id": "martin-kakao-reply",
           "body": "剛剛想到你～",
           "senderId": "owner"
+        },
+        {
+          "id": "martin-kakao-opening-1",
+          "body": "Babe",
+          "senderId": "martin",
+          "time": "2026-10-25 09:41"
+        },
+        {
+          "id": "martin-kakao-opening-2",
+          "body": "我剛錄完新專輯第一首歌的demo！",
+          "senderId": "martin",
+          "time": "2026-10-25 09:41"
+        },
+        {
+          "id": "martin-kakao-opening-3",
+          "body": "今天到現在都還沒吃東西",
+          "senderId": "martin",
+          "time": "2026-10-25 09:41"
+        },
+        {
+          "id": "martin-kakao-opening-4",
+          "body": "好餓ㅜㅜ",
+          "senderId": "martin",
+          "time": "2026-10-25 09:41"
         }
       ]
     }
@@ -698,6 +722,96 @@
     "boyfriend": "martin",
     "boyfriendName": "MARTIN"
   },
-  "events": [],
+  "events": [
+    {
+      "id": "martin-opening-notification-1",
+      "label": "MARTIN 傳來第一則 KakaoTalk 訊息",
+      "type": "start",
+      "event": "start",
+      "target": "",
+      "conditions": [],
+      "logic": "and",
+      "actions": [
+        {
+          "type": "notification",
+          "key": "kakao",
+          "value": "KakaoTalk: Babe"
+        }
+      ],
+      "next": [
+        "martin-opening-delay-1"
+      ],
+      "once": true,
+      "x": 120,
+      "y": 100
+    },
+    {
+      "id": "martin-opening-delay-1",
+      "label": "稍後收到第二則訊息",
+      "type": "delay",
+      "event": "",
+      "target": "",
+      "conditions": [],
+      "logic": "and",
+      "actions": [
+        {
+          "type": "notification",
+          "key": "kakao",
+          "value": "KakaoTalk: 我剛錄完新專輯第一首歌的demo！"
+        }
+      ],
+      "next": [
+        "martin-opening-delay-2"
+      ],
+      "once": true,
+      "delayMs": 1800,
+      "x": 120,
+      "y": 260
+    },
+    {
+      "id": "martin-opening-delay-2",
+      "label": "稍後收到第三則訊息",
+      "type": "delay",
+      "event": "",
+      "target": "",
+      "conditions": [],
+      "logic": "and",
+      "actions": [
+        {
+          "type": "notification",
+          "key": "kakao",
+          "value": "KakaoTalk: 今天到現在都還沒吃東西"
+        }
+      ],
+      "next": [
+        "martin-opening-delay-3"
+      ],
+      "once": true,
+      "delayMs": 1800,
+      "x": 120,
+      "y": 420
+    },
+    {
+      "id": "martin-opening-delay-3",
+      "label": "稍後收到第四則訊息",
+      "type": "delay",
+      "event": "",
+      "target": "",
+      "conditions": [],
+      "logic": "and",
+      "actions": [
+        {
+          "type": "notification",
+          "key": "kakao",
+          "value": "KakaoTalk: 好餓ㅜㅜ"
+        }
+      ],
+      "next": [],
+      "once": true,
+      "delayMs": 1800,
+      "x": 120,
+      "y": 580
+    }
+  ],
   "tests": []
 }
