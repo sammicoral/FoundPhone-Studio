@@ -183,7 +183,9 @@ function StoryPlayer() {
                           className="boyfriend-avatar-image"
                           src={import.meta.env.BASE_URL + "assets/" + member.id + "-avatar.jpg"}
                           alt={member.name + " 頭像"}
-                          loading="lazy"
+                          loading="eager"
+                          decoding="async"
+                          fetchPriority={boyfriend === member.id ? "high" : "auto"}
                         />
                       </span>
                       <span className="boyfriend-name">{member.name}</span>
