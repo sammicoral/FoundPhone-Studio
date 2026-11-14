@@ -3,7 +3,7 @@
   "id": "cortis-martin-story",
   "title": "CORTIS · MARTIN",
   "description": "MARTIN 專屬故事線。此檔案獨立於其他成員，後續劇情請編輯本檔。",
-  "revision": 3,
+  "revision": 4,
   "phone": {
     "owner": "机主",
     "date": "2026-10-25",
@@ -735,7 +735,7 @@
         {
           "type": "notification",
           "key": "kakao",
-          "value": "KakaoTalk: Babe"
+          "value": "KakaoTalk|martin: Babe"
         }
       ],
       "next": [
@@ -757,7 +757,7 @@
         {
           "type": "notification",
           "key": "kakao",
-          "value": "KakaoTalk: 我剛錄完新專輯第一首歌的demo！"
+          "value": "KakaoTalk|martin: 我剛錄完新專輯第一首歌的demo！"
         }
       ],
       "next": [
@@ -780,7 +780,7 @@
         {
           "type": "notification",
           "key": "kakao",
-          "value": "KakaoTalk: 今天到現在都還沒吃東西"
+          "value": "KakaoTalk|martin: 今天到現在都還沒吃東西"
         }
       ],
       "next": [
@@ -803,7 +803,7 @@
         {
           "type": "notification",
           "key": "kakao",
-          "value": "KakaoTalk: 好餓ㅜㅜ"
+          "value": "KakaoTalk|martin: 好餓ㅜㅜ"
         },
         {
           "type": "ending",
