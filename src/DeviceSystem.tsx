@@ -64,6 +64,7 @@ export function DeviceLock({
   time,
   notices,
   onDismiss,
+  onNotificationOpen,
   pinOpen,
   setPinOpen,
   error,
@@ -78,6 +79,7 @@ export function DeviceLock({
   time: string;
   notices: string[];
   onDismiss: (index: number) => void;
+  onNotificationOpen: (text: string) => void;
   pinOpen: boolean;
   setPinOpen: (v: boolean) => void;
   error: string;
@@ -140,7 +142,7 @@ export function DeviceLock({
                 apps={work.apps}
                 contacts={work.data.contacts}
                 memberAvatar={String(work.variables.memberAvatar || "")}
-                onOpen={open}
+                onOpen={onNotificationOpen}
                 onDismiss={onDismiss}
               />
             )}
