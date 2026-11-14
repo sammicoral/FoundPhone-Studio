@@ -1154,6 +1154,9 @@ function AppContent({
   const [thread, setThread] = useState(
     String(state.ui?.[app.id]?.notificationThread ?? ""),
   );
+  useEffect(() => {
+    setThread(String(state.ui?.[app.id]?.notificationThread ?? ""));
+  }, [app.id, state.ui?.[app.id]?.notificationThread]);
   const [tab, setTab] = useState(app.tabs[0]);
   const [q, setQ] = useState("");
   const [pw, setPw] = useState("");
