@@ -629,7 +629,6 @@ function PhoneRuntime({
                     );
                   }}
                   work={work}
-                  virtualTime={virtualTime}
                 />
               </AppWindow>
             ) : (
