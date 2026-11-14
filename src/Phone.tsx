@@ -419,6 +419,21 @@ function PhoneRuntime({
       work.data.contacts,
       String(work.variables.memberAvatar || ""),
     ).appId;
+    const destinationThread =
+      destinationApp === "kakao" ? work.data.kakao?.[0]?.title ?? "" : "";
+    if (destinationThread) {
+      const current = runtimeRef.current;
+      update({
+        ...current,
+        ui: {
+          ...current.ui,
+          kakao: {
+            ...current.ui?.kakao,
+            notificationThread: destinationThread,
+          },
+        },
+      });
+    }
     setPanel("");
     if (locked) {
       const configuredPasscode = String(s.ui?.settings?.passcode ?? work.phone.passcode ?? "");
@@ -1136,7 +1151,9 @@ function AppContent({
   virtualTime: string;
 }) {
   const [detail, setDetail] = useState<Item | null>(null);
-  const [thread, setThread] = useState("");
+  const [thread, setThread] = useState(
+    String(state.ui?.[app.id]?.notificationThread ?? ""),
+  );
   const [tab, setTab] = useState(app.tabs[0]);
   const [q, setQ] = useState("");
   const [pw, setPw] = useState("");
@@ -1254,7 +1271,10 @@ function AppContent({
               onAdd={onAdd}
               onBack={onBack}
               thread={thread}
-              onThread={setThread}
+              onThread={(nextThread) => {
+                setThread(nextThread);
+                onUi?.("notificationThread", nextThread);
+              }}
             />
           </Suspense>
         </div>
